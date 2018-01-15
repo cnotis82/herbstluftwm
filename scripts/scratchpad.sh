@@ -12,7 +12,7 @@
 #
 # If a tag name is supplied, this is used instead of the scratchpad
 
-tag=" "
+tag="   "
 
 hc() { "${herbstclient_command[@]:-herbstclient}" "$@" ;}
 
