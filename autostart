@@ -138,6 +138,8 @@ hc keybind $Mod-space                                                           
                      . cycle_layout +1 vertical horizontal max vertical grid    \
                , cycle_layout +1
 
+hc keybind $Mod-g set_layout grid
+
 # mouse
 hc mouseunbind --all
 hc mousebind $Mod-Button1 move
@@ -188,7 +190,7 @@ hc unrule -F
 hc rule class=Termite tag="   "
 hc rule class=Firefox tag="   " 
 hc rule class=Google-chrome tag="   " 
-hc rule class=Doublecmd tag="   "
+hc rule class=Thunar tag="   "
 hc rule class=Gvim tag="   "
 hc rule class=Pidgin tag="   "
 hc rule class=ViberPC tag="   " 
