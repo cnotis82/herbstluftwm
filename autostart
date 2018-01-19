@@ -52,7 +52,7 @@ hc keybind $Mod-q close
 hc keybind $Mod-Return spawn termite #${TERMINAL:-termite} # use your $TERMINAL with xterm as fallback
 hc keybind $Mod-a spawn rofi -show combi
 hc keybind $Mod-b spawn google-chrome-stable
-hc keybind $Mod-d spawn thunar
+hc keybind $Mod-d spawn pcmanfm
 hc keybind $Mod-p spawn popcorntime 
 hc keybind $Mod-v spawn viber 
 #hc keybind $Mod-t spawn pidgin 
@@ -191,7 +191,7 @@ hc unrule -F
 hc rule class=Termite tag="   "
 hc rule class=Firefox tag="   " 
 hc rule class=Google-chrome tag="   " 
-hc rule class=Thunar tag="   "
+hc rule class=Pcmanfm tag="   "
 hc rule class=Gvim tag="   "
 hc rule class=Pidgin tag="   "
 hc rule class=ViberPC tag="   " 
@@ -200,7 +200,7 @@ hc rule class=Clementine tag="   "
 hc rule class=Mpv tag="   "
 hc rule class=Vlc tag="   "
 hc rule class=Chromium-browser tag="   "
-hc rule class=MonoDevelop tag="   "
+hc rule class=GitKraken tag="   "
 
 
  # move all xterms to tag 3
