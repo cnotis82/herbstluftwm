@@ -290,9 +290,9 @@ toggle-off-foreground = #55
 
 ; Only applies if <bar-progress> is used
 bar-progress-width = 20
-bar-progress-indicator = |
-bar-progress-fill = ─
-bar-progress-empty = ─
+bar-progress-indicator = 
+bar-progress-fill = 
+bar-progress-empty = 
 bar-progress-fill-foreground = #00FF00
 
 label-song-maxlen = 50
@@ -368,12 +368,12 @@ bar-used-foreground-0 = #aaff77
 bar-used-foreground-1 = #aaff77
 bar-used-foreground-2 = #fba922
 bar-used-foreground-3 = #ff5555
-bar-used-indicator = |
+bar-used-indicator = 
 bar-used-indicator-font = 6
 bar-used-indicator-foreground = #ff
-bar-used-fill = ─
+bar-used-fill = 
 bar-used-fill-font = 6
-bar-used-empty = ─
+bar-used-empty = 
 bar-used-empty-font = 6
 bar-used-empty-foreground = #444444
 
@@ -504,11 +504,11 @@ bar-volume-foreground-4 = #55aa55
 bar-volume-foreground-5 = #f5a70a
 bar-volume-foreground-6 = #ff5555
 bar-volume-gradient = false
-bar-volume-indicator = |
+bar-volume-indicator = 
 bar-volume-indicator-font = 2
-bar-volume-fill = ─
+bar-volume-fill = 
 bar-volume-fill-font = 2
-bar-volume-empty = ─
+bar-volume-empty = 
 bar-volume-empty-font = 2
 bar-volume-empty-foreground = ${colors.foreground-alt}
 
