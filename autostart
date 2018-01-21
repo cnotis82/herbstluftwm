@@ -19,7 +19,6 @@ Mod=Mod1    # Use alt as the main modifier
 #Mod=Mod4   # Use the super key as the main modifier
 
 #scripts
-#herbstclient emit_hook goto_last_tag
 hc spawn /home/notis/.config/herbstluftwm/autorun "polybar"
 hc spawn /home/notis/.config/herbstluftwm/lasttag.sh
 hc keybind $Mod-semicolon spawn /home/notis/.config/herbstluftwm/swap.sh auto
@@ -52,10 +51,10 @@ hc keybind $Mod-q close
 hc keybind $Mod-Return spawn termite #${TERMINAL:-termite} # use your $TERMINAL with xterm as fallback
 hc keybind $Mod-a spawn rofi -show combi
 hc keybind $Mod-b spawn google-chrome-stable
-hc keybind $Mod-d spawn thunar
-hc keybind $Mod-p spawn popcorntime 
-hc keybind $Mod-v spawn viber 
-#hc keybind $Mod-t spawn pidgin 
+hc keybind $Mod-d spawn pcmanfm
+hc keybind $Mod-p spawn popcorntime
+hc keybind $Mod-v spawn viber
+#hc keybind $Mod-t spawn pidgin
 #hc keybind $Mod-s spawn xfce4-taskmanager
 
 # focusing clients
@@ -127,6 +126,7 @@ hc keybind $Mod-comma  use_index -1 --skip-visible
 # layouting
 hc keybind $Mod-r remove
 hc keybind $Mod-s floating toggle
+hc keybind $Mod-x pseudotile toggle
 hc keybind $Mod-f spawn bash -c "herbstclient fullscreen toggle; herbstclient emit_hook fullscreen"
 
 #hc keybind $Mod-p pseudotile toggle
@@ -137,6 +137,8 @@ hc keybind $Mod-space                                                           
             or , and . compare tags.focus.curframe_wcount = 2                   \
                      . cycle_layout +1 vertical horizontal max vertical grid    \
                , cycle_layout +1
+
+hc keybind $Mod-g set_layout grid
 
 # mouse
 hc mouseunbind --all
@@ -186,18 +188,18 @@ hc set mouse_recenter_gap 0
 # rules
 hc unrule -F
 hc rule class=Termite tag="   "
-hc rule class=Firefox tag="   " 
-hc rule class=Google-chrome tag="   " 
-hc rule class=Doublecmd tag="   "
+hc rule class=Firefox tag="   "
+hc rule class=Google-chrome tag="   "
+hc rule class=Pcmanfm tag="   "
 hc rule class=Gvim tag="   "
 hc rule class=Pidgin tag="   "
-hc rule class=ViberPC tag="   " 
-hc rule class=Hexchat tag="   " 
+hc rule class=ViberPC tag="   "
+hc rule class=Hexchat tag="   "
 hc rule class=Clementine tag="   "
 hc rule class=Mpv tag="   "
 hc rule class=Vlc tag="   "
 hc rule class=Chromium-browser tag="   "
-hc rule class=MonoDevelop tag="   "
+hc rule class=GitKraken tag="   "
 
 
  # move all xterms to tag 3
