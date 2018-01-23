@@ -55,7 +55,7 @@ font-3 = FontAwesome:size=10:weight=Regular
 
 modules-left = arch updates cpu temperature fan memory 
 modules-center = hlws
-modules-right = xbacklight volume wlan gmail weather battery xkeyboard date
+modules-right = volume wlan gmail weather battery xkeyboard date
 
 #tray-position = right
 #tray-padding = 4
@@ -291,8 +291,8 @@ toggle-off-foreground = #55
 ; Only applies if <bar-progress> is used
 bar-progress-width = 20
 bar-progress-indicator = 
-bar-progress-fill = 
-bar-progress-empty = 
+bar-progress-fill = ♪
+bar-progress-empty = ♪
 bar-progress-fill-foreground = #00FF00
 
 label-song-maxlen = 50
@@ -488,7 +488,7 @@ label = %date% %time%
 type = internal/volume
 
 format-volume = <label-volume> <bar-volume>
-label-volume = ♪
+label-volume = 
 label-volume-foreground = ${colors.foreground-alt}
 
 format-muted-prefix = " "
