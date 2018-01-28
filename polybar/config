@@ -291,8 +291,8 @@ toggle-off-foreground = #55
 ; Only applies if <bar-progress> is used
 bar-progress-width = 20
 bar-progress-indicator = 
-bar-progress-fill = ♪
-bar-progress-empty = ♪
+bar-progress-fill = 
+bar-progress-empty = 
 bar-progress-fill-foreground = #00FF00
 
 label-song-maxlen = 50
@@ -610,7 +610,7 @@ type = custom/menu
 
 format-spacing = 1
 
-label-open = 
+label-open = 
 label-open-foreground = ${colors.secondary}
 label-close =  cancel
 label-close-foreground = ${colors.secondary}
