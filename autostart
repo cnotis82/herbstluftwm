@@ -19,6 +19,7 @@ Mod=Mod1    # Use alt as the main modifier
 #Mod=Mod4   # Use the super key as the main modifier
 
 #scripts
+#herbstclient emit_hook goto_last_tag
 hc spawn /home/notis/.config/herbstluftwm/autorun "polybar"
 hc spawn /home/notis/.config/herbstluftwm/lasttag.sh
 hc keybind $Mod-semicolon spawn /home/notis/.config/herbstluftwm/swap.sh auto
@@ -101,9 +102,9 @@ hc keybind $Mod-Control-l       resize right +$resizestep
 #hc keybind $Mod-Control-g       set  frame_gap $frame_gap_step
 
 # tags
-tag_names=( "   " "   " "   " "   " "   " "   "  "   ")
+tag_names=( "   " "   " "   " "   " "   " "   " "   " "   ")
 #tag_names=( '1:term''2:www' '3:files' '4:social' '5:media' '6:doc' '7:dev' '8:sys')
-tag_keys=( {1..7} 0 )
+tag_keys=( {1..8} 0 )
 
 hc rename default "${tag_names[0]}" || true
 for i in ${!tag_names[@]} ; do
@@ -129,6 +130,7 @@ hc keybind $Mod-s floating toggle
 hc keybind $Mod-x pseudotile toggle
 hc keybind $Mod-f spawn bash -c "herbstclient fullscreen toggle; herbstclient emit_hook fullscreen"
 
+#hc keybind $Mod-p pseudotile toggle
 # The following cycles through the available layouts within a frame, but skips
 # layouts, if the layout change wouldn't affect the actual window positions.
 # I.e. if there are two windows within a frame, the grid layout is skipped.
@@ -198,8 +200,8 @@ hc rule class=Clementine tag="   "
 hc rule class=Mpv tag="   "
 hc rule class=Vlc tag="   "
 hc rule class=Chromium-browser tag="   "
-hc rule class=GitKraken tag="   "
-
+hc rule class=GitKraken tag="   "
+hc rule class=Atom tag="   "
 
  # move all xterms to tag 3
 hc rule focus=on # normally focus new clients
