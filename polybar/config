@@ -53,7 +53,7 @@ font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 font-3 = FontAwesome:size=10:weight=Regular
 
-modules-left = arch updates cpu temperature fan memory 
+modules-left = appmenu arch updates cpu temperature fan memory 
 modules-center = hlws
 modules-right = volume wlan gmail weather battery xkeyboard date
 
@@ -94,7 +94,7 @@ font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 font-3 = FontAwesome:size=10:weight=Regular
 
-modules-left =  arch updates cpu temperature fan memory wlan   
+modules-left =  appmenu arch updates cpu temperature fan memory wlan   
 modules-center = hlws
 modules-right = mpd volume weather battery xkeyboard date powermenu
 
@@ -605,12 +605,20 @@ exec = ~/.config/polybar/gmail/launch.py
 tail = true
 click-left = xdg-open https://mail.google.com
 
+[module/appmenu]
+type = custom/script
+format-prefix = " "
+format-prefix-foreground = ${colors.foreground-alt}
+exec = echo "Menu"
+click-left = "jgmenu_run >/dev/null 2>&1 &"
+
+
 [module/powermenu]
 type = custom/menu
 
 format-spacing = 1
 
-label-open = 
+label-open = 
 label-open-foreground = ${colors.secondary}
 label-close =  cancel
 label-close-foreground = ${colors.secondary}
