@@ -2,9 +2,9 @@
 
 ### the items below were added by 'jgmenu_run init'
 
-#stay_alive          = 1
+stay_alive          = 1
 #hide_on_startup     = 0
-#csv_cmd             = pmenu
+csv_cmd             = lx
 #tint2_look          = 1
 #at_pointer          = 0
 #multi_window        = 1
@@ -21,7 +21,7 @@
 #menu_radius         = 1
 #menu_border         = 0
 #menu_halign         = left
-#menu_valign         = top
+menu_valign         = top
 #sub_spacing         = 1
 #sub_padding_top     = -1
 #sub_padding_right   = -1
