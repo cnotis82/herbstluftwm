@@ -53,7 +53,7 @@ font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 font-3 = FontAwesome:size=10:weight=Regular
 
-modules-left = appmenu arch updates cpu temperature fan memory 
+modules-left = arch updates cpu temperature fan memory 
 modules-center = hlws
 modules-right = volume wlan gmail weather battery xkeyboard date
 
@@ -94,7 +94,7 @@ font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 font-3 = FontAwesome:size=10:weight=Regular
 
-modules-left =  appmenu arch updates cpu temperature fan memory wlan   
+modules-left =  appmenu arch updates cpu temperature fan memory wlan gmail  
 modules-center = hlws
 modules-right = mpd volume weather battery xkeyboard date powermenu
 
