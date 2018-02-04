@@ -56,16 +56,17 @@ fi
 
 # restart the panels
 herbstclient emit_hook quit_panel
-
-panelcmd=${panelcmd:-~/.config/herbstluftwm/panel.sh}
+killall polybar
+panelcmd=${panelcmd:-~/.config/herbstluftwm/panel_polybar.sh}
 if ! [ "$panelcmd" ] ; then
     # fall back to global panel if there is no user-specific panel
-    panelcmd=/etc/xdg/herbstluftwm/panel.sh
+    panelcmd=/etc/xdg/herbstluftwm/panel_polybar.sh
 fi
 
 for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do
     # start it on each monitor
     "$panelcmd" $monitor &
-done
 
+done
+hc spawn polybar my-awesome-polybar1
 
