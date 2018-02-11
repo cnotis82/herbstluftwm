@@ -567,6 +567,7 @@ format = <label>
 format-underline = #9f78e1
 label = "%output:0:30%"
 exec = .config/polybar/packages.sh
+click-left=.config/polybar/packages.sh
 
 [module/arch]
 type = custom/script
