@@ -43,8 +43,8 @@ hc keybind XF86AudioNext spawn mpc next
 hc keybind XF86AudioPrev spawn mpc prev
 hc keybind XF86AudioPlay spawn mpc toggle
 hc keybind XF86Music spawn banshee
-hc keybind XF86Mail spawn firefox www.gmail.com
-hc keybind XF86Search spawn firefox https://www.google.com.gr
+hc keybind XF86Mail spawn google-chrome-stable www.gmail.com
+hc keybind XF86Search spawn google-chrome-stable https://www.google.com.gr
 hc keybind XF86Calculator spawn galculator
 hc keybind Print spawn scrot '%Y-%m-%d_$wx$h_scrot.png' -e 'mv $f ~/Pictures/'
 hc keybind XF86HomePage spawn jgmenu_run
@@ -231,9 +231,11 @@ hc detect_monitors
 #autostart]
 #RUNS=1
 killall dunst
+killall redshift-gtk
 dunst -conf /home/notis/.config/dunst/dunstrc &
 setxkbmap -layout us,gr -option grp:alt_shift_toggle
 xfce4-power-manager&
+redshift-gtk&
 feh --bg-scale /home/notis/Pictures/hbwm.jpg
 
 # find the panel
