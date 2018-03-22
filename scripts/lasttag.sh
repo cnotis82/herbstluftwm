@@ -22,25 +22,25 @@ hc --idle '(tag_changed|goto_last_tag|reload|fullscreen|split_bottom|split_right
                 exit
                 ;;
             fullscreen)
-                notify-send "Fullscreen toggle"
+                notify-send -u low "Fullscreen toggle"
                 ;;
             split_bottom)
-                notify-send "Split Bottom 0.5"
+                notify-send -u low "Split Bottom 0.5"
                 ;;
             split_right)
-                notify-send "Split Right 0.5"
+                notify-send -u low "Split Right 0.5"
                 ;;
             list_keys)
                 keys=$(herbstclient list_keybinds)
-                notify-send -t 20000 "${keys}"
+                notify-send -u low -t 20000 "${keys}"
                 ;;
             version)
-            ver=$(herbstclient -v)
-                notify-send "${ver}"
+            ver=$(herbstclient -v | cowsay)
+                notify-send -u low "${ver}"
                 ;;
             layout_dump)
             layout=$(herbstclient layout)
-                notify-send "${layout}"
+                notify-send -u low "${layout}"
                 ;;
                 
         esac

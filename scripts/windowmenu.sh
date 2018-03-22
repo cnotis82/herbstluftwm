@@ -11,9 +11,16 @@ set -e
 action_list() {
     local a="$1"
     i=0
-    "$a" "Close" herbstclient close
-    "$a" "Toggle fullscreen" herbstclient fullscreen toggle
-    "$a" "Toggle pseudotile" herbstclient pseudotile toggle
+    "$a" "Add Tag 1" herbstclient add Tag1
+    "$a" "Add Tag 2" herbstclient add Tag2
+    "$a" "Add Tag Youtube" herbstclient add '   '   
+    "$a" "Add Tag VM" herbstclient add '   '
+    "$a" "Add Tag Games" herbstclient add '   '
+    "$a" "Delete Tag 1" herbstclient merge_tag Tag1 
+    "$a" "Delete Tag 2" herbstclient merge_tag Tag2
+    "$a" "Delete Tag Youtube" herbstclient merge_tag '   '  
+    "$a" "Delete Tag VM" herbstclient merge_tag '   '  
+    "$a" "Delete Tag Games" herbstclient merge_tag '   '
     for tag in $(herbstclient complete 1 move) ; do
         "$a" "Move to tag $tag $i" herbstclient move_index "$i"
 	i=$((i + 1))
