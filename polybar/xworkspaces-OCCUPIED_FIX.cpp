@@ -97,6 +97,8 @@ namespace modules {
   void xworkspaces_module::handle(const evt::property_notify& evt) {
     if (evt->atom == m_ewmh->_NET_CLIENT_LIST) {
       rebuild_clientlist();
+      rebuild_desktops();
+      rebuild_desktop_states();
     } else if (evt->atom == m_ewmh->_NET_DESKTOP_NAMES) {
       m_desktop_names = ewmh_util::get_desktop_names();
       rebuild_desktops();
@@ -218,7 +220,7 @@ namespace modules {
                 break;
             }
           }
-        } 
+        }
 
         d->label = m_labels.at(d->state)->clone();
         d->label->reset_tokens();
