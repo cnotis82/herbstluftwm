@@ -94,7 +94,7 @@ font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 font-3 = FontAwesome:size=10:weight=Regular
 
-modules-left = info-trash arch system-uptime-pretty updates cpu temperature fan memory wlan info-hackspeed mpd spotify
+modules-left = appmenu info-trash arch system-uptime-pretty updates cpu temperature fan memory wlan info-hackspeed 
 modules-center = ewmh
 ;hlws
 modules-right = news-arch volume gmail weather info-redshift-temp battery xkeyboard date powermenu
@@ -132,15 +132,15 @@ padding-right = 2
 module-margin-left = 4
 module-margin-right = 4
 
-#font-0 = DejaVu Sans Mono:size=9;1
-font-0 = Droid Sans Mono:size=10;1
+font-0 = Comic Sans MS:size=10:weight=Italic
+#font-0 = Droid Sans Mono:size=10;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
-font-3 = FontAwesome:size=12:weight=Regular
+font-3 = FontAwesome:size=10:weight=Regular
 
-modules-left = mpd
-modules-center =
-modules-right = ip-wireless ip-wired filesystem
+modules-left = mpd spotify
+modules-center = filesystem
+modules-right = ip-wireless ip-wired
 
 [module/hlws]
 type              = custom/script
@@ -263,10 +263,9 @@ type = internal/fs
 interval = 25
 
 mount-0 = /
-mount-1 = /boot
-mount-2 = /home
+mount-1 = /home/notis/External
 
-label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%%
+label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%% of %total%
 label-unmounted = %mountpoint% not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
 
@@ -278,7 +277,7 @@ format-online-underline = #ffb52a
 label-song = %title%
 label-song-foreground = #ff
 ;format-online-prefix = " "
-format-online =  <label-song>  <icon-prev>  <icon-stop> <toggle>  <icon-next>
+format-online =  <label-song>  <icon-prev>  <icon-stop> <toggle>  <icon-next> <bar-progress>
 format-online-foreground = ${colors.foreground-alt}
 
 icon-prev = 
@@ -294,7 +293,7 @@ toggle-off-foreground = #55
 
 
 ; Only applies if <bar-progress> is used
-bar-progress-width = 5
+bar-progress-width = 30
 bar-progress-indicator = 
 bar-progress-fill = 
 bar-progress-empty = 
@@ -385,9 +384,9 @@ bar-used-empty-foreground = #444444
 
 [module/ip-wired]
 type = internal/network
-interface = enp1s0f1 
+interface = enp7s0 
 format-connected = <label-connected>
-label-connected = LAN: %local_ip% 
+label-connected = LAN: %local_ip% %linkspeed%
 label-connected-foreground = #eefafafa
 
 [module/ip-wireless]

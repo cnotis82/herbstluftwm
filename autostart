@@ -31,6 +31,8 @@ hc keybind $Mod-w spawn /home/notis/.config/herbstluftwm/windowmenu.sh
 hc keybind $Mod-Control-f spawn /home/notis/.config/herbstluftwm/fanmenu.sh
 hc keybind $Mod-Control-p spawn /home/notis/.config/herbstluftwm/exitmenu.sh
 hc keybind $Mod-Control-s spawn /home/notis/.config/herbstluftwm/toggledualhead.sh
+hc keybind $Mod-Control-m spawn /home/notis/.config/herbstluftwm/polybarmenu.sh
+hc keybind $Mod-t emit_hook goto_last_tag
 hc keybind $Mod-t emit_hook goto_last_tag
 hc keybind $Mod-Control-i emit_hook list_keys
 hc keybind $Mod-Control-v emit_hook version
@@ -252,7 +254,11 @@ for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do
     # start it on each monitor
     "$panel" $monitor &
     if [ $monitor -eq 0 ]; then
-        hc spawn polybar my-awesome-polybar1
+        rm /tmp/my-awesome-polybar1.pid
+        sleep 1
+        polybar my-awesome-polybar1 &
+        echo "$!" > my-awesome-polybar1.pid
+        
     else
         hc spawn polybar my-awesome-polybar0
     fi

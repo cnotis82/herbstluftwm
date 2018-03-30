@@ -56,7 +56,7 @@ fi
 
 # restart the panels
 herbstclient emit_hook quit_panel
-killall polybar
+
 panelcmd=${panelcmd:-~/.config/herbstluftwm/panel_polybar.sh}
 if ! [ "$panelcmd" ] ; then
     # fall back to global panel if there is no user-specific panel
@@ -68,5 +68,13 @@ for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do
     "$panelcmd" $monitor &
 
 done
-hc spawn polybar my-awesome-polybar1
+polybar-msg cmd quit
+sleep 1
+rm /tmp/bottom-bar.pid
+rm /tmp/my-awesome-polybar1.pid
+sleep 1
+polybar my-awesome-polybar1 &
+echo "$!" > my-awesome-polybar1.pid
+polybar bottom-bar &
+echo "$!" > /tmp/bottom-bar.pid
 
