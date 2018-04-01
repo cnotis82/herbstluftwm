@@ -20,7 +20,7 @@ Mod=Mod1    # Use alt as the main modifier
 
 #scripts
 #herbstclient emit_hook goto_last_tag
-hc spawn /home/notis/.config/herbstluftwm/autorun "polybar"
+#hc spawn /home/notis/.config/herbstluftwm/autorun "polybar"
 hc spawn /home/notis/.config/herbstluftwm/lasttag.sh
 hc keybind $Mod-semicolon spawn /home/notis/.config/herbstluftwm/swap.sh auto
 hc keybind $Mod-slash spawn /home/notis/.config/herbstluftwm/swap.sh close
@@ -110,7 +110,7 @@ hc keybind $Mod-Control-l       resize right +$resizestep
 #hc keybind $Mod-Control-g       set  frame_gap $frame_gap_step
 
 # tags
-tag_names=( "   " "   " "   " "   " "   " "   " "   " "   ")
+tag_names=( "   " "   " "   " "   " "   " "   " "   " "   ")
 #tag_names=( '1:term''2:www' '3:files' '4:social' '5:media' '6:doc' '7:dev' '8:sys')
 tag_keys=( {1..8} 0 )
 
@@ -197,8 +197,8 @@ hc set mouse_recenter_gap 0
 # rules
 hc unrule -F
 hc rule class=Termite tag="   "
-hc rule class=Firefox tag="   "
-hc rule class=Google-chrome tag="   "
+hc rule class=Firefox tag="   "
+hc rule class=Google-chrome tag="   "
 hc rule class=Pcmanfm tag="   "
 hc rule class=Gvim tag="   "
 hc rule class=Pidgin tag="   "
@@ -241,6 +241,9 @@ hc detect_monitors
 #RUNS=1
 killall dunst
 killall redshift-gtk
+killall geoclue
+polybar-msg cmd quit
+
 dunst -conf /home/notis/.config/dunst/dunstrc &
 setxkbmap -layout us,gr -option grp:alt_shift_toggle
 xfce4-power-manager&
@@ -255,9 +258,12 @@ for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do
     "$panel" $monitor &
     if [ $monitor -eq 0 ]; then
         rm /tmp/my-awesome-polybar1.pid
+        rm /tmp/bottom-bar.pid
         sleep 1
         polybar my-awesome-polybar1 &
-        echo "$!" > my-awesome-polybar1.pid
+        echo "$!" > /tmp/my-awesome-polybar1.pid
+        polybar bottom-bar &
+        echo "$!" > /tmp/bottom-bar.pid
         
     else
         hc spawn polybar my-awesome-polybar0

@@ -68,13 +68,14 @@ for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do
     "$panelcmd" $monitor &
 
 done
+killall geoclue
 polybar-msg cmd quit
 sleep 1
 rm /tmp/bottom-bar.pid
 rm /tmp/my-awesome-polybar1.pid
 sleep 1
 polybar my-awesome-polybar1 &
-echo "$!" > my-awesome-polybar1.pid
+echo "$!" > /tmp/my-awesome-polybar1.pid
 polybar bottom-bar &
 echo "$!" > /tmp/bottom-bar.pid
 
