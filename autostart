@@ -239,10 +239,11 @@ hc detect_monitors
 
 #autostart]
 #RUNS=1
+herbstclient emit_hook quit_panel
 killall dunst
 killall redshift-gtk
-killall geoclue
-polybar-msg cmd quit
+pid=( )
+#polybar-msg cmd quit
 
 dunst -conf /home/notis/.config/dunst/dunstrc &
 setxkbmap -layout us,gr -option grp:alt_shift_toggle
@@ -261,8 +262,10 @@ for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do
         rm /tmp/bottom-bar.pid
         sleep 1
         polybar my-awesome-polybar1 &
+        pids+=( $! )
         echo "$!" > /tmp/my-awesome-polybar1.pid
         polybar bottom-bar &
+        pids+=( $! )
         echo "$!" > /tmp/bottom-bar.pid
         
     else
@@ -271,3 +274,7 @@ for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do
 
     #sed -i s/^RUNS.*/RUNS=0/ $0
 done
+
+herbstclient -w '(quit_panel|reload)'
+
+kill ${pids[@]}
