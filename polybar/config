@@ -8,7 +8,7 @@
 ;=====================================================
 
 [colors]
-background = #222
+background = #222B2E
 background-alt = #444
 foreground = #dfdfdf
 foreground-alt = #555
@@ -52,6 +52,7 @@ font-0 = Comic Sans MS:size=10:weight=Italic
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 font-3 = FontAwesome:size=10:weight=Regular
+font-4 = DejaVu Sans:size=10
 
 modules-left = arch updates cpu temperature fan memory 
 modules-center = hlws
@@ -91,10 +92,11 @@ module-margin-right = 1
 font-0 = Comic Sans MS:size=10:weight=Italic
 #font-0 = Droid Sans Mono:size=10;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-font-2 = siji:pixelsize=10;1
+font-2 = Wuncon Siji:pixelsize=10:weight=Regular;1
 font-3 = FontAwesome:size=10:weight=Regular
+font-4 = DejaVu Sans:size=10
 
-modules-left = appmenu info-trash arch system-uptime-pretty updates cpu temperature fan memory wlan info-hackspeed 
+modules-left =  info-trash arch system-uptime-pretty updates cpu temperature fan memory wlan info-hackspeed taskwarrior
 modules-center = ewmh
 ;hlws
 modules-right = news-arch volume gmail weather info-redshift-temp battery xkeyboard date powermenu
@@ -138,9 +140,9 @@ font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = siji:pixelsize=10;1
 font-3 = FontAwesome:size=10:weight=Regular
 
-modules-left = mpd spotify
+modules-left = appmenu mpd spotify
 modules-center = filesystem
-modules-right = ip-wireless ip-wired
+modules-right = ticker-btceur ip-wireless ip-wired
 
 [module/hlws]
 type              = custom/script
@@ -329,7 +331,7 @@ card = intel_backlight
 
 [module/cpu]
 type = internal/cpu
-interval = 2
+interval = 0.5
 format = <label> <ramp-coreload>
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
@@ -698,6 +700,25 @@ format-underline = #0a6cf5
 exec = ~/.config/polybar/info-archnews.py
 interval = 40
 click-left = xdg-open https://www.newsbeast.gr
+
+[module/ticker-btceur]
+type = custom/script
+format-prefix = " " 
+format-prefix-foreground = ${colors.foreground-alt}
+format = <label>
+format-underline = #0a6cf5
+exec = ~/.config/polybar/ticker-btceur.sh
+interval = 600
+
+[module/taskwarrior]
+interval = 30
+type = custom/script
+exec = ~/.config/polybar/taskwarrior.sh
+format = <label>
+format-prefix-foreground = ${colors.foreground-alt}
+format-prefix = " "
+format-underline = #f50a4d
+click-left = task "$((`cat /tmp/tw_polybar_id`))" done
 
 [settings]
 screenchange-reload = true
