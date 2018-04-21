@@ -241,14 +241,16 @@ hc detect_monitors
 #RUNS=1
 herbstclient emit_hook quit_panel
 killall dunst
-killall redshift-gtk
+killall redshift
 pid=( )
 #polybar-msg cmd quit
+
+sleep 2
 
 dunst -conf /home/notis/.config/dunst/dunstrc &
 setxkbmap -layout us,gr -option grp:alt_shift_toggle
 xfce4-power-manager&
-redshift-gtk&
+redshift&
 feh --bg-scale /home/notis/Pictures/hbwm.jpg
 
 # find the panel
