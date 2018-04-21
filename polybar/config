@@ -96,7 +96,7 @@ font-2 = Wuncon Siji:pixelsize=10:weight=Regular;1
 font-3 = FontAwesome:size=10:weight=Regular
 font-4 = DejaVu Sans:size=10
 
-modules-left =  info-trash arch system-uptime-pretty updates cpu temperature fan memory wlan info-hackspeed taskwarrior
+modules-left =  info-trash arch system-uptime-pretty updates cpu temperature fan memory wlan isrunning-openvpn info-hackspeed taskwarrior
 modules-center = ewmh
 ;hlws
 modules-right = news-arch volume gmail weather info-redshift-temp battery xkeyboard date powermenu
@@ -493,6 +493,7 @@ label = %date% %time%
 
 [module/volume]
 type = internal/volume
+master-mixer = Master
 format = <label> <bar-used>
 format-volume-prefix = " "
 format-volume-prefix-foreground = ${colors.foreground-alt}
@@ -719,6 +720,16 @@ format-prefix-foreground = ${colors.foreground-alt}
 format-prefix = " "
 format-underline = #f50a4d
 click-left = task "$((`cat /tmp/tw_polybar_id`))" done
+
+[module/isrunning-openvpn]
+type = custom/script
+exec = ~/.config/polybar/isrunning-openvpn.sh
+format-prefix-foreground = ${colors.foreground-alt}
+format-prefix = " "
+format-underline = #ffb52a
+click-left = gksu systemctl start openvpn-client@TunnelBearItaly.service
+click-right = gksu systemctl stop openvpn-client@TunnelBearItaly.service
+interval = 5
 
 [settings]
 screenchange-reload = true
