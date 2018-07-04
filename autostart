@@ -209,15 +209,15 @@ hc rule class=Mpv tag="   "
 hc rule class=Vlc tag="   "
 hc rule class=Popcorn-Time tag="   "
 hc rule class=stremio tag="   "
-hc rule class=spotify tag="   "
+hc rule class=Spotify tag="   "
 hc rule class=Chromium-browser tag="   "
 hc rule class=GitKraken tag="   "
 hc rule class=Atom tag="   "
 hc rule class=MonoDevelop tag="   "
 hc rule class=deepin-system-monitor tag="   "
 hc rule class=Arandr tag="   "
-hc rule class=xfce4-power-manager-settings tag="   "
-
+hc rule class=Xfce4-power-manager-settings tag="   " pseudotile=off
+hc rule class=Xfce4-taskmanager tag="   "
  # move all xterms to tag 3
 hc rule focus=on # normally focus new clients
 #hc rule focus=off # normally do not focus new clients
@@ -226,6 +226,7 @@ hc rule focus=on # normally focus new clients
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_(DIALOG|UTILITY|SPLASH)' pseudotile=on
 hc rule windowtype='_NET_WM_WINDOW_TYPE_DIALOG' focus=on
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_(NOTIFICATION|DOCK|DESKTOP)' manage=off
+hc rule class=Gsimplecal manage=off 
 
 # unlock, just to be sure
 hc unlock
@@ -269,6 +270,7 @@ for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do
         polybar bottom-bar &
         pids+=( $! )
         echo "$!" > /tmp/bottom-bar.pid
+        hc spawn polybar my-awesome-polybar0
         
     else
         hc spawn polybar my-awesome-polybar0
