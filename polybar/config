@@ -54,13 +54,13 @@ font-2 = siji:pixelsize=10;1
 font-3 = FontAwesome:size=10:weight=Regular
 font-4 = DejaVu Sans:size=10
 
-modules-left = arch updates cpu temperature fan memory isrunning-openvpn
-modules-center = ewmh
+modules-left = arch updates cpu temperature fan memory 
+modules-center = hlws
 modules-right = volume wlan gmail weather battery xkeyboard date
 
-tray-position = right
-tray-padding = 4
-tray-maxsize = 16
+#tray-position = right
+#tray-padding = 4
+#tray-maxsize = 16
 
 [bar/my-awesome-polybar1]
 monitor = ${env:MONITOR:HDMI1}
@@ -96,7 +96,7 @@ font-2 = Wuncon Siji:pixelsize=10:weight=Regular;1
 font-3 = FontAwesome:size=10:weight=Regular
 font-4 = DejaVu Sans:size=10
 
-modules-left =  info-trash arch system-uptime-pretty updates cpu temperature fan memory wlan isrunning-openvpn taskwarrior
+modules-left =  info-trash arch system-uptime-pretty updates cpu temperature fan memory wlan info-hackspeed taskwarrior
 modules-center = ewmh
 ;hlws
 modules-right = news-arch volume gmail weather info-redshift-temp battery xkeyboard date powermenu
@@ -332,12 +332,11 @@ card = intel_backlight
 [module/cpu]
 type = internal/cpu
 interval = 0.5
-format = %{A1:xfce4-taskmanager & disown:}<label> <ramp-coreload>%{A}
-format-prefix = " " 
+format = <label> <ramp-coreload>
+format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #ffb52a
 label = %percentage%%
-click-left = /usr/bin/xfce4-taskmanager &
 ramp-coreload-0 = ▁
 ramp-coreload-0-font = 2
 ramp-coreload-0-foreground = #aaff77
@@ -424,7 +423,7 @@ interval = 2.0
 ; Available tags:
 ; ;   <label-connected> (default)
 ; ;   <ramp-signal>
-format-connected-prefix = %{A1:networkmanager_dmenu & disown:} %{A}
+format-connected-prefix = " "
 format-connected-prefix-foreground = ${colors.foreground-alt}
 format-connected = <label-connected>
 format-connected-underline = #9f78e1
@@ -457,7 +456,7 @@ label-connected-foreground = #eefafafa
 #format-disconnected =
 #format-disconnected = <label-disconnected>
 format-disconnected-underline = ${self.format-connected-underline}
-label-disconnected = %{A1:networkmanager_dmenu & disown:}down%{A}
+label-disconnected = down
 label-disconnected-foreground = ${colors.foreground-alt}
 
 [module/eth]
@@ -483,7 +482,7 @@ interval = 10
 date =
 date-alt = " %Y-%m-%d"
 
-time = %{A3:gsimplecal & disown:}%H:%M %{A}
+time = %H:%M
 time-alt = %H:%M:%S
 
 format-prefix = 
@@ -494,12 +493,11 @@ label = %date% %time%
 
 [module/volume]
 type = internal/volume
-master-mixer = Master
 format = <label> <bar-used>
 format-volume-prefix = " "
 format-volume-prefix-foreground = ${colors.foreground-alt}
 format-volume-underline = #9f78e1
-format-volume = %{A3:pavucontrol & disown:}<bar-volume>%{A}
+format-volume = <bar-volume>
 ;label-volume = 
 ;label-volume-foreground = ${colors.foreground-alt}
 ;label-volume-underline = #9f78e1
@@ -537,7 +535,7 @@ format-charging-underline = #ffb52a
 format-discharging = <ramp-capacity> <label-discharging>
 format-discharging-underline = ${self.format-charging-underline}
 
-format-full-prefix = %{A3:xfce4-power-manager-settings & disown:}  %{A}
+format-full-prefix = " "
 format-full-prefix-foreground = ${colors.foreground-alt}
 format-full-underline = ${self.format-charging-underline}
 
@@ -551,13 +549,13 @@ animation-charging-1 = " "
 animation-charging-2 = " "
 animation-charging-foreground = ${colors.foreground-alt}
 animation-charging-framerate = 750
- 
+
 [module/temperature]
 type = internal/temperature
 thermal-zone = 1
 warn-temperature = 60
 
-format = %{A1:termite --exec='watch sensors' & disown:}<ramp> <label>%{A}
+format = <ramp> <label>
 format-underline = #f50a4d
 format-warn = <ramp> <label-warn>
 format-warn-underline = ${self.format-underline}
@@ -576,9 +574,9 @@ type = custom/script
 interval = 600
 format-prefix = " " 
 format-prefix-foreground = ${colors.foreground-alt}
-format = <label> 
+format = <label>
 format-underline = #9f78e1
-label = %{A3:termite --exec=pacui & disown:} %output:0:30% %{A}
+label = "%output:0:30%"
 exec = .config/polybar/packages.sh
 click-left=.config/polybar/packages.sh
 
@@ -608,7 +606,7 @@ type = custom/script
 interval = 5
 format-prefix = " " 
 format-prefix-foreground = ${colors.foreground-alt}
-format = %{A1:/home/notis/.config/herbstluftwm/fanmenu.sh & disown:}<label> %{A}
+format = <label>
 format-underline = #0a6cf5
 label = "%output:0:30%"
 exec = .config/polybar/fan.sh
@@ -721,16 +719,6 @@ format-prefix-foreground = ${colors.foreground-alt}
 format-prefix = " "
 format-underline = #f50a4d
 click-left = task "$((`cat /tmp/tw_polybar_id`))" done
-
-[module/isrunning-openvpn]
-type = custom/script
-exec = ~/.config/polybar/isrunning-openvpn.sh
-format-prefix-foreground = ${colors.foreground-alt}
-format-prefix = " "
-format-underline = #ffb52a
-click-left = gksu systemctl start openvpn-client@TunnelBearItaly.service
-click-right = gksu systemctl stop openvpn-client@TunnelBearItaly.service
-interval = 5
 
 [settings]
 screenchange-reload = true
