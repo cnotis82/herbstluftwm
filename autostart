@@ -59,7 +59,7 @@ hc keybind $Mod-Control-r reload
 hc keybind $Mod-q close
 hc keybind $Mod-Return spawn termite #${TERMINAL:-termite} # use your $TERMINAL with xterm as fallback
 hc keybind $Mod-a spawn rofi -show combi
-hc keybind $Mod-b spawn google-chrome-stable
+hc keybind $Mod-b spawn firefox
 hc keybind $Mod-d spawn pcmanfm
 hc keybind $Mod-p spawn popcorntime
 hc keybind $Mod-v spawn viber
@@ -81,7 +81,7 @@ hc keybind $Mod-Control-Left  shift left
 hc keybind $Mod-Control-Down  shift down
 hc keybind $Mod-Control-Up    shift up
 hc keybind $Mod-Control-Right shift right
-hc keybind $Mod-Control-period spawn polybar my-awesome-polybar0
+hc keybind $Mod-Control-period spawn polybar bottom-bar
 hc keybind $Mod-Control-comma spawn polybar my-awesome-polybar1
 #hc keybind $Mod-Control-k     shift up
 #hc keybind $Mod-Control-l     shift right
@@ -242,7 +242,7 @@ hc detect_monitors
 #RUNS=1
 herbstclient emit_hook quit_panel
 killall dunst
-killall redshift
+killall redshift-gtk
 pid=( )
 #polybar-msg cmd quit
 
@@ -251,7 +251,7 @@ sleep 2
 dunst -conf /home/notis/.config/dunst/dunstrc &
 setxkbmap -layout us,gr -option grp:alt_shift_toggle
 xfce4-power-manager&
-redshift&
+redshift-gtk&
 feh --bg-scale /home/notis/Pictures/hbwm.jpg
 
 # find the panel

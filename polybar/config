@@ -499,7 +499,7 @@ format = <label> <bar-used>
 format-volume-prefix = " "
 format-volume-prefix-foreground = ${colors.foreground-alt}
 format-volume-underline = #9f78e1
-format-volume = <bar-volume>
+format-volume = %{A3:pavucontrol & disown:}<bar-volume>%{A}
 ;label-volume = 
 ;label-volume-foreground = ${colors.foreground-alt}
 ;label-volume-underline = #9f78e1
@@ -557,7 +557,7 @@ type = internal/temperature
 thermal-zone = 1
 warn-temperature = 60
 
-format = <ramp> <label>
+format = %{A1:termite --exec='watch sensors' & disown:}<ramp> <label>%{A}
 format-underline = #f50a4d
 format-warn = <ramp> <label-warn>
 format-warn-underline = ${self.format-underline}
