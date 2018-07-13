@@ -59,7 +59,7 @@ hc keybind $Mod-Control-r reload
 hc keybind $Mod-q close
 hc keybind $Mod-Return spawn termite #${TERMINAL:-termite} # use your $TERMINAL with xterm as fallback
 hc keybind $Mod-a spawn rofi -show combi
-hc keybind $Mod-b spawn google-chrome-stable
+hc keybind $Mod-b spawn firefox
 hc keybind $Mod-d spawn pcmanfm
 hc keybind $Mod-p spawn popcorntime
 hc keybind $Mod-v spawn viber
@@ -81,7 +81,7 @@ hc keybind $Mod-Control-Left  shift left
 hc keybind $Mod-Control-Down  shift down
 hc keybind $Mod-Control-Up    shift up
 hc keybind $Mod-Control-Right shift right
-hc keybind $Mod-Control-period spawn polybar my-awesome-polybar0
+hc keybind $Mod-Control-period spawn polybar bottom-bar
 hc keybind $Mod-Control-comma spawn polybar my-awesome-polybar1
 #hc keybind $Mod-Control-k     shift up
 #hc keybind $Mod-Control-l     shift right
@@ -209,15 +209,15 @@ hc rule class=Mpv tag="   "
 hc rule class=Vlc tag="   "
 hc rule class=Popcorn-Time tag="   "
 hc rule class=stremio tag="   "
-hc rule class=spotify tag="   "
+hc rule class=Spotify tag="   "
 hc rule class=Chromium-browser tag="   "
 hc rule class=GitKraken tag="   "
 hc rule class=Atom tag="   "
 hc rule class=MonoDevelop tag="   "
 hc rule class=deepin-system-monitor tag="   "
 hc rule class=Arandr tag="   "
-hc rule class=xfce4-power-manager-settings tag="   "
-
+hc rule class=Xfce4-power-manager-settings tag="   " pseudotile=off
+hc rule class=Xfce4-taskmanager tag="   "
  # move all xterms to tag 3
 hc rule focus=on # normally focus new clients
 #hc rule focus=off # normally do not focus new clients
@@ -226,6 +226,7 @@ hc rule focus=on # normally focus new clients
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_(DIALOG|UTILITY|SPLASH)' pseudotile=on
 hc rule windowtype='_NET_WM_WINDOW_TYPE_DIALOG' focus=on
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_(NOTIFICATION|DOCK|DESKTOP)' manage=off
+hc rule class=Gsimplecal manage=off 
 
 # unlock, just to be sure
 hc unlock
@@ -241,7 +242,7 @@ hc detect_monitors
 #RUNS=1
 herbstclient emit_hook quit_panel
 killall dunst
-killall redshift
+killall redshift-gtk
 pid=( )
 #polybar-msg cmd quit
 
@@ -250,7 +251,7 @@ sleep 2
 dunst -conf /home/notis/.config/dunst/dunstrc &
 setxkbmap -layout us,gr -option grp:alt_shift_toggle
 xfce4-power-manager&
-redshift&
+redshift-gtk&
 feh --bg-scale /home/notis/Pictures/hbwm.jpg
 
 # find the panel
@@ -269,6 +270,7 @@ for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do
         polybar bottom-bar &
         pids+=( $! )
         echo "$!" > /tmp/bottom-bar.pid
+        hc spawn polybar my-awesome-polybar0
         
     else
         hc spawn polybar my-awesome-polybar0
