@@ -160,7 +160,7 @@ type              = custom/script
 exec              = python /home/notis/.config/herbstluftwm/layout.py
 click-left       = exec herbstclient cycle_layout
 interval          = 1
-format-foreground = #9fbc00
+format-foreground = #9f78e1
 format-background = ${colors.background}
 format-underline = #555
 format-padding = 2
@@ -728,7 +728,7 @@ type = custom/script
 exec = ~/.config/polybar/taskwarrior.sh
 format = <label>
 format-prefix-foreground = ${colors.foreground-alt}
-format-prefix = " "
+format-prefix = " "
 format-underline = #f50a4d
 click-left = task "$((`cat /tmp/tw_polybar_id`))" done
 
