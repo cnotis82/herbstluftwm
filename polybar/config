@@ -8,7 +8,7 @@
 ;=====================================================
 
 [colors]
-background = #222B2E
+background = #3a3432
 background-alt = #444
 foreground = #dfdfdf
 foreground-alt = #555
@@ -50,9 +50,12 @@ module-margin-right = 1
 font-0 = Comic Sans MS:size=10:weight=Italic
 #font-0 = Droid Sans Mono:size=10;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-font-2 = siji:pixelsize=10;1
-font-3 = FontAwesome:size=10:weight=Regular
-font-4 = DejaVu Sans:size=10
+font-2 = Wuncon Siji:pixelsize=10:weight=Regular;1
+#font-3 = FontAwesome:size=10:weight=Regular
+font-3 = DejaVu Sans:size=10
+font-4 = "Font Awesome 5 Free:style=Regular:pixelsize=10;2"
+font-5 = "Font Awesome 5 Free:style=Solid:pixelsize=10;2"
+font-6 = "Font Awesome 5 Brands:style=Regular:pixelsize=10;2"
 
 modules-left = updates cpu temperature fan memory isrunning-openvpn isrunning-firewall wlan
 modules-center = ewmh layout
@@ -93,8 +96,11 @@ font-0 = Comic Sans MS:size=10:weight=Italic
 #font-0 = Droid Sans Mono:size=10;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = Wuncon Siji:pixelsize=10:weight=Regular;1
-font-3 = FontAwesome:size=10:weight=Regular
-font-4 = DejaVu Sans:size=10
+#font-3 = FontAwesome:size=10:weight=Regular
+font-3 = DejaVu Sans:size=10
+font-4 = "Font Awesome 5 Free:style=Regular:pixelsize=12;2"
+font-5 = "Font Awesome 5 Free:style=Solid:pixelsize=12;2"
+font-6 = "Font Awesome 5 Brands:style=Regular:pixelsize=12;2"
 
 modules-left =  info-trash arch system-uptime-pretty updates cpu temperature fan memory wlan isrunning-openvpn isrunning-firewall taskwarrior
 modules-center = ewmh layout
@@ -137,8 +143,12 @@ module-margin-right = 4
 font-0 = Comic Sans MS:size=10:weight=Italic
 #font-0 = Droid Sans Mono:size=10;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-font-2 = siji:pixelsize=10;1
-font-3 = FontAwesome:size=10:weight=Regular
+font-2 = Wuncon Siji:pixelsize=10:weight=Regular;1
+#font-3 = FontAwesome:size=10:weight=Regular
+font-3 = DejaVu Sans:size=10
+font-4 = "Font Awesome 5 Free:style=Regular:pixelsize=10;2"
+font-5 = "Font Awesome 5 Free:style=Solid:pixelsize=10;2"
+font-6 = "Font Awesome 5 Brands:style=Regular:pixelsize=10;2"
 
 modules-left = appmenu arch mpd spotify
 modules-center = filesystem
@@ -159,7 +169,7 @@ format-padding = 2
 type              = custom/script
 exec              = python /home/notis/.config/herbstluftwm/layout.py
 click-left       = exec herbstclient cycle_layout
-interval          = 1
+interval          = 2
 format-foreground = #9f78e1
 format-background = ${colors.background}
 format-underline = #555
@@ -341,9 +351,9 @@ card = intel_backlight
 
 [module/cpu]
 type = internal/cpu
-interval = 0.5
-format = %{A1:xfce4-taskmanager & disown:}<label> <ramp-coreload>%{A}
-format-prefix = " " 
+interval = 1
+format = %{A1:lxtask & disown:}<label> <ramp-coreload>%{A}
+format-prefix = " " 
 format-prefix-foreground = ${colors.foreground-alt}
 format-underline = #ffb52a
 label = %percentage%%
@@ -645,7 +655,7 @@ format-underline = #f50a4d
 exec = ~/.config/polybar/spotify.sh
 click-left = playerctl -p spotify play-pause
 tail = true
-interval = 2
+interval = 5
 
 
 [module/powermenu]
@@ -701,7 +711,7 @@ format-prefix-foreground = ${colors.foreground-alt}
 format = <label>
 format-underline = #0a6cf5
 exec = ~/.config/polybar/system-uptime-pretty.sh
-interval = 30
+interval = 60
 
 [module/news-arch]
 type = custom/script
@@ -710,7 +720,7 @@ format-prefix-foreground = ${colors.foreground-alt}
 format = <label>
 format-underline = #0a6cf5
 exec = python ~/.config/polybar/info-archnews.py 1
-interval = 40
+interval = 3600
 click-left = xdg-open https://www.enikos.gr/
 
 
@@ -734,7 +744,7 @@ exec = ~/.config/polybar/ticker-btceur.sh
 interval = 600
 
 [module/taskwarrior]
-interval = 30
+interval = 60
 type = custom/script
 exec = ~/.config/polybar/taskwarrior.sh
 format = <label>
@@ -751,16 +761,24 @@ format-prefix = " "
 format-underline = #ffb52a
 click-left = gksu systemctl start openvpn-client@TunnelBearItaly.service
 click-right = gksu systemctl stop openvpn-client@TunnelBearItaly.service
-interval = 5
+interval = 10
 
 [module/isrunning-firewall]
 type = custom/script
 exec = ~/.config/polybar/isrunning-firewall.sh
 format-prefix-foreground = ${colors.foreground-alt}
-format-prefix = " "
+format-prefix = " "
 format-underline = #ffb52a
 click-left = gksu gufw
-interval = 5
+interval = 10
+
+[module/freq]
+type = custom/script
+exec = ~/.config/polybar/freq.sh
+format-prefix-foreground = ${colors.foreground-alt}
+format-prefix = @
+format-underline = #ffb52a
+interval = 2
 
 [settings]
 screenchange-reload = true
