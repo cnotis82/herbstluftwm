@@ -36,7 +36,8 @@ hc keybind $Mod-t emit_hook goto_last_tag
 hc keybind $Mod-t emit_hook goto_last_tag
 hc keybind $Mod-Control-i emit_hook list_keys
 hc keybind $Mod-Control-v emit_hook version
-hc keybind $Mod-Control-d emit_hook layout_dump
+hc keybind $Mod-Control-d spawn /home/notis/.config/herbstluftwm/hlwm-layout-manager.sh save
+hc keybind $Mod-Control-a spawn /home/notis/.config/herbstluftwm/hlwm-layout-manager.sh load
 
 hc keybind XF86AudioLowerVolume spawn amixer -q set Master 5%-
 hc keybind XF86AudioRaiseVolume spawn amixer -q set Master 5%+
@@ -59,7 +60,7 @@ hc keybind $Mod-Control-r reload
 hc keybind $Mod-q close
 hc keybind $Mod-Escape spawn xkill
 hc keybind $Mod-Return spawn termite #${TERMINAL:-termite} # use your $TERMINAL with xterm as fallback
-hc keybind $Mod-a spawn rofi -show combi
+hc keybind $Mod-a spawn rofi -combi-modi window,drun -show combi -modi combi
 hc keybind $Mod-b spawn firefox
 hc keybind $Mod-d spawn pcmanfm
 hc keybind $Mod-p spawn popcorntime
@@ -112,20 +113,32 @@ hc keybind $Mod-Control-l       resize right +$resizestep
 #hc keybind $Mod-Control-g       set  frame_gap $frame_gap_step
 
 # tags
-tag_names=( "   " "   " "   " "   " "   " "   " "   " "   ")
+tag_names=( "   " "   " "   " "   " "   " "   " "   " "   " "   " "   " "   " "   " "   ")
 #tag_names=( '1:term''2:www' '3:files' '4:social' '5:media' '6:doc' '7:dev' '8:sys')
-tag_keys=( {1..8} 0 )
+tag_keys=( {1..13} 0 )
 
 hc rename default "${tag_names[0]}" || true
 for i in ${!tag_names[@]} ; do
     hc add "${tag_names[$i]}"
     key="${tag_keys[$i]}"
-    if ! [ -z "$key" ] ; then
+    if ! [ -z "$key" ] && [ $key -lt 11 ]; then
         hc keybind "$Mod-$key" use_index "$i"
         hc keybind "$Mod-Control-$key" move_index "$i"
+    else
+        if [ $key -eq 11 ];then
+            hc keybind "Mod4-1" use_index 10
+            hc keybind "Mod4-Control-1" move_index 10
+        elif [ $key -eq 12 ];then
+            hc keybind "Mod4-2" use_index 11
+            hc keybind "Mod4-Control-2" move_index 11
+        elif [ $key -eq 13 ];then
+            hc keybind "Mod4-3" use_index 12
+            hc keybind "Mod4-Control-3" move_index 12
+        fi
     fi
 done
-
+hc keybind "$Mod-0" use_index 9
+hc keybind "$Mod-Control-0" move_index 9
 
 herbstclient pad 0 24 0 0
 # herbstclient pad 1 [0 [28 [0 [0]]]]
@@ -170,7 +183,7 @@ hc attr theme.floating.reset 1
 hc set frame_border_active_color '#222222'
 hc set frame_border_normal_color '#101010'
 hc set frame_bg_normal_color '#565656'
-hc set frame_bg_active_color '#345F0C'
+hc set frame_bg_active_color '#01a0e4'
 hc set frame_border_width 1
 hc set always_show_frame 1
 hc set frame_bg_transparent 1
@@ -202,6 +215,7 @@ hc rule class=Termite tag="   "
 hc rule class=Firefox tag="   "
 hc rule class=Google-chrome tag="   "
 hc rule class=Pcmanfm tag="   "
+hc rule class=Polo-gtk tag="   "
 hc rule class=Gvim tag="   "
 hc rule class=Pidgin tag="   "
 hc rule class=ViberPC tag="   "
