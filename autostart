@@ -216,24 +216,26 @@ hc rule class=Firefox tag="   "
 hc rule class=Google-chrome tag="   "
 hc rule class=Pcmanfm tag="   "
 hc rule class=Polo-gtk tag="   "
-hc rule class=Gvim tag="   "
+hc rule class=Corebird tag="   "
 hc rule class=Pidgin tag="   "
-hc rule class=ViberPC tag="   "
-hc rule class=Hexchat tag="   "
+hc rule class=Viber tag="   " pseudotile=off
+hc rule class=Slack tag="   " pseudotile=off
 hc rule class=Clementine tag="   "
 hc rule class=Mpv tag="   "
-hc rule class=Vlc tag="   "
+hc rule class=vlc tag="   "
 hc rule class=Popcorn-Time tag="   "
-hc rule class=stremio tag="   "
 hc rule class=Spotify tag="   "
 hc rule class=Chromium-browser tag="   "
 hc rule class=GitKraken tag="   "
 hc rule class=Atom tag="   "
-hc rule class=MonoDevelop tag="   "
-hc rule class=deepin-system-monitor tag="   "
+hc rule class=Subl3 tag="   "
+hc rule class=QtCreator tag="   "
+hc rule class=org.remmina.Remmina tag="   "
+hc rule class=DesktopEditors tag="   "
+hc rule class=Foxit Reader tag="   "
 hc rule class=Arandr tag="   "
 hc rule class=Xfce4-power-manager-settings tag="   " pseudotile=off
-hc rule class=Xfce4-taskmanager tag="   "
+hc rule class=gufw.py tag="   "
  # move all xterms to tag 3
 hc rule focus=on # normally focus new clients
 #hc rule focus=off # normally do not focus new clients
@@ -257,8 +259,8 @@ hc detect_monitors
 #autostart]
 #RUNS=1
 herbstclient emit_hook quit_panel
-killall dunst
-killall redshiftgui
+#killall dunst
+#killall redshiftgui
 pid=( )
 #polybar-msg cmd quit
 

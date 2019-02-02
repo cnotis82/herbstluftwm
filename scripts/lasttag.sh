@@ -7,7 +7,7 @@
 # or bind it: herbstclient keybind Mod1-Escape emit_hook goto_last_tag
 
 hc() { "${herbstclient_command[@]:-herbstclient}" "$@" ;}
-hc --idle '(tag_changed|goto_last_tag|reload|fullscreen|split_bottom|split_right|list_keys|version|layout_dump)' \
+hc --idle '(tag_changed|goto_last_tag|reload|quit_panel|fullscreen|split_bottom|split_right|list_keys|version|layout_dump)' \
     | while read line ; do
         IFS=$'\t' read -ra args <<< "$line"
         case ${args[0]} in
@@ -19,7 +19,15 @@ hc --idle '(tag_changed|goto_last_tag|reload|fullscreen|split_bottom|split_right
                 [ "$lasttag" ] && hc use "$lasttag"
                 ;;
             reload)
+                notify-send -u low "Herbstluftwm will be reloaded"
+                killall dunst
+                killall redshiftgui.elf
                 exit
+                ;;
+            quit_panel)
+                polybar-msg cmd quit
+                killall packages.sh
+                notify-send -u low "Panels will be reloaded"
                 ;;
             fullscreen)
                 notify-send -u low "Fullscreen toggle"
