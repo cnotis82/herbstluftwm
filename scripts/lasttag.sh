@@ -7,7 +7,7 @@
 # or bind it: herbstclient keybind Mod1-Escape emit_hook goto_last_tag
 
 hc() { "${herbstclient_command[@]:-herbstclient}" "$@" ;}
-hc --idle '(tag_changed|goto_last_tag|reload|quit_panel|fullscreen|split_bottom|split_right|list_keys|version|layout_dump)' \
+hc --idle '(tag_changed|reload|quit_panel|tag_added|tag_removed|goto_last_tag|fullscreen|floating|pseudotile|split_bottom|split_right|list_keys|version|layout_dump)' \
     | while read line ; do
         IFS=$'\t' read -ra args <<< "$line"
         case ${args[0]} in
@@ -19,19 +19,31 @@ hc --idle '(tag_changed|goto_last_tag|reload|quit_panel|fullscreen|split_bottom|
                 [ "$lasttag" ] && hc use "$lasttag"
                 ;;
             reload)
-                notify-send -u low "Herbstluftwm will be reloaded"
-                killall dunst
                 killall redshiftgui.elf
+                killall dunst
+                notify-send -u critical "Herbstluftwm will be reloaded"
                 exit
                 ;;
             quit_panel)
                 polybar-msg cmd quit
                 killall packages.sh
-                notify-send -u low "Panels will be reloaded"
+                notify-send -u critical "Panels will be reloaded"
+                ;;
+            tag_added)
+                notify-send -u low "Tag ${args[1]} added"
+                ;;
+            tag_removed)
+                notify-send -u low "Tag ${args[1]} removed"
                 ;;
             fullscreen)
-                notify-send -u low "Fullscreen toggle"
+                notify-send -u low "Fullscreen mode"
                 ;;
+            floating)
+                notify-send -u low "Floating mode"
+                ;;
+            pseudotile)
+                notify-send -u low "Pseudotile mode"
+                ;;    
             split_bottom)
                 notify-send -u low "Split Bottom 0.5"
                 ;;
