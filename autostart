@@ -212,27 +212,28 @@ hc set mouse_recenter_gap 0
 # rules
 hc unrule -F
 hc rule class=Termite tag="   "
-hc rule class=Firefox tag="   "
+hc rule class=Firefox tag="   " hook=Firefox focus=off
 hc rule class=Google-chrome tag="   "
-hc rule class=Pcmanfm tag="   "
-hc rule class=Polo-gtk tag="   "
-hc rule class=Corebird tag="   " 
-hc rule class=Pidgin tag="   " 
-hc rule instance=Viber tag="   " pseudotile=on 
-hc rule class=Slack tag="   " pseudotile=on 
+hc rule class=Pcmanfm tag="   " hook=Pcmanfm focus=off
+hc rule class=Polo-gtk tag="   " 
+hc rule class=Corebird tag="   " hook=Corebird focus=off 
+hc rule class=Pidgin tag="   " hook=Pidgin focus=off
+hc rule class=Hexchat tag="   " hook=Hexchat focus=off
+hc rule instance=Viber tag="   " pseudotile=on hook=Viber focus=off 
+hc rule class=Slack tag="   " pseudotile=on hook=Slack focus=off
 hc rule class=Clementine tag="   "
 hc rule class=Mpv tag="   "
-hc rule class=vlc tag="   " 
-hc rule class=Popcorn-Time tag="   "  
+hc rule class=vlc tag="   " hook=vlc focus=off
+hc rule class=Popcorn-Time tag="   "  hook=Popcorn-Time focus=off
 hc rule class=Spotify tag="   " 
 hc rule class=Chromium-browser tag="   "
-hc rule class=GitKraken tag="   " 
+hc rule class=GitKraken tag="   " hook=GitKraken focus=off pseudotile=on
 hc rule class=Atom tag="   "
-hc rule class=Subl3 tag="   " 
+hc rule class=Subl3 tag="   " hook=subl3
 hc rule class=QtCreator tag="   "
-hc rule class=org.remmina.Remmina tag="   "
-hc rule class=DesktopEditors tag="   "
-hc rule instance=FoxitReader tag="   "
+hc rule class=org.remmina.Remmina tag="   " hook=remmina
+hc rule class=DesktopEditors tag="   " hook=DesktopEditors
+hc rule instance=FoxitReader tag="   " hook=FoxitReader
 hc rule class=Arandr tag="   "
 hc rule class=Xfce4-power-manager-settings tag="   " pseudotile=off
 hc rule class=gufw.py tag="   "
