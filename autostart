@@ -211,7 +211,7 @@ hc set mouse_recenter_gap 0
 
 # rules
 hc unrule -F
-hc rule class=Termite tag="   "
+hc rule class=Termite tag="   " hook=Term focus=off
 hc rule class=Firefox tag="   " hook=Firefox focus=off
 hc rule class=Google-chrome tag="   "
 hc rule class=Pcmanfm tag="   " hook=Pcmanfm focus=off
@@ -232,6 +232,7 @@ hc rule class=Atom tag="   "
 hc rule class=Subl3 tag="   " hook=subl3
 hc rule class=QtCreator tag="   "
 hc rule class=org.remmina.Remmina tag="   " hook=remmina
+hc rule class=Filezilla tag="   " hook=Filezilla
 hc rule class=DesktopEditors tag="   " hook=DesktopEditors
 hc rule instance=FoxitReader tag="   " hook=FoxitReader
 hc rule class=Arandr tag="   "
