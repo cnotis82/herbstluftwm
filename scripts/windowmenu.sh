@@ -11,16 +11,16 @@ set -e
 action_list() {
     local a="$1"
     i=0
-    "$a" "Add Tag 1" herbstclient add Tag1
-    "$a" "Add Tag 2" herbstclient add Tag2
+    "$a" "Add Tag docs" herbstclient add '   '
+    "$a" "Add Tag docker" herbstclient add '   '
     "$a" "Add Tag Youtube" herbstclient add '   '   
     "$a" "Add Tag VM" herbstclient add '   '
-    "$a" "Add Tag Games" herbstclient add '   '
-    "$a" "Delete Tag 1" herbstclient merge_tag Tag1 
-    "$a" "Delete Tag 2" herbstclient merge_tag Tag2
+    "$a" "Add Tag Colibri" herbstclient add '   '
+    "$a" "Delete Tag docs" herbstclient merge_tag '   '
+    "$a" "Delete Tag Docker" herbstclient merge_tag '   '
     "$a" "Delete Tag Youtube" herbstclient merge_tag '   '  
     "$a" "Delete Tag VM" herbstclient merge_tag '   '  
-    "$a" "Delete Tag Games" herbstclient merge_tag '   '
+    "$a" "Delete Tag Colibri" herbstclient merge_tag '   '
     "$a" "Delete Tag Scratchpad" herbstclient merge_tag "   "
     for tag in $(herbstclient complete 1 move) ; do
         "$a" "Move to tag $tag $i" herbstclient move_index "$i"
