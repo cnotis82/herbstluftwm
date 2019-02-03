@@ -7,7 +7,7 @@
 # or bind it: herbstclient keybind Mod1-Escape emit_hook goto_last_tag
 
 hc() { "${herbstclient_command[@]:-herbstclient}" "$@" ;}
-hc --idle '(tag_changed|reload|quit_panel|tag_added|tag_removed|goto_last_tag|fullscreen|floating|pseudotile|split_bottom|split_right|list_keys|version|layout_dump)' \
+hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|goto_last_tag|fullscreen|floating|pseudotile|split_bottom|split_right|list_keys|version|layout_dump|print)' \
     | while read line ; do
         IFS=$'\t' read -ra args <<< "$line"
         case ${args[0]} in
@@ -35,6 +35,9 @@ hc --idle '(tag_changed|reload|quit_panel|tag_added|tag_removed|goto_last_tag|fu
             tag_removed)
                 notify-send -u low "Tag ${args[1]} removed"
                 ;;
+            urgent)
+                notify-send -u critical "Urgent Window"
+                ;;
             fullscreen)
                 notify-send -u low "Fullscreen mode"
                 ;;
@@ -49,6 +52,9 @@ hc --idle '(tag_changed|reload|quit_panel|tag_added|tag_removed|goto_last_tag|fu
                 ;;
             split_right)
                 notify-send -u low "Split Right 0.5"
+                ;;
+            print)
+                notify-send -u low "Screenshot saved in Pictures"
                 ;;
             list_keys)
                 keys=$(herbstclient list_keybinds)

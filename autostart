@@ -49,7 +49,7 @@ hc keybind XF86Music spawn banshee
 hc keybind XF86Mail spawn firefox www.gmail.com
 hc keybind XF86Search spawn firefox https://www.google.com.gr
 hc keybind XF86Calculator spawn galculator
-hc keybind Print spawn scrot '%Y-%m-%d_$wx$h_scrot.png' -e 'mv $f ~/Pictures/'
+hc keybind Print spawn bash -c "scrot '%Y-%m-%d_$wx$h_scrot.png' -e 'mv $f ~/Pictures/'; herbstclient emit_hook print"
 hc keybind XF86HomePage spawn jgmenu_run
 
 #hc keybind XF86MonBrightnessDown spawn /usr/bin/light -U 5
