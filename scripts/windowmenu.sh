@@ -21,6 +21,7 @@ action_list() {
     "$a" "Delete Tag Youtube" herbstclient merge_tag '   '  
     "$a" "Delete Tag VM" herbstclient merge_tag '   '  
     "$a" "Delete Tag Games" herbstclient merge_tag '   '
+    "$a" "Delete Tag Scratchpad" herbstclient merge_tag "   "
     for tag in $(herbstclient complete 1 move) ; do
         "$a" "Move to tag $tag $i" herbstclient move_index "$i"
 	i=$((i + 1))

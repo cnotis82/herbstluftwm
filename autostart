@@ -49,7 +49,7 @@ hc keybind XF86Music spawn banshee
 hc keybind XF86Mail spawn firefox www.gmail.com
 hc keybind XF86Search spawn firefox https://www.google.com.gr
 hc keybind XF86Calculator spawn galculator
-hc keybind Print spawn scrot '%Y-%m-%d_$wx$h_scrot.png' -e 'mv $f ~/Pictures/'
+hc keybind Print spawn bash -c "scrot '%Y-%m-%d_$wx$h_scrot.png' -e 'mv $f ~/Pictures/'; herbstclient emit_hook print"
 hc keybind XF86HomePage spawn jgmenu_run
 
 #hc keybind XF86MonBrightnessDown spawn /usr/bin/light -U 5
@@ -149,8 +149,8 @@ hc keybind $Mod-comma  use_index -1 --skip-visible
 
 # layouting
 hc keybind $Mod-r remove
-hc keybind $Mod-s floating toggle
-hc keybind $Mod-x pseudotile toggle
+hc keybind $Mod-s spawn bash -c "herbstclient floating toggle; herbstclient emit_hook floating"
+hc keybind $Mod-x spawn bash -c "herbstclient pseudotile toggle; herbstclient emit_hook pseudotile"
 hc keybind $Mod-f spawn bash -c "herbstclient fullscreen toggle; herbstclient emit_hook fullscreen"
 
 #hc keybind $Mod-p pseudotile toggle
@@ -216,24 +216,26 @@ hc rule class=Firefox tag="   "
 hc rule class=Google-chrome tag="   "
 hc rule class=Pcmanfm tag="   "
 hc rule class=Polo-gtk tag="   "
-hc rule class=Gvim tag="   "
-hc rule class=Pidgin tag="   "
-hc rule class=ViberPC tag="   "
-hc rule class=Hexchat tag="   "
+hc rule class=Corebird tag="   " 
+hc rule class=Pidgin tag="   " 
+hc rule instance=Viber tag="   " pseudotile=on 
+hc rule class=Slack tag="   " pseudotile=on 
 hc rule class=Clementine tag="   "
 hc rule class=Mpv tag="   "
-hc rule class=Vlc tag="   "
-hc rule class=Popcorn-Time tag="   "
-hc rule class=stremio tag="   "
-hc rule class=Spotify tag="   "
+hc rule class=vlc tag="   " 
+hc rule class=Popcorn-Time tag="   "  
+hc rule class=Spotify tag="   " 
 hc rule class=Chromium-browser tag="   "
-hc rule class=GitKraken tag="   "
+hc rule class=GitKraken tag="   " 
 hc rule class=Atom tag="   "
-hc rule class=MonoDevelop tag="   "
-hc rule class=deepin-system-monitor tag="   "
+hc rule class=Subl3 tag="   " 
+hc rule class=QtCreator tag="   "
+hc rule class=org.remmina.Remmina tag="   "
+hc rule class=DesktopEditors tag="   "
+hc rule instance=FoxitReader tag="   "
 hc rule class=Arandr tag="   "
 hc rule class=Xfce4-power-manager-settings tag="   " pseudotile=off
-hc rule class=Xfce4-taskmanager tag="   "
+hc rule class=gufw.py tag="   "
  # move all xterms to tag 3
 hc rule focus=on # normally focus new clients
 #hc rule focus=off # normally do not focus new clients
@@ -255,15 +257,9 @@ herbstclient set tree_style '╾│ ├└╼─┐'
 hc detect_monitors
 
 #autostart]
-#RUNS=1
 herbstclient emit_hook quit_panel
-killall dunst
-killall redshiftgui
 pid=( )
-#polybar-msg cmd quit
-
-sleep 2
-
+sleep 1
 dunst -conf /home/notis/.config/dunst/dunstrc &
 setxkbmap -layout us,gr -option grp:alt_shift_toggle
 xfce4-power-manager&
