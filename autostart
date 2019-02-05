@@ -134,6 +134,9 @@ for i in ${!tag_names[@]} ; do
         elif [ $key -eq 13 ];then
             hc keybind "Mod4-3" use_index 12
             hc keybind "Mod4-Control-3" move_index 12
+        elif [ $key -eq 14 ];then
+            hc keybind "Mod4-4" use_index 13
+            hc keybind "Mod4-Control-4" move_index 13
         fi
     fi
 done
