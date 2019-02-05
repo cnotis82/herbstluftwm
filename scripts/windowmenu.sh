@@ -12,11 +12,13 @@ action_list() {
     local a="$1"
     i=0
     "$a" "Add Tag docs" herbstclient add '   '
+    "$a" "Add Tag images" herbstclient add '   '
     "$a" "Add Tag docker" herbstclient add '   '
     "$a" "Add Tag Youtube" herbstclient add '   '   
     "$a" "Add Tag VM" herbstclient add '   '
     "$a" "Add Tag Colibri" herbstclient add '   '
     "$a" "Delete Tag docs" herbstclient merge_tag '   '
+    "$a" "Delete Tag images" herbstclient merge_tag '   '
     "$a" "Delete Tag Docker" herbstclient merge_tag '   '
     "$a" "Delete Tag Youtube" herbstclient merge_tag '   '  
     "$a" "Delete Tag VM" herbstclient merge_tag '   '  

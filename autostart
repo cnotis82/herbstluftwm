@@ -113,9 +113,9 @@ hc keybind $Mod-Control-l       resize right +$resizestep
 #hc keybind $Mod-Control-g       set  frame_gap $frame_gap_step
 
 # tags
-tag_names=( "   " "   " "   " "   " "   " "   " "   " "   " "   " "   " "   " "   " "   ")
+tag_names=( "   " "   " "   " "   " "   " "   " "   " "   " "   " "   " "   " "   " "   " "   ")
 #tag_names=( '1:term''2:www' '3:files' '4:social' '5:media' '6:doc' '7:dev' '8:sys')
-tag_keys=( {1..13} 0 )
+tag_keys=( {1..14} 0 )
 
 hc rename default "${tag_names[0]}" || true
 for i in ${!tag_names[@]} ; do
@@ -211,33 +211,37 @@ hc set mouse_recenter_gap 0
 
 # rules
 hc unrule -F
-hc rule class=Termite tag="   " hook=Term focus=off
-hc rule class=Firefox tag="   " hook=Firefox focus=off
+hc rule class=Termite tag="   " hook="   " focus=off
+hc rule class=Firefox tag="   " hook="   " focus=off
 hc rule class=Google-chrome tag="   "
-hc rule class=Pcmanfm tag="   " hook=Pcmanfm focus=off
+hc rule class=Pcmanfm tag="   " hook="   " focus=off
 hc rule class=Polo-gtk tag="   " 
-hc rule class=Corebird tag="   " hook=Corebird focus=off 
-hc rule class=Pidgin tag="   " hook=Pidgin focus=off
-hc rule class=Hexchat tag="   " hook=Hexchat focus=off
-hc rule instance=Viber tag="   " pseudotile=on hook=Viber focus=off 
-hc rule class=Slack tag="   " pseudotile=on hook=Slack focus=off
+hc rule class=Corebird tag="   " hook="   " focus=off 
+hc rule class=Pidgin tag="   " hook="   " focus=off
+hc rule class=Hexchat tag="   " hook="   " focus=off
+hc rule instance=Viber tag="   " pseudotile=on hook="   " focus=off 
+hc rule class=Slack tag="   " pseudotile=on hook="   " focus=off
 hc rule class=Clementine tag="   "
 hc rule class=Mpv tag="   "
-hc rule class=vlc tag="   " hook=vlc focus=off
-hc rule class=Popcorn-Time tag="   "  hook=Popcorn-Time focus=off
+hc rule class=vlc tag="   " hook="   " focus=off
+hc rule class=Popcorn-Time tag="   "  hook="   " focus=off
 hc rule class=Spotify tag="   " 
 hc rule class=Chromium-browser tag="   "
-hc rule class=GitKraken tag="   " hook=GitKraken focus=off pseudotile=on
-hc rule class=Atom tag="   "
-hc rule class=Subl3 tag="   " hook=subl3
-hc rule class=QtCreator tag="   "
-hc rule class=org.remmina.Remmina tag="   " hook=remmina
-hc rule class=Filezilla tag="   " hook=Filezilla
-hc rule class=DesktopEditors tag="   " hook=DesktopEditors
-hc rule instance=FoxitReader tag="   " hook=FoxitReader
-hc rule class=Arandr tag="   "
-hc rule class=Xfce4-power-manager-settings tag="   " pseudotile=off
-hc rule class=gufw.py tag="   "
+hc rule class=GitKraken tag="   " hook="   " focus=off pseudotile=on
+hc rule class=Atom tag="   " hook="   "
+hc rule class=Subl3 tag="   " hook="   "
+hc rule class=QtCreator tag="   " hook="   "
+hc rule class=org.remmina.Remmina tag="   " hook="   "
+hc rule class=Filezilla tag="   " hook="   "
+hc rule class=DesktopEditors tag="   " hook="   "
+hc rule instance=FoxitReader tag="   " hook="   "
+hc rule class=Sxiv tag="   " hook="   "
+hc rule class=Gimp-2.10 tag="   " hook="   "
+hc rule class=Pencil tag="   " hook="   "
+
+hc rule class=Arandr tag="   " hook="   "
+hc rule class=Xfce4-power-manager-settings tag="   " pseudotile=off hook="   "
+hc rule class=gufw.py tag="   " hook="   "
  # move all xterms to tag 3
 hc rule focus=on # normally focus new clients
 #hc rule focus=off # normally do not focus new clients
