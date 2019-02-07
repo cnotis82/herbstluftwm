@@ -39,6 +39,11 @@ hc keybind $Mod-Control-v emit_hook version
 hc keybind $Mod-Control-d spawn /home/notis/.config/herbstluftwm/hlwm-layout-manager.sh save
 hc keybind $Mod-Control-a spawn /home/notis/.config/herbstluftwm/hlwm-layout-manager.sh load
 
+#minimize
+hc keybind $Mod-n       spawn /home/notis/.config/herbstluftwm/hide_window.sh +1
+hc keybind $Mod-Shift-n spawn /home/notis/.config/herbstluftwm/hide_window.sh -1
+hc keybind $Mod-Control-n spawn /home/notis/.config/herbstluftwm/hide_window.sh 0
+
 hc keybind XF86AudioLowerVolume spawn amixer -q set Master 5%-
 hc keybind XF86AudioRaiseVolume spawn amixer -q set Master 5%+
 hc keybind XF86AudioMute spawn amixer -q set Master toggle
@@ -234,6 +239,7 @@ hc rule class=GitKraken tag="   " hook="   " focus=off pseudotile=on
 hc rule class=Atom tag="   " hook="   "
 hc rule class=Subl3 tag="   " hook="   "
 hc rule class=QtCreator tag="   " hook="   "
+hc rule class=Code tag="   " hook="   "
 hc rule class=org.remmina.Remmina tag="   " hook="   "
 hc rule class=Filezilla tag="   " hook="   "
 hc rule class=DesktopEditors tag="   " hook="   "
