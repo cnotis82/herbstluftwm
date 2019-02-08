@@ -38,6 +38,8 @@ hc keybind $Mod-Control-i emit_hook list_keys
 hc keybind $Mod-Control-v emit_hook version
 hc keybind $Mod-Control-d spawn /home/notis/.config/herbstluftwm/hlwm-layout-manager.sh save
 hc keybind $Mod-Control-a spawn /home/notis/.config/herbstluftwm/hlwm-layout-manager.sh load
+hc keybind $Mod-Control-c spawn /home/notis/.config/herbstluftwm/herstcmd.sh
+hc keybind $Mod-Control-b spawn /home/notis/.config/herbstluftwm/wselect.sh bring
 
 #minimize
 hc keybind $Mod-n       spawn /home/notis/.config/herbstluftwm/hide_window.sh +1
