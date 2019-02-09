@@ -583,7 +583,7 @@ thermal-zone = 1
 warn-temperature = 60
 
 format = %{A1:termite --exec='watch sensors' & disown:}<ramp> <label>%{A}
-;format-underline = #f50a4d
+format-underline = ${colors.background}
 format-warn = <ramp> <label-warn>
 format-warn-underline = ${self.format-underline}
 
