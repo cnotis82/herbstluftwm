@@ -19,8 +19,6 @@ Mod=Mod1    # Use alt as the main modifier
 #Mod=Mod4   # Use the super key as the main modifier
 
 #scripts
-#herbstclient emit_hook goto_last_tag
-#hc spawn /home/notis/.config/herbstluftwm/autorun "polybar"
 hc spawn /home/notis/.config/herbstluftwm/lasttag.sh
 hc keybind $Mod-semicolon spawn /home/notis/.config/herbstluftwm/swap.sh auto
 hc keybind $Mod-slash spawn /home/notis/.config/herbstluftwm/swap.sh close
@@ -38,6 +36,13 @@ hc keybind $Mod-Control-i emit_hook list_keys
 hc keybind $Mod-Control-v emit_hook version
 hc keybind $Mod-Control-d spawn /home/notis/.config/herbstluftwm/hlwm-layout-manager.sh save
 hc keybind $Mod-Control-a spawn /home/notis/.config/herbstluftwm/hlwm-layout-manager.sh load
+hc keybind $Mod-Control-c spawn /home/notis/.config/herbstluftwm/herstcmd.sh
+hc keybind $Mod-Control-b spawn /home/notis/.config/herbstluftwm/wselect.sh bring
+
+#minimize
+hc keybind $Mod-n       spawn /home/notis/.config/herbstluftwm/hide_window.sh +1
+hc keybind $Mod-Shift-n spawn /home/notis/.config/herbstluftwm/hide_window.sh -1
+hc keybind $Mod-Control-n spawn /home/notis/.config/herbstluftwm/hide_window.sh 0
 
 hc keybind XF86AudioLowerVolume spawn amixer -q set Master 5%-
 hc keybind XF86AudioRaiseVolume spawn amixer -q set Master 5%+
@@ -52,9 +57,7 @@ hc keybind XF86Calculator spawn galculator
 hc keybind Print spawn bash -c "scrot '%Y-%m-%d_$wx$h_scrot.png' -e 'mv $f ~/Pictures/'; herbstclient emit_hook print"
 hc keybind XF86HomePage spawn jgmenu_run
 
-#hc keybind XF86MonBrightnessDown spawn /usr/bin/light -U 5
-#hc keybind XF86MonBrightnessUp spawn /usr/bin/light -A 5
-
+#Apps
 hc keybind $Mod-Control-q quit
 hc keybind $Mod-Control-r reload
 hc keybind $Mod-q close
@@ -66,8 +69,6 @@ hc keybind $Mod-d spawn pcmanfm
 hc keybind $Mod-p spawn popcorntime
 hc keybind $Mod-v spawn viber
 hc keybind $Mod-Control-w spawn i3lock-fancy 
-#hc keybind $Mod-t spawn pidgin
-#hc keybind $Mod-s spawn xfce4-taskmanager
 
 # focusing clients
 hc keybind $Mod-Left  focus left
@@ -103,19 +104,11 @@ hc keybind $Mod-Control-h       resize left +$resizestep
 hc keybind $Mod-Control-j       resize down +$resizestep
 hc keybind $Mod-Control-k       resize up +$resizestep
 hc keybind $Mod-Control-l       resize right +$resizestep
-#hc keybind $Mod-Control-Left    resize left +$resizestep
-#hc keybind $Mod-Control-Down    resize down +$resizestep
-#hc keybind $Mod-Control-Up      resize up +$resizestep
-#hc keybind $Mod-Control-Right   resize right +$resizestep
-
-#Resize Frame Gaps
-#frame_gap_step=hc get frame_gap + 10
-#hc keybind $Mod-Control-g       set  frame_gap $frame_gap_step
 
 # tags
-tag_names=( "   " "   " "   " "   " "   " "   " "   " "   " "   " "   " "   " "   " "   ")
+tag_names=( "   " "   " "   " "   " "   " "   " "   " "   " "   " "   " "   " "   " "   " "   ")
 #tag_names=( '1:term''2:www' '3:files' '4:social' '5:media' '6:doc' '7:dev' '8:sys')
-tag_keys=( {1..13} 0 )
+tag_keys=( {1..14} 0 )
 
 hc rename default "${tag_names[0]}" || true
 for i in ${!tag_names[@]} ; do
@@ -134,6 +127,9 @@ for i in ${!tag_names[@]} ; do
         elif [ $key -eq 13 ];then
             hc keybind "Mod4-3" use_index 12
             hc keybind "Mod4-Control-3" move_index 12
+        elif [ $key -eq 14 ];then
+            hc keybind "Mod4-4" use_index 13
+            hc keybind "Mod4-Control-4" move_index 13
         fi
     fi
 done
@@ -141,7 +137,6 @@ hc keybind "$Mod-0" use_index 9
 hc keybind "$Mod-Control-0" move_index 9
 
 herbstclient pad 0 24 0 0
-# herbstclient pad 1 [0 [28 [0 [0]]]]
 
 # cycle through tags
 hc keybind $Mod-period use_index +1 --skip-visible
@@ -211,33 +206,38 @@ hc set mouse_recenter_gap 0
 
 # rules
 hc unrule -F
-hc rule class=Termite tag="   " hook=Term focus=off
-hc rule class=Firefox tag="   " hook=Firefox focus=off
+hc rule class=Termite tag="   " hook="   " focus=off
+hc rule class=Firefox tag="   " hook="   " focus=off
 hc rule class=Google-chrome tag="   "
-hc rule class=Pcmanfm tag="   " hook=Pcmanfm focus=off
+hc rule class=Pcmanfm tag="   " hook="   " focus=off
 hc rule class=Polo-gtk tag="   " 
-hc rule class=Corebird tag="   " hook=Corebird focus=off 
-hc rule class=Pidgin tag="   " hook=Pidgin focus=off
-hc rule class=Hexchat tag="   " hook=Hexchat focus=off
-hc rule instance=Viber tag="   " pseudotile=on hook=Viber focus=off 
-hc rule class=Slack tag="   " pseudotile=on hook=Slack focus=off
+hc rule class=Corebird tag="   " hook="   " focus=off 
+hc rule class=Pidgin tag="   " hook="   " focus=off
+hc rule class=Hexchat tag="   " hook="   " focus=off
+hc rule instance=Viber tag="   " pseudotile=on hook="   " focus=off 
+hc rule class=Slack tag="   " pseudotile=on hook="   " focus=off
 hc rule class=Clementine tag="   "
 hc rule class=Mpv tag="   "
-hc rule class=vlc tag="   " hook=vlc focus=off
-hc rule class=Popcorn-Time tag="   "  hook=Popcorn-Time focus=off
+hc rule class=vlc tag="   " hook="   " focus=off
+hc rule class=Popcorn-Time tag="   "  hook="   " focus=off
 hc rule class=Spotify tag="   " 
 hc rule class=Chromium-browser tag="   "
-hc rule class=GitKraken tag="   " hook=GitKraken focus=off pseudotile=on
-hc rule class=Atom tag="   "
-hc rule class=Subl3 tag="   " hook=subl3
-hc rule class=QtCreator tag="   "
-hc rule class=org.remmina.Remmina tag="   " hook=remmina
-hc rule class=Filezilla tag="   " hook=Filezilla
-hc rule class=DesktopEditors tag="   " hook=DesktopEditors
-hc rule instance=FoxitReader tag="   " hook=FoxitReader
-hc rule class=Arandr tag="   "
-hc rule class=Xfce4-power-manager-settings tag="   " pseudotile=off
-hc rule class=gufw.py tag="   "
+hc rule class=GitKraken tag="   " hook="   " focus=off pseudotile=on
+hc rule class=Atom tag="   " hook="   "
+hc rule class=Subl3 tag="   " hook="   "
+hc rule class=QtCreator tag="   " hook="   "
+hc rule class=Code tag="   " hook="   "
+hc rule class=org.remmina.Remmina tag="   " hook="   "
+hc rule class=Filezilla tag="   " hook="   "
+hc rule class=DesktopEditors tag="   " hook="   "
+hc rule instance=FoxitReader tag="   " hook="   "
+hc rule class=Sxiv tag="   " hook="   "
+hc rule class=Gimp-2.10 tag="   " hook="   "
+hc rule class=Pencil tag="   " hook="   "
+
+hc rule class=Arandr tag="   " hook="   "
+hc rule class=Xfce4-power-manager-settings tag="   " pseudotile=off hook="   "
+hc rule class=gufw.py tag="   " hook="   "
  # move all xterms to tag 3
 hc rule focus=on # normally focus new clients
 #hc rule focus=off # normally do not focus new clients

@@ -14,6 +14,15 @@ hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|goto
             tag_changed)
                 lasttag="$tag"
                 tag=${args[1]}
+                # sleep 1
+                # status=( $(herbstclient tag_status) )
+                # empty="."
+                # #notify-send -u critical "$status $tag"
+                # for i in ${!status[@]} ; do
+                #     if [ "${status[$i]}" = "$empty" ]; then
+                #         hc merge_tag " ${status[$(( $i + 1 ))]}  "
+                #     fi
+                # done
                 ;;
             goto_last_tag)
                 [ "$lasttag" ] && hc use "$lasttag"
@@ -35,22 +44,40 @@ hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|goto
             tag_removed)
                 notify-send -u low "Tag ${args[1]} removed"
                 ;;
+            tag_flags)
+               
+                ;;
             # urgent)
             #     notify-send -u critical "Urgent Window"
             #     ;;
             rule)
-                #notify-send -u critical "Urgent Window"
+                
+                #herbstclient add "${args[1]}"
+                # status=( $(herbstclient tag_status) )
+                # found=false
+                # #notify-send -u critical "$status $tag"
+                # for i in ${!status[@]} ; do
+                #     if [ "${status[$i]}" = "${args[1]}" ]; then
+                #         found=true
+                #     fi
+                # done
+                
+                # if [ "$found" = false ] ; then
+                #     hc add "${args[1]}"
+                # fi
+                #hc add "${args[1]}"
+                #sleep 1
                 winid=${args[2]}
                 xdotool set_window --urgency 1 $winid
                 ;;
             fullscreen)
-                notify-send -u low "Fullscreen mode"
+                notify-send -u low "Fullscreen ${args[1]}"
                 ;;
             floating)
-                notify-send -u low "Floating mode"
+                notify-send -u low "Floating ${args[1]}"
                 ;;
             pseudotile)
-                notify-send -u low "Pseudotile mode"
+                notify-send -u low "Pseudotile ${args[1]}"
                 ;;    
             split_bottom)
                 notify-send -u low "Split Bottom 0.5"
