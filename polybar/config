@@ -8,9 +8,12 @@
 ;=====================================================
 
 [colors]
-background = #3a3432
+background = #bdae93
+;#3a3432
+
 background-alt = #444
-foreground = #dfdfdf
+foreground = #1d2021
+;#ebdbb2
 foreground-alt = #555
 primary = #ffb52a
 secondary = #e60053
@@ -170,9 +173,9 @@ type              = custom/script
 exec              = python /home/notis/.config/herbstluftwm/layout.py
 click-left       = exec herbstclient cycle_layout
 interval          = 2
-format-foreground = #9f78e1
+format-foreground = #83a598
 format-background = ${colors.background}
-format-underline = #555
+;format-underline = #555
 format-padding = 2
 
 [module/ewmh]
@@ -222,9 +225,9 @@ enable-scroll = false
 ; ;   %index%
 ; ; Default: %icon%  %name%
 label-active = %icon% %name%
-label-active-foreground = #9fbc00
-label-active-background = #3f3f3f
-label-active-underline = #9fbc00
+label-active-foreground = #1d2021
+label-active-background = #83a598
+label-active-underline = #83a598
 ;
 ; ; Available tokens:
 ; ;   %name%
@@ -232,8 +235,10 @@ label-active-underline = #9fbc00
 ; ;   %index%
 ; ; Default: %icon%  %name%
 label-occupied = %name%
-label-occupied-underline = #555555
-label-occupied-foreground = #55
+;label-occupied-underline = #1d2021
+;#555555
+label-occupied-foreground = #555
+;#55
 ;
 ; ; Available tokens:
 ; ;   %name%
@@ -270,10 +275,10 @@ blacklist-0 = num lock
 
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
-format-prefix-underline = ${colors.secondary}
+;format-prefix-underline = ${colors.secondary}
 
 label-layout = %layout%
-label-layout-underline = ${colors.secondary}
+;label-layout-underline = ${colors.secondary}
 
 label-indicator-padding = 2
 label-indicator-margin = 1
@@ -287,15 +292,15 @@ interval = 25
 mount-0 = /
 mount-1 = /home/notis/External
 
-label-mounted = %{F#0a81f5}%mountpoint%%{F-}: %percentage_used%% of %total%
-label-unmounted = %mountpoint% not mounted
+label-mounted = %{F#83a598}%mountpoint%%{F-}: %percentage_used%% of %total%
+label-unmounted =  %mountpoint% not mounted
 label-unmounted-foreground = ${colors.foreground-alt}
 
 [module/mpd]
 type = internal/mpd
 host = localhost
 port = 6600
-format-online-underline = #ffb52a
+;format-online-underline = #ffb52a
 label-song = %title%
 label-song-foreground = #ff
 ;format-online-prefix = " "
@@ -355,21 +360,21 @@ interval = 1
 format = %{A1:lxtask & disown:}<label> <ramp-coreload>%{A}
 format-prefix = " " 
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #ffb52a
+;format-underline = #ffb52a
 label = %percentage%%
 click-left = /usr/bin/xfce4-taskmanager &
 ramp-coreload-0 = ▁
 ramp-coreload-0-font = 2
-ramp-coreload-0-foreground = #aaff77
+ramp-coreload-0-foreground = #83a598
 ramp-coreload-1 = ▂
 ramp-coreload-1-font = 2
-ramp-coreload-1-foreground = #aaff77
+ramp-coreload-1-foreground = #83a598
 ramp-coreload-2 = ▃
 ramp-coreload-2-font = 2
-ramp-coreload-2-foreground = #aaff77
+ramp-coreload-2-foreground = #83a598
 ramp-coreload-3 = ▄
 ramp-coreload-3-font = 2
-ramp-coreload-3-foreground = #aaff77
+ramp-coreload-3-foreground = #83a598
 ramp-coreload-4 = ▅
 ramp-coreload-4-font = 2
 ramp-coreload-4-foreground = #fba922
@@ -387,13 +392,13 @@ ramp-coreload-7-foreground = #ff5555
 type = internal/memory
 interval = 4
 format = <label> <bar-used>
-format-prefix = " "
+format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #4bffdc
+;format-underline = #4bffdc
 label = %percentage_used%%
 bar-used-width = 8
-bar-used-foreground-0 = #aaff77
-bar-used-foreground-1 = #aaff77
+bar-used-foreground-0 = #83a598
+bar-used-foreground-1 = #83a598
 bar-used-foreground-2 = #fba922
 bar-used-foreground-3 = #ff5555
 bar-used-indicator = 
@@ -447,7 +452,7 @@ interval = 2.0
 format-connected-prefix = %{A1:networkmanager_dmenu & disown:} %{A}
 format-connected-prefix-foreground = ${colors.foreground-alt}
 format-connected = <label-connected>
-format-connected-underline = #9f78e1
+format-connected-underline = ${colors.background}
 ;
 ; ; Available tags:
 ; ;   <label-disconnected> (default)
@@ -469,7 +474,7 @@ format-connected-underline = #9f78e1
 ; ;   %linkspeed% [wired]
 ; ; Default: %ifname% %local_ip%
 label-connected = %signal%/%downspeed%
-label-connected-foreground = #eefafafa
+label-connected-foreground = ${colors.foreground}
 ;
 ; ; Available tokens:
 ; ;   %ifname%    [wireless+wired]
@@ -508,7 +513,7 @@ time-alt = %H:%M:%S
 
 format-prefix = 
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #0a6cf5
+;format-underline = #0a6cf5
 
 label = %date% %time%
 
@@ -516,9 +521,9 @@ label = %date% %time%
 type = internal/volume
 master-mixer = Master
 format = <label> <bar-used>
-format-volume-prefix = " "
+format-volume-prefix = " "
 format-volume-prefix-foreground = ${colors.foreground-alt}
-format-volume-underline = #9f78e1
+;format-volume-underline = #9f78e1
 format-volume = %{A3:pavucontrol & disown:}<bar-volume>%{A}
 ;label-volume = 
 ;label-volume-foreground = ${colors.foreground-alt}
@@ -526,14 +531,14 @@ format-volume = %{A3:pavucontrol & disown:}<bar-volume>%{A}
 
 format-muted-prefix = " "
 format-muted-foreground = ${colors.foreground-alt}
-label-muted = sound muted
+label-muted = muted
 
 bar-volume-width = 10
-bar-volume-foreground-0 = #55aa55
-bar-volume-foreground-1 = #55aa55
-bar-volume-foreground-2 = #55aa55
-bar-volume-foreground-3 = #55aa55
-bar-volume-foreground-4 = #55aa55
+bar-volume-foreground-0 = #83a598
+bar-volume-foreground-1 = #83a598
+bar-volume-foreground-2 = #83a598
+bar-volume-foreground-3 = #83a598
+bar-volume-foreground-4 = #f5a70a
 bar-volume-foreground-5 = #f5a70a
 bar-volume-foreground-6 = #ff5555
 bar-volume-gradient = false
@@ -555,11 +560,11 @@ format-charging = <animation-charging> <label-charging>
 format-charging-underline = #ffb52a
 
 format-discharging = <ramp-capacity> <label-discharging>
-format-discharging-underline = ${self.format-charging-underline}
+;format-discharging-underline = ${self.format-charging-underline}
 
 format-full-prefix = %{A3:xfce4-power-manager-settings & disown:}  %{A}
 format-full-prefix-foreground = ${colors.foreground-alt}
-format-full-underline = ${self.format-charging-underline}
+;format-full-underline = ${self.format-charging-underline}
 
 ramp-capacity-0 = " "
 ramp-capacity-1 = " "
@@ -578,7 +583,7 @@ thermal-zone = 1
 warn-temperature = 60
 
 format = %{A1:termite --exec='watch sensors' & disown:}<ramp> <label>%{A}
-format-underline = #f50a4d
+;format-underline = #f50a4d
 format-warn = <ramp> <label-warn>
 format-warn-underline = ${self.format-underline}
 
@@ -594,10 +599,10 @@ ramp-foreground = ${colors.foreground-alt}
 [module/updates]
 type = custom/script
 interval = 600
-format-prefix = " " 
+format-prefix = " " 
 format-prefix-foreground = ${colors.foreground-alt}
 format = <label> 
-format-underline = #9f78e1
+;format-underline = #9f78e1
 label = %{A3:termite --exec=pacui & disown:} %output:0:30% %{A}
 exec = .config/polybar/packages.sh
 click-left=.config/polybar/packages.sh
@@ -608,7 +613,7 @@ interval = 3600
 format-prefix = " " 
 format-prefix-foreground = ${colors.foreground-alt}
 format = <label>
-format-underline = #ffb52a
+;format-underline = #ffb52a
 label = "%output:0:30%"
 exec = .config/polybar/arch.sh
 
@@ -618,7 +623,7 @@ interval = 700
 ;format-prefix = " " 
 ;format-prefix-foreground = #ffb52a
 format = <label>
-format-underline = #0a6cf5
+;format-underline = #0a6cf5
 label = "%output:0:30%"
 exec = .config/polybar/weather.sh
 click-left = xdg-open http://meteo.gr/cf.cfm?city_id=12
@@ -629,13 +634,13 @@ interval = 5
 format-prefix = " " 
 format-prefix-foreground = ${colors.foreground-alt}
 format = %{A1:/home/notis/.config/herbstluftwm/fanmenu.sh & disown:}<label> %{A}
-format-underline = #0a6cf5
+;format-underline = #0a6cf5
 label = "%output:0:30%"
 exec = .config/polybar/fan.sh
 
 [module/gmail]
 type = custom/script
-format-underline = #4bffdc
+;format-underline = #4bffdc
 exec = ~/.config/polybar/gmail/launch.py
 tail = true
 click-left = xdg-open https://mail.google.com
@@ -651,7 +656,7 @@ click-left = "jgmenu_run >/dev/null 2>&1 &"
 type = custom/script
 format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
-format-underline = #f50a4d
+;format-underline = #f50a4d
 exec = ~/.config/polybar/spotify.sh
 click-left = playerctl -p spotify play-pause
 tail = true
@@ -663,7 +668,7 @@ type = custom/menu
 
 format-spacing = 1
 
-label-open = 
+label-open = 
 label-open-foreground = ${colors.secondary}
 label-close =  cancel
 label-close-foreground = ${colors.secondary}
@@ -672,7 +677,7 @@ label-separator-foreground = ${colors.foreground-alt}
 
 menu-0-0 =  suspend
 menu-0-0-exec = gksudo systemctl suspend
-menu-0-1 =  reboot
+menu-0-1 =  reboot
 menu-0-1-exec = gksudo reboot
 menu-0-2 =  power off
 menu-0-2-exec = gksudo poweroff
@@ -688,7 +693,7 @@ type = custom/script
 format-prefix = " " 
 format-prefix-foreground = ${colors.foreground-alt}
 format = <label>
-format-underline = #4bffdc
+;format-underline = #4bffdc
 label = "%output:0:30%"
 exec = ~/.config/polybar/info-trash.sh
 interval = 60
@@ -709,7 +714,7 @@ type = custom/script
 format-prefix = " " 
 format-prefix-foreground = ${colors.foreground-alt}
 format = <label>
-format-underline = #0a6cf5
+;format-underline = #0a6cf5
 exec = ~/.config/polybar/system-uptime-pretty.sh
 interval = 60
 
@@ -718,10 +723,10 @@ type = custom/script
 format-prefix = " " 
 format-prefix-foreground = ${colors.foreground-alt}
 format = <label>
-format-underline = #0a6cf5
+;format-underline = #0a6cf5
 exec = python ~/.config/polybar/info-archnews.py 1
 interval = 3600
-click-left = xdg-open https://www.enikos.gr/
+click-left = xdg-open https://www.naftemporiki.gr
 
 
 [module/names]
@@ -729,7 +734,7 @@ type = custom/script
 format-prefix = " " 
 format-prefix-foreground = ${colors.foreground-alt}
 format = <label>
-format-underline = #0a6cf5
+;ormat-underline = #0a6cf5
 exec = python ~/.config/polybar/info-names.py
 interval = 3600
 click-left = xdg-open http://www.eortologio.gr/rss/si_el.xml
@@ -739,7 +744,7 @@ type = custom/script
 format-prefix = " " 
 format-prefix-foreground = ${colors.foreground-alt}
 format = <label>
-format-underline = #0a6cf5
+;format-underline = #0a6cf5
 exec = ~/.config/polybar/ticker-btceur.sh
 interval = 600
 
@@ -749,8 +754,8 @@ type = custom/script
 exec = ~/.config/polybar/taskwarrior.sh
 format = <label>
 format-prefix-foreground = ${colors.foreground-alt}
-format-prefix = " "
-format-underline = #f50a4d
+format-prefix = " "
+;format-underline = #f50a4d
 click-left = task "$((`cat /tmp/tw_polybar_id`))" done
 
 [module/isrunning-openvpn]
@@ -758,7 +763,7 @@ type = custom/script
 exec = ~/.config/polybar/isrunning-openvpn.sh
 format-prefix-foreground = ${colors.foreground-alt}
 format-prefix = " "
-format-underline = #ffb52a
+;format-underline = #ffb52a
 click-left = gksu systemctl start openvpn-client@TunnelBearItaly.service
 click-right = gksu systemctl stop openvpn-client@TunnelBearItaly.service
 interval = 10
@@ -768,7 +773,7 @@ type = custom/script
 exec = ~/.config/polybar/isrunning-firewall.sh
 format-prefix-foreground = ${colors.foreground-alt}
 format-prefix = " "
-format-underline = #ffb52a
+;format-underline = #ffb52a
 click-left = gksu gufw
 interval = 10
 
@@ -777,7 +782,7 @@ type = custom/script
 exec = ~/.config/polybar/freq.sh
 format-prefix-foreground = ${colors.foreground-alt}
 format-prefix = @
-format-underline = #ffb52a
+;format-underline = #ffb52a
 interval = 2
 
 [settings]
