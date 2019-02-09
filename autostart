@@ -26,8 +26,7 @@ hc keybind $Mod-semicolon spawn /home/notis/.config/herbstluftwm/swap.sh auto
 hc keybind $Mod-slash spawn /home/notis/.config/herbstluftwm/swap.sh close
 hc keybind $Mod-minus spawn /home/notis/.config/herbstluftwm/scratchpad.sh
 hc keybind $Mod-m spawn /home/notis/.config/herbstluftwm/maximize.sh
-hc keybind $Mod-Control-m spawn /home/notis/.config/herbstluftwm/float-maximize.sh
-hc keybind $Mod-w spawn /home/notis/.config/herbstluftwm/windowmenu.sh
+#hc keybind $Mod-w spawn /home/notis/.config/herbstluftwm/windowmenu.sh
 hc keybind $Mod-Control-f spawn /home/notis/.config/herbstluftwm/fanmenu.sh
 hc keybind $Mod-Control-p spawn /home/notis/.config/herbstluftwm/exitmenu.sh
 hc keybind $Mod-Control-s spawn /home/notis/.config/herbstluftwm/toggledualhead.sh
@@ -39,8 +38,9 @@ hc keybind $Mod-Control-v emit_hook version
 hc keybind $Mod-Control-d spawn /home/notis/.config/herbstluftwm/hlwm-layout-manager.sh save
 hc keybind $Mod-Control-a spawn /home/notis/.config/herbstluftwm/hlwm-layout-manager.sh load
 hc keybind $Mod-Control-c spawn /home/notis/.config/herbstluftwm/herstcmd.sh
-hc keybind $Mod-Control-b spawn /home/notis/.config/herbstluftwm/wselect.sh bring
-hc keybind $Mod-Control-g spawn /home/notis/.config/herbstluftwm/wselect.sh select_here
+hc keybind $Mod-Control-b spawn /home/notis/.config/herbstluftwm/herstcmd.sh bring
+hc keybind $Mod-Control-g spawn /home/notis/.config/herbstluftwm/herstcmd.sh jumpto
+hc keybind $Mod-w spawn /home/notis/.config/herbstluftwm/herstcmd.sh move
 
 #minimize
 hc keybind $Mod-n       spawn /home/notis/.config/herbstluftwm/hide_window.sh +1
@@ -155,8 +155,10 @@ herbstclient pad 0 24 0 0
 # herbstclient pad 1 [0 [28 [0 [0]]]]
 
 # cycle through tags
-hc keybind $Mod-period use_index +1 --skip-visible
-hc keybind $Mod-comma  use_index -1 --skip-visible
+hc keybind Mod4-period use_index +1 --skip-visible
+hc keybind Mod4-comma  use_index -1 --skip-visible
+hc keybind $Mod-period spawn /home/notis/.config/herbstluftwm/tagswitch.sh next
+hc keybind $Mod-comma  spawn /home/notis/.config/herbstluftwm/tagswitch.sh prev
 
 # layouting
 hc keybind $Mod-r remove
