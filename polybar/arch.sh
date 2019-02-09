@@ -2,4 +2,4 @@
 
 kernel=$(uname -r)
 
-echo "${kernel}"
+echo "${kernel}" | cut -d'-' -f1-1
