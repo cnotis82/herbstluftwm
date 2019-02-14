@@ -37,7 +37,7 @@ hc keybind $Mod-Control-d spawn /home/notis/.config/herbstluftwm/hlwm-layout-man
 hc keybind $Mod-Control-a spawn /home/notis/.config/herbstluftwm/hlwm-layout-manager.sh load
 hc keybind $Mod-Control-c spawn /home/notis/.config/herbstluftwm/herstcmd.sh
 hc keybind $Mod-b spawn /home/notis/.config/herbstluftwm/herstcmd.sh bring
-hc keybind $Mod-j spawn /home/notis/.config/herbstluftwm/herstcmd.sh jumpto
+hc keybind $Mod-j spawn rofi -show window
 hc keybind $Mod-w spawn /home/notis/.config/herbstluftwm/herstcmd.sh move
 
 #minimize
@@ -71,6 +71,7 @@ hc keybind $Mod-Return spawn termite #${TERMINAL:-termite} # use your $TERMINAL 
 hc keybind $Mod-a spawn rofi -combi-modi window,drun -show combi -modi combi
 
 hc keybind Mod4-f spawn firefox
+hc keybind Mod4-e spawn thunderbird
 hc keybind Mod4-p spawn pcmanfm
 hc keybind Mod4-v spawn viber
 hc keybind Mod4-l spawn i3lock-fancy 
@@ -165,6 +166,8 @@ hc keybind Mod4-period use_index +1 --skip-visible
 hc keybind Mod4-comma  use_index -1 --skip-visible
 hc keybind $Mod-period spawn /home/notis/.config/herbstluftwm/tagswitch.sh next
 hc keybind $Mod-comma  spawn /home/notis/.config/herbstluftwm/tagswitch.sh prev
+# hc keybind $Mod-period spawn /home/notis/.config/herbstluftwm/herbst-move.py +1 full
+# hc keybind $Mod-comma  spawn /home/notis/.config/herbstluftwm/herbst-move.py -1 full
 
 # layouting
 hc keybind $Mod-r remove
@@ -233,6 +236,7 @@ hc set mouse_recenter_gap 0
 hc unrule -F
 hc rule class=Termite tag="   " hook="   " focus=off
 hc rule class=Firefox tag="   " hook="   " focus=off
+hc rule class=Thunderbird tag="   " hook="   " focus=off
 hc rule class=Google-chrome tag="   "
 hc rule class=Pcmanfm tag="   " hook="   " focus=off
 hc rule class=Polo-gtk tag="   " 
