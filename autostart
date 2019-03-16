@@ -29,6 +29,7 @@ hc keybind $Mod-Control-f spawn /home/notis/.config/herbstluftwm/fanmenu.sh
 hc keybind $Mod-Control-p spawn /home/notis/.config/herbstluftwm/exitmenu.sh
 hc keybind $Mod-Control-s spawn /home/notis/.config/herbstluftwm/toggledualhead.sh
 hc keybind $Mod-Control-m spawn /home/notis/.config/herbstluftwm/polybarmenu.sh
+hc keybind $Mod-Control-t spawn /home/notis/.config/herbstluftwm/toggle_bottom_bar.sh
 hc keybind $Mod-t emit_hook goto_last_tag
 hc keybind $Mod-t emit_hook goto_last_tag
 #hc keybind $Mod-Control-i emit_hook list_keys
@@ -99,8 +100,6 @@ hc keybind $Mod-Control-Left  shift left
 hc keybind $Mod-Control-Down  shift down
 hc keybind $Mod-Control-Up    shift up
 hc keybind $Mod-Control-Right shift right
-# hc keybind $Mod-Control-period spawn polybar bottom-bar
-# hc keybind $Mod-Control-comma spawn polybar my-awesome-polybar1
 #hc keybind $Mod-Control-k     shift up
 #hc keybind $Mod-Control-l     shift right
 
@@ -164,10 +163,10 @@ herbstclient pad 0 24 0 0
 # cycle through tags
 hc keybind Mod4-period use_index +1 --skip-visible
 hc keybind Mod4-comma  use_index -1 --skip-visible
-hc keybind $Mod-period spawn /home/notis/.config/herbstluftwm/tagswitch.sh next
-hc keybind $Mod-comma  spawn /home/notis/.config/herbstluftwm/tagswitch.sh prev
-# hc keybind $Mod-period spawn /home/notis/.config/herbstluftwm/herbst-move.py +1 full
-# hc keybind $Mod-comma  spawn /home/notis/.config/herbstluftwm/herbst-move.py -1 full
+# hc keybind $Mod-period spawn /home/notis/.config/herbstluftwm/tagswitch.sh next
+# hc keybind $Mod-comma  spawn /home/notis/.config/herbstluftwm/tagswitch.sh prev
+hc keybind $Mod-period spawn /home/notis/.config/herbstluftwm/herbst-move.py +1 full
+hc keybind $Mod-comma  spawn /home/notis/.config/herbstluftwm/herbst-move.py -1 full
 
 # layouting
 hc keybind $Mod-r remove
