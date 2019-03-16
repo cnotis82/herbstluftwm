@@ -52,7 +52,6 @@ hc keybind XF86AudioMute spawn amixer -q set Master toggle
 hc keybind XF86AudioNext spawn mpc next
 hc keybind XF86AudioPrev spawn mpc prev
 hc keybind XF86AudioPlay spawn mpc toggle
-hc keybind XF86Music spawn bash -c "mpd"
 hc keybind XF86Mail spawn firefox www.gmail.com
 hc keybind XF86Search spawn firefox https://www.google.com.gr
 hc keybind XF86Calculator spawn galculator
@@ -68,7 +67,7 @@ hc keybind $Mod-q close
 hc keybind $Mod-Escape spawn xkill
 
 # Run Apps
-hc keybind $Mod-Return spawn termite #${TERMINAL:-termite} # use your $TERMINAL with xterm as fallback
+hc keybind $Mod-Return spawn xterm -e fish #${TERMINAL:-termite} # use your $TERMINAL with xterm as fallback
 hc keybind $Mod-a spawn rofi -combi-modi window,drun -show combi -modi combi
 
 hc keybind Mod4-f spawn firefox
@@ -82,7 +81,11 @@ hc keybind Mod4-c spawn pidgin
 hc keybind Mod4-d spawn subl3
 hc keybind Mod4-g spawn gitkraken
 hc keybind Mod4-h spawn hexchat
+hc keybind Mod4-u spawn xterm -e htop
 hc keybind Mod4-m spawn bash -c "mpd"
+hc keybind Mod4-n spawn xterm -e ncmpcpp
+hc keybind Mod4-Return spawn xterm -e yay -Syu
+hc keybind Mod4-i spawn xterm -e neofetch
 #hc keybind $Mod-s spawn xfce4-taskmanager
 
 # focusing clients
@@ -100,6 +103,8 @@ hc keybind $Mod-Control-Left  shift left
 hc keybind $Mod-Control-Down  shift down
 hc keybind $Mod-Control-Up    shift up
 hc keybind $Mod-Control-Right shift right
+# hc keybind $Mod-Control-period spawn polybar bottom-bar
+# hc keybind $Mod-Control-comma spawn polybar my-awesome-polybar1
 #hc keybind $Mod-Control-k     shift up
 #hc keybind $Mod-Control-l     shift right
 
@@ -204,7 +209,7 @@ hc attr theme.floating.reset 1
 hc set frame_border_active_color '#222222'
 hc set frame_border_normal_color '#101010'
 hc set frame_bg_normal_color '#565656'
-hc set frame_bg_active_color '#01a0e4'
+hc set frame_bg_active_color '#345F0C'
 hc set frame_border_width 1
 hc set always_show_frame 1
 hc set frame_bg_transparent 1
@@ -212,7 +217,7 @@ hc set frame_transparent_width 5
 hc set frame_gap 4
 
 
-hc attr theme.active.color '#83a598'
+hc attr theme.active.color '#9fbc00'
 hc attr theme.normal.color '#454545'
 hc attr theme.urgent.color orange
 hc attr theme.inner_width 1
@@ -234,6 +239,8 @@ hc set mouse_recenter_gap 0
 # rules
 hc unrule -F
 hc rule class=Termite tag="   " hook="   " focus=off
+hc rule class=st-256color tag="   " hook="   " focus=off
+hc rule class=XTerm tag="   " hook="   " focus=off
 hc rule class=Firefox tag="   " hook="   " focus=off
 hc rule class=Thunderbird tag="   " hook="   " focus=off
 hc rule class=Google-chrome tag="   "
@@ -293,7 +300,8 @@ sleep 1
 dunst -conf /home/notis/.config/dunst/dunstrc &
 setxkbmap -layout us,gr -option grp:alt_shift_toggle
 xfce4-power-manager&
-redshiftgui&
+#redshiftgui&
+fluxgui&
 feh --bg-scale /home/notis/Pictures/hbwm.jpg
 
 # find the panel
