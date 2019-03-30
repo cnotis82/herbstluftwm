@@ -34,7 +34,7 @@ hc keybind $Mod-t emit_hook goto_last_tag
 hc keybind $Mod-t emit_hook goto_last_tag
 #hc keybind $Mod-Control-i emit_hook list_keys
 #hc keybind $Mod-Control-v emit_hook version
-hc keybind $Mod-Control-d spawn /home/notis/.config/herbstluftwm/hlwm-layout-manager.sh save
+#hc keybind $Mod-Control-d spawn /home/notis/.config/herbstluftwm/hlwm-layout-manager.sh save
 hc keybind $Mod-Control-a spawn /home/notis/.config/herbstluftwm/hlwm-layout-manager.sh load
 hc keybind $Mod-Control-c spawn /home/notis/.config/herbstluftwm/herstcmd.sh
 hc keybind $Mod-b spawn /home/notis/.config/herbstluftwm/herstcmd.sh bring
@@ -52,8 +52,9 @@ hc keybind XF86AudioMute spawn amixer -q set Master toggle
 hc keybind XF86AudioNext spawn mpc next
 hc keybind XF86AudioPrev spawn mpc prev
 hc keybind XF86AudioPlay spawn mpc toggle
-hc keybind XF86Mail spawn firefox www.gmail.com
-hc keybind XF86Search spawn firefox https://www.google.com.gr
+hc keybind XF86Mail spawn thunderbird
+hc keybind XF86Music spawn xterm -e ncmpcpp
+hc keybind XF86Search spawn catfish
 hc keybind XF86Calculator spawn galculator
 hc keybind Print spawn bash -c "scrot '%Y-%m-%d_$wx$h_scrot.png' -e 'mv $f ~/Pictures/'; herbstclient emit_hook print"
 hc keybind XF86HomePage spawn jgmenu_run
@@ -126,6 +127,10 @@ hc keybind $Mod-Control-l       resize right +$resizestep
 #hc keybind $Mod-Control-Down    resize down +$resizestep
 #hc keybind $Mod-Control-Up      resize up +$resizestep
 #hc keybind $Mod-Control-Right   resize right +$resizestep
+
+# Shifting to monitor
+hc keybind $Mod-d shift_to_monitor 1
+hc keybind $Mod-Control-d shift_to_monitor 0
 
 #Resize Frame Gaps
 #frame_gap_step=hc get frame_gap + 10
@@ -262,6 +267,7 @@ hc rule class=Atom tag="   " hook="   "
 hc rule class=Subl3 tag="   " hook="   "
 hc rule class=QtCreator tag="   " hook="   "
 hc rule class=Code tag="   " hook="   "
+hc rule class=Gvim tag="   " hook="   "
 hc rule class=org.remmina.Remmina tag="   " hook="   "
 hc rule class=Filezilla tag="   " hook="   "
 hc rule class=DesktopEditors tag="   " hook="   "
