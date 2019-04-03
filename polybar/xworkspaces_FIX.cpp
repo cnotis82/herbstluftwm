@@ -81,7 +81,7 @@ namespace modules {
     m_monitors = randr_util::get_monitors(m_connection, m_connection.root(), false);
 
     // Get desktop details
-    m_desktop_names = ewmh_util::get_desktop_names();
+    m_desktop_names = get_desktop_names();
     m_current_desktop = ewmh_util::get_current_desktop();
 
     rebuild_desktops();
@@ -99,8 +99,8 @@ namespace modules {
       rebuild_clientlist();
       rebuild_desktops();
       rebuild_desktop_states();
-    } else if (evt->atom == m_ewmh->_NET_DESKTOP_NAMES) {
-      m_desktop_names = ewmh_util::get_desktop_names();
+    } else if (evt->atom == m_ewmh->_NET_DESKTOP_NAMES || evt->atom == m_ewmh->_NET_NUMBER_OF_DESKTOPS) {
+      m_desktop_names = get_desktop_names();
       rebuild_desktops();
       rebuild_desktop_states();
     } else if (evt->atom == m_ewmh->_NET_CURRENT_DESKTOP) {
@@ -165,7 +165,12 @@ namespace modules {
 
     bounds.erase(std::unique(bounds.begin(), bounds.end(), [](auto& a, auto& b) { return a == b; }), bounds.end());
 
-    unsigned int step = m_desktop_names.size() / bounds.size();
+    unsigned int step;
+    if (bounds.size() > 0) {
+      step = m_desktop_names.size() / bounds.size();
+    } else {
+      step = 1;
+    }
     unsigned int offset = 0;
     for (unsigned int i = 0; i < bounds.size(); i++) {
       if (!m_pinworkspaces || m_bar.monitor->match(bounds[i])) {
@@ -231,6 +236,22 @@ namespace modules {
     }
   }
 
+  vector<string> xworkspaces_module::get_desktop_names(){
+    vector<string> names = ewmh_util::get_desktop_names();
+    unsigned int desktops_number = ewmh_util::get_number_of_desktops();
+    if(desktops_number == names.size()) {
+      return names;
+    }
+    else if(desktops_number < names.size()) {
+      names.erase(names.begin()+desktops_number, names.end());
+      return names;
+    }
+    for (unsigned int i = names.size(); i < desktops_number + 1; i++) {
+      names.insert(names.end(), to_string(i));
+    }
+    return names;
+  }
+
   /**
    * Find window and set corresponding desktop to urgent
    */
@@ -276,8 +297,10 @@ namespace modules {
       output += module::get_output();
     }
 
-    m_builder->cmd(mousebtn::SCROLL_DOWN, string{EVENT_PREFIX} + string{EVENT_SCROLL_DOWN});
-    m_builder->cmd(mousebtn::SCROLL_UP, string{EVENT_PREFIX} + string{EVENT_SCROLL_UP});
+    if (m_scroll) {
+      m_builder->cmd(mousebtn::SCROLL_DOWN, string{EVENT_PREFIX} + string{EVENT_SCROLL_DOWN});
+      m_builder->cmd(mousebtn::SCROLL_UP, string{EVENT_PREFIX} + string{EVENT_SCROLL_UP});
+    }
 
     m_builder->append(output);
 
