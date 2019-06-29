@@ -53,7 +53,7 @@ hc keybind XF86AudioNext spawn mpc next
 hc keybind XF86AudioPrev spawn mpc prev
 hc keybind XF86AudioPlay spawn mpc toggle
 hc keybind XF86Mail spawn thunderbird
-hc keybind XF86Music spawn xterm -e ncmpcpp
+hc keybind XF86Music spawn termite -e ncmpcpp
 hc keybind XF86Search spawn catfish
 hc keybind XF86Calculator spawn galculator
 hc keybind Print spawn bash -c "scrot '%Y-%m-%d_$wx$h_scrot.png' -e 'mv $f ~/Pictures/'; herbstclient emit_hook print"
@@ -68,46 +68,28 @@ hc keybind $Mod-q close
 hc keybind $Mod-Escape spawn xkill
 
 # Run Apps
-hc keybind $Mod-Return spawn xterm -e fish #${TERMINAL:-termite} # use your $TERMINAL with xterm as fallback
+hc keybind $Mod-Return spawn st -e zsh # use your $TERMINAL with xterm as fallback
 hc keybind $Mod-a spawn rofi -combi-modi window,drun -show combi -modi combi
 
 hc keybind Mod4-f spawn firefox
 hc keybind Mod4-e spawn thunderbird
-hc keybind Mod4-p spawn pcmanfm
 hc keybind Mod4-v spawn viber
 hc keybind Mod4-l spawn i3lock-fancy 
-hc keybind Mod4-t spawn corebird
 hc keybind Mod4-s spawn slack
-hc keybind Mod4-c spawn pidgin
 hc keybind Mod4-d spawn subl3
 hc keybind Mod4-g spawn gitkraken
-hc keybind Mod4-h spawn hexchat
-hc keybind Mod4-u spawn xterm -e htop
-hc keybind Mod4-m spawn bash -c "mpd"
-hc keybind Mod4-n spawn xterm -e ncmpcpp
-hc keybind Mod4-Return spawn xterm -e yay -Syu
-hc keybind Mod4-i spawn xterm -e neofetch
-#hc keybind $Mod-s spawn xfce4-taskmanager
 
 # focusing clients
 hc keybind $Mod-Left  focus left
 hc keybind $Mod-Down  focus down
 hc keybind $Mod-Up    focus up
 hc keybind $Mod-Right focus right
-# hc keybind $Mod-h     focus left
-# hc keybind $Mod-j     focus down
-# hc keybind $Mod-k     focus up
-# hc keybind $Mod-l     focus right
 
 # moving clients
 hc keybind $Mod-Control-Left  shift left
 hc keybind $Mod-Control-Down  shift down
 hc keybind $Mod-Control-Up    shift up
 hc keybind $Mod-Control-Right shift right
-# hc keybind $Mod-Control-period spawn polybar bottom-bar
-# hc keybind $Mod-Control-comma spawn polybar my-awesome-polybar1
-#hc keybind $Mod-Control-k     shift up
-#hc keybind $Mod-Control-l     shift right
 
 # splitting frames
 # create an empty frame at the specified direction
@@ -123,22 +105,13 @@ hc keybind $Mod-Control-h       resize left +$resizestep
 hc keybind $Mod-Control-j       resize down +$resizestep
 hc keybind $Mod-Control-k       resize up +$resizestep
 hc keybind $Mod-Control-l       resize right +$resizestep
-#hc keybind $Mod-Control-Left    resize left +$resizestep
-#hc keybind $Mod-Control-Down    resize down +$resizestep
-#hc keybind $Mod-Control-Up      resize up +$resizestep
-#hc keybind $Mod-Control-Right   resize right +$resizestep
 
 # Shifting to monitor
 hc keybind $Mod-d shift_to_monitor 1
 hc keybind $Mod-Control-d shift_to_monitor 0
 
-#Resize Frame Gaps
-#frame_gap_step=hc get frame_gap + 10
-#hc keybind $Mod-Control-g       set  frame_gap $frame_gap_step
-
 # tags
 tag_names=( "   " "   " "   " "   " "   " "   " "   " "   " "   " "   " "   " "   " "   " "   ")
-#tag_names=( '1:term''2:www' '3:files' '4:social' '5:media' '6:doc' '7:dev' '8:sys')
 tag_keys=( {1..14} 0 )
 
 hc rename default "${tag_names[0]}" || true
@@ -211,15 +184,17 @@ hc keybind $Mod-i jumpto urgent
 # theme
 hc attr theme.tiling.reset 1
 hc attr theme.floating.reset 1
-hc set frame_border_active_color '#222222'
-hc set frame_border_normal_color '#101010'
-hc set frame_bg_normal_color '#565656'
-hc set frame_bg_active_color '#345F0C'
+#hc set frame_border_active_color '#222222'
+#hc set frame_border_normal_color '#101010'
+#hc set frame_bg_normal_color '#565656'
+#hc set frame_bg_active_color '#345F0C'
 hc set frame_border_width 1
 hc set always_show_frame 1
-hc set frame_bg_transparent 1
+hc set frame_bg_transparent 0
+hc set frame_active_opacity 1
+hc set frame_normal_opacity 1
 hc set frame_transparent_width 5
-hc set frame_gap 4
+hc set frame_gap 8
 
 
 hc attr theme.active.color '#9fbc00'
@@ -233,9 +208,19 @@ hc attr theme.floating.outer_width 1
 hc attr theme.floating.outer_color black
 hc attr theme.active.inner_color '#3E4A00'
 hc attr theme.active.outer_color '#3E4A00'
+
+hc attr theme.minimal.color '#9fbc00'
+hc attr theme.minimal.border_width 5
+hc attr theme.minimal.outer_width 1
+hc attr theme.minimal.outer_color black 
+hc attr theme.tiling.border_width 5
+hc attr theme.tiling.outer_width 1
+hc attr theme.tiling.outer_color black
+
+
 hc attr theme.background_color '#141414'
 
-hc set window_gap 0
+hc set window_gap 5
 hc set frame_padding 0
 hc set smart_window_surroundings 0
 hc set smart_frame_surroundings 1
@@ -244,7 +229,7 @@ hc set mouse_recenter_gap 0
 # rules
 hc unrule -F
 hc rule class=Termite tag="   " hook="   " focus=off
-hc rule class=st-256color tag="   " hook="   " focus=off
+hc rule class=St tag="   " hook="   " focus=off
 hc rule class=XTerm tag="   " hook="   " focus=off
 hc rule class=Firefox tag="   " hook="   " focus=off
 hc rule class=Thunderbird tag="   " hook="   " focus=off
@@ -272,6 +257,7 @@ hc rule class=org.remmina.Remmina tag="   " hook="   "
 hc rule class=Filezilla tag="   " hook="   "
 hc rule class=DesktopEditors tag="   " hook="   "
 hc rule instance=FoxitReader tag="   " hook="   "
+hc rule class=Zathura tag="   " hook="   "
 hc rule class=Sxiv tag="   " hook="   "
 hc rule class=Gimp-2.10 tag="   " hook="   "
 hc rule class=Pencil tag="   " hook="   "
@@ -304,11 +290,6 @@ herbstclient emit_hook quit_panel
 pid=( )
 sleep 1
 dunst -conf /home/notis/.config/dunst/dunstrc &
-setxkbmap -layout us,gr -option grp:alt_shift_toggle
-xfce4-power-manager&
-#redshiftgui&
-fluxgui&
-feh --bg-scale /home/notis/Pictures/hbwm.jpg
 
 # find the panel
 panel=~/.config/herbstluftwm/panel_polybar.sh
