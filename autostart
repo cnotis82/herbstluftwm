@@ -18,6 +18,7 @@ hc keyunbind --all
 Mod=Mod1    # Use alt as the main modifier
 #Mod=Mod4   # Use the super key as the main modifier
 
+
 #scripts
 hc spawn /home/notis/.config/herbstluftwm/lasttag.sh
 hc keybind $Mod-semicolon spawn /home/notis/.config/herbstluftwm/swap.sh auto
@@ -53,14 +54,11 @@ hc keybind XF86AudioNext spawn mpc next
 hc keybind XF86AudioPrev spawn mpc prev
 hc keybind XF86AudioPlay spawn mpc toggle
 hc keybind XF86Mail spawn thunderbird
-hc keybind XF86Music spawn termite -e ncmpcpp
-hc keybind XF86Search spawn catfish
+hc keybind XF86Music spawn st -e ncmpcpp
+#hc keybind XF86Search spawn catfish
 hc keybind XF86Calculator spawn galculator
 hc keybind Print spawn bash -c "scrot '%Y-%m-%d_$wx$h_scrot.png' -e 'mv $f ~/Pictures/'; herbstclient emit_hook print"
 hc keybind XF86HomePage spawn jgmenu_run
-
-#hc keybind XF86MonBrightnessDown spawn /usr/bin/light -U 5
-#hc keybind XF86MonBrightnessUp spawn /usr/bin/light -A 5
 
 hc keybind $Mod-Control-q quit
 hc keybind $Mod-Control-r reload
@@ -93,8 +91,10 @@ hc keybind $Mod-Control-Right shift right
 
 # splitting frames
 # create an empty frame at the specified direction
-hc keybind $Mod-u       spawn bash -c "herbstclient split   bottom  0.5; herbstclient emit_hook split_bottom"
-hc keybind $Mod-o       spawn bash -c "herbstclient split   right  0.5; herbstclient emit_hook split_right"
+hc keybind $Mod-u       spawn bash -c "herbstclient split   bottom  0.5"
+hc keybind $Mod-o       spawn bash -c "herbstclient split   right  0.5"
+hc keybind $Mod-Control-u       spawn bash -c "herbstclient split   top  0.5"
+hc keybind $Mod-Control-o       spawn bash -c "herbstclient split   left  0.5"
 # let the current frame explode into subframes
 hc keybind $Mod-Control-space split explode
 hc keybind $Mod-z rotate
@@ -141,13 +141,10 @@ hc keybind "$Mod-0" use_index 9
 hc keybind "$Mod-Control-0" move_index 9
 
 herbstclient pad 0 24 0 0
-# herbstclient pad 1 [0 [28 [0 [0]]]]
 
 # cycle through tags
 hc keybind Mod4-period use_index +1 --skip-visible
 hc keybind Mod4-comma  use_index -1 --skip-visible
-# hc keybind $Mod-period spawn /home/notis/.config/herbstluftwm/tagswitch.sh next
-# hc keybind $Mod-comma  spawn /home/notis/.config/herbstluftwm/tagswitch.sh prev
 hc keybind $Mod-period spawn /home/notis/.config/herbstluftwm/herbst-move.py +1 full
 hc keybind $Mod-comma  spawn /home/notis/.config/herbstluftwm/herbst-move.py -1 full
 
@@ -156,6 +153,7 @@ hc keybind $Mod-r remove
 hc keybind $Mod-s spawn bash -c "herbstclient floating toggle; herbstclient emit_hook floating"
 hc keybind $Mod-x spawn bash -c "herbstclient pseudotile toggle; herbstclient emit_hook pseudotile"
 hc keybind $Mod-f spawn bash -c "herbstclient fullscreen toggle; herbstclient emit_hook fullscreen"
+hc keybind $Mod-Shift-f substitute FSRESTORE clients.focus.fullscreen chain , fullscreen on , attr clients.focus.ewmhnotify toggle , spawn herbstclient fullscreen FSRESTORE
 
 #hc keybind $Mod-p pseudotile toggle
 # The following cycles through the available layouts within a frame, but skips
@@ -184,10 +182,10 @@ hc keybind $Mod-i jumpto urgent
 # theme
 hc attr theme.tiling.reset 1
 hc attr theme.floating.reset 1
-#hc set frame_border_active_color '#222222'
-#hc set frame_border_normal_color '#101010'
-#hc set frame_bg_normal_color '#565656'
-#hc set frame_bg_active_color '#345F0C'
+hc set frame_border_active_color '#222222'
+hc set frame_border_normal_color '#101010'
+hc set frame_bg_normal_color '#565656'
+hc set frame_bg_active_color '#345F0C'
 hc set frame_border_width 0
 hc set always_show_frame 1
 hc set frame_bg_transparent 0
@@ -196,6 +194,7 @@ hc set frame_normal_opacity 40
 hc set frame_transparent_width 0
 hc set frame_gap 8
 hc set focus_follows_mouse 1
+hc set default_frame_layout grid
 
 hc attr theme.active.color '#9fbc00'
 hc attr theme.normal.color '#454545'
@@ -232,7 +231,7 @@ hc unrule -F
 hc rule class=Termite tag="   " hook="   " focus=off
 hc rule class=St tag="   " hook="   " focus=off
 hc rule class=XTerm tag="   " hook="   " focus=off
-hc rule class=firefox tag="   " hook="   " focus=off
+hc rule class=firefox tag="   " hook="   " focus=off ewmhrequests=off
 hc rule class=Thunderbird tag="   " hook="   " focus=off
 hc rule class=Google-chrome tag="   "
 hc rule class=Pcmanfm tag="   " hook="   " focus=off
