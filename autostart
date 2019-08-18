@@ -27,11 +27,10 @@ hc keybind $Mod-minus spawn /home/notis/.config/herbstluftwm/scratchpad.sh
 hc keybind $Mod-m spawn /home/notis/.config/herbstluftwm/maximize.sh
 #hc keybind $Mod-w spawn /home/notis/.config/herbstluftwm/windowmenu.sh
 hc keybind $Mod-Control-f spawn /home/notis/.config/herbstluftwm/fanmenu.sh
-hc keybind $Mod-Control-p spawn /home/notis/.config/herbstluftwm/powermenu
+hc keybind $Mod-Control-Delete spawn /home/notis/.config/herbstluftwm/powermenu
 hc keybind $Mod-Control-s spawn /home/notis/.config/herbstluftwm/toggledualhead.sh
 hc keybind $Mod-Control-m spawn /home/notis/.config/herbstluftwm/polybarmenu.sh
 hc keybind $Mod-Control-t spawn /home/notis/.config/herbstluftwm/toggle_bottom_bar.sh
-hc keybind $Mod-t emit_hook goto_last_tag
 hc keybind $Mod-t emit_hook goto_last_tag
 #hc keybind $Mod-Control-i emit_hook list_keys
 #hc keybind $Mod-Control-v emit_hook version
@@ -156,6 +155,7 @@ hc keybind $Mod-comma  spawn /home/notis/.config/herbstluftwm/herbst-move.py -1 
 
 # layouting
 hc keybind $Mod-r remove
+hc keybind $Mod-Shift-s spawn /home/notis/.config/herbstluftwm/toggle_single_float.sh
 hc keybind $Mod-s spawn bash -c "herbstclient floating toggle; herbstclient emit_hook floating"
 hc keybind $Mod-x spawn bash -c "herbstclient pseudotile toggle; herbstclient emit_hook pseudotile"
 hc keybind $Mod-f spawn bash -c "herbstclient fullscreen toggle; herbstclient emit_hook fullscreen"
