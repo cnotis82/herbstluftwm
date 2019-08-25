@@ -8,7 +8,7 @@
 ;=====================================================
 
 [colors]
-background = #bf1d2021
+background = #df1d2021
 ;#c1c4bc
 ;#3a3432
 
@@ -62,9 +62,9 @@ font-4 = "Font Awesome 5 Free:style=Regular:pixelsize=10;2"
 font-5 = "Font Awesome 5 Free:style=Solid:pixelsize=10;2"
 font-6 = "Font Awesome 5 Brands:style=Regular:pixelsize=10;2"
 
-modules-left = updates cpu temperature fan memory isrunning-openvpn isrunning-firewall wlan
+modules-left = cpu temperature fan memory isrunning-openvpn isrunning-firewall wlan
 modules-center = bspwm 
-modules-right = volume gmail weather battery xkeyboard date search
+modules-right = volume gmail weather battery xkeyboard date 
 
 tray-position = right
 tray-padding = 4
@@ -88,52 +88,7 @@ line-size = 3
 line-color = ${colors.linecolor}
 
 underline-size = 2
-overline-size = 1
-
-border-size = 1
-border-color = #00000000
-
-padding-left = 1
-padding-right = 1
-
-module-margin-left = 1
-module-margin-right = 1
-
-font-0 = Comic Sans MS:size=10:weight=Italic
-#font-0 = Droid Sans Mono:size=10;1
-font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
-font-2 = Wuncon Siji:pixelsize=10:weight=Regular;1
-#font-3 = FontAwesome:size=10:weight=Regular
-font-3 = DejaVu Sans:size=10
-font-4 = "Font Awesome 5 Free:style=Regular:pixelsize=10;2"
-font-5 = "Font Awesome 5 Free:style=Solid:pixelsize=10;2"
-font-6 = "Font Awesome 5 Brands:style=Regular:pixelsize=10;2"
-
-modules-left = updates cpu temperature fan memory isrunning-openvpn isrunning-firewall wlan
-modules-center = ewmh layout
-modules-right = volume gmail weather battery xkeyboard date search
-
-tray-position = right
-tray-padding = 4
-tray-maxsize = 16
-
-[bar/my-awesome-polybar1]
-monitor = ${env:MONITOR:HDMI1}
-enable-ipc = true
-
-width = 100%
-height = 20
-fixed-center = true
-
-background = ${colors.background}
-foreground = ${colors.foreground}
-
-line-size = 2
-#line-color = #f00
-line-color = ${colors.linecolor}
-
-underline-size = 1
-overline-size = 1
+overline-size = 2
 
 border-size = 0
 border-color = #00000000
@@ -154,10 +109,55 @@ font-4 = "Font Awesome 5 Free:style=Regular:pixelsize=10;2"
 font-5 = "Font Awesome 5 Free:style=Solid:pixelsize=10;2"
 font-6 = "Font Awesome 5 Brands:style=Regular:pixelsize=10;2"
 
-modules-left =  info-trash arch system-uptime-pretty updates cpu temperature fan memory wlan isrunning-openvpn isrunning-firewall
+modules-left = archmenu cpu temperature fan memory isrunning-openvpn isrunning-firewall wlan
+modules-center = ewmh layout
+modules-right = volume gmail weather battery xkeyboard date 
+
+tray-position = right
+tray-padding = 4
+tray-maxsize = 16
+
+[bar/my-awesome-polybar1]
+monitor = ${env:MONITOR:HDMI1}
+enable-ipc = true
+
+width = 100%
+height = 20
+fixed-center = true
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 2
+#line-color = #f00
+line-color = ${colors.linecolor}
+
+underline-size = 2
+overline-size = 2
+
+border-size = 0
+border-color = #00000000
+
+padding-left = 1
+padding-right = 0
+
+module-margin-left = 1
+module-margin-right = 1
+
+font-0 = Comic Sans MS:size=10:weight=Italic
+#font-0 = Droid Sans Mono:size=10;1
+font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+font-2 = Wuncon Siji:pixelsize=10:weight=Regular;1
+#font-3 = FontAwesome:size=10:weight=Regular
+font-3 = DejaVu Sans:size=10
+font-4 = "Font Awesome 5 Free:style=Regular:pixelsize=10;2"
+font-5 = "Font Awesome 5 Free:style=Solid:pixelsize=10;2"
+font-6 = "Font Awesome 5 Brands:style=Regular:pixelsize=10;2"
+
+modules-left =  archmenu arch system-uptime-pretty updates cpu temperature fan memory wlan isrunning-openvpn isrunning-firewall
 modules-center = ewmh layout
 ;hlws
-modules-right = volume gmail weather battery xkeyboard date search powermenu 
+modules-right = volume gmail weather battery xkeyboard date  
 
 tray-position = right
 tray-padding = 4
@@ -202,7 +202,7 @@ font-4 = "Font Awesome 5 Free:style=Regular:pixelsize=10;2"
 font-5 = "Font Awesome 5 Free:style=Solid:pixelsize=10;2"
 font-6 = "Font Awesome 5 Brands:style=Regular:pixelsize=10;2"
 
-modules-left = appmenu arch mpd spotify
+modules-left = arch mpd spotify
 modules-center = filesystem
 modules-right = names taskwarrior ticker-btceur
 
@@ -413,7 +413,7 @@ label-active-foreground = #ebdbb2
 ;#665c54
 label-active-background = #32302f
 ;#83a598
-label-active-underline = #9fbc00
+label-active-overline = #345F0C
 ;
 ; ; Available tokens:
 ; ;   %name%
@@ -434,7 +434,7 @@ label-occupied-foreground = #555
 label-urgent = %name%!
 label-urgent-foreground = #000000
 label-urgent-background = #bd2c40
-label-urgent-underline = #9b0a20
+label-urgent-overline = #9b0a20
 ;
 ; ; Available tokens:
 ; ;   %name%
@@ -551,28 +551,28 @@ format-prefix-foreground = ${colors.foreground-alt}
 label = %percentage%%
 click-left = /usr/bin/xfce4-taskmanager &
 ramp-coreload-0 = ▁
-ramp-coreload-0-font = 2
+ramp-coreload-0-font = 1
 ramp-coreload-0-foreground = #83a598
 ramp-coreload-1 = ▂
-ramp-coreload-1-font = 2
+ramp-coreload-1-font = 1
 ramp-coreload-1-foreground = #83a598
 ramp-coreload-2 = ▃
-ramp-coreload-2-font = 2
+ramp-coreload-2-font = 1
 ramp-coreload-2-foreground = #83a598
 ramp-coreload-3 = ▄
-ramp-coreload-3-font = 2
+ramp-coreload-3-font = 1
 ramp-coreload-3-foreground = #83a598
 ramp-coreload-4 = ▅
-ramp-coreload-4-font = 2
+ramp-coreload-4-font = 1
 ramp-coreload-4-foreground = #fabd2f
 ramp-coreload-5 = ▆
-ramp-coreload-5-font = 2
+ramp-coreload-5-font = 1
 ramp-coreload-5-foreground = #fabd2f
 ramp-coreload-6 = ▇
-ramp-coreload-6-font = 2
+ramp-coreload-6-font = 1
 ramp-coreload-6-foreground = #fb4934
 ramp-coreload-7 = █
-ramp-coreload-7-font = 2
+ramp-coreload-7-font = 1
 ramp-coreload-7-foreground = #fb4934
 
 [module/memory]
@@ -880,6 +880,31 @@ menu-0-1-exec = gksudo reboot
 menu-0-2 =  power off
 menu-0-2-exec = gksudo poweroff
 
+[module/archmenu]
+type = custom/menu
+
+format-spacing = 1
+
+label-open = 
+label-open-foreground = ${colors.secondary}
+label-close =  close 
+label-close-foreground = ${colors.secondary}
+label-separator = |
+label-separator-foreground = ${colors.foreground-alt}
+
+menu-0-0 =  Menu 
+menu-0-0-exec = jgmenu_run >/dev/null 2>&1 &
+menu-0-1 =  Search 
+menu-0-1-exec = catfish >/dev/null 2>&1 &
+menu-0-2 =  Layout 
+menu-0-2-exec = /home/notis/.config/herbstluftwm/hlwm-layout-manager.sh load
+menu-0-3 =  Windows 
+menu-0-3-exec = /home/notis/.config/herbstluftwm/rmenu_wi
+menu-0-4 =  Hlwm cmds 
+menu-0-4-exec = /home/notis/.config/herbstluftwm/herstcmd.sh
+menu-0-5 =  PowerMenu 
+menu-0-5-exec = /home/notis/.config/herbstluftwm/powermenu
+
 [module/info-redshift-temp]
 type = custom/script
 format-underline = #4bffdc
@@ -937,7 +962,7 @@ exec = python ~/.config/polybar/info-names.py
 interval = 3600
 click-left = xdg-open http://www.eortologio.gr/rss/si_el.xml
 
-[module/ticker-btceur]
+[module/ticker-b/cattceur]
 type = custom/script
 format-prefix = " " 
 format-prefix-foreground = ${colors.foreground-alt}
