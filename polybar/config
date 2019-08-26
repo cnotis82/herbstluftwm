@@ -896,14 +896,17 @@ menu-0-0 =  Menu
 menu-0-0-exec = jgmenu_run >/dev/null 2>&1 &
 menu-0-1 =  Search 
 menu-0-1-exec = catfish >/dev/null 2>&1 &
-menu-0-2 =  Layout 
-menu-0-2-exec = /home/notis/.config/herbstluftwm/hlwm-layout-manager.sh load
-menu-0-3 =  Windows 
-menu-0-3-exec = /home/notis/.config/herbstluftwm/rmenu_wi
-menu-0-4 =  Hlwm cmds 
-menu-0-4-exec = /home/notis/.config/herbstluftwm/herstcmd.sh
-menu-0-5 =  PowerMenu 
-menu-0-5-exec = /home/notis/.config/herbstluftwm/powermenu
+menu-0-2 = HLWM 
+menu-0-2-exec = menu-open-1
+menu-0-3 =  PowerMenu 
+menu-0-3-exec = /home/notis/.config/herbstluftwm/powermenu
+
+menu-1-0 =  Layout 
+menu-1-0-exec = /home/notis/.config/herbstluftwm/hlwm-layout-manager.sh load
+menu-1-1 =  Windows 
+menu-1-1-exec = /home/notis/.config/herbstluftwm/rmenu_wi
+menu-1-2 =  Hlwm cmds 
+menu-1-2-exec = /home/notis/.config/herbstluftwm/herstcmd.sh
 
 [module/info-redshift-temp]
 type = custom/script
