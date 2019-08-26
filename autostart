@@ -30,7 +30,8 @@ hc keybind $Mod-Control-f spawn /home/notis/.config/herbstluftwm/fanmenu.sh
 hc keybind $Mod-Control-Delete spawn /home/notis/.config/herbstluftwm/powermenu
 hc keybind $Mod-Control-s spawn /home/notis/.config/herbstluftwm/toggledualhead.sh
 hc keybind $Mod-Control-m spawn /home/notis/.config/herbstluftwm/polybarmenu.sh
-hc keybind $Mod-Control-t spawn /home/notis/.config/herbstluftwm/toggle_bottom_bar.sh
+hc keybind $Mod-Control-t spawn /home/notis/.config/herbstluftwm/show_bottom_bar.sh
+hc keybind $Mod-Shift-t spawn /home/notis/.config/herbstluftwm/hide_bottom_bar.sh
 hc keybind $Mod-t emit_hook goto_last_tag
 hc keybind $Mod-Control-i emit_hook list_keys
 hc keybind $Mod-Control-v emit_hook version
@@ -111,8 +112,8 @@ hc keybind $Mod-Shift-bracketleft shift_to_monitor 0
 hc keybind $Mod-Control-bracketleft  spawn /home/notis/.config/herbstluftwm/swap_monitors.sh 1
 hc keybind $Mod-Control-bracketright spawn /home/notis/.config/herbstluftwm/swap_monitors.sh 0
 
-hc keybind $Mod-grave spawn bash -c "herbstclient pad 0 0 0 0; herbstclient pad 1 0 0 0;polybar-msg cmd toggle"
-hc keybind $Mod-Control-grave spawn bash -c "herbstclient pad 0 24 0 0;herbstclient pad 1 24 0 0;polybar-msg cmd toggle"
+hc keybind $Mod-grave spawn bash -c "herbstclient pad 0 0 0 0 0; herbstclient pad 1 0 0 0 0;polybar-msg cmd toggle"
+hc keybind $Mod-Control-grave spawn bash -c "herbstclient pad 0 20 0 0 0;herbstclient pad 1 20 0 0 0;polybar-msg cmd toggle"
 
 hc set default_frame_layout 3
 hc set_layout grid
@@ -146,8 +147,6 @@ for i in ${!tag_names[@]} ; do
 done
 hc keybind "$Mod-0" use_index 9
 hc keybind "$Mod-Shift-0" move_index 9
-
-herbstclient pad 0 24 0 0
 
 # cycle through tags
 hc keybind Mod4-period use_index +1 --skip-visible
@@ -200,7 +199,7 @@ hc set frame_bg_transparent 0
 hc set frame_active_opacity 40
 hc set frame_normal_opacity 40
 hc set frame_transparent_width 0
-hc set frame_gap 8
+hc set frame_gap 10
 hc set focus_follows_mouse 1
 
 hc attr theme.active.color orange
