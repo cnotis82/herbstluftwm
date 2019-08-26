@@ -32,9 +32,9 @@ hc keybind $Mod-Control-s spawn /home/notis/.config/herbstluftwm/toggledualhead.
 hc keybind $Mod-Control-m spawn /home/notis/.config/herbstluftwm/polybarmenu.sh
 hc keybind $Mod-Control-t spawn /home/notis/.config/herbstluftwm/toggle_bottom_bar.sh
 hc keybind $Mod-t emit_hook goto_last_tag
-#hc keybind $Mod-Control-i emit_hook list_keys
-#hc keybind $Mod-Control-v emit_hook version
-#hc keybind $Mod-Control-d spawn /home/notis/.config/herbstluftwm/hlwm-layout-manager.sh save
+hc keybind $Mod-Control-i emit_hook list_keys
+hc keybind $Mod-Control-v emit_hook version
+hc keybind $Mod-Control-d spawn /home/notis/.config/herbstluftwm/hlwm-layout-manager.sh save
 hc keybind $Mod-Control-a spawn /home/notis/.config/herbstluftwm/hlwm-layout-manager.sh load
 hc keybind $Mod-Control-c spawn /home/notis/.config/herbstluftwm/herstcmd.sh
 hc keybind $Mod-b spawn /home/notis/.config/herbstluftwm/herstcmd.sh bring
@@ -61,7 +61,7 @@ hc keybind XF86HomePage spawn jgmenu_run
 
 hc keybind $Mod-Control-q quit
 hc keybind $Mod-Control-r reload
-hc keybind $Mod-q close
+hc keybind $Mod-q close_and_remove
 hc keybind $Mod-Escape spawn xkill
 
 # Run Apps
@@ -83,34 +83,36 @@ hc keybind $Mod-Up    focus up
 hc keybind $Mod-Right focus right
 
 # moving clients
-hc keybind $Mod-Control-Left  shift left
-hc keybind $Mod-Control-Down  shift down
-hc keybind $Mod-Control-Up    shift up
-hc keybind $Mod-Control-Right shift right
+hc keybind $Mod-Shift-Left  shift left
+hc keybind $Mod-Shift-Down  shift down
+hc keybind $Mod-Shift-Up    shift up
+hc keybind $Mod-Shift-Right shift right
 
 # splitting frames
 # create an empty frame at the specified direction
-hc keybind $Mod-u       spawn bash -c "herbstclient split   bottom  0.5"
-hc keybind $Mod-o       spawn bash -c "herbstclient split   right  0.5"
-hc keybind $Mod-Control-u       spawn bash -c "herbstclient split   top  0.5"
-hc keybind $Mod-Control-o       spawn bash -c "herbstclient split   left  0.5"
+hc keybind $Mod-u       spawn bash -c "herbstclient split   bottom  0.5; herbstclient focus -e d"
+hc keybind $Mod-o       spawn bash -c "herbstclient split   right  0.5; herbstclient focus -e r"
+hc keybind $Mod-Control-u       spawn bash -c "herbstclient split   top  0.5; herbstclient focus -e t"
+hc keybind $Mod-Control-o       spawn bash -c "herbstclient split   left  0.5; herbstclient focus -e l"
 # let the current frame explode into subframes
 hc keybind $Mod-Control-space split explode
 hc keybind $Mod-z rotate
 
 # resizing frames
 resizestep=0.05
-hc keybind $Mod-Control-h       resize left +$resizestep
-hc keybind $Mod-Control-j       resize down +$resizestep
-hc keybind $Mod-Control-k       resize up +$resizestep
-hc keybind $Mod-Control-l       resize right +$resizestep
+hc keybind $Mod-Shift-h       resize left +$resizestep
+hc keybind $Mod-Shift-j       resize down +$resizestep
+hc keybind $Mod-Shift-k       resize up +$resizestep
+hc keybind $Mod-Shift-l       resize right +$resizestep
 
 # Shifting to monitor
-hc keybind $Mod-d shift_to_monitor 1
-hc keybind $Mod-Control-d shift_to_monitor 0
+hc keybind $Mod-bracketright shift_to_monitor 1
+hc keybind $Mod-Shift-bracketleft shift_to_monitor 0
+hc keybind $Mod-Control-bracketleft  spawn /home/notis/.config/herbstluftwm/swap_monitors.sh 1
+hc keybind $Mod-Control-bracketright spawn /home/notis/.config/herbstluftwm/swap_monitors.sh 0
 
-hc keybind $Mod-grave spawn bash -c "herbstclient pad 0 0 0 0;polybar-msg cmd toggle"
-hc keybind $Mod-Control-grave spawn bash -c "herbstclient pad 0 24 0 0;polybar-msg cmd toggle"
+hc keybind $Mod-grave spawn bash -c "herbstclient pad 0 0 0 0; herbstclient pad 1 0 0 0;polybar-msg cmd toggle"
+hc keybind $Mod-Control-grave spawn bash -c "herbstclient pad 0 24 0 0;herbstclient pad 1 24 0 0;polybar-msg cmd toggle"
 
 hc set default_frame_layout 3
 hc set_layout grid
@@ -125,25 +127,25 @@ for i in ${!tag_names[@]} ; do
     key="${tag_keys[$i]}"
     if ! [ -z "$key" ] && [ $key -lt 11 ]; then
         hc keybind "$Mod-$key" use_index "$i"
-        hc keybind "$Mod-Control-$key" move_index "$i"
+        hc keybind "$Mod-Shift-$key" move_index "$i"
     else
         if [ $key -eq 11 ];then
             hc keybind "Mod4-1" use_index 10
-            hc keybind "Mod4-Control-1" move_index 10
+            hc keybind "Mod4-Shift-1" move_index 10
         elif [ $key -eq 12 ];then
             hc keybind "Mod4-2" use_index 11
-            hc keybind "Mod4-Control-2" move_index 11
+            hc keybind "Mod4-Shift-2" move_index 11
         elif [ $key -eq 13 ];then
             hc keybind "Mod4-3" use_index 12
-            hc keybind "Mod4-Control-3" move_index 12
+            hc keybind "Mod4-Shift-3" move_index 12
         elif [ $key -eq 14 ];then
             hc keybind "Mod4-4" use_index 13
-            hc keybind "Mod4-Control-4" move_index 13
+            hc keybind "Mod4-Shift-4" move_index 13
         fi
     fi
 done
 hc keybind "$Mod-0" use_index 9
-hc keybind "$Mod-Control-0" move_index 9
+hc keybind "$Mod-Shift-0" move_index 9
 
 herbstclient pad 0 24 0 0
 
@@ -201,9 +203,9 @@ hc set frame_transparent_width 0
 hc set frame_gap 8
 hc set focus_follows_mouse 1
 
-hc attr theme.active.color '#9fbc00'
+hc attr theme.active.color orange
 hc attr theme.normal.color '#454545'
-hc attr theme.urgent.color orange
+hc attr theme.urgent.color red
 hc attr theme.inner_width 1
 hc attr theme.inner_color black
 hc attr theme.border_width 1
@@ -213,8 +215,8 @@ hc attr theme.floating.outer_color black
 hc attr theme.active.inner_color '#3E4A00'
 hc attr theme.active.outer_color '#3E4A00'
 
-hc attr theme.minimal.color '#9fbc00'
-hc attr theme.minimal.active.color '#9fbc00'
+hc attr theme.minimal.color orange
+hc attr theme.minimal.active.color orange
 hc attr theme.minimal.normal.color '#454545'
 hc attr theme.minimal.border_width 4
 hc attr theme.minimal.outer_width 1
@@ -295,7 +297,7 @@ herbstclient emit_hook quit_panel
 pid=( )
 sleep 1
 dunst -conf /home/notis/.config/dunst/dunstrc &
-feh --bg-scale /home/notis/Pictures/ricardo-gomez-angel-URmvfx8Yn4Q-unsplash.jpg
+feh --bg-scale /home/notis/Pictures/lambert-yuri-BL1ipcOKmmE-unsplash.jpg
 
 # find the panel
 panel=~/.config/herbstluftwm/panel_polybar.sh
@@ -313,10 +315,10 @@ for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do
         polybar bottom-bar &
         pids+=( $! )
         echo "$!" > /tmp/bottom-bar.pid
-        hc spawn polybar my-awesome-polybar0
+        polybar my-awesome-polybar0 &
         
     else
-        hc spawn polybar my-awesome-polybar0
+        polybar my-awesome-polybar0 &
     fi
 
     #sed -i s/^RUNS.*/RUNS=0/ $0
