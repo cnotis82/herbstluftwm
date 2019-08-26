@@ -133,7 +133,7 @@ line-size = 2
 line-color = ${colors.linecolor}
 
 underline-size = 2
-overline-size = 2
+overline-size = 1
 
 border-size = 0
 border-color = #00000000
@@ -409,11 +409,11 @@ enable-scroll = false
 ; ;   %index%
 ; ; Default: %icon%  %name%
 label-active = %icon% %name%
-label-active-foreground = #ebdbb2
+label-active-foreground = #d79921
 ;#665c54
 label-active-background = #32302f
 ;#83a598
-label-active-overline = #345F0C
+label-active-overline = #d79921
 ;
 ; ; Available tokens:
 ; ;   %name%
@@ -670,7 +670,7 @@ label-connected-foreground = ${colors.foreground}
 #format-disconnected = <label-disconnected>
 format-disconnected-underline = ${self.format-connected-underline}
 label-disconnected = %{A1:networkmanager_dmenu & disown:}down%{A}
-label-disconnected-foreground = ${colors.foreground-alt}
+label-disconnected-foreground = ${colors.secondary}
 
 [module/eth]
 type = internal/network
@@ -699,11 +699,11 @@ time = %{A3:gsimplecal & disown:}%H:%M %{A}
 time-alt = %H:%M:%S
 
 format-prefix = 
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-foreground = #d79921 
 ;format-underline = #0a6cf5
 
 label = %date% %time%
-
+format-foreground= #d79921
 [module/volume]
 type = internal/volume
 master-mixer = Master
@@ -717,7 +717,7 @@ format-volume = %{A3:pavucontrol & disown:}<bar-volume>%{A}
 ;label-volume-underline = #9f78e1
 
 format-muted-prefix = " "
-format-muted-foreground = ${colors.foreground-alt}
+format-muted-foreground = ${colors.secondary}
 label-muted = muted
 
 bar-volume-width = 10
@@ -885,8 +885,8 @@ type = custom/menu
 
 format-spacing = 1
 
-label-open = 
-label-open-foreground = ${colors.secondary}
+label-open = 
+label-open-foreground = #d79921
 label-close =  close 
 label-close-foreground = ${colors.secondary}
 label-separator = |
