@@ -72,7 +72,7 @@ hc keybind $Mod-a spawn /home/notis/.config/herbstluftwm/rmenu_wi_g
 hc keybind Mod4-f spawn firefox
 hc keybind Mod4-e spawn thunderbird
 hc keybind Mod4-v spawn viber
-hc keybind Mod4-l spawn i3lock-fancy 
+hc keybind Mod4-l spawn bash -c "betterlockscreen -l dim" 
 hc keybind Mod4-s spawn slack
 hc keybind Mod4-d spawn subl3
 hc keybind Mod4-g spawn gitkraken
@@ -91,10 +91,10 @@ hc keybind $Mod-Shift-Right shift right
 
 # splitting frames
 # create an empty frame at the specified direction
-hc keybind $Mod-u       spawn bash -c "herbstclient split   bottom  0.5; herbstclient focus -e d"
-hc keybind $Mod-o       spawn bash -c "herbstclient split   right  0.5; herbstclient focus -e r"
-hc keybind $Mod-Control-u       spawn bash -c "herbstclient split   top  0.5; herbstclient focus -e t"
-hc keybind $Mod-Control-o       spawn bash -c "herbstclient split   left  0.5; herbstclient focus -e l"
+hc keybind $Mod-u chain , split bottom 0.5 , focus -e d      
+hc keybind $Mod-o chain , split right 0.5 , focus -e r      
+hc keybind $Mod-Control-u chain , split top 0.5 , focus -e t      
+hc keybind $Mod-Control-o chain , split left 0.5 , focus -e l      
 # let the current frame explode into subframes
 hc keybind $Mod-Control-space split explode
 hc keybind $Mod-z rotate
@@ -112,8 +112,8 @@ hc keybind $Mod-Shift-bracketleft shift_to_monitor 0
 hc keybind $Mod-Control-bracketleft  spawn /home/notis/.config/herbstluftwm/swap_monitors.sh 1
 hc keybind $Mod-Control-bracketright spawn /home/notis/.config/herbstluftwm/swap_monitors.sh 0
 
-hc keybind $Mod-grave spawn bash -c "herbstclient pad 0 0 0 0 0; herbstclient pad 1 0 0 0 0;polybar-msg cmd toggle"
-hc keybind $Mod-Control-grave spawn bash -c "herbstclient pad 0 20 0 0 0;herbstclient pad 1 20 0 0 0;polybar-msg cmd toggle"
+hc keybind $Mod-grave chain , pad 0 0 0 0 0 , pad 1 0 0 0 0 , spawn polybar-msg cmd hide
+hc keybind $Mod-Control-grave chain , pad 0 20 0 0 0 , pad 1 20 0 0 0 , spawn polybar-msg cmd show
 
 hc set default_frame_layout 3
 hc set_layout grid
@@ -157,9 +157,9 @@ hc keybind $Mod-comma  spawn /home/notis/.config/herbstluftwm/herbst-move.py -1 
 # layouting
 hc keybind $Mod-r remove
 hc keybind $Mod-Shift-s spawn /home/notis/.config/herbstluftwm/toggle_single_float.sh
-hc keybind $Mod-s spawn bash -c "herbstclient floating toggle; herbstclient emit_hook floating"
-hc keybind $Mod-x spawn bash -c "herbstclient pseudotile toggle; herbstclient emit_hook pseudotile"
-hc keybind $Mod-f spawn bash -c "herbstclient fullscreen toggle; herbstclient emit_hook fullscreen"
+hc keybind $Mod-s chain , floating toggle , emit_hook floating
+hc keybind $Mod-x chain , pseudotile toggle , emit_hook pseudotile 
+hc keybind $Mod-f chain , fullscreen toggle , emit_hook fullscreen
 hc keybind $Mod-Shift-f substitute FSRESTORE clients.focus.fullscreen chain , fullscreen on , attr clients.focus.ewmhnotify toggle , spawn herbstclient fullscreen FSRESTORE
 
 #hc keybind $Mod-p pseudotile toggle
