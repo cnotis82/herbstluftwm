@@ -10,5 +10,7 @@ if [ -z "$geometry" ] ;then
     exit 1
 fi
 #
-herbstclient pad $monitor " 20 " "0 " "20 " "0"
+herbstclient pad "0" " 20 " "0 " "20 " "0"
+herbstclient pad "1" " 20 " "0 " "20 " "0"
+
 exit 0
