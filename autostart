@@ -78,11 +78,11 @@ hc keybind Mod4-d spawn subl3
 hc keybind Mod4-g spawn gitkraken
 
 # tmux sessions
-hc keybind $Mod-Control-1 chain , spawn st -e tmux a -t home , use_index 0
-hc keybind $Mod-Control-3 chain , spawn st -e tmux a -t file , use_index 0
-hc keybind $Mod-Control-4 chain , spawn st -e tmux a -t chat , use_index 0  
-hc keybind $Mod-Control-8 chain , spawn st -e tmux a -t system , use_index 0  
-hc keybind $Mod-Control-0 chain , spawn st -e tmux a -t dropdown , use_index 0  
+hc keybind $Mod-Control-1 spawn /home/notis/.config/herbstluftwm/erexec_on_tag.sh "   " st -e tmux a -t home
+hc keybind $Mod-Control-3 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "   " st -e tmux a -t file
+hc keybind $Mod-Control-4 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "   " st -e tmux a -t chat
+hc keybind $Mod-Control-8 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "   " st -e tmux a -t system
+hc keybind $Mod-Control-0 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "   " st -e tmux a -t dropdown
 
 # focusing clients
 hc keybind $Mod-Left  focus left
@@ -118,10 +118,8 @@ hc keybind $Mod-Control-f cycle_value frame_gap 0 10 15 20 25 30
 hc keybind $Mod-Control-w cycle_value window_gap 0 5 10 15 20 25
 
 # Shifting to monitor
-hc keybind $Mod-bracketright shift_to_monitor 1
-hc keybind $Mod-Shift-bracketleft shift_to_monitor 0
-hc keybind $Mod-Control-bracketleft  spawn /home/notis/.config/herbstluftwm/swap_monitors.sh 1
-hc keybind $Mod-Control-bracketright spawn /home/notis/.config/herbstluftwm/swap_monitors.sh 0
+hc keybind $Mod-Control-bracketleft  chain . shift_to_monitor 1 . focus_monitor 1
+hc keybind $Mod-Control-bracketright chain . shift_to_monitor 0 . focus_monitor 0
 
 hc keybind $Mod-grave chain , pad 0 0 0 0 0 , pad 1 0 0 0 0 , spawn polybar-msg cmd hide
 hc keybind $Mod-Control-grave chain , pad 0 20 0 0 0 , pad 1 20 0 0 0 , spawn polybar-msg cmd show
@@ -203,7 +201,8 @@ hc attr theme.floating.reset 1
 hc set frame_border_active_color '#222222'
 hc set frame_border_normal_color '#101010'
 hc set frame_bg_normal_color '#565656'
-hc set frame_bg_active_color '#345F0C'
+hc set frame_bg_active_color whitesmoke
+#'#345F0C'
 hc set frame_border_width 0
 hc set always_show_frame 1
 hc set frame_bg_transparent 0
@@ -214,12 +213,12 @@ hc set frame_gap 10
 hc set focus_follows_mouse 1
 
 hc attr theme.active.color orange
-hc attr theme.normal.color '#454545'
+hc attr theme.normal.color dimgray
 hc attr theme.urgent.color red
 hc attr theme.inner_width 1
 hc attr theme.inner_color black
 hc attr theme.border_width 1
-hc attr theme.floating.color brown
+hc attr theme.floating.color coral
 hc attr theme.floating.border_width 4
 hc attr theme.floating.outer_width 1
 #hc attr theme.floating.outer_color black
@@ -228,7 +227,7 @@ hc attr theme.active.outer_color '#3E4A00'
 
 hc attr theme.minimal.color orange
 hc attr theme.minimal.active.color orange
-hc attr theme.minimal.normal.color '#454545'
+hc attr theme.minimal.normal.color dimgray 
 hc attr theme.minimal.border_width 4
 hc attr theme.minimal.outer_width 1
 hc attr theme.minimal.outer_color black 
@@ -308,7 +307,8 @@ herbstclient emit_hook quit_panel
 pid=( )
 sleep 1
 dunst -conf /home/notis/.config/dunst/dunstrc &
-feh --bg-scale /home/notis/Pictures/lambert-yuri-BL1ipcOKmmE-unsplash.jpg
+feh --bg-scale /home/notis/Pictures/cristina-gottardi-84RNIdh3EwU-unsplash.jpg
+compton --backend glx --blur-method kawase --blur-background --blur-strength 5 & 
 
 # find the panel
 panel=~/.config/herbstluftwm/panel_polybar.sh
