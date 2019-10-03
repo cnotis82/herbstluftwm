@@ -8,11 +8,12 @@
 ;=====================================================
 
 [colors]
-background = #bdae93
+background = #df1d2021
+;#c1c4bc
 ;#3a3432
 
 background-alt = #444
-foreground = #1d2021
+foreground = #aabdae93
 ;#ebdbb2
 foreground-alt = #555
 primary = #ffb52a
@@ -23,7 +24,8 @@ linecolor = #fba922
 bordercolor = #333
 accent = #e60053
 
-[bar/my-awesome-polybar0]
+
+[bar/bspwm-polybar]
 monitor = ${env:MONITOR:eDP1}
 enable-ipc = true
 
@@ -60,16 +62,18 @@ font-4 = "Font Awesome 5 Free:style=Regular:pixelsize=10;2"
 font-5 = "Font Awesome 5 Free:style=Solid:pixelsize=10;2"
 font-6 = "Font Awesome 5 Brands:style=Regular:pixelsize=10;2"
 
-modules-left = updates cpu temperature fan memory isrunning-openvpn isrunning-firewall wlan
-modules-center = ewmh layout
-modules-right = volume gmail weather battery xkeyboard date
+modules-left = cpu temperature fan memory isrunning-openvpn isrunning-firewall wlan
+modules-center = bspwm 
+modules-right = volume gmail weather battery xkeyboard date 
 
 tray-position = right
 tray-padding = 4
 tray-maxsize = 16
 
-[bar/my-awesome-polybar1]
-monitor = ${env:MONITOR:HDMI1}
+
+
+[bar/my-awesome-polybar0]
+monitor = ${env:MONITOR:eDP1}
 enable-ipc = true
 
 width = 100%
@@ -84,7 +88,7 @@ line-size = 3
 line-color = ${colors.linecolor}
 
 underline-size = 2
-overline-size = 1
+overline-size = 2
 
 border-size = 0
 border-color = #00000000
@@ -101,14 +105,59 @@ font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = Wuncon Siji:pixelsize=10:weight=Regular;1
 #font-3 = FontAwesome:size=10:weight=Regular
 font-3 = DejaVu Sans:size=10
-font-4 = "Font Awesome 5 Free:style=Regular:pixelsize=12;2"
-font-5 = "Font Awesome 5 Free:style=Solid:pixelsize=12;2"
-font-6 = "Font Awesome 5 Brands:style=Regular:pixelsize=12;2"
+font-4 = "Font Awesome 5 Free:style=Regular:pixelsize=10;2"
+font-5 = "Font Awesome 5 Free:style=Solid:pixelsize=10;2"
+font-6 = "Font Awesome 5 Brands:style=Regular:pixelsize=10;2"
 
-modules-left =  info-trash arch system-uptime-pretty updates cpu temperature fan memory wlan isrunning-openvpn isrunning-firewall taskwarrior
+modules-left = archmenu cpu temperature fan memory isrunning-openvpn isrunning-firewall wlan
+modules-center = ewmh layout
+modules-right = volume gmail weather battery xkeyboard date 
+
+tray-position = right
+tray-padding = 4
+tray-maxsize = 16
+
+[bar/my-awesome-polybar1]
+monitor = ${env:MONITOR:HDMI1}
+enable-ipc = true
+
+width = 100%
+height = 20
+fixed-center = true
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 2
+#line-color = #f00
+line-color = ${colors.linecolor}
+
+underline-size = 2
+overline-size = 1
+
+border-size = 0
+border-color = #00000000
+
+padding-left = 1
+padding-right = 0
+
+module-margin-left = 1
+module-margin-right = 1
+
+font-0 = Comic Sans MS:size=10:weight=Italic
+#font-0 = Droid Sans Mono:size=10;1
+font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+font-2 = Wuncon Siji:pixelsize=10:weight=Regular;1
+#font-3 = FontAwesome:size=10:weight=Regular
+font-3 = DejaVu Sans:size=10
+font-4 = "Font Awesome 5 Free:style=Regular:pixelsize=10;2"
+font-5 = "Font Awesome 5 Free:style=Solid:pixelsize=10;2"
+font-6 = "Font Awesome 5 Brands:style=Regular:pixelsize=10;2"
+
+modules-left =  archmenu arch system-uptime-pretty updates cpu temperature fan memory wlan isrunning-openvpn isrunning-firewall
 modules-center = ewmh layout
 ;hlws
-modules-right = news-arch volume gmail weather battery xkeyboard date powermenu 
+modules-right = volume gmail weather battery xkeyboard date  
 
 tray-position = right
 tray-padding = 4
@@ -140,8 +189,8 @@ border-color = #00000000
 padding-left = 2
 padding-right = 2
 
-module-margin-left = 4
-module-margin-right = 4
+module-margin-left = 1
+module-margin-right = 1
 
 font-0 = Comic Sans MS:size=10:weight=Italic
 #font-0 = Droid Sans Mono:size=10;1
@@ -153,9 +202,144 @@ font-4 = "Font Awesome 5 Free:style=Regular:pixelsize=10;2"
 font-5 = "Font Awesome 5 Free:style=Solid:pixelsize=10;2"
 font-6 = "Font Awesome 5 Brands:style=Regular:pixelsize=10;2"
 
-modules-left = appmenu arch mpd spotify
+modules-left = arch mpd spotify
 modules-center = filesystem
 modules-right = names taskwarrior ticker-btceur
+
+
+
+[module/bspwm]
+type = internal/bspwm
+
+; Only show workspaces defined on the same output as the bar
+; NOTE: The bspwm and XRandR monitor names must match, which they do by default.
+; Default: true
+pin-workspaces = false
+
+; Output mode flags after focused state label
+; Default: false
+inline-mode = false
+
+; Create click handler used to focus workspace
+; Default: true
+enable-click = true
+
+; Create scroll handlers used to cycle workspaces
+; Default: true
+enable-scroll = false
+
+; Set the scroll cycle direction 
+; Default: true
+reverse-scroll = false
+
+; Use fuzzy (partial) matching on labels when assigning 
+; icons to workspaces
+; Example: code;♚ will apply the icon to all workspaces 
+; containing
+
+ 'code' in the label
+; Default: false
+fuzzy-match = true
+
+
+; ws-icon-[0-9]+ = label;icon
+; Note that the label needs to correspond with the bspwm workspace name
+ws-icon-0 = term;
+ws-icon-1 = www;
+ws-icon-2 = file;
+ws-icon-3 = chat;
+ws-icon-4 = media;
+ws-icon-5 = code;
+ws-icon-6 = git;
+ws-icon-7 = docs;
+ws-icon-8 = sys;
+ws-icon-9 = other;
+
+; Available tags:
+;   <label-monitor>
+;   <label-state> - gets replaced with <label-(focused|urgent|occupied|empty)>
+;   <label-mode> - gets replaced with <label-(monocle|tiled|fullscreen|floating|locked|sticky|private)>
+; Default: <label-state>
+format = <label-state> <label-mode>
+
+; Available tokens:
+;   %name%
+; Default: %name%
+label-monitor = %name%
+
+; If any values for label-dimmed-N are defined, the workspace/mode
+; colors will get overridden with those values if the monitor is out of focus
+; To only override workspaces in a specific state, use:
+;   label-dimmed-focused
+;   label-dimmed-occupied
+;   label-dimmed-urgent
+;   label-dimmed-empty
+label-dimmed-foreground = #555
+label-dimmed-underline = ${colors.background}
+label-dimmed-focused-background = #f00
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+; Default: %icon%  %name%
+label-focused = " %icon% "
+label-focused-foreground = #ffffff
+label-focused-background = #3f3f3f
+label-focused-underline = #fba922
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+; Default: %icon%  %name%
+label-occupied = " %icon% "
+label-occupied-underline = #555555
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+; Default: %icon%  %name%
+label-urgent = " %icon% "
+label-urgent-foreground = #000000
+label-urgent-background = #bd2c40
+label-urgent-underline = #9b0a20
+
+; Available tokens:
+;   %name%
+;   %icon%
+;   %index%
+; Default: %icon%  %name%
+label-empty = " %icon% " 
+label-empty-foreground = #55
+
+; The following labels will be used to indicate the layout/mode
+; for the focused workspace. Requires <label-mode>
+;
+; Available tokens:
+;   None
+;label-monocle = 
+;label-tiled = 
+;label-fullscreen = 
+;label-floating
+
+ = 
+;label-pseudotiled = P
+;label-locked = 
+;label-locked-foreground = #bd2c40
+;label-sticky = 
+;label-sticky-foreground = #fba922
+;label-private = 
+;label-private-foreground = #bd2c40
+;label-marked = M
+
+; Separator in between workspaces
+
+;label-separator = |
+;label-separator-padding = 2
+;label-separator-foreground = #ffb52a
+
 
 [module/hlws]
 type              = custom/script
@@ -173,7 +357,7 @@ type              = custom/script
 exec              = python /home/notis/.config/herbstluftwm/layout.py
 click-left       = exec herbstclient cycle_layout
 interval          = 2
-format-foreground = #83a598
+format-foreground = ${colors.foreground}
 format-background = ${colors.background}
 ;format-underline = #555
 format-padding = 2
@@ -225,9 +409,11 @@ enable-scroll = false
 ; ;   %index%
 ; ; Default: %icon%  %name%
 label-active = %icon% %name%
-label-active-foreground = #1d2021
-label-active-background = #83a598
-label-active-underline = #83a598
+label-active-foreground = #d79921
+;#665c54
+label-active-background = #32302f
+;#83a598
+label-active-overline = #d79921
 ;
 ; ; Available tokens:
 ; ;   %name%
@@ -248,7 +434,7 @@ label-occupied-foreground = #555
 label-urgent = %name%!
 label-urgent-foreground = #000000
 label-urgent-background = #bd2c40
-label-urgent-underline = #9b0a20
+label-urgent-overline = #9b0a20
 ;
 ; ; Available tokens:
 ; ;   %name%
@@ -262,11 +448,11 @@ label-empty-foreground = #55
 
 [module/xwindow]
 type = internal/xwindow
-label = %title: 0:30:...%
-label-maxlen = 30
+label = %title: 0:50:...%
+label-maxlen = 50
 #format-background = #808000
-format-background = #555555
-format-foreground = #FFFFFF
+format-background = ${colors.background}
+format-foreground = ${colors.foreground}
 format-padding = 2
 
 [module/xkeyboard]
@@ -320,11 +506,12 @@ toggle-off-foreground = #55
 
 
 ; Only applies if <bar-progress> is used
-bar-progress-width = 30
+bar-progress-width = 20
 bar-progress-indicator = 
-bar-progress-fill = 
-bar-progress-empty = 
+bar-progress-fill = 
+bar-progress-empty = 
 bar-progress-fill-foreground = #00FF00
+bar-progress-empty-foreground = ${colors.foreground-alt}
 
 label-song-maxlen = 50
 label-song-ellipsis = true
@@ -364,29 +551,29 @@ format-prefix-foreground = ${colors.foreground-alt}
 label = %percentage%%
 click-left = /usr/bin/xfce4-taskmanager &
 ramp-coreload-0 = ▁
-ramp-coreload-0-font = 2
+ramp-coreload-0-font = 1
 ramp-coreload-0-foreground = #83a598
 ramp-coreload-1 = ▂
-ramp-coreload-1-font = 2
+ramp-coreload-1-font = 1
 ramp-coreload-1-foreground = #83a598
 ramp-coreload-2 = ▃
-ramp-coreload-2-font = 2
+ramp-coreload-2-font = 1
 ramp-coreload-2-foreground = #83a598
 ramp-coreload-3 = ▄
-ramp-coreload-3-font = 2
+ramp-coreload-3-font = 1
 ramp-coreload-3-foreground = #83a598
 ramp-coreload-4 = ▅
-ramp-coreload-4-font = 2
-ramp-coreload-4-foreground = #fba922
+ramp-coreload-4-font = 1
+ramp-coreload-4-foreground = #fabd2f
 ramp-coreload-5 = ▆
-ramp-coreload-5-font = 2
-ramp-coreload-5-foreground = #fba922
+ramp-coreload-5-font = 1
+ramp-coreload-5-foreground = #fabd2f
 ramp-coreload-6 = ▇
-ramp-coreload-6-font = 2
-ramp-coreload-6-foreground = #ff5555
+ramp-coreload-6-font = 1
+ramp-coreload-6-foreground = #fb4934
 ramp-coreload-7 = █
-ramp-coreload-7-font = 2
-ramp-coreload-7-foreground = #ff5555
+ramp-coreload-7-font = 1
+ramp-coreload-7-foreground = #fb4934
 
 [module/memory]
 type = internal/memory
@@ -483,7 +670,7 @@ label-connected-foreground = ${colors.foreground}
 #format-disconnected = <label-disconnected>
 format-disconnected-underline = ${self.format-connected-underline}
 label-disconnected = %{A1:networkmanager_dmenu & disown:}down%{A}
-label-disconnected-foreground = ${colors.foreground-alt}
+label-disconnected-foreground = ${colors.secondary}
 
 [module/eth]
 type = internal/network
@@ -512,11 +699,11 @@ time = %{A3:gsimplecal & disown:}%H:%M %{A}
 time-alt = %H:%M:%S
 
 format-prefix = 
-format-prefix-foreground = ${colors.foreground-alt}
+format-prefix-foreground = #d79921 
 ;format-underline = #0a6cf5
 
 label = %date% %time%
-
+format-foreground= #d79921
 [module/volume]
 type = internal/volume
 master-mixer = Master
@@ -530,7 +717,7 @@ format-volume = %{A3:pavucontrol & disown:}<bar-volume>%{A}
 ;label-volume-underline = #9f78e1
 
 format-muted-prefix = " "
-format-muted-foreground = ${colors.foreground-alt}
+format-muted-foreground = ${colors.secondary}
 label-muted = muted
 
 bar-volume-width = 10
@@ -583,7 +770,7 @@ thermal-zone = 1
 warn-temperature = 60
 
 format = %{A1:termite --exec='watch sensors' & disown:}<ramp> <label>%{A}
-;format-underline = #f50a4d
+format-underline = ${colors.background}
 format-warn = <ramp> <label-warn>
 format-warn-underline = ${self.format-underline}
 
@@ -606,6 +793,17 @@ format = <label>
 label = %{A3:termite --exec=pacui & disown:} %output:0:30% %{A}
 exec = .config/polybar/packages.sh
 click-left=.config/polybar/packages.sh
+
+[module/search]
+type = custom/script
+format-prefix = " " 
+format-prefix-foreground = ${colors.foreground}
+;format = <label> 
+;format-underline = #9f78e1
+;label = %{A1:catfish& disown:} %{A}
+;exec = .config/polybar/packages.sh
+exec = echo " "
+click-left="catfish >/dev/null 2>&1 &"
 
 [module/arch]
 type = custom/script
@@ -682,6 +880,34 @@ menu-0-1-exec = gksudo reboot
 menu-0-2 =  power off
 menu-0-2-exec = gksudo poweroff
 
+[module/archmenu]
+type = custom/menu
+
+format-spacing = 1
+
+label-open = 
+label-open-foreground = #d79921
+label-close =  close 
+label-close-foreground = ${colors.secondary}
+label-separator = |
+label-separator-foreground = ${colors.foreground-alt}
+
+menu-0-0 =  Menu 
+menu-0-0-exec = jgmenu_run >/dev/null 2>&1 &
+menu-0-1 =  Search 
+menu-0-1-exec = catfish >/dev/null 2>&1 &
+menu-0-2 = HLWM 
+menu-0-2-exec = menu-open-1
+menu-0-3 =  PowerMenu 
+menu-0-3-exec = /home/notis/.config/herbstluftwm/powermenu
+
+menu-1-0 =  Layout 
+menu-1-0-exec = /home/notis/.config/herbstluftwm/hlwm-layout-manager.sh load
+menu-1-1 =  Windows 
+menu-1-1-exec = /home/notis/.config/herbstluftwm/rmenu_wi
+menu-1-2 =  Hlwm cmds 
+menu-1-2-exec = /home/notis/.config/herbstluftwm/herstcmd.sh
+
 [module/info-redshift-temp]
 type = custom/script
 format-underline = #4bffdc
@@ -739,7 +965,7 @@ exec = python ~/.config/polybar/info-names.py
 interval = 3600
 click-left = xdg-open http://www.eortologio.gr/rss/si_el.xml
 
-[module/ticker-btceur]
+[module/ticker-b/cattceur]
 type = custom/script
 format-prefix = " " 
 format-prefix-foreground = ${colors.foreground-alt}

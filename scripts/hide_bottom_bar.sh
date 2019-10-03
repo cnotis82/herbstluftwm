@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
+pid=$(cat /tmp/bottom-bar.pid)
+polybar-msg -p $pid cmd hide
 
 hc() { "${herbstclient_command[@]:-herbstclient}" "$@" ;}
 monitor=${1:-0}
@@ -8,4 +10,7 @@ if [ -z "$geometry" ] ;then
     exit 1
 fi
 #
-herbstclient pad $monitor " 20 " "0 " "0 " "0"
+#herbstclient pad $monitor " 20 " "0 " "0 " "0"
+herbstclient pad "0" " 20 " "0 " "0 " "0"
+herbstclient pad "1" " 20 " "0 " "0 " "0"
+exit 0
