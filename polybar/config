@@ -8,7 +8,7 @@
 ;=====================================================
 
 [colors]
-background = #df1d2021
+background = #cf1d2021
 ;#c1c4bc
 ;#3a3432
 
@@ -26,7 +26,7 @@ accent = #e60053
 
 
 [bar/bspwm-polybar]
-monitor = ${env:MONITOR:eDP1}
+monitor = ${env:MONITOR:HDMI1}
 enable-ipc = true
 
 width = 100%
@@ -52,8 +52,8 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 1
 
-font-0 = Comic Sans MS:size=10:weight=Italic
-#font-0 = Droid Sans Mono:size=10;1
+#font-0 = Comic Sans MS:size=10:weight=Italic
+font-0 = Droid Sans Mono:size=10;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = Wuncon Siji:pixelsize=10:weight=Regular;1
 #font-3 = FontAwesome:size=10:weight=Regular
@@ -62,7 +62,7 @@ font-4 = "Font Awesome 5 Free:style=Regular:pixelsize=10;2"
 font-5 = "Font Awesome 5 Free:style=Solid:pixelsize=10;2"
 font-6 = "Font Awesome 5 Brands:style=Regular:pixelsize=10;2"
 
-modules-left = cpu temperature fan memory isrunning-openvpn isrunning-firewall wlan
+modules-left = archmenu updates cpu temperature fan memory wlan
 modules-center = bspwm 
 modules-right = volume gmail weather battery xkeyboard date 
 
@@ -99,7 +99,8 @@ padding-right = 0
 module-margin-left = 1
 module-margin-right = 1
 
-font-0 = Comic Sans MS:size=10:weight=Italic
+#font-0 = Comic Sans MS:size=10:weight=Italic
+font-0 = Iosevka Term Italic:size=10;1
 #font-0 = Droid Sans Mono:size=10;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = Wuncon Siji:pixelsize=10:weight=Regular;1
@@ -109,13 +110,13 @@ font-4 = "Font Awesome 5 Free:style=Regular:pixelsize=10;2"
 font-5 = "Font Awesome 5 Free:style=Solid:pixelsize=10;2"
 font-6 = "Font Awesome 5 Brands:style=Regular:pixelsize=10;2"
 
-modules-left = archmenu cpu temperature fan memory isrunning-openvpn isrunning-firewall wlan
+modules-left = archmenu updates cpu temperature fan memory wlan 
 modules-center = ewmh layout
 modules-right = volume gmail weather battery xkeyboard date 
 
-tray-position = right
-tray-padding = 4
-tray-maxsize = 16
+;tray-position = right
+;tray-padding = 4
+;tray-maxsize = 16
 
 [bar/my-awesome-polybar1]
 monitor = ${env:MONITOR:HDMI1}
@@ -144,8 +145,9 @@ padding-right = 0
 module-margin-left = 1
 module-margin-right = 1
 
-font-0 = Comic Sans MS:size=10:weight=Italic
+#font-0 = Comic Sans MS:size=10:weight=Italic
 #font-0 = Droid Sans Mono:size=10;1
+font-0 = Iosevka Term Italic:size=10;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = Wuncon Siji:pixelsize=10:weight=Regular;1
 #font-3 = FontAwesome:size=10:weight=Regular
@@ -154,18 +156,18 @@ font-4 = "Font Awesome 5 Free:style=Regular:pixelsize=10;2"
 font-5 = "Font Awesome 5 Free:style=Solid:pixelsize=10;2"
 font-6 = "Font Awesome 5 Brands:style=Regular:pixelsize=10;2"
 
-modules-left =  archmenu arch system-uptime-pretty updates cpu temperature fan memory wlan isrunning-openvpn isrunning-firewall
-modules-center = ewmh layout
+modules-left =  archmenu updates cpu temperature fan memory wlan 
+modules-center = ewmh layout 
 ;hlws
 modules-right = volume gmail weather battery xkeyboard date  
 
-tray-position = right
-tray-padding = 4
-tray-maxsize = 16
+;tray-position = right
+;tray-padding = 4
+;tray-maxsize = 16
 
 [bar/bottom-bar]
 enable-ipc = true
-
+wm-restack = bspwm
 
 width = 100%
 height = 20
@@ -183,7 +185,7 @@ foreground = ${colors.foreground}
 line-size = 3
 line-color = #f00
 
-border-size = 4
+border-size = 0
 border-color = #00000000
 
 padding-left = 2
@@ -192,8 +194,9 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 1
 
-font-0 = Comic Sans MS:size=10:weight=Italic
+#font-0 = Comic Sans MS:size=10:weight=Italic
 #font-0 = Droid Sans Mono:size=10;1
+font-0 = Iosevka Term Italic:size=10;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = Wuncon Siji:pixelsize=10:weight=Regular;1
 #font-3 = FontAwesome:size=10:weight=Regular
@@ -202,11 +205,13 @@ font-4 = "Font Awesome 5 Free:style=Regular:pixelsize=10;2"
 font-5 = "Font Awesome 5 Free:style=Solid:pixelsize=10;2"
 font-6 = "Font Awesome 5 Brands:style=Regular:pixelsize=10;2"
 
-modules-left = arch mpd spotify
+modules-left = arch system-uptime-pretty mpd spotify
 modules-center = filesystem
-modules-right = names taskwarrior ticker-btceur
+modules-right = isrunning-openvpn isrunning-firewall taskwarrior
 
-
+tray-position = right
+tray-padding = 4
+tray-maxsize = 16
 
 [module/bspwm]
 type = internal/bspwm
@@ -214,7 +219,7 @@ type = internal/bspwm
 ; Only show workspaces defined on the same output as the bar
 ; NOTE: The bspwm and XRandR monitor names must match, which they do by default.
 ; Default: true
-pin-workspaces = false
+pin-workspaces = true
 
 ; Output mode flags after focused state label
 ; Default: false
@@ -239,7 +244,7 @@ reverse-scroll = false
 
  'code' in the label
 ; Default: false
-fuzzy-match = true
+fuzzy-match = false
 
 
 ; ws-icon-[0-9]+ = label;icon
@@ -253,8 +258,6 @@ ws-icon-5 = code;
 ws-icon-6 = git;
 ws-icon-7 = docs;
 ws-icon-8 = sys;
-ws-icon-9 = other;
-
 ; Available tags:
 ;   <label-monitor>
 ;   <label-state> - gets replaced with <label-(focused|urgent|occupied|empty)>
@@ -319,26 +322,26 @@ label-empty-foreground = #55
 ;
 ; Available tokens:
 ;   None
-;label-monocle = 
-;label-tiled = 
-;label-fullscreen = 
-;label-floating
+label-monocle = M
+label-tiled = T
+label-fullscreen = F 
+label-floating = fl
 
  = 
-;label-pseudotiled = P
-;label-locked = 
-;label-locked-foreground = #bd2c40
-;label-sticky = 
-;label-sticky-foreground = #fba922
-;label-private = 
-;label-private-foreground = #bd2c40
-;label-marked = M
+label-pseudotiled = P
+label-locked = L 
+label-locked-foreground = #bd2c40
+label-sticky = S
+label-sticky-foreground = #fba922
+label-private = P
+label-private-foreground = #bd2c40
+label-marked = M
 
 ; Separator in between workspaces
 
-;label-separator = |
-;label-separator-padding = 2
-;label-separator-foreground = #ffb52a
+label-separator = |
+label-separator-padding = 2
+label-separator-foreground = #ffb52a
 
 
 [module/hlws]
@@ -357,8 +360,8 @@ type              = custom/script
 exec              = python /home/notis/.config/herbstluftwm/layout.py
 click-left       = exec herbstclient cycle_layout
 interval          = 2
-format-foreground = ${colors.foreground}
-format-background = ${colors.background}
+format-foreground = #d79921 
+format-background = #32302f
 ;format-underline = #555
 format-padding = 2
 
@@ -449,10 +452,10 @@ label-empty-foreground = #55
 [module/xwindow]
 type = internal/xwindow
 label = %title: 0:50:...%
-label-maxlen = 50
+label-maxlen = 20
 #format-background = #808000
-format-background = ${colors.background}
-format-foreground = ${colors.foreground}
+format-background = #32302f 
+format-foreground = #d79921
 format-padding = 2
 
 [module/xkeyboard]
@@ -613,7 +616,7 @@ label-connected-foreground = #eefafafa
 
 [module/wlan]
 type = internal/network
-interface = wlp6s0
+interface = wlp3s0
 ; ; Default: 1
 interval = 2.0
 ;
@@ -700,10 +703,12 @@ time-alt = %H:%M:%S
 
 format-prefix = 
 format-prefix-foreground = #d79921 
+format-prefix-background = #32302f 
 ;format-underline = #0a6cf5
 
 label = %date% %time%
 format-foreground= #d79921
+format-background= #32302f
 [module/volume]
 type = internal/volume
 master-mixer = Master
@@ -766,8 +771,8 @@ animation-charging-framerate = 750
  
 [module/temperature]
 type = internal/temperature
-thermal-zone = 1
-warn-temperature = 60
+thermal-zone = 5
+warn-temperature = 80
 
 format = %{A1:termite --exec='watch sensors' & disown:}<ramp> <label>%{A}
 format-underline = ${colors.background}
@@ -785,7 +790,7 @@ ramp-foreground = ${colors.foreground-alt}
 
 [module/updates]
 type = custom/script
-interval = 600
+interval = 3600
 format-prefix = " " 
 format-prefix-foreground = ${colors.foreground-alt}
 format = <label> 
@@ -834,7 +839,7 @@ format-prefix-foreground = ${colors.foreground-alt}
 format = %{A1:/home/notis/.config/herbstluftwm/fanmenu.sh & disown:}<label> %{A}
 ;format-underline = #0a6cf5
 label = "%output:0:30%"
-exec = .config/polybar/fan.sh
+exec = .config/polybar/fan1.sh
 
 [module/gmail]
 type = custom/script
@@ -887,6 +892,7 @@ format-spacing = 1
 
 label-open = 
 label-open-foreground = #d79921
+label-open-background = #32302f
 label-close =  close 
 label-close-foreground = ${colors.secondary}
 label-separator = |

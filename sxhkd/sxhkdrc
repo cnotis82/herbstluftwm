@@ -1,0 +1,188 @@
+#
+# wm independent hotkeys
+#
+
+# terminal emulator
+alt + Return
+    st	
+
+# program launcher
+alt + @space
+	dmenu_run
+
+# make sxhkd reload its configuration files:
+alt + Escape
+	pkill -USR1 -x sxhkd
+
+#
+# bspwm hotkeys
+#
+
+# quit/restart bspwm
+alt + super + {q,r}
+	bspc {quit,wm -r}
+
+# close and kill
+alt + {_,shift + }q
+	bspc node -{c,k}
+
+# alternate between the tiled and monocle layout
+alt + m
+	bspc desktop -l next
+
+# send the newest marked node to the newest preselected node
+alt + y
+	bspc node newest.marked.local -n newest.!automatic.local
+
+# swap the current node and the biggest node
+alt + g
+	bspc node -s last
+
+#
+# state/flags
+#
+
+# set the window state
+alt + {t,s}
+	bspc node -t {tiled,floating}
+
+alt + f 
+	bspc node -t fullscreen; \
+	polybar-msg cmd toggle	
+
+# set the node flags
+alt + ctrl + {m,x,y,z}
+	bspc node -g {marked,locked,sticky,private}
+
+#
+# focus/swap
+#
+
+# focus the node in the given direction
+alt + {_,shift + }{h,j,k,l}
+	bspc node -{f,s} {west,south,north,east}
+
+# Focus left/right occupied desktop
+alt + {comma,period}
+    bspc desktop --focus {prev,next}.occupied
+
+# focus the next/previous node in the current desktop
+alt + {_,shift + }c
+	bspc node -f {next,prev}.local
+
+# focus the next/previous desktop in the current monitor
+alt + bracket{left,right}
+	bspc desktop -f {prev,next}.local
+
+# focus the last node/desktop
+alt + Tab
+	bspc desktop -f last
+
+# focus the older or newer node in the focus history
+alt + {o,i}
+	bspc wm -h off; \
+	bspc node {older,newer} -f; \
+	bspc wm -h on
+
+# focus or send to the given desktop
+alt + {_,shift + }{1-9,0}
+	bspc {desktop -f,node -d} '^{1-9,10}'
+
+
+# Rotate desktop
+alt + {_,shift + }r
+	bspc node @/ --rotate {90,-90}
+
+# Make split ratios equal
+alt + equal
+	bspc node @/ --equalize
+
+
+# Make split ratios balanced
+alt + minus
+	bspc node @/ --balance
+
+#
+# preselect
+#
+
+# preselect the direction
+alt + ctrl + {h,j,k,l}
+	bspc node -p {west,south,north,east}
+
+# preselect the ratio
+alt + ctrl + {1-9}
+	bspc node -o 0.{1-9}
+
+# cancel the preselection for the focused node
+alt + ctrl + space
+	bspc node -p cancel
+
+# cancel the preselection for the focused desktop
+alt + ctrl + shift + space
+	bspc query -N -d | xargs -I id -n 1 bspc node id -p cancel
+
+#
+# move/resize
+#
+
+# expand a window by moving one of its side outward
+alt + super + {h,j,k,l}
+	bspc node -z {left -20 0,bottom 0 20,top 0 -20,right 20 0}
+
+# contract a window by moving one of its side inward
+alt + super + shift + {h,j,k,l}
+	bspc node -z {right -20 0,top 0 20,bottom 0 -20,left 20 0}
+
+# move a floating window
+alt + {Left,Down,Up,Right}
+	bspc node -v {-20 0,0 20,0 -20,20 0}
+
+ 
+# Emulate i3's scratchpad
+F12
+	if ! xdotool search –onlyvisible –classname ‘scratchpad’ windowunmap; then 
+    if ! xdotool search –classname ‘scratchpad’ windowmap; then 
+      st -title ‘scratchpad’ -name ‘scratchpad’ -e byobu; 
+      bspc window –swap biggest; 
+    fi; 
+  fi
+
+# Applications
+alt + a
+	/home/notis/.config/herbstluftwm/rmenu_wi_g
+
+alt + ctrl + Delete
+	/home/notis/.config/herbstluftwm/powermenu
+
+alt + b
+	/home/notis/.config/herbstluftwm/rmenu_wi
+
+alt + shift + t
+	pid=$(cat /tmp/bottom-bar.pid); \
+	polybar-msg -p $pid cmd hide; \
+	bspc config bottom_padding 1
+
+alt + ctrl + t
+	pid=$(cat /tmp/bottom-bar.pid); \
+	polybar-msg -p $pid cmd show; \
+	#bspc config bottom_padding 1
+
+alt + grave
+	pid=$(cat /tmp/bspwm-polybar.pid); \
+	polybar-msg -p $pid cmd hide; \
+	bspc config top_padding 1
+
+alt + ctrl + grave
+	pid=$(cat /tmp/bspwm-polybar.pid); \
+	polybar-msg -p $pid cmd show; \
+	#bspc config bottom_padding 1
+
+# hide window
+alt + n
+	bspc node -g hidden
+
+#unhide window
+alt + ctrl +n
+	bspc node $(bspc query -N -n .hidden | tail -n1) -g hidden=off
+
