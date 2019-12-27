@@ -22,6 +22,8 @@ layouts="$HOME/.config/herbstluftwm/layouts"
 #scripts
 hc spawn /home/notis/.config/herbstluftwm/lasttag.sh
 hc keybind $Mod-semicolon spawn /home/notis/.config/herbstluftwm/swap.sh auto
+hc keybind $Mod-Control-semicolon spawn /home/notis/.config/herbstluftwm/swap.sh stack_spawn
+hc keybind $Mod-Shift-semicolon spawn /home/notis/.config/herbstluftwm/swap.sh master_spawn
 hc keybind $Mod-slash spawn /home/notis/.config/herbstluftwm/swap.sh close
 hc keybind $Mod-minus spawn /home/notis/.config/herbstluftwm/scratchpad.sh
 hc keybind $Mod-m spawn /home/notis/.config/herbstluftwm/maximize.sh
@@ -38,11 +40,11 @@ hc keybind $Mod-Control-i emit_hook list_keys
 hc keybind $Mod-Control-v emit_hook version
 hc keybind $Mod-Control-d spawn /home/notis/.config/herbstluftwm/hlwm-layout-manager.sh save
 hc keybind $Mod-Control-a spawn /home/notis/.config/herbstluftwm/hlwm-layout-manager.sh load
-hc keybind $Mod-F1 load "$(<"$layouts/"default"")"
-hc keybind $Mod-F2 load "$(<"$layouts/"MasterLeft"")"
-hc keybind $Mod-F3 load "$(<"$layouts/"ThreeColumn"")"
-hc keybind $Mod-F4 load "$(<"$layouts/"Grid"")"
-hc keybind $Mod-F5 load "$(<"$layouts/"bsp"")"
+hc keybind $Mod-F1 chain , load "$(<"$layouts/"default"")" , focus -e l
+hc keybind $Mod-F2 chain , load "$(<"$layouts/"MasterLeft"")" , focus -e l
+hc keybind $Mod-F3 chain , load "$(<"$layouts/"ThreeColumn"")" , focus -e 
+hc keybind $Mod-F4 chain , load "$(<"$layouts/"Grid"")" , focus -e l
+hc keybind $Mod-F5 chain , load "$(<"$layouts/"bsp"")" , focus -e l
 hc keybind $Mod-Control-c spawn /home/notis/.config/herbstluftwm/herstcmd.sh
 hc keybind $Mod-b spawn /home/notis/.config/herbstluftwm/herstcmd.sh bring
 hc keybind $Mod-j spawn /home/notis/.config/herbstluftwm/rmenu_wi 
@@ -80,11 +82,12 @@ hc keybind Mod4-e spawn thunderbird
 hc keybind Mod4-v spawn viber
 hc keybind Mod4-l spawn bash -c "betterlockscreen -l dim"  
 hc keybind Mod4-s spawn slack
-hc keybind Mod4-d spawn subl3
+hc keybind Mod4-d spawn dmenfm
 hc keybind Mod4-g spawn gitkraken
 
+
 # tmux sessions
-hc keybind $Mod-Control-1 spawn /home/notis/.config/herbstluftwm/erexec_on_tag.sh "   " st -e tmux a -t home
+hc keybind $Mod-Control-1 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "   " st -e tmux a -t home
 hc keybind $Mod-Control-3 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "   " st -e tmux a -t file
 hc keybind $Mod-Control-4 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "   " st -e tmux a -t chat
 hc keybind $Mod-Control-8 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "   " st -e tmux a -t system
@@ -265,14 +268,14 @@ hc rule class=Hexchat tag="   " hook="   " focus=off
 hc rule instance=Viber tag="   " pseudotile=on hook="   " focus=off 
 hc rule class=Slack tag="   " pseudotile=on hook="   " focus=off
 hc rule class=Clementine tag="   "
-hc rule class=Mpv tag="   "
-hc rule class=vlc tag="   " hook="   " focus=off
+hc rule class=Mpv tag="   " ewmhrequests=off
+hc rule class=vlc tag="   " hook="   " focus=off ewmhrequests=off
 hc rule class=Popcorn-Time tag="   "  hook="   " focus=off
 hc rule class=Spotify tag="   " 
 hc rule class=Chromium-browser tag="   "
 hc rule class=GitKraken tag="   " hook="   " focus=off pseudotile=on
 hc rule class=Atom tag="   " hook="   "
-hc rule class=Subl3 tag="   " hook="   "
+hc rule class=Subl3 tag="   " hook="   " ewmhrequests=off
 hc rule class=QtCreator tag="   " hook="   "
 hc rule class=Code tag="   " hook="   "
 hc rule class=Gvim tag="   " hook="   "
@@ -313,9 +316,9 @@ herbstclient emit_hook quit_panel
 pid=( )
 sleep 1
 dunst -conf /home/notis/.config/dunst/dunstrc &
-feh --bg-scale /home/notis/Pictures/cristina-gottardi-84RNIdh3EwU-unsplash.jpg
-compton --backend glx --blur-method kawase --blur-background --blur-strength 5 & 
-
+feh --bg-scale /home/notis/Pictures/randy-tarampi-a5KMylND9Bo-unsplash.jpg
+#compton --backend glx --blur-method kawase --blur-background --blur-strength 5 & 
+compton -b &
 # find the panel
 panel=~/.config/herbstluftwm/panel_polybar.sh
 [ -x "$panel" ] || panel=/etc/xdg/herbstluftwm/panel_polybar.sh
