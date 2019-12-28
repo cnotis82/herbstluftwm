@@ -86,7 +86,7 @@
       else # moves all the clients in master out and then spawn
         [ -z "$EmptyAll" ] && auto
         while [ "$emptyMaster" != ')' ]; do
-          hc chain , focus -e $masterD , shift -e $stackD , focus -e $masterD
+          hc chain , shift -e $stackD , focus -e $masterD
           set_vars
         done;"$@"
       fi
