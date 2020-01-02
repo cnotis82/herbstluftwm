@@ -7,7 +7,7 @@
 # or bind it: herbstclient keybind Mod1-Escape emit_hook goto_last_tag
 
 hc() { "${herbstclient_command[@]:-herbstclient}" "$@" ;}
-hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|goto_last_tag|fullscreen|floating|pseudotile|split_bottom|split_right|list_keys|version|layout_dump|print)' \
+hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|goto_last_tag|fullscreen|floating|pseudotile|split_bottom|split_right|list_keys|version|layout_dump|print|tag_flags)' \
     | while read line ; do
         IFS=$'\t' read -ra args <<< "$line"
         case ${args[0]} in
@@ -28,13 +28,16 @@ hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|goto
                 [ "$lasttag" ] && hc use "$lasttag"
                 ;;
             reload)
-                killall redshiftgui.elf
-                killall dunst
                 notify-send -u critical "Herbstluftwm will be reloaded"
+                polybar-msg cmd quit
+                killall dunst
+                killall compton
+                
                 exit
                 ;;
             quit_panel)
                 polybar-msg cmd quit
+                #killall fluxgui
                 killall packages.sh
                 notify-send -u critical "Panels will be reloaded"
                 ;;
@@ -45,12 +48,8 @@ hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|goto
                 notify-send -u low "Tag ${args[1]} removed"
                 ;;
             tag_flags)
-               
                 ;;
-            # urgent)
-            #     notify-send -u critical "Urgent Window"
-            #     ;;
-            rule)
+            rule|tag_flags)
                 
                 #herbstclient add "${args[1]}"
                 # status=( $(herbstclient tag_status) )
@@ -67,6 +66,8 @@ hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|goto
                 # fi
                 #hc add "${args[1]}"
                 #sleep 1
+                hc and , compare tags.focus.curframe_wcount gt 1 , split explode , or . focus right . focus down 
+                hc and , compare tags.focus.curframe_wcount = 0 , close_and_remove
                 winid=${args[2]}
                 xdotool set_window --urgency 1 $winid
                 ;;
@@ -100,6 +101,7 @@ hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|goto
             layout=$(herbstclient layout)
                 notify-send -u low "${layout}"
                 ;;
-                
+            new_frame)
+                ;;
         esac
     done
