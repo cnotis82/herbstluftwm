@@ -48,25 +48,10 @@ hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|goto
                 notify-send -u low "Tag ${args[1]} removed"
                 ;;
             tag_flags)
+				hc and , compare tags.focus.curframe_wcount = 0 , close_and_remove
                 ;;
             rule|tag_flags)
-                
-                #herbstclient add "${args[1]}"
-                # status=( $(herbstclient tag_status) )
-                # found=false
-                # #notify-send -u critical "$status $tag"
-                # for i in ${!status[@]} ; do
-                #     if [ "${status[$i]}" = "${args[1]}" ]; then
-                #         found=true
-                #     fi
-                # done
-                
-                # if [ "$found" = false ] ; then
-                #     hc add "${args[1]}"
-                # fi
-                #hc add "${args[1]}"
-                #sleep 1
-                hc and , compare tags.focus.curframe_wcount gt 1 , split explode , or . focus right . focus down 
+                hc and , compare tags.focus.curframe_wcount gt 1 , ! silent get_attr tags.focus.my_unmaximized_layout , split explode , or . focus right . focus down 
                 hc and , compare tags.focus.curframe_wcount = 0 , close_and_remove
                 winid=${args[2]}
                 xdotool set_window --urgency 1 $winid
