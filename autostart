@@ -82,9 +82,11 @@ hc keybind Mod4-e spawn thunderbird
 hc keybind Mod4-v spawn viber
 hc keybind Mod4-l spawn bash -c "betterlockscreen -l dim"  
 hc keybind Mod4-s spawn slack
-hc keybind Mod4-d spawn dmenfm
+hc keybind Mod4-s spawn subl3
+hc keybind Mod4-p spawn pcmanfm
 hc keybind Mod4-g spawn gitkraken
-
+hc keybind Mod4-m emit_hook bsp
+hc keybind Mod4-Shift-m emit_hook no_bsp
 
 # tmux sessions
 hc keybind $Mod-Control-1 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "   " st -e tmux a -t home
@@ -94,6 +96,7 @@ hc keybind $Mod-Control-8 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh 
 hc keybind $Mod-Control-0 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "   " st -e tmux a -t scratchpad
 
 # focusing clients
+hc set focus_crosses_monitor_boundaries 0
 hc keybind $Mod-Left  or , focus left , focus_edge right
 hc keybind $Mod-Down  or , focus down , focus_edge up
 hc keybind $Mod-Up    or , focus up , focus_edge down
@@ -112,7 +115,7 @@ hc keybind $Mod-o chain , split right 0.5 , focus -e r
 hc keybind $Mod-Control-u chain , split top 0.5 , focus -e t      
 hc keybind $Mod-Control-o chain , split left 0.5 , focus -e l      
 # let the current frame explode into subframes
-hc keybind $Mod-Control-space split explode
+hc keybind $Mod-Control-space chain , split explode , or . focus right . focus down 
 hc keybind $Mod-z rotate
 
 # resizing frames
@@ -190,6 +193,7 @@ hc keybind $Mod-space                                                           
                , cycle_layout +1
 
 hc keybind $Mod-g set_layout grid
+hc keybind $Mod-Shift-space set_layout max
 
 # mouse
 hc mouseunbind --all
@@ -211,7 +215,7 @@ hc attr theme.floating.reset 1
 hc set frame_border_active_color '#222222'
 hc set frame_border_normal_color '#101010'
 hc set frame_bg_normal_color '#565656'
-hc set frame_bg_active_color whitesmoke
+hc set frame_bg_active_color orange
 #'#345F0C'
 hc set frame_border_width 0
 hc set always_show_frame 1
@@ -220,7 +224,7 @@ hc set frame_active_opacity 40
 hc set frame_normal_opacity 40
 hc set frame_transparent_width 0
 hc set frame_gap 10
-hc set focus_follows_mouse 1
+hc set focus_follows_mouse 0
 
 hc attr theme.active.color orange
 hc attr theme.normal.color dimgray
@@ -266,19 +270,19 @@ hc rule class=Polo-gtk tag="   "
 hc rule class=Corebird tag="   " hook="   " focus=off 
 hc rule class=Pidgin tag="   " hook="   " focus=off
 hc rule class=Hexchat tag="   " hook="   " focus=off
-hc rule instance=Viber tag="   " pseudotile=on hook="   " focus=off 
+hc rule class=ViberPC tag="   " pseudotile=on hook="   " focus=off 
 hc rule class=Slack tag="   " pseudotile=on hook="   " focus=off
 hc rule class=Clementine tag="   "
-hc rule class=Mpv tag="   " ewmhrequests=off
+hc rule class=mpv tag="   " ewmhrequests=off
 hc rule class=vlc tag="   " hook="   " focus=off ewmhrequests=off
 hc rule class=Popcorn-Time tag="   "  hook="   " focus=off
 hc rule class=Spotify tag="   " 
-hc rule class=Chromium-browser tag="   "
+hc rule class=Chromium-browser tag="   " hook="   " focus=off
 hc rule class=GitKraken tag="   " hook="   " focus=off pseudotile=on
 hc rule class=Atom tag="   " hook="   "
 hc rule class=Subl3 tag="   " hook="   " ewmhrequests=off
 hc rule class=QtCreator tag="   " hook="   "
-hc rule class=Code tag="   " hook="   "
+hc rule class=code-oss tag="   " hook="   "
 hc rule class=Gvim tag="   " hook="   "
 hc rule class=org.remmina.Remmina tag="   " hook="   "
 hc rule class=Filezilla tag="   " hook="   "

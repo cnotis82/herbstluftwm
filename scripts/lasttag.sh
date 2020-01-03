@@ -5,9 +5,9 @@
 
 # to switch to the last tag, call: herbstclient emit_hook goto_last_tag
 # or bind it: herbstclient keybind Mod1-Escape emit_hook goto_last_tag
-
+mode=0
 hc() { "${herbstclient_command[@]:-herbstclient}" "$@" ;}
-hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|goto_last_tag|fullscreen|floating|pseudotile|split_bottom|split_right|list_keys|version|layout_dump|print|tag_flags)' \
+hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|goto_last_tag|fullscreen|floating|pseudotile|split_bottom|split_right|list_keys|version|layout_dump|print|tag_flags|bsp|no_bsp)' \
     | while read line ; do
         IFS=$'\t' read -ra args <<< "$line"
         case ${args[0]} in
@@ -47,12 +47,20 @@ hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|goto
             tag_removed)
                 notify-send -u low "Tag ${args[1]} removed"
                 ;;
+            bsp)
+				mode=1
+				;;
+			no_bsp)
+				mode=0
+				;;
             tag_flags)
 				hc and , compare tags.focus.curframe_wcount = 0 , close_and_remove
                 ;;
             rule|tag_flags)
-                hc and , compare tags.focus.curframe_wcount gt 1 , ! silent get_attr tags.focus.my_unmaximized_layout , split explode , or . focus right . focus down 
-                hc and , compare tags.focus.curframe_wcount = 0 , close_and_remove
+				if [ $mode -eq 1 ]; then
+                	hc and , compare tags.focus.curframe_wcount gt 1 , ! silent get_attr tags.focus.my_unmaximized_layout , split explode , or . focus right . focus down 
+                	hc and , compare tags.focus.curframe_wcount = 0 , close_and_remove
+            	fi
                 winid=${args[2]}
                 xdotool set_window --urgency 1 $winid
                 ;;
