@@ -58,7 +58,7 @@ hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|goto
                 ;;
             rule|tag_flags)
 				if [ $mode -eq 1 ]; then
-                	hc and , compare tags.focus.curframe_wcount gt 1 , ! silent get_attr tags.focus.my_unmaximized_layout , split explode , or . focus right . focus down 
+                	hc chain : lock : and , compare tags.focus.curframe_wcount gt 1 , ! silent get_attr tags.focus.my_unmaximized_layout , split explode , or . focus right . focus down : unlock 
                 	hc and , compare tags.focus.curframe_wcount = 0 , close_and_remove
             	fi
                 winid=${args[2]}
