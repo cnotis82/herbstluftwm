@@ -49,9 +49,11 @@ hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|goto
                 ;;
             bsp)
 				mode=1
+                notify-send -u low "Binary split enabled"
 				;;
 			no_bsp)
 				mode=0
+                notify-send -u low "Binary split disabled"
 				;;
             tag_flags)
 				hc and , compare tags.focus.curframe_wcount = 0 , close_and_remove
