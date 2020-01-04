@@ -6,6 +6,7 @@
 # to switch to the last tag, call: herbstclient emit_hook goto_last_tag
 # or bind it: herbstclient keybind Mod1-Escape emit_hook goto_last_tag
 mode=0
+tag=""
 hc() { "${herbstclient_command[@]:-herbstclient}" "$@" ;}
 hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|goto_last_tag|fullscreen|floating|pseudotile|split_bottom|split_right|list_keys|version|layout_dump|print|tag_flags|bsp|no_bsp)' \
     | while read line ; do
@@ -59,15 +60,18 @@ hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|goto
 				hc and , compare tags.focus.curframe_wcount = 0 , close_and_remove
                 ;;
             rule|tag_flags)
+				lasttag="$tag"
+				tag=${args[1]}
+				#hc use "$tag"
 				if [ $mode -eq 1 ]; then
-                	hc chain : lock : and , compare tags.focus.curframe_wcount gt 1 , ! silent get_attr tags.focus.my_unmaximized_layout , split explode , or . focus right . focus down : unlock 
+                	hc chain : lock : and , use "$tag" , set_layout max , compare tags.by-name."$tag".curframe_wcount gt 1 , ! silent get_attr tags.by-name."$tag".my_unmaximized_layout , split explode , or . focus right . focus down : use "$lasttag" : unlock 
                 	hc and , compare tags.focus.curframe_wcount = 0 , close_and_remove
             	fi
                 winid=${args[2]}
                 xdotool set_window --urgency 1 $winid
                 ;;
             fullscreen)
-                notify-send -u low "Fullscreen ${args[1]}"
+                notify-send -u low "Fullscreen $tag"
                 ;;
             floating)
                 notify-send -u low "Floating ${args[1]}"
