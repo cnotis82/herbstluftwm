@@ -62,22 +62,32 @@ hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|goto
             rule|tag_flags)
 				lasttag="$tag"
 				tag=${args[1]}
+                winid=${args[2]}
 				#hc use "$tag"
 				if [ $mode -eq 1 ]; then
-                	hc chain : lock : and , use "$tag" , set_layout max , compare tags.by-name."$tag".curframe_wcount gt 1 , ! silent get_attr tags.by-name."$tag".my_unmaximized_layout , split explode , or . focus right . focus down : use "$lasttag" : unlock 
+                	hc chain : lock \
+                             : set_layout max \
+                             : use "$tag" \
+                             : and , compare tags.by-name."$tag".curframe_wcount gt 1 \
+                                   , ! silent get_attr tags.by-name."$tag".my_unmaximized_layout \
+                                   , split explode \
+                                   , or . focus right \
+                                        . focus down \
+                             : use "$lasttag" \
+                             : unlock
+
                 	hc and , compare tags.focus.curframe_wcount = 0 , close_and_remove
             	fi
-                winid=${args[2]}
                 xdotool set_window --urgency 1 $winid
                 ;;
             fullscreen)
                 notify-send -u low "Fullscreen $tag"
                 ;;
             floating)
-                notify-send -u low "Floating ${args[1]}"
+                notify-send -u low "Floating $tag"
                 ;;
             pseudotile)
-                notify-send -u low "Pseudotile ${args[1]}"
+                notify-send -u low "Pseudotile $tag"
                 ;;    
             split_bottom)
                 notify-send -u low "Split Bottom 0.5"
