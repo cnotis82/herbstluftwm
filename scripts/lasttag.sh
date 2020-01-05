@@ -63,21 +63,17 @@ hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|goto
 				lasttag="$tag"
 				tag=${args[1]}
                 winid=${args[2]}
-				#hc use "$tag"
+                				
 				if [ $mode -eq 1 ]; then
-                	hc chain : lock \
-                             : set_layout max \
-                             : use "$tag" \
-                             : and , compare tags.by-name."$tag".curframe_wcount gt 1 \
+                           	hc chain : lock : and , use "$tag" \
+                                   , set_layout max \
+                                   , compare tags.by-name."$tag".curframe_wcount gt 1 \
                                    , ! silent get_attr tags.by-name."$tag".my_unmaximized_layout \
                                    , split explode \
-                                   , or . focus right \
-                                        . focus down \
-                             : use "$lasttag" \
-                             : unlock
-
+                                   , or . focus right . focus down : use "$lasttag" : unlock
                 	hc and , compare tags.focus.curframe_wcount = 0 , close_and_remove
             	fi
+                
                 xdotool set_window --urgency 1 $winid
                 ;;
             fullscreen)
