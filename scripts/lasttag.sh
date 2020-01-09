@@ -8,22 +8,13 @@
 mode=0
 tag=""
 hc() { "${herbstclient_command[@]:-herbstclient}" "$@" ;}
-hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|goto_last_tag|fullscreen|floating|pseudotile|split_bottom|split_right|list_keys|version|layout_dump|print|tag_flags|bsp|no_bsp)' \
+hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|goto_last_tag|fullscreen|floating|pseudotile|split_bottom|split_right|list_keys|version|layout_dump|print|tag_flags|bsp|no_bsp|max)' \
     | while read line ; do
         IFS=$'\t' read -ra args <<< "$line"
         case ${args[0]} in
             tag_changed)
                 lasttag="$tag"
                 tag=${args[1]}
-                # sleep 1
-                # status=( $(herbstclient tag_status) )
-                # empty="."
-                # #notify-send -u critical "$status $tag"
-                # for i in ${!status[@]} ; do
-                #     if [ "${status[$i]}" = "$empty" ]; then
-                #         hc merge_tag " ${status[$(( $i + 1 ))]}  "
-                #     fi
-                # done
                 ;;
             goto_last_tag)
                 [ "$lasttag" ] && hc use "$lasttag"
@@ -57,21 +48,31 @@ hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|goto
                 notify-send -u low "Binary split disabled"
 				;;
             tag_flags)
-				hc and , compare tags.focus.curframe_wcount = 0 , close_and_remove
+                if [ $mode -eq 1 ]; then
+                    hc and , compare tags.focus.curframe_wcount = 0 , close_and_remove
+                    hc and , compare tags.focus.frame_count = 1 , ! silent get_attr tags.focus.my_unmaximized_layout , set_layout grid
+                fi
                 ;;
             rule|tag_flags)
 				lasttag="$tag"
 				tag=${args[1]}
                 winid=${args[2]}
+                focus=$(hc attr tags.focus.name)
                 				
 				if [ $mode -eq 1 ]; then
-                           	hc chain : lock : and , use "$tag" \
-                                   , set_layout max \
-                                   , compare tags.by-name."$tag".curframe_wcount gt 1 \
-                                   , ! silent get_attr tags.by-name."$tag".my_unmaximized_layout \
-                                   , split explode \
-                                   , or . focus right . focus down : use "$lasttag" : unlock
-                	hc and , compare tags.focus.curframe_wcount = 0 , close_and_remove
+                           	# hc chain : lock : and , use "$tag" \
+                            #        , set_layout max \
+                            #        , compare tags.by-name."$tag".curframe_wcount gt 1 \
+                            #        , ! silent get_attr tags.by-name."$tag".my_unmaximized_layout \
+                            #        , split explode \
+                            #        , or . focus right . focus down : use "$lasttag" : unlock
+                            if [ $tag == $focus ]; then
+                                hc chain : lock : and , set_layout max \
+                                       , compare tags.focus.curframe_wcount gt 1 \
+                                       , ! silent get_attr tags.focus.my_unmaximized_layout \
+                                       , split explode : unlock
+                            fi
+                	hc and , compare tags.focus.curframe_wcount = 0 , close_and_remove 
             	fi
                 
                 xdotool set_window --urgency 1 $winid
