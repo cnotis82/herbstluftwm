@@ -248,17 +248,17 @@ hc attr theme.active.outer_color '#3E4A00'
 hc attr theme.minimal.color orange
 hc attr theme.minimal.active.color orange
 hc attr theme.minimal.normal.color dimgray 
-hc attr theme.minimal.border_width 4
+hc attr theme.minimal.border_width 5
 hc attr theme.minimal.outer_width 1
 hc attr theme.minimal.outer_color black 
-hc attr theme.tiling.border_width 4
+hc attr theme.tiling.border_width 5
 hc attr theme.tiling.outer_width 1
 hc attr theme.tiling.outer_color black
 
 
 hc attr theme.background_color '#141414'
 
-hc set window_gap 3
+hc set window_gap 0
 hc set frame_padding 0
 hc set smart_window_surroundings 1
 hc set smart_frame_surroundings 1

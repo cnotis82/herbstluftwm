@@ -49,8 +49,8 @@ hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|goto
 				;;
             tag_flags)
                 if [ $mode -eq 1 ]; then
-                    hc and , compare tags.focus.curframe_wcount = 0 , close_and_remove
-                    hc and , compare tags.focus.frame_count = 1 , ! silent get_attr tags.focus.my_unmaximized_layout , set_layout grid
+                    hc chain : lock : and , compare tags.focus.curframe_wcount = 0 , close_and_remove : unlock
+                    hc chain : lock : and , compare tags.focus.frame_count = 1 , ! silent get_attr tags.focus.my_unmaximized_layout , set_layout grid : unlock
                 fi
                 ;;
             rule|tag_flags)
@@ -60,18 +60,23 @@ hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|goto
                 focus=$(hc attr tags.focus.name)
                 				
 				if [ $mode -eq 1 ]; then
-                           	# hc chain : lock : and , use "$tag" \
-                            #        , set_layout max \
-                            #        , compare tags.by-name."$tag".curframe_wcount gt 1 \
-                            #        , ! silent get_attr tags.by-name."$tag".my_unmaximized_layout \
-                            #        , split explode \
-                            #        , or . focus right . focus down : use "$lasttag" : unlock
-                            if [ $tag == $focus ]; then
-                                hc chain : lock : and , set_layout max \
-                                       , compare tags.focus.curframe_wcount gt 1 \
-                                       , ! silent get_attr tags.focus.my_unmaximized_layout \
-                                       , split explode : unlock
-                            fi
+							#if [ $tag == $focus ]; then
+	                           	hc chain : lock : use "$tag" \
+	                           			 : and , set_layout max , compare tags.by-name."$tag".curframe_wcount gt 1 \
+	                                   		, ! silent get_attr tags.by-name."$tag".my_unmaximized_layout \
+	                                   		, split explode \
+	                                   		, cycle_frame \
+	                                   	: use "$lasttag" \
+	                                   	: unlock
+	                        #fi
+            #                 if [ $tag == $focus ]; then
+            #                     hc chain : lock : and , set_layout max \
+            #                            , compare tags.focus.curframe_wcount gt 1 \
+            #                            , ! silent get_attr tags.focus.my_unmaximized_layout \
+            #                            , split explode  \
+            #                            , cycle_frame \
+									   # : unlock
+            #                 fi
                 	hc and , compare tags.focus.curframe_wcount = 0 , close_and_remove 
             	fi
                 
