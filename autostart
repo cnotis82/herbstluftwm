@@ -26,7 +26,7 @@ hc keybind $Mod-Control-semicolon spawn /home/notis/.config/herbstluftwm/swap.sh
 hc keybind $Mod-Shift-semicolon spawn /home/notis/.config/herbstluftwm/swap.sh master_spawn
 hc keybind $Mod-slash spawn /home/notis/.config/herbstluftwm/swap.sh close
 hc keybind $Mod-minus spawn /home/notis/.config/herbstluftwm/scratchpad.sh
-hc keybind $Mod-m spawn /home/notis/.config/herbstluftwm/maximize.sh
+hc keybind $Mod-m spawn /home/notis/.config/herbstluftwm/maximize.sh 
 hc keybind $Mod-Shift-m spawn /home/notis/.config/herbstluftwm/float-maximize.sh
 #hc keybind $Mod-w spawn /home/notis/.config/herbstluftwm/windowmenu.sh
 #hc keybind $Mod-Control-f spawn /home/notis/.config/herbstluftwm/fanmenu.sh
@@ -115,7 +115,7 @@ hc keybind $Mod-o chain , split right 0.5 , focus -e r
 hc keybind $Mod-Control-u chain , split top 0.5 , focus -e t      
 hc keybind $Mod-Control-o chain , split left 0.5 , focus -e l      
 # let the current frame explode into subframes
-hc keybind $Mod-Control-space chain , split explode , or . focus right . focus down 
+hc keybind $Mod-Control-space chain , split explode , or . focus right . focus down
 hc keybind $Mod-z rotate
 
 # resizing frames
@@ -124,6 +124,12 @@ hc keybind $Mod-Shift-h       resize left +$resizestep
 hc keybind $Mod-Shift-j       resize down +$resizestep
 hc keybind $Mod-Shift-k       resize up +$resizestep
 hc keybind $Mod-Shift-l       resize right +$resizestep
+
+# resize window in floating mode
+hc keybind $Mod-Control-Left spawn /home/notis/.config/herbstluftwm/winsizer.sh -x
+hc keybind $Mod-Control-Right spawn /home/notis/.config/herbstluftwm/winsizer.sh +x
+hc keybind $Mod-Control-Up spawn /home/notis/.config/herbstluftwm/winsizer.sh -y
+hc keybind $Mod-Control-Down spawn /home/notis/.config/herbstluftwm/winsizer.sh +y
 
 # Gaps
 hc keybind $Mod-Control-f cycle_value frame_gap 0 10 15 20 25 30
@@ -321,7 +327,7 @@ herbstclient emit_hook quit_panel
 pid=( )
 sleep 1
 dunst -conf /home/notis/.config/dunst/dunstrc &
-feh --bg-scale /home/notis/Pictures/randy-tarampi-a5KMylND9Bo-unsplash.jpg
+feh --bg-scale /home/notis/Pictures/christiane-nuetzel-dDTaJmKVl4o-unsplash.jpg
 #compton --backend glx --blur-method kawase --blur-background --blur-strength 5 & 
 compton -b &
 # find the panel
