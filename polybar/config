@@ -8,7 +8,7 @@
 ;=====================================================
 
 [colors]
-background = #df1d2021
+background = #ff1d2021
 ;#c1c4bc
 ;#3a3432
 
@@ -26,6 +26,51 @@ accent = #e60053
 
 
 [bar/bspwm-polybar]
+monitor = ${env:MONITOR:HDMI1}
+enable-ipc = true
+
+width = 100%
+height = 20
+fixed-center = true
+
+background = ${colors.background}
+foreground = ${colors.foreground}
+
+line-size = 3
+#line-color = #f00
+line-color = ${colors.linecolor}
+
+underline-size = 2
+overline-size = 1
+
+border-size = 0
+border-color = #00000000
+
+padding-left = 0
+padding-right = 2
+
+module-margin-left = 1
+module-margin-right = 1
+
+#font-0 = Comic Sans MS:size=10:weight=Italic
+font-0 = Droid Sans Mono:size=10;1
+font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
+font-2 = Wuncon Siji:pixelsize=10:weight=Regular;1
+#font-3 = FontAwesome:size=10:weight=Regular
+font-3 = DejaVu Sans:size=10
+font-4 = "Font Awesome 5 Free:style=Regular:pixelsize=10;2"
+font-5 = "Font Awesome 5 Free:style=Solid:pixelsize=10;2"
+font-6 = "Font Awesome 5 Brands:style=Regular:pixelsize=10;2"
+
+modules-left = archmenu updates cpu temperature fan memory wlan
+modules-center = bspwm 
+modules-right = volume gmail weather battery xkeyboard date 
+
+#tray-position = right
+#tray-padding = 4
+#tray-maxsize = 16
+
+[bar/bspwm-polybar0]
 monitor = ${env:MONITOR:eDP1}
 enable-ipc = true
 
@@ -52,8 +97,8 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 1
 
-font-0 = Comic Sans MS:size=10:weight=Italic
-#font-0 = Droid Sans Mono:size=10;1
+#font-0 = Comic Sans MS:size=10:weight=Italic
+font-0 = Droid Sans Mono:size=10;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = Wuncon Siji:pixelsize=10:weight=Regular;1
 #font-3 = FontAwesome:size=10:weight=Regular
@@ -62,15 +107,13 @@ font-4 = "Font Awesome 5 Free:style=Regular:pixelsize=10;2"
 font-5 = "Font Awesome 5 Free:style=Solid:pixelsize=10;2"
 font-6 = "Font Awesome 5 Brands:style=Regular:pixelsize=10;2"
 
-modules-left = cpu temperature fan memory isrunning-openvpn isrunning-firewall wlan
+modules-left = archmenu updates cpu temperature fan memory wlan
 modules-center = bspwm 
 modules-right = volume gmail weather battery xkeyboard date 
 
 tray-position = right
 tray-padding = 4
 tray-maxsize = 16
-
-
 
 [bar/my-awesome-polybar0]
 monitor = ${env:MONITOR:eDP1}
@@ -99,7 +142,8 @@ padding-right = 0
 module-margin-left = 1
 module-margin-right = 1
 
-font-0 = Comic Sans MS:size=10:weight=Italic
+#font-0 = Comic Sans MS:size=10:weight=Italic
+font-0 = Iosevka Term Italic:size=10;1
 #font-0 = Droid Sans Mono:size=10;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = Wuncon Siji:pixelsize=10:weight=Regular;1
@@ -109,13 +153,13 @@ font-4 = "Font Awesome 5 Free:style=Regular:pixelsize=10;2"
 font-5 = "Font Awesome 5 Free:style=Solid:pixelsize=10;2"
 font-6 = "Font Awesome 5 Brands:style=Regular:pixelsize=10;2"
 
-modules-left = archmenu cpu temperature fan memory isrunning-openvpn isrunning-firewall wlan
+modules-left = archmenu updates cpu temperature fan memory  
 modules-center = ewmh layout
-modules-right = volume gmail weather battery xkeyboard date 
+modules-right = volume gmail weather wlan battery xkeyboard date 
 
-tray-position = right
-tray-padding = 4
-tray-maxsize = 16
+;tray-position = right
+;tray-padding = 4
+;tray-maxsize = 16
 
 [bar/my-awesome-polybar1]
 monitor = ${env:MONITOR:HDMI1}
@@ -144,8 +188,9 @@ padding-right = 0
 module-margin-left = 1
 module-margin-right = 1
 
-font-0 = Comic Sans MS:size=10:weight=Italic
+#font-0 = Comic Sans MS:size=10:weight=Italic
 #font-0 = Droid Sans Mono:size=10;1
+font-0 = Iosevka Term Italic:size=10;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = Wuncon Siji:pixelsize=10:weight=Regular;1
 #font-3 = FontAwesome:size=10:weight=Regular
@@ -154,18 +199,18 @@ font-4 = "Font Awesome 5 Free:style=Regular:pixelsize=10;2"
 font-5 = "Font Awesome 5 Free:style=Solid:pixelsize=10;2"
 font-6 = "Font Awesome 5 Brands:style=Regular:pixelsize=10;2"
 
-modules-left =  archmenu arch system-uptime-pretty updates cpu temperature fan memory wlan isrunning-openvpn isrunning-firewall
-modules-center = ewmh layout
+modules-left =  archmenu cpu memory temperature fan updates
+modules-center = ewmh layout 
 ;hlws
-modules-right = volume gmail weather battery xkeyboard date  
+modules-right = volume gmail weather wlan battery xkeyboard date
 
-tray-position = right
-tray-padding = 4
-tray-maxsize = 16
+;tray-position = right
+;tray-padding = 4
+;tray-maxsize = 16
 
 [bar/bottom-bar]
 enable-ipc = true
-
+wm-restack = bspwm
 
 width = 100%
 height = 20
@@ -183,7 +228,7 @@ foreground = ${colors.foreground}
 line-size = 3
 line-color = #f00
 
-border-size = 4
+border-size = 0
 border-color = #00000000
 
 padding-left = 2
@@ -192,8 +237,9 @@ padding-right = 2
 module-margin-left = 1
 module-margin-right = 1
 
-font-0 = Comic Sans MS:size=10:weight=Italic
+#font-0 = Comic Sans MS:size=10:weight=Italic
 #font-0 = Droid Sans Mono:size=10;1
+font-0 = Iosevka Term Italic:size=10;1
 font-1 = unifont:fontformat=truetype:size=8:antialias=false;0
 font-2 = Wuncon Siji:pixelsize=10:weight=Regular;1
 #font-3 = FontAwesome:size=10:weight=Regular
@@ -202,11 +248,13 @@ font-4 = "Font Awesome 5 Free:style=Regular:pixelsize=10;2"
 font-5 = "Font Awesome 5 Free:style=Solid:pixelsize=10;2"
 font-6 = "Font Awesome 5 Brands:style=Regular:pixelsize=10;2"
 
-modules-left = arch mpd spotify
+modules-left = info-trash arch system-uptime-pretty mpd 
 modules-center = filesystem
-modules-right = names taskwarrior ticker-btceur
+modules-right = isrunning-openvpn isrunning-firewall taskwarrior
 
-
+tray-position = right
+tray-padding = 4
+tray-maxsize = 16
 
 [module/bspwm]
 type = internal/bspwm
@@ -214,7 +262,7 @@ type = internal/bspwm
 ; Only show workspaces defined on the same output as the bar
 ; NOTE: The bspwm and XRandR monitor names must match, which they do by default.
 ; Default: true
-pin-workspaces = false
+pin-workspaces = true
 
 ; Output mode flags after focused state label
 ; Default: false
@@ -239,7 +287,7 @@ reverse-scroll = false
 
  'code' in the label
 ; Default: false
-fuzzy-match = true
+fuzzy-match = false
 
 
 ; ws-icon-[0-9]+ = label;icon
@@ -251,10 +299,8 @@ ws-icon-3 = chat;
 ws-icon-4 = media;
 ws-icon-5 = code;
 ws-icon-6 = git;
-ws-icon-7 = docs;
-ws-icon-8 = sys;
-ws-icon-9 = other;
-
+ws-icon-7 = sys;
+ws-icon-8 = docs;
 ; Available tags:
 ;   <label-monitor>
 ;   <label-state> - gets replaced with <label-(focused|urgent|occupied|empty)>
@@ -283,7 +329,7 @@ label-dimmed-focused-background = #f00
 ;   %icon%
 ;   %index%
 ; Default: %icon%  %name%
-label-focused = " %icon% "
+label-focused = "  %icon%  "
 label-focused-foreground = #ffffff
 label-focused-background = #3f3f3f
 label-focused-underline = #fba922
@@ -293,7 +339,7 @@ label-focused-underline = #fba922
 ;   %icon%
 ;   %index%
 ; Default: %icon%  %name%
-label-occupied = " %icon% "
+label-occupied = "  %icon%  "
 label-occupied-underline = #555555
 
 ; Available tokens:
@@ -301,7 +347,7 @@ label-occupied-underline = #555555
 ;   %icon%
 ;   %index%
 ; Default: %icon%  %name%
-label-urgent = " %icon% "
+label-urgent = "  %icon%  "
 label-urgent-foreground = #000000
 label-urgent-background = #bd2c40
 label-urgent-underline = #9b0a20
@@ -311,7 +357,7 @@ label-urgent-underline = #9b0a20
 ;   %icon%
 ;   %index%
 ; Default: %icon%  %name%
-label-empty = " %icon% " 
+label-empty = 
 label-empty-foreground = #55
 
 ; The following labels will be used to indicate the layout/mode
@@ -319,20 +365,20 @@ label-empty-foreground = #55
 ;
 ; Available tokens:
 ;   None
-;label-monocle = 
-;label-tiled = 
-;label-fullscreen = 
-;label-floating
+label-monocle = [M]
+label-tiled = [T]
+label-fullscreen = [F] 
+label-floating = [~]
 
  = 
-;label-pseudotiled = P
-;label-locked = 
-;label-locked-foreground = #bd2c40
-;label-sticky = 
-;label-sticky-foreground = #fba922
-;label-private = 
-;label-private-foreground = #bd2c40
-;label-marked = M
+label-pseudotiled = [P]
+label-locked = [L] 
+label-locked-foreground = #bd2c40
+label-sticky = [S]
+label-sticky-foreground = #fba922
+label-private = [P]
+label-private-foreground = #bd2c40
+label-marked = [M]
 
 ; Separator in between workspaces
 
@@ -357,8 +403,8 @@ type              = custom/script
 exec              = python /home/notis/.config/herbstluftwm/layout.py
 click-left       = exec herbstclient cycle_layout
 interval          = 2
-format-foreground = ${colors.foreground}
-format-background = ${colors.background}
+format-foreground = #32302f
+format-background = #d79921
 ;format-underline = #555
 format-padding = 2
 
@@ -409,9 +455,9 @@ enable-scroll = false
 ; ;   %index%
 ; ; Default: %icon%  %name%
 label-active = %icon% %name%
-label-active-foreground = #d79921
+label-active-foreground = #32302f
 ;#665c54
-label-active-background = #32302f
+label-active-background = #d79921
 ;#83a598
 label-active-overline = #d79921
 ;
@@ -449,17 +495,17 @@ label-empty-foreground = #55
 [module/xwindow]
 type = internal/xwindow
 label = %title: 0:50:...%
-label-maxlen = 50
+label-maxlen = 20
 #format-background = #808000
-format-background = ${colors.background}
-format-foreground = ${colors.foreground}
+format-background = #32302f 
+format-foreground = #d79921
 format-padding = 2
 
 [module/xkeyboard]
 type = internal/xkeyboard
 blacklist-0 = num lock
 
-format-prefix = " "
+format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 ;format-prefix-underline = ${colors.secondary}
 
@@ -613,7 +659,7 @@ label-connected-foreground = #eefafafa
 
 [module/wlan]
 type = internal/network
-interface = wlp6s0
+interface = wlp3s0
 ; ; Default: 1
 interval = 2.0
 ;
@@ -699,16 +745,18 @@ time = %{A3:gsimplecal & disown:}%H:%M %{A}
 time-alt = %H:%M:%S
 
 format-prefix = 
-format-prefix-foreground = #d79921 
+format-prefix-foreground = #32302f 
+format-prefix-background = #d79921 
 ;format-underline = #0a6cf5
 
 label = %date% %time%
-format-foreground= #d79921
+format-foreground= #32302f
+format-background= #d79921
 [module/volume]
 type = internal/volume
 master-mixer = Master
 format = <label> <bar-used>
-format-volume-prefix = " "
+format-volume-prefix = " "
 format-volume-prefix-foreground = ${colors.foreground-alt}
 ;format-volume-underline = #9f78e1
 format-volume = %{A3:pavucontrol & disown:}<bar-volume>%{A}
@@ -766,8 +814,8 @@ animation-charging-framerate = 750
  
 [module/temperature]
 type = internal/temperature
-thermal-zone = 1
-warn-temperature = 60
+thermal-zone = 3
+warn-temperature = 80
 
 format = %{A1:termite --exec='watch sensors' & disown:}<ramp> <label>%{A}
 format-underline = ${colors.background}
@@ -779,13 +827,15 @@ label-warn = %temperature%
 label-warn-foreground = ${colors.secondary}
 
 ramp-0 = 
-ramp-1 = 
-ramp-2 = 
+ramp-1 = 
+ramp-2 = 
+ramp-3 = 
+ramp-4 = 
 ramp-foreground = ${colors.foreground-alt}
 
 [module/updates]
 type = custom/script
-interval = 600
+interval = 3600
 format-prefix = " " 
 format-prefix-foreground = ${colors.foreground-alt}
 format = <label> 
@@ -829,12 +879,12 @@ click-left = xdg-open http://meteo.gr/cf.cfm?city_id=12
 [module/fan]
 type = custom/script
 interval = 5
-format-prefix = " " 
+format-prefix = " " 
 format-prefix-foreground = ${colors.foreground-alt}
 format = %{A1:/home/notis/.config/herbstluftwm/fanmenu.sh & disown:}<label> %{A}
 ;format-underline = #0a6cf5
 label = "%output:0:30%"
-exec = .config/polybar/fan.sh
+exec = .config/polybar/fan1.sh
 
 [module/gmail]
 type = custom/script
@@ -861,32 +911,14 @@ tail = true
 interval = 5
 
 
-[module/powermenu]
-type = custom/menu
-
-format-spacing = 1
-
-label-open = 
-label-open-foreground = ${colors.secondary}
-label-close =  cancel
-label-close-foreground = ${colors.secondary}
-label-separator = |
-label-separator-foreground = ${colors.foreground-alt}
-
-menu-0-0 =  suspend
-menu-0-0-exec = gksudo systemctl suspend
-menu-0-1 =  reboot
-menu-0-1-exec = gksudo reboot
-menu-0-2 =  power off
-menu-0-2-exec = gksudo poweroff
-
 [module/archmenu]
 type = custom/menu
 
 format-spacing = 1
 
-label-open = 
-label-open-foreground = #d79921
+label-open =  herbstluftwm
+label-open-foreground = #32302f
+label-open-background = #d79921
 label-close =  close 
 label-close-foreground = ${colors.secondary}
 label-separator = |
@@ -898,7 +930,7 @@ menu-0-1 =  Search
 menu-0-1-exec = catfish >/dev/null 2>&1 &
 menu-0-2 = HLWM 
 menu-0-2-exec = menu-open-1
-menu-0-3 =  PowerMenu 
+menu-0-3 =  PowerMenu 
 menu-0-3-exec = /home/notis/.config/herbstluftwm/powermenu
 
 menu-1-0 =  Layout 
