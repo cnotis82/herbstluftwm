@@ -202,7 +202,7 @@ font-6 = "Font Awesome 5 Brands:style=Regular:pixelsize=10;2"
 modules-left =  archmenu cpu memory temperature fan updates
 modules-center = ewmh layout 
 ;hlws
-modules-right = volume gmail weather wlan battery xkeyboard date
+modules-right = volume gmail weather wlan info-pingrtt battery xkeyboard date 
 
 ;tray-position = right
 ;tray-padding = 4
@@ -249,7 +249,7 @@ font-5 = "Font Awesome 5 Free:style=Solid:pixelsize=10;2"
 font-6 = "Font Awesome 5 Brands:style=Regular:pixelsize=10;2"
 
 modules-left = info-trash arch system-uptime-pretty mpd 
-modules-center = filesystem
+modules-center = filesystem 
 modules-right = isrunning-openvpn isrunning-firewall taskwarrior
 
 tray-position = right
@@ -1042,6 +1042,11 @@ format-prefix-foreground = ${colors.foreground-alt}
 format-prefix = @
 ;format-underline = #ffb52a
 interval = 2
+
+[module/info-pingrtt]
+type = custom/script
+exec = ~/.config/polybar/info-pingrtt.sh
+interval = 10
 
 [settings]
 screenchange-reload = true
