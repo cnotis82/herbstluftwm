@@ -199,10 +199,10 @@ font-4 = "Font Awesome 5 Free:style=Regular:pixelsize=10;2"
 font-5 = "Font Awesome 5 Free:style=Solid:pixelsize=10;2"
 font-6 = "Font Awesome 5 Brands:style=Regular:pixelsize=10;2"
 
-modules-left =  archmenu cpu memory temperature fan updates
-modules-center = ewmh layout 
+modules-left =  ewmh layout xwindow
+modules-center =  date weather
 ;hlws
-modules-right = volume gmail weather wlan info-pingrtt battery xkeyboard date 
+modules-right = cpu memory temperature fan wlan volume battery gmail xkeyboard  
 
 ;tray-position = right
 ;tray-padding = 4
@@ -248,9 +248,9 @@ font-4 = "Font Awesome 5 Free:style=Regular:pixelsize=10;2"
 font-5 = "Font Awesome 5 Free:style=Solid:pixelsize=10;2"
 font-6 = "Font Awesome 5 Brands:style=Regular:pixelsize=10;2"
 
-modules-left = info-trash arch system-uptime-pretty mpd 
+modules-left = archmenu info-trash arch updates system-uptime-pretty mpd 
 modules-center = filesystem 
-modules-right = isrunning-openvpn isrunning-firewall taskwarrior
+modules-right = info-pingrtt isrunning-openvpn isrunning-firewall taskwarrior
 
 tray-position = right
 tray-padding = 4
@@ -495,7 +495,7 @@ label-empty-foreground = #55
 [module/xwindow]
 type = internal/xwindow
 label = %title: 0:50:...%
-label-maxlen = 20
+label-maxlen = 50
 #format-background = #808000
 format-background = #32302f 
 format-foreground = #d79921
@@ -745,13 +745,13 @@ time = %{A3:gsimplecal & disown:}%H:%M %{A}
 time-alt = %H:%M:%S
 
 format-prefix = 
-format-prefix-foreground = #32302f 
-format-prefix-background = #d79921 
+format-prefix-foreground = #d79921 
+format-prefix-background = #32302f 
 ;format-underline = #0a6cf5
 
 label = %date% %time%
-format-foreground= #32302f
-format-background= #d79921
+format-foreground= #d79921
+format-background= #32302f
 [module/volume]
 type = internal/volume
 master-mixer = Master
@@ -870,6 +870,8 @@ type = custom/script
 interval = 700
 ;format-prefix = " " 
 ;format-prefix-foreground = #ffb52a
+format-foreground= #d79921
+format-background= #32302f
 format = <label>
 ;format-underline = #0a6cf5
 label = "%output:0:30%"
