@@ -454,7 +454,7 @@ enable-scroll = false
 ; ;   %icon%
 ; ;   %index%
 ; ; Default: %icon%  %name%
-label-active = %icon% %name%
+label-active =  "   %name%  " 
 label-active-foreground = #32302f
 ;#665c54
 label-active-background = #d79921
