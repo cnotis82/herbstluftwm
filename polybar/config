@@ -8,7 +8,7 @@
 ;=====================================================
 
 [colors]
-background = #cf1d2021
+background = #ff1d2021
 ;#c1c4bc
 ;#3a3432
 
@@ -153,9 +153,9 @@ font-4 = "Font Awesome 5 Free:style=Regular:pixelsize=10;2"
 font-5 = "Font Awesome 5 Free:style=Solid:pixelsize=10;2"
 font-6 = "Font Awesome 5 Brands:style=Regular:pixelsize=10;2"
 
-modules-left = archmenu updates cpu temperature fan memory wlan 
+modules-left = archmenu updates cpu temperature fan memory  
 modules-center = ewmh layout
-modules-right = volume gmail weather battery xkeyboard date 
+modules-right = volume gmail weather wlan battery xkeyboard date 
 
 ;tray-position = right
 ;tray-padding = 4
@@ -199,10 +199,10 @@ font-4 = "Font Awesome 5 Free:style=Regular:pixelsize=10;2"
 font-5 = "Font Awesome 5 Free:style=Solid:pixelsize=10;2"
 font-6 = "Font Awesome 5 Brands:style=Regular:pixelsize=10;2"
 
-modules-left =  archmenu updates cpu temperature fan memory wlan 
+modules-left =  archmenu cpu memory temperature fan updates
 modules-center = ewmh layout 
 ;hlws
-modules-right = volume gmail weather battery xkeyboard date  
+modules-right = volume gmail weather wlan battery xkeyboard date
 
 ;tray-position = right
 ;tray-padding = 4
@@ -248,7 +248,7 @@ font-4 = "Font Awesome 5 Free:style=Regular:pixelsize=10;2"
 font-5 = "Font Awesome 5 Free:style=Solid:pixelsize=10;2"
 font-6 = "Font Awesome 5 Brands:style=Regular:pixelsize=10;2"
 
-modules-left = arch system-uptime-pretty mpd spotify
+modules-left = info-trash arch system-uptime-pretty mpd 
 modules-center = filesystem
 modules-right = isrunning-openvpn isrunning-firewall taskwarrior
 
@@ -505,7 +505,7 @@ format-padding = 2
 type = internal/xkeyboard
 blacklist-0 = num lock
 
-format-prefix = " "
+format-prefix = " "
 format-prefix-foreground = ${colors.foreground-alt}
 ;format-prefix-underline = ${colors.secondary}
 
@@ -756,7 +756,7 @@ format-background= #d79921
 type = internal/volume
 master-mixer = Master
 format = <label> <bar-used>
-format-volume-prefix = " "
+format-volume-prefix = " "
 format-volume-prefix-foreground = ${colors.foreground-alt}
 ;format-volume-underline = #9f78e1
 format-volume = %{A3:pavucontrol & disown:}<bar-volume>%{A}
@@ -814,7 +814,7 @@ animation-charging-framerate = 750
  
 [module/temperature]
 type = internal/temperature
-thermal-zone = 5
+thermal-zone = 3
 warn-temperature = 80
 
 format = %{A1:termite --exec='watch sensors' & disown:}<ramp> <label>%{A}
@@ -827,8 +827,10 @@ label-warn = %temperature%
 label-warn-foreground = ${colors.secondary}
 
 ramp-0 = 
-ramp-1 = 
-ramp-2 = 
+ramp-1 = 
+ramp-2 = 
+ramp-3 = 
+ramp-4 = 
 ramp-foreground = ${colors.foreground-alt}
 
 [module/updates]
@@ -877,7 +879,7 @@ click-left = xdg-open http://meteo.gr/cf.cfm?city_id=12
 [module/fan]
 type = custom/script
 interval = 5
-format-prefix = " " 
+format-prefix = " " 
 format-prefix-foreground = ${colors.foreground-alt}
 format = %{A1:/home/notis/.config/herbstluftwm/fanmenu.sh & disown:}<label> %{A}
 ;format-underline = #0a6cf5
@@ -909,33 +911,14 @@ tail = true
 interval = 5
 
 
-[module/powermenu]
-type = custom/menu
-
-format-spacing = 1
-
-label-open = 
-label-open-foreground = ${colors.secondary}
-label-close =  cancel
-label-close-foreground = ${colors.secondary}
-label-separator = |
-label-separator-foreground = ${colors.foreground-alt}
-
-menu-0-0 =  suspend
-menu-0-0-exec = gksudo systemctl suspend
-menu-0-1 =  reboot
-menu-0-1-exec = gksudo reboot
-menu-0-2 =  power off
-menu-0-2-exec = gksudo poweroff
-
 [module/archmenu]
 type = custom/menu
 
 format-spacing = 1
 
-label-open = 
-label-open-foreground = #d79921
-label-open-background = #32302f
+label-open =  herbstluftwm
+label-open-foreground = #32302f
+label-open-background = #d79921
 label-close =  close 
 label-close-foreground = ${colors.secondary}
 label-separator = |
@@ -947,7 +930,7 @@ menu-0-1 =  Search
 menu-0-1-exec = catfish >/dev/null 2>&1 &
 menu-0-2 = HLWM 
 menu-0-2-exec = menu-open-1
-menu-0-3 =  PowerMenu 
+menu-0-3 =  PowerMenu 
 menu-0-3-exec = /home/notis/.config/herbstluftwm/powermenu
 
 menu-1-0 =  Layout 
