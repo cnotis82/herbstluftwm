@@ -267,6 +267,7 @@ class HLWMLayout(Label):
         self.layout = hlwm(['layout']) 
         self.count = hlwm(['attr' , 'tags.focus.client_count'])
         self.fcount = hlwm(['attr' , 'tags.focus.curframe_wcount'])
+        self.monitor = hlwm(['attr' , 'monitors.focus.lock_tag'])
         super(HLWMLayout,self).__init__('')
         self.reset_label()
         hlwm.enhook('focus_changed', (lambda a: self.newlayout(a)))
@@ -276,20 +277,36 @@ class HLWMLayout(Label):
         self.layout = self.hc(['layout'])
         self.count = self.hc(['attr' , 'tags.focus.client_count'])
         self.fcount = self.hc(['attr' , 'tags.focus.curframe_wcount'])
+        self.monitor = self.hc(['attr' , 'monitors.focus.lock_tag'])
         self.reset_label()
     def reset_label(self):
+
         index = self.layout.find("%")
-        if index > 0:
-            self.label = "T-" + self.fcount
+        if self.monitor == "false" :
+
+            if index > 0:
+                self.label = "T-" + self.fcount
+            else:
+                if self.layout.find("grid") > 0:
+                    self.label = "G"
+                elif self.layout.find("horizontal") > 0:
+                    self.label = "H"
+                elif self.layout.find("vertical") > 0:
+                    self.label = "V"
+                else:    
+                    self.label = self.count
         else:
-            if self.layout.find("grid") > 0:
-                self.label = "G"
-            elif self.layout.find("horizontal") > 0:
-                self.label = "H"
-            elif self.layout.find("vertical") > 0:
-                self.label = "V"
-            else:    
-                self.label = self.count
+            if index > 0:
+                self.label = "T-" + self.fcount + " - []"
+            else:
+                if self.layout.find("grid") > 0:
+                    self.label = "G" + " - []"
+                elif self.layout.find("horizontal") > 0:
+                    self.label = "H" + " - []"
+                elif self.layout.find("vertical") > 0:
+                    self.label = "V" + " - []"
+                else:    
+                    self.label = self.count + " - []"
     def render_themed(self,painter):
         if self.label != '':
             super(HLWMLayout,self).render_themed(painter)
