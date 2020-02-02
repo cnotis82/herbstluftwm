@@ -58,6 +58,7 @@ fi
 herbstclient emit_hook quit_panel
 pid=( )
 
+
 panelcmd=${panelcmd:-~/.config/herbstluftwm/panel_polybar.sh}
 if ! [ "$panelcmd" ] ; then
     # fall back to global panel if there is no user-specific panel
@@ -69,17 +70,8 @@ for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do
     "$panelcmd" $monitor &
 
 done
-#polybar-msg cmd quit
-sleep 1
-rm /tmp/bottom-bar.pid
-rm /tmp/my-awesome-polybar1.pid
-sleep 1
-polybar my-awesome-polybar1 &
-pids+=( $! )
-echo "$!" > /tmp/my-awesome-polybar1.pid
-polybar bottom-bar &
-pids+=( $! )
-echo "$!" > /tmp/bottom-bar.pid
+
+herbstclient spawn /home/notis/.config/barpyrus/barpyrus-master/barpyrus.py &
 
 herbstclient -w '(quit_panel|reload)'
 

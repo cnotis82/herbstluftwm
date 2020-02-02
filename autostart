@@ -89,11 +89,11 @@ hc keybind Mod4-m emit_hook bsp
 hc keybind Mod4-Shift-m emit_hook no_bsp
 
 # tmux sessions
-hc keybind $Mod-Control-1 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "   " st -e tmux a -t home
-hc keybind $Mod-Control-3 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "   " st -e tmux a -t file
-hc keybind $Mod-Control-4 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "   " st -e tmux a -t chat
-hc keybind $Mod-Control-8 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "   " st -e tmux a -t system
-hc keybind $Mod-Control-0 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "   " st -e tmux a -t scratchpad
+hc keybind $Mod-Control-1 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "  " st -e tmux a -t home
+hc keybind $Mod-Control-3 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "  " st -e tmux a -t file
+hc keybind $Mod-Control-4 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "  " st -e tmux a -t chat
+hc keybind $Mod-Control-8 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "  " st -e tmux a -t system
+hc keybind $Mod-Control-0 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "  " st -e tmux a -t scratchpad
 
 # focusing clients
 hc set focus_crosses_monitor_boundaries 0
@@ -133,20 +133,22 @@ hc keybind $Mod-Control-Down spawn /home/notis/.config/herbstluftwm/winsizer.sh 
 
 # Gaps
 hc keybind $Mod-Control-f cycle_value frame_gap 0 10 15 20 25 30
-hc keybind $Mod-Control-w cycle_value window_gap 0 5 10 15 20 25
+#hc keybind $Mod-Control-w cycle_value window_gap 0 5 10 15 20 25
+hc keybind $Mod-Control-w set always_show_frame toggle 
 
 # Shifting to monitor
 hc keybind $Mod-Control-bracketleft  chain . shift_to_monitor 1 . focus_monitor 1
 hc keybind $Mod-Control-bracketright chain . shift_to_monitor 0 . focus_monitor 0
 
-hc keybind $Mod-grave chain , pad 0 0 0 0 0 , pad 1 0 0 0 0 , spawn polybar-msg cmd hide
-hc keybind $Mod-Control-grave chain , pad 0 20 0 0 0 , pad 1 20 0 0 0 , spawn polybar-msg cmd show
+hc keybind $Mod-grave chain , pad 0 0 0 0 0 , pad 1 0 0 0 0 , spawn xdo hide -n lemonbar 
+hc keybind $Mod-Control-grave chain , pad 0 20 0 0 0 , pad 1 20 0 0 0 , spawn xdo show -n lemonbar 
 
 hc set default_frame_layout 3
 hc set_layout grid
 
+
 # tags
-tag_names=( "   " "   " "   " "   " "   " "   " "   " "   " "   " "   " "   " "   " "   " "   ")
+tag_names=( "  " "  " "  " "  " "  " "  " "  " "  " "  " "  " "  " "  " "  " "  ")
 tag_keys=( {1..14} 0 )
 
 hc rename default "${tag_names[0]}" || true
@@ -226,7 +228,7 @@ hc set frame_bg_active_color orange
 hc set frame_border_width 0
 hc set always_show_frame 1
 hc set frame_bg_transparent 0
-hc set frame_active_opacity 40
+hc set frame_active_opacity 20
 hc set frame_normal_opacity 40
 hc set frame_transparent_width 0
 hc set frame_gap 10
@@ -238,8 +240,8 @@ hc attr theme.urgent.color red
 hc attr theme.inner_width 1
 hc attr theme.inner_color black
 hc attr theme.border_width 1
-hc attr theme.floating.color coral
-hc attr theme.floating.border_width 4
+hc attr theme.floating.color '#fffdd0'
+hc attr theme.floating.border_width 5
 hc attr theme.floating.outer_width 1
 #hc attr theme.floating.outer_color black
 hc attr theme.active.inner_color '#3E4A00'
@@ -265,43 +267,43 @@ hc set smart_frame_surroundings 1
 hc set mouse_recenter_gap 0
 # rules
 hc unrule -F
-hc rule class=Termite tag="   " hook="   " focus=off
-hc rule class=St tag="   " hook="   " focus=off
+hc rule class=Termite tag="  " hook="  " focus=off
+hc rule class=St tag="  " hook="  " focus=off
 hc rule class=XTerm tag="   " hook="   " focus=off
-hc rule class=firefox tag="   " hook="   " focus=off ewmhrequests=off
-hc rule class=Thunderbird tag="   " hook="   " focus=off
-hc rule class=Google-chrome tag="   "
-hc rule class=Pcmanfm tag="   " hook="   " focus=off
-hc rule class=Polo-gtk tag="   " 
-hc rule class=Corebird tag="   " hook="   " focus=off 
-hc rule class=Pidgin tag="   " hook="   " focus=off
-hc rule class=Hexchat tag="   " hook="   " focus=off
-hc rule class=ViberPC tag="   " pseudotile=on hook="   " focus=off 
-hc rule class=Slack tag="   " pseudotile=on hook="   " focus=off
-hc rule class=Clementine tag="   "
-hc rule class=mpv tag="   " ewmhrequests=off
-hc rule class=vlc tag="   " hook="   " focus=off ewmhrequests=off
-hc rule class=Popcorn-Time tag="   "  hook="   " focus=off
-hc rule class=Spotify tag="   " 
-hc rule class=Chromium-browser tag="   " hook="   " focus=off
-hc rule class=GitKraken tag="   " hook="   " focus=off pseudotile=on
-hc rule class=Atom tag="   " hook="   "
-hc rule class=Subl3 tag="   " hook="   " ewmhrequests=off
-hc rule class=QtCreator tag="   " hook="   "
-hc rule class=code-oss tag="   " hook="   "
-hc rule class=Gvim tag="   " hook="   "
-hc rule class=org.remmina.Remmina tag="   " hook="   "
-hc rule class=Filezilla tag="   " hook="   "
-hc rule class=DesktopEditors tag="   " hook="   "
-hc rule instance=FoxitReader tag="   " hook="   "
-hc rule class=Zathura tag="   " hook="   "
-hc rule class=Sxiv tag="   " hook="   "
-hc rule class=Gimp-2.10 tag="   " hook="   "
-hc rule class=Pencil tag="   " hook="   "
+hc rule class=firefox tag="  " hook="  " focus=off ewmhrequests=off
+hc rule class=Thunderbird tag="  " hook="  " focus=off
+hc rule class=Google-chrome tag="  "
+hc rule class=Pcmanfm tag="  " hook="  " focus=off
+hc rule class=Polo-gtk tag="  " 
+hc rule class=Corebird tag="  " hook="  " focus=off 
+hc rule class=Pidgin tag="  " hook="  " focus=off
+hc rule class=Hexchat tag="  " hook="  " focus=off
+hc rule class=ViberPC tag="  " pseudotile=on hook="  " focus=off 
+hc rule class=Slack tag="  " pseudotile=on hook="  " focus=off
+hc rule class=Clementine tag="  "
+hc rule class=mpv tag="  " ewmhrequests=off
+hc rule class=vlc tag="  " hook="  " focus=off ewmhrequests=off
+hc rule class=Popcorn-Time tag="  "  hook="  " focus=off
+hc rule class=Spotify tag="  " 
+hc rule class=Chromium-browser tag="  " hook="  " focus=off
+hc rule class=GitKraken tag="  " hook="  " focus=off pseudotile=on
+hc rule class=Atom tag="  " hook="  "
+hc rule class=Subl3 tag="  " hook="  " ewmhrequests=off
+hc rule class=QtCreator tag="  " hook="  "
+hc rule class=code-oss tag="  " hook="  "
+hc rule class=Gvim tag="  " hook="  "
+hc rule class=org.remmina.Remmina tag="  " hook="  "
+hc rule class=Filezilla tag="  " hook="  "
+hc rule class=DesktopEditors tag="  " hook="  "
+hc rule instance=FoxitReader tag="  " hook="  "
+hc rule class=Zathura tag="  " hook="  "
+hc rule class=Sxiv tag="  " hook="  "
+hc rule class=Gimp-2.10 tag="  " hook="  "
+hc rule class=Pencil tag="  " hook="  "
 
-hc rule class=Arandr tag="   " hook="   "
-hc rule class=Xfce4-power-manager-settings tag="   " pseudotile=off hook="   "
-hc rule class=gufw.py tag="   " hook="   "
+hc rule class=Arandr tag="  " hook="  "
+hc rule class=Xfce4-power-manager-settings tag="  " pseudotile=off hook="  "
+hc rule class=gufw.py tag="  " hook="  "
  # move all xterms to tag 3
 hc rule focus=on # normally focus new clients
 #hc rule focus=off # normally do not focus new clients
@@ -321,39 +323,25 @@ herbstclient set tree_style '╾│ ├└╼─┐'
 # hc set_monitors 1280x1024+0+0 1280x1024+1280+0
 # or simply:
 hc detect_monitors
-
+hc set_monitors 2560x1080+0+0 
 #autostart]
 herbstclient emit_hook quit_panel
 pid=( )
 sleep 1
 dunst -conf /home/notis/.config/dunst/dunstrc &
-feh --bg-scale /home/notis/Pictures/christiane-nuetzel-dDTaJmKVl4o-unsplash.jpg
+feh --bg-scale /home/notis/Pictures/irina-iriser-nYIQYg8cQVc-unsplash.jpg
 #compton --backend glx --blur-method kawase --blur-background --blur-strength 5 & 
 compton -b &
 # find the panel
-panel=~/.config/herbstluftwm/panel_polybar.sh
-[ -x "$panel" ] || panel=/etc/xdg/herbstluftwm/panel_polybar.sh
+panelcmd=${panelcmd:-~/.config/herbstluftwm/panel_polybar.sh}
+
+
 for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do
     # start it on each monitor
-    "$panel" $monitor &
-    if [ $monitor -eq 0 ]; then
-        rm /tmp/my-awesome-polybar1.pid
-        rm /tmp/bottom-bar.pid
-        sleep 1
-        polybar my-awesome-polybar1 &
-        pids+=( $! )
-        echo "$!" > /tmp/my-awesome-polybar1.pid
-        polybar bottom-bar &
-        pids+=( $! )
-        echo "$!" > /tmp/bottom-bar.pid
-        polybar my-awesome-polybar0 &
-        
-    else
-        polybar my-awesome-polybar0 &
-    fi
-
-    #sed -i s/^RUNS.*/RUNS=0/ $0
+    "$panelcmd" $monitor &    
 done
+
+herbstclient spawn /home/notis/.config/barpyrus/barpyrus-master/barpyrus.py &
 
 herbstclient -w '(quit_panel|reload)'
 
