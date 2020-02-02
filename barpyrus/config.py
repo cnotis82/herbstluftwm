@@ -29,10 +29,12 @@ conky_text += '%{F\\#d79921}  %{F\\#989898}${memperc}% '
 conky_text += '%{F\\#d79921}  %{F\\#989898}${i8k_right_fan_rpm} '
 conky_text += '%{F\\#d79921}  %{F\\#989898}${i8k_cpu_temp}°C '
 conky_text += '%{F\\#d79921}  %{F\\#989898}${wireless_link_qual_perc wlp3s0}% '
-conky_text += '%{F\\#d79921} - %{F\\#989898}${downspeedf wlp3s0}K '
+conky_text += '%{F\\#d79921}  %{F\\#989898}${downspeedf wlp3s0}K '
 conky_text += '%{F\\#d79921}  %{F\\#989898}${exec amixer -c 0 get Master | grep Mono: | cut -d " " -f6} '
 conky_text += '%{F\\#d79921}  %{F\\#989898}${battery_percent}% '
 conky_weather = '%{F\\#d79921} %{F\\#989898}${texeci 3600 /home/notis/.config/polybar/weather.sh} '
+conky_weather += '%{F\\#d79921}  %{F\\#989898}${kernel} '
+conky_weather += '%{F\\#d79921}  %{F\\#989898}${uptime_short} '
 
 
 # example options for the hlwm.HLWMLayoutSwitcher widget
@@ -86,7 +88,7 @@ bar.widget = W.ListLayout([
       W.RawLabel(' '),
       W.ListLayout([
       conky.ConkyWidget(text= conky_weather), 
-      orange_frame(W.DateTime('%H:%M'))
+      orange_frame(W.DateTime('%d. %B, %H:%M'))
       ]))
 ])
 
