@@ -199,8 +199,8 @@ class ShortLongLayout(TabbedLayout):
         # tabs is a list of paris, where the first element is the title
         # and the second element is the widget
         tabs = [
-            ('< ', shortwidget),
-            ('> ', longwidget),
+            (' ', shortwidget),
+            (' ', longwidget),
         ]
         super(ShortLongLayout,self).__init__(tabs, selection = (1 if longdefault else 0))
 

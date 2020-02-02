@@ -22,13 +22,18 @@ hc(['pad', str(monitor), str(height)]) # get space for the panel
 
 # first icon: 0 percent
 # last icon: 100 percent
-conky_text = '%{F\\#d79921}  %{F\\#989898}${cpu}% '
+conky_text = '%{F\\#d79921} %{F\\#989898}${texeci 600 /home/notis/.config/polybar/gmail/launch.py} '
+conky_text += '%{F\\#d79921}  %{F\\#989898}${texeci 3600 /home/notis/.config/polybar/packages.sh} '
+conky_text += '%{F\\#d79921}  %{F\\#989898}${cpu}% '
 conky_text += '%{F\\#d79921}  %{F\\#989898}${memperc}% '
 conky_text += '%{F\\#d79921}  %{F\\#989898}${i8k_right_fan_rpm} '
-conky_text += '%{F\\#d79921}  %{F\\#989898}${i8k_cpu_temp} '
+conky_text += '%{F\\#d79921}  %{F\\#989898}${i8k_cpu_temp}°C '
 conky_text += '%{F\\#d79921}  %{F\\#989898}${wireless_link_qual_perc wlp3s0}% '
 conky_text += '%{F\\#d79921} - %{F\\#989898}${downspeedf wlp3s0}K '
+conky_text += '%{F\\#d79921}  %{F\\#989898}${exec amixer -c 0 get Master | grep Mono: | cut -d " " -f6} '
 conky_text += '%{F\\#d79921}  %{F\\#989898}${battery_percent}% '
+conky_weather = '%{F\\#d79921} %{F\\#989898}${texeci 3600 /home/notis/.config/polybar/weather.sh} '
+
 
 # example options for the hlwm.HLWMLayoutSwitcher widget
 xkblayouts = [
@@ -37,7 +42,7 @@ xkblayouts = [
 ]
 setxkbmap = 'setxkbmap -option compose:menu -option ctrl:nocaps'
 #setxkbmap += 'layout us,gr -option grp:ctrl_shift_toggle'
-setxkbmap += ' -option compose:ralt -option compose:rctrl'
+#setxkbmap += ' -option compose:ralt -option compose:rctrl'
 
 # you can define custom themes
 grey_frame = Theme(bg = '#32302f', fg = '#d79921', padding = (3,3))
@@ -62,15 +67,27 @@ bar.widget = W.ListLayout([
            grey_frame(hlwm.HLWMWindowTitle(hc))
                                     ),
     W.RawLabel('%{r}'),
-    conky.ConkyWidget(text= conky_text),
+    
+    W.ShortLongLayout(
+      W.RawLabel(' '),
+      W.ListLayout([
+      conky.ConkyWidget(text= conky_text)
+      
+      ])),
+
     # something like a tabbed widget with the tab labels '>' and '<'
     W.ShortLongLayout(
-        W.RawLabel(''),
-        W.ListLayout([
+        W.RawLabel(' '),
+        W.StackedLayout([
             hlwm.HLWMLayoutSwitcher(hc, xkblayouts, command = setxkbmap.split(' ')),
             W.RawLabel(' '),
         ])),
-    orange_frame(W.DateTime('%H:%M')),
+    W.ShortLongLayout(
+      W.RawLabel(' '),
+      W.ListLayout([
+      conky.ConkyWidget(text= conky_weather), 
+      orange_frame(W.DateTime('%H:%M'))
+      ]))
 ])
 
 

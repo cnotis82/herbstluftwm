@@ -17,7 +17,7 @@ class Conky(EventInput):
         default_config = {
             'out_to_console': 'true',
             'out_to_x': 'false',
-            'update_interval': '1',
+            'update_interval': '2',
             'background': 'false',
             'default_bar_width': '5',
             'use_spacer': 'none',
