@@ -3,6 +3,7 @@ from barpyrus import widgets as W
 from barpyrus.core import Theme
 from barpyrus import lemonbar
 from barpyrus import conky
+from barpyrus import trayer
 import sys
 # Copy this config to ~/.config/barpyrus/config.py
 
@@ -30,16 +31,15 @@ conky_text += '%{F\\#d79921}  %{F\\#989898}${i8k_right_fan_rpm} '
 conky_text += '%{F\\#d79921}  %{F\\#989898}${i8k_cpu_temp}°C '
 conky_text += '%{F\\#d79921}  %{F\\#989898}${wireless_link_qual_perc wlp3s0}% '
 conky_text += '%{F\\#d79921}  %{F\\#989898}${downspeedf wlp3s0}K '
-conky_text += '%{F\\#d79921}  %{F\\#989898}${exec amixer -c 0 get Master | grep Mono: | cut -d " " -f6} '
+conky_text += '%{F\\#d79921}%{A2:gsimplecal: }  %{A} %{F\\#989898}${fs_used_perc /}% '
 conky_text += '%{F\\#d79921}  %{F\\#989898}${battery_percent}% '
 conky_weather = '%{F\\#d79921} %{F\\#989898}${texeci 3600 /home/notis/.config/polybar/weather.sh} '
 conky_weather += '%{F\\#d79921}  %{F\\#989898}${kernel} '
 conky_weather += '%{F\\#d79921}  %{F\\#989898}${uptime_short} '
 
-
 # example options for the hlwm.HLWMLayoutSwitcher widget
 xkblayouts = [
-    'us us -variant altgr-intl us'.split(' '),
+    'us us us'.split(' '),
     'gr gr gr'.split(' '),
 ]
 setxkbmap = 'setxkbmap -option compose:menu -option ctrl:nocaps'
@@ -76,7 +76,7 @@ bar.widget = W.ListLayout([
       conky.ConkyWidget(text= conky_text)
       
       ])),
-
+    
     # something like a tabbed widget with the tab labels '>' and '<'
     W.ShortLongLayout(
         W.RawLabel(' '),
@@ -89,7 +89,11 @@ bar.widget = W.ListLayout([
       W.ListLayout([
       conky.ConkyWidget(text= conky_weather), 
       orange_frame(W.DateTime('%d. %B, %H:%M'))
-      ]))
+
+      ])),
+    
+    trayer.TrayerWidget()
+
 ])
 
 

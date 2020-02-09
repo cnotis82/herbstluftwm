@@ -10,14 +10,16 @@ class TrayerWatch(EventInput):
         self.default_args = {
             'edge': 'top',
             'align': 'right',
-            'widthtype': 'request',
-            'expand': 'true',
+            #widthtype': 'request',
+            'width': '4',
+            'expand': 'false',
             'SetDockType': 'true',
+            #'SetPartialStrut': 'true',
             'transparent': 'true',
             'alpha': '0',
-            'height': '16',
+            'height': '20',
             'margin': '0',
-            'tint': '0x29b2e',
+            'tint': '0x00000',
         }
         if args is not None:
             self.default_args.update(args)
@@ -70,6 +72,7 @@ class TrayerWatch(EventInput):
 
     def get_width(self):
         self.width = self.trayer.get_geometry().width
+        
         return self.width + int(self.default_args['margin'])
 
     def kill(self):
@@ -89,4 +92,6 @@ class TrayerWidget(Widget):
         self.trayer = TrayerWatch(cmd, args)
 
     def render(self, painter):
-        painter.space(self.trayer.get_width())
+        painter.space(self.trayer.get_width()-77)
+
+        #painter.space(0)
