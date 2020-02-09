@@ -34,6 +34,8 @@ conky_text += '%{F\\#d79921}  %{F\\#989898}${downspeedf wlp3s0}K '
 conky_text += '%{F\\#d79921}%{A2:gsimplecal: }  %{A} %{F\\#989898}${fs_used_perc /}% '
 conky_text += '%{F\\#d79921}  %{F\\#989898}${battery_percent}% '
 conky_weather = '%{F\\#d79921} %{F\\#989898}${texeci 3600 /home/notis/.config/polybar/weather.sh} '
+conky_weather += '%{F\\#d79921}  %{F\\#989898}${texeci 3600 /home/notis/.config/polybar/isrunning-openvpn.sh} '
+conky_weather += '%{F\\#d79921}  %{F\\#989898}${texeci 3600 /home/notis/.config/polybar/isrunning-firewall.sh}'
 conky_weather += '%{F\\#d79921}  %{F\\#989898}${kernel} '
 conky_weather += '%{F\\#d79921}  %{F\\#989898}${uptime_short} '
 
