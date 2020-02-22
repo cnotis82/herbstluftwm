@@ -73,21 +73,15 @@ def underlined_tags(self, painter): # self is a HLWMTagInfo object
     else:
         painter.ol('#454545')
     painter.space(3)
-    if self.name == 'irc':
-        #painter.symbol(0xe1ec)
-        #painter.symbol(0xe1a1)
-        painter.symbol(0xe1ef)
-    elif self.name == 'vim':
-        painter.symbol(0xe1cf)
-    elif self.name == 'web':
-        painter.symbol(0xe19c)
+    if self.name == 'home':
+        painter.symbol(0xf015)
+    elif self.name == 'slack':
+        painter.symbol(0xf3ef)
     elif self.name == 'mail':
         #painter.symbol(0xe1a8)
-        painter.symbol(0xe071)
-    elif self.name == 'scratchpad':
-        painter.symbol(0xe022)
+        painter.symbol(0xf0e0)
     elif self.name == 'music':
-        painter.symbol(0xe05c)
+        painter.symbol(0xf028)
     else:
         painter += self.name
     painter.space(3)
