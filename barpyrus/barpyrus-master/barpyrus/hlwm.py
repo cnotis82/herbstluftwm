@@ -80,8 +80,8 @@ def underlined_tags(self, painter): # self is a HLWMTagInfo object
     elif self.name == 'mail':
         #painter.symbol(0xe1a8)
         painter.symbol(0xf0e0)
-    elif self.name == 'music':
-        painter.symbol(0xf028)
+    elif self.name == 'cloud':
+        painter.symbol(0xf381)
     else:
         painter += self.name
     painter.space(3)
