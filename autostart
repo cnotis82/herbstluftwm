@@ -46,7 +46,9 @@ hc keybind $Mod-F3 chain , load "$(<"$layouts/"ThreeColumn"")" , focus -e
 hc keybind $Mod-F4 chain , load "$(<"$layouts/"Grid"")" , focus -e l
 hc keybind $Mod-F5 chain , load "$(<"$layouts/"bsp"")" , focus -e l
 hc keybind $Mod-Control-c spawn /home/notis/.config/herbstluftwm/herstcmd.sh
-hc keybind $Mod-b spawn /home/notis/.config/herbstluftwm/herstcmd.sh bring
+hc keybind $Mod-b spawn /home/notis/.config/herbstluftwm/bring.sh
+hc keybind $Mod-Control-a spawn /home/notis/.config/herbstluftwm/herstcmd.sh add
+hc keybind $Mod-d spawn /home/notis/.config/herbstluftwm/herstcmd.sh merge_tag
 hc keybind $Mod-j spawn /home/notis/.config/herbstluftwm/rmenu_wi 
 hc keybind $Mod-w spawn /home/notis/.config/herbstluftwm/herstcmd.sh move
 
@@ -140,7 +142,7 @@ hc keybind $Mod-Control-w set always_show_frame toggle
 hc keybind $Mod-Control-bracketleft  chain . shift_to_monitor 1 . focus_monitor 1
 hc keybind $Mod-Control-bracketright chain . shift_to_monitor 0 . focus_monitor 0
 
-hc keybind $Mod-grave chain , pad 0 0 0 0 0 , pad 1 0 0 0 0 , spawn xdo hide -n lemonbar 
+hc keybind $Mod-grave chain , pad 0 0 0 0 0 , pad 1 0 0 0 0 , spawn xdo hide -n lemonbar  
 hc keybind $Mod-Control-grave chain , pad 0 20 0 0 0 , pad 1 20 0 0 0 , spawn xdo show -n lemonbar 
 
 hc set default_frame_layout 3
@@ -270,7 +272,8 @@ hc unrule -F
 hc rule class=Termite tag="  " hook="  " focus=off
 hc rule class=St tag="  " hook="  " focus=off
 hc rule class=XTerm tag="   " hook="   " focus=off
-hc rule class=firefox tag="  " hook="  " focus=off ewmhrequests=off
+hc rule class=firefox tag="  " hook="  " focus=off 
+hc rule class=Brave-browser tag="  " hook="  " focus=off ewmhrequests=off
 hc rule class=Thunderbird tag="  " hook="  " focus=off
 hc rule class=Google-chrome tag="  "
 hc rule class=Pcmanfm tag="  " hook="  " focus=off
@@ -322,16 +325,18 @@ herbstclient set tree_style '╾│ ├└╼─┐'
 # do multi monitor setup here, e.g.:
 # hc set_monitors 1280x1024+0+0 1280x1024+1280+0
 # or simply:
-hc detect_monitors
+#hc detect_monitors
 hc set_monitors 2560x1080+0+0 
 #autostart]
 herbstclient emit_hook quit_panel
 pid=( )
 sleep 1
 dunst -conf /home/notis/.config/dunst/dunstrc &
-feh --bg-scale /home/notis/Pictures/irina-iriser-nYIQYg8cQVc-unsplash.jpg
+feh --bg-scale /home/notis/Pictures/daniel-h-tong-CuOFa-QFaYg-unsplash.jpg
 #compton --backend glx --blur-method kawase --blur-background --blur-strength 5 & 
-compton -b &
+#compton -b &
+picom -bft-20  
+#xcompmgr -c &
 # find the panel
 panelcmd=${panelcmd:-~/.config/herbstluftwm/panel_polybar.sh}
 
