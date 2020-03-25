@@ -47,8 +47,8 @@ hc keybind $Mod-F4 chain , load "$(<"$layouts/"Grid"")" , focus -e l
 hc keybind $Mod-F5 chain , load "$(<"$layouts/"bsp"")" , focus -e l
 hc keybind $Mod-Control-c spawn /home/notis/.config/herbstluftwm/herstcmd.sh
 hc keybind $Mod-b spawn /home/notis/.config/herbstluftwm/bring.sh
-hc keybind $Mod-Control-a spawn /home/notis/.config/herbstluftwm/herstcmd.sh add
-hc keybind $Mod-d spawn /home/notis/.config/herbstluftwm/herstcmd.sh merge_tag
+hc keybind $Mod-Control-a spawn /home/notis/.config/herbstluftwm/new_tag.sh
+hc keybind $Mod-d spawn /home/notis/.config/herbstluftwm/merge_tag.sh
 hc keybind $Mod-j spawn /home/notis/.config/herbstluftwm/rmenu_wi 
 hc keybind $Mod-w spawn /home/notis/.config/herbstluftwm/herstcmd.sh move
 
