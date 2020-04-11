@@ -22,6 +22,6 @@ hc add "$tag"
 # move next window from this process to this tag
 # prepend the rule so that it may be overwritten by existing custom rules e.g.
 # in the autostart
-hc rule maxage="$expire" pid="$$" tag="$tag" once
+hc rule maxage="$expire" pid="$$" tag="$tag"
 
 exec "$@"
