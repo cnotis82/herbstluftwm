@@ -119,6 +119,8 @@ hc keybind $Mod-Control-o chain , split left 0.5 , focus -e l
 # let the current frame explode into subframes
 hc keybind $Mod-Control-space chain , split explode , or . focus right . focus down
 hc keybind $Mod-z rotate
+hc keybind $Mod-Shift-r drag "" resize
+
 
 # resizing frames
 resizestep=0.05
@@ -148,6 +150,8 @@ hc keybind $Mod-Control-grave chain , pad 0 20 0 0 0 , pad 1 20 0 0 0 , spawn xd
 hc set default_frame_layout 3
 hc set_layout grid
 
+#themes
+hc keybind $Mod-Control-t spawn /home/notis/.config/herbstluftwm/thememenu.sh
 
 # tags
 tag_names=( "  " "  " "  " "  " "  " "  " "  " "  " "  " "  " "  " "  " "  " "  ")
@@ -187,7 +191,7 @@ hc keybind $Mod-comma  spawn /home/notis/.config/herbstluftwm/herbst-move.py -1 
 
 # layouting
 hc keybind $Mod-r remove
-hc keybind $Mod-Shift-s spawn /home/notis/.config/herbstluftwm/toggle_single_float.sh
+hc keybind $Mod-Shift-s set_attr clients.focus.floating toggle
 hc keybind $Mod-s chain , floating toggle , emit_hook floating
 hc keybind $Mod-x chain , pseudotile toggle , emit_hook pseudotile
 hc keybind $Mod-f chain , fullscreen toggle , emit_hook fullscreen
@@ -332,7 +336,7 @@ herbstclient emit_hook quit_panel
 pid=( )
 sleep 1
 dunst -conf /home/notis/.config/dunst/dunstrc &
-feh --bg-scale /home/notis/Pictures/daniel-h-tong-CuOFa-QFaYg-unsplash.jpg
+feh --bg-scale /home/notis/Pictures/irina-iriser-nYIQYg8cQVc-unsplash.jpg
 #compton --backend glx --blur-method kawase --blur-background --blur-strength 5 & 
 #compton -b &
 picom -bft-20  
