@@ -68,7 +68,7 @@ hc keybind XF86Music spawn st -e ncmpcpp
 #hc keybind XF86Search spawn catfish
 hc keybind XF86Calculator spawn galculator
 hc keybind Print spawn bash -c "scrot '%Y-%m-%d_$wx$h_scrot.png' -e 'mv $f ~/Pictures/'; herbstclient emit_hook print"
-hc keybind XF86HomePage spawn jgmenu_run
+#hc keybind XF86HomePage spawn jgmenu_run
 
 hc keybind $Mod-Control-q quit
 hc keybind $Mod-Control-r reload
@@ -84,7 +84,6 @@ hc keybind Mod4-e spawn thunderbird
 hc keybind Mod4-v spawn viber
 hc keybind Mod4-l spawn bash -c "betterlockscreen -l dim"  
 hc keybind Mod4-s spawn slack
-hc keybind Mod4-s spawn subl3
 hc keybind Mod4-p spawn pcmanfm
 hc keybind Mod4-g spawn gitkraken
 hc keybind Mod4-m emit_hook bsp
@@ -271,10 +270,13 @@ hc set frame_padding 0
 hc set smart_window_surroundings 1
 hc set smart_frame_surroundings 1
 hc set mouse_recenter_gap 0
+hc set hide_covered_windows 1
+
 # rules
 hc unrule -F
+hc rule index=e
 hc rule class=Termite tag="  " hook="  " focus=off
-hc rule class=St tag="  " hook="  " focus=off
+hc rule instance=st tag="  " hook="  " focus=off keys_inactive="Mod4-Shift-Up"
 hc rule class=XTerm tag="   " hook="   " focus=off
 hc rule class=firefox tag="  " hook="  " focus=off 
 hc rule class=Brave-browser tag="  " hook="  " focus=off ewmhrequests=off
@@ -288,8 +290,8 @@ hc rule class=Hexchat tag="  " hook="  " focus=off
 hc rule class=ViberPC tag="  " pseudotile=on hook="  " focus=off 
 hc rule class=Slack tag="  " pseudotile=on hook="  " focus=off
 hc rule class=Clementine tag="  "
-hc rule class=mpv tag="  " ewmhrequests=off
-hc rule class=vlc tag="  " hook="  " focus=off ewmhrequests=off
+hc rule class=mpv tag="  " 
+hc rule class=vlc tag="  " hook="  " focus=off 
 hc rule class=Popcorn-Time tag="  "  hook="  " focus=off
 hc rule class=Spotify tag="  " 
 hc rule class=Chromium-browser tag="  " hook="  " focus=off
