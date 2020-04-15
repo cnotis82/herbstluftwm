@@ -13,6 +13,8 @@
 
 config_1="$XDG_CONFIG_HOME/herbstluftwm/herbstcommander"
 config_2="$HOME/.config/herbstluftwm/herbstcommander"
+#dmenu_command=(dmenu -i -fn "-xos4-terminus-medium-r-*-*-14-*" 
+echo 'dmenu_command=(rofi -dmenu)'
 [[ -f "$config_1" ]] && source "$config_1"
 [[ -f "$config_2" ]] && source "$config_2"
 
@@ -20,7 +22,8 @@ dm() {
     if [[ "${dmenu_command[@]}" ]]; then
         "${dmenu_command[@]}" "$@"
     else
-        dmenu -i "$@"
+        #dmenu -i "$@"
+        rofi -show-icons -lines 10 -padding 20 -width 50 -show drun -sidebar-mode -columns 3 -dmenu
     fi
 }
 
