@@ -5,10 +5,11 @@
 
 # to switch to the last tag, call: herbstclient emit_hook goto_last_tag
 # or bind it: herbstclient keybind Mod1-Escape emit_hook goto_last_tag
-mode=0
+mode=1
+transparent=1
 tag=""
 hc() { "${herbstclient_command[@]:-herbstclient}" "$@" ;}
-hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|goto_last_tag|fullscreen|floating|pseudotile|split_bottom|split_right|list_keys|version|layout_dump|print|tag_flags|bsp|no_bsp|max)' \
+hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|goto_last_tag|fullscreen|floating|pseudotile|split_bottom|split_right|list_keys|version|layout_dump|print|tag_flags|bsp|no_bsp|max|trans|no_trans)' \
     | while read line ; do
         IFS=$'\t' read -ra args <<< "$line"
         case ${args[0]} in
@@ -39,6 +40,14 @@ hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|goto
             tag_removed)
                 notify-send -u low "Tag ${args[1]} removed"
                 ;;
+            trans)
+				transparent=1
+                notify-send -u low "Transparent enabled"
+				;;
+			no_trans)
+				transparent=0
+                notify-send -u low "Transparent disabled"
+				;;
             bsp)
 				mode=1
                 notify-send -u low "Binary split enabled"
@@ -58,17 +67,18 @@ hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|goto
 				tag=${args[1]}
                 winid=${args[2]}
                 focus=$(hc attr tags.focus.name)
-                				
+                if [ $transparent -eq 1 ]; then
+                transset-df -i "$winid"
+               	fi
 				if [ $mode -eq 1 ]; then
-							#if [ $tag == $focus ]; then
-	                           	hc chain : lock : use "$tag" \
-	                           			 : and , set_layout max , compare tags.by-name."$tag".curframe_wcount gt 1 \
-	                                   		, ! silent get_attr tags.by-name."$tag".my_unmaximized_layout \
-	                                   		, split explode \
-	                                   		, cycle_frame \
-	                                   	: use "$lasttag" \
-	                                   	: unlock
-	                        #fi
+							if [ $tag == $focus ]; then
+	                               hc chain : lock \
+                                         : and , set_layout max , compare tags.by-name."$tag".curframe_wcount gt 1 \
+                                            , ! silent get_attr tags.by-name."$tag".my_unmaximized_layout \
+                                            , split explode \
+                                            , cycle_frame \
+                                        : unlock
+	                        fi
             #                 if [ $tag == $focus ]; then
             #                     hc chain : lock : and , set_layout max \
             #                            , compare tags.focus.curframe_wcount gt 1 \
