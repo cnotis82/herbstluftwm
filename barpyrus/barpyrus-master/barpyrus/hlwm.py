@@ -82,6 +82,12 @@ def underlined_tags(self, painter): # self is a HLWMTagInfo object
         painter.symbol(0xf0e0)
     elif self.name == 'cloud':
         painter.symbol(0xf381)
+    elif self.name == 'reddit':
+        painter.symbol(0xf281)
+    elif self.name == 'music':
+        painter.symbol(0xf025)
+    elif self.name == 'jira':
+        painter.symbol(0xf7b1)
     else:
         painter += self.name
     painter.space(3)
