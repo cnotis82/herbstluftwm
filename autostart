@@ -79,16 +79,16 @@ hc keybind $Mod-Escape spawn xkill
 # Application
 hc keybind $Mod-Return spawn st -e zsh # use your $TERMINAL with xterm as fallback
 hc keybind $Mod-a spawn /home/notis/.config/herbstluftwm/rmenu_wi_g 
-hc keybind Mod4-f spawn bash -c "DRI_PRIME=1 firefox& disown"
+hc keybind Mod4-f spawn bash -c "firefox& disown"
 hc keybind Mod4-e spawn thunderbird
-hc keybind Mod4-v spawn bash -c "DRI_PRIME=1 viber& disown"
+hc keybind Mod4-v spawn bash -c "viber& disown"
 hc keybind Mod4-l spawn bash -c "betterlockscreen -l dim"  
 hc keybind Mod4-s spawn bash -c "DRI_PRIME=1 slack& disown"
-hc keybind Mod4-p spawn bash -c "DRI_PRIME=1 popcorntime& disown"
-hc keybind Mod4-g spawn bash -c "DRI_PRIME=1 gitkraken& disown"
-hc keybind Mod4-c spawn bash -c "DRI_PRIME=1 code& disown"
-hc keybind Mod4-d spawn bash -c "DRI_PRIME=1 discord& disown"
-hc keybind Mod4-w spawn bash -c "DRI_PRIME=1 desktopeditors& disown"
+hc keybind Mod4-p spawn bash -c "popcorntime& disown"
+hc keybind Mod4-g spawn bash -c "gitkraken& disown"
+hc keybind Mod4-c spawn bash -c "code& disown"
+hc keybind Mod4-d spawn bash -c "discord& disown"
+hc keybind Mod4-w spawn bash -c "libreoffice& disown"
 hc keybind Mod4-m emit_hook bsp
 hc keybind Mod4-Shift-m emit_hook no_bsp
 hc keybind Mod4-t emit_hook trans
@@ -235,7 +235,7 @@ hc attr theme.floating.reset 1
 hc set frame_border_active_color '#222222'
 hc set frame_border_normal_color '#101010'
 hc set frame_bg_normal_color '#565656'
-hc set frame_bg_active_color orange
+hc set frame_bg_active_color '#ffb86c'
 #'#345F0C'
 hc set frame_border_width 0
 hc set always_show_frame 1
@@ -246,7 +246,7 @@ hc set frame_transparent_width 0
 hc set frame_gap 10
 hc set focus_follows_mouse 0
 
-hc attr theme.active.color orange
+hc attr theme.active.color '#ffb86c'
 hc attr theme.normal.color dimgray
 hc attr theme.urgent.color red
 hc attr theme.inner_width 1
@@ -259,8 +259,8 @@ hc attr theme.floating.outer_width 1
 hc attr theme.active.inner_color '#3E4A00'
 hc attr theme.active.outer_color '#3E4A00'
 
-hc attr theme.minimal.color orange
-hc attr theme.minimal.active.color orange
+hc attr theme.minimal.color '#ffb86c'
+hc attr theme.minimal.active.color '#ffb86c'
 hc attr theme.minimal.normal.color dimgray 
 hc attr theme.minimal.border_width 5
 hc attr theme.minimal.outer_width 1
@@ -283,6 +283,7 @@ hc set update_dragged_clients 1
 # rules
 hc unrule -F
 hc rule index=e
+hc rule floatplacement=center
 #hc rule hook=new_client
 hc rule class=Termite tag="  " hook="  " focus=off
 hc rule instance=st tag="  " hook="  " focus=off keys_inactive="Mod4-Shift-Up"
@@ -299,7 +300,7 @@ hc rule class=Hexchat tag="  " hook="  " focus=off
 hc rule class=ViberPC tag="  " hook="  " focus=off 
 hc rule class=discord tag="  " hook="  " focus=off 
 hc rule class=Slack tag="  " hook="  " focus=off
-hc rule class=Clementine tag="  "
+hc rule class=Clementine tag="  "   
 hc rule class=mpv tag="  " 
 hc rule class=vlc tag="  " hook="  " focus=off 
 hc rule class=Popcorn-Time tag="  "  hook="  " focus=off
@@ -309,11 +310,12 @@ hc rule class=GitKraken tag="  " hook="  " focus=off pseudotile=on
 hc rule class=Atom tag="  " hook="  "
 hc rule class=Subl3 tag="  " hook="  " ewmhrequests=off
 hc rule class=QtCreator tag="  " hook="  "
-hc rule class=code-oss tag="  " hook="  "
+hc rule class=Code tag="  " hook="  "
 hc rule class=Gvim tag="  " hook="  "
 hc rule class=org.remmina.Remmina tag="  " hook="  "
 hc rule class=Filezilla tag="  " hook="  "
 hc rule class=DesktopEditors tag="  " hook="  "
+hc rule instance=libreoffice tag="  " hook="  "
 hc rule instance=FoxitReader tag="  " hook="  "
 hc rule class=Zathura tag="  " hook="  "
 hc rule class=Sxiv tag="  " hook="  "
@@ -362,7 +364,8 @@ for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do
     "$panelcmd" $monitor &    
 done
 
-herbstclient spawn /home/notis/.config/barpyrus/barpyrus-master/barpyrus.py &
+#herbstclient spawn /home/notis/.config/barpyrus/barpyrus-master/barpyrus.py &
+herbstclient spawn /home/notis/.config/barpyrus/barpyrus-master/barpyrus1.py &
 
 herbstclient -w '(quit_panel|reload)'
 
