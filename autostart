@@ -119,7 +119,11 @@ hc keybind $Mod-Shift-Right or , shift right , shift_edge left
 hc keybind $Mod-u chain , split bottom 0.5 , focus -e d       
 hc keybind $Mod-o chain , split right 0.5 , focus -e r     
 hc keybind $Mod-Control-u chain , split top 0.5 , focus -e t      
-hc keybind $Mod-Control-o chain , split left 0.5 , focus -e l      
+hc keybind $Mod-Control-o chain , split left 0.5 , focus -e l
+hc keybind Mod4-u split bottom 0.5 ''      
+hc keybind Mod4-o split right 0.5 ''   
+hc keybind Mod4-Control-u split top 0.5 ''      
+hc keybind Mod4-Control-o split left 0.5 ''      
 # let the current frame explode into subframes
 hc keybind $Mod-Control-space chain , split explode , or . focus right . focus down
 hc keybind $Mod-z rotate
@@ -330,7 +334,7 @@ hc rule focus=on # normally focus new clients
 #hc rule focus=off # normally do not focus new clients
 # give focus to most common terminals
 #hc rule class~'(.*[Rr]xvt.*|.*[Tt]erm|Konsole)' focus=on
-hc rule windowtype~'_NET_WM_WINDOW_TYPE_(DIALOG|UTILITY|SPLASH)' pseudotile=on
+hc rule windowtype~'_NET_WM_WINDOW_TYPE_(DIALOG|UTILITY|SPLASH)' floating=on
 hc rule windowtype='_NET_WM_WINDOW_TYPE_DIALOG' focus=on
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_(NOTIFICATION|DOCK|DESKTOP)' manage=off
 hc rule class=Gsimplecal manage=off 
