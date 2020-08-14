@@ -28,7 +28,8 @@ hc keybind $Mod-Control-semicolon spawn /home/notis/.config/herbstluftwm/swap.sh
 hc keybind $Mod-Shift-semicolon spawn /home/notis/.config/herbstluftwm/swap.sh master_spawn
 hc keybind $Mod-slash spawn /home/notis/.config/herbstluftwm/swap.sh close
 hc keybind $Mod-minus spawn /home/notis/.config/herbstluftwm/scratchpad.sh
-hc keybind $Mod-m spawn /home/notis/.config/herbstluftwm/maximize.sh 
+hc keybind $Mod-m spawn /home/notis/.config/herbstluftwm/maximize.sh
+hc keybind $Mod-g spawn /home/notis/.config/herbstluftwm/maximize.sh grid 
 hc keybind $Mod-Shift-m spawn /home/notis/.config/herbstluftwm/float-maximize.sh
 hc keybind $Mod-Control-Delete spawn /home/notis/.config/herbstluftwm/powermenu
 hc keybind $Mod-Control-s spawn /home/notis/.config/herbstluftwm/toggledualhead.sh
@@ -38,8 +39,8 @@ hc keybind $Mod-Shift-t spawn /home/notis/.config/herbstluftwm/hide_bottom_bar.s
 hc keybind $Mod-t emit_hook goto_last_tag
 hc keybind $Mod-Control-i emit_hook list_keys
 hc keybind $Mod-Control-v emit_hook version
-hc keybind $Mod-Control-d spawn /home/notis/.config/herbstluftwm/hlwm-layout-manager.sh save
-hc keybind $Mod-Control-a spawn /home/notis/.config/herbstluftwm/hlwm-layout-manager.sh load
+hc keybind $Mod-Mod4-d spawn /home/notis/.config/herbstluftwm/hlwm-layout-manager.sh save
+hc keybind $Mod-Mod4-a spawn /home/notis/.config/herbstluftwm/hlwm-layout-manager.sh load
 hc keybind $Mod-F1 chain , load "$(<"$layouts/"default"")" , focus -e l
 hc keybind $Mod-F2 chain , load "$(<"$layouts/"MasterLeft"")" , focus -e l
 hc keybind $Mod-F3 chain , load "$(<"$layouts/"ThreeColumn"")" , focus -e 
@@ -83,7 +84,7 @@ hc keybind Mod4-f spawn bash -c "firefox& disown"
 hc keybind Mod4-e spawn thunderbird
 hc keybind Mod4-v spawn bash -c "viber& disown"
 hc keybind Mod4-l spawn bash -c "betterlockscreen -l dim"  
-hc keybind Mod4-s spawn bash -c "DRI_PRIME=1 slack& disown"
+hc keybind Mod4-s spawn bash -c "slack& disown"
 hc keybind Mod4-p spawn bash -c "popcorntime& disown"
 hc keybind Mod4-g spawn bash -c "gitkraken& disown"
 hc keybind Mod4-c spawn bash -c "code& disown"
@@ -96,7 +97,7 @@ hc keybind Mod4-Shift-t emit_hook no_trans
 
 # tmux sessions
 hc keybind $Mod-Control-1 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "  " st -e tmux a -t home
-hc keybind $Mod-Control-3 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "  " bash -c "DRI_PRIME=1 st -e tmux a -t file"
+hc keybind $Mod-Control-3 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "  " st -e tmux a -t file
 hc keybind $Mod-Control-4 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "  " st -e tmux a -t chat
 hc keybind $Mod-Control-8 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "  " st -e tmux a -t system
 hc keybind $Mod-Control-0 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "  " st -e tmux a -t scratchpad
@@ -216,7 +217,7 @@ hc keybind $Mod-space                                                           
                      . cycle_layout +1 vertical horizontal max vertical grid    \
                , cycle_layout +1
 
-hc keybind $Mod-g set_layout grid
+hc keybind $Mod-Shift-g set_layout grid
 hc keybind $Mod-Shift-space set_layout max
 
 # mouse
@@ -287,7 +288,7 @@ hc set update_dragged_clients 1
 # rules
 hc unrule -F
 hc rule index=e
-hc rule floatplacement=center
+hc rule floatplacement=smart
 #hc rule hook=new_client
 hc rule class=Termite tag="  " hook="  " focus=off
 hc rule instance=st tag="  " hook="  " focus=off keys_inactive="Mod4-Shift-Up"
@@ -334,8 +335,8 @@ hc rule focus=on # normally focus new clients
 #hc rule focus=off # normally do not focus new clients
 # give focus to most common terminals
 #hc rule class~'(.*[Rr]xvt.*|.*[Tt]erm|Konsole)' focus=on
-hc rule windowtype~'_NET_WM_WINDOW_TYPE_(DIALOG|UTILITY|SPLASH)' floating=on
-hc rule windowtype='_NET_WM_WINDOW_TYPE_DIALOG' focus=on
+hc rule windowtype~'_NET_WM_WINDOW_TYPE_(DIALOG|UTILITY|SPLASH)' floating=on floatplacement=center
+hc rule windowtype='_NET_WM_WINDOW_TYPE_DIALOG' focus=on floatplacement=center
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_(NOTIFICATION|DOCK|DESKTOP)' manage=off
 hc rule class=Gsimplecal manage=off 
 
@@ -354,7 +355,7 @@ herbstclient emit_hook quit_panel
 pid=( )
 sleep 1
 dunst -conf /home/notis/.config/dunst/dunstrc &
-feh --bg-scale /home/notis/Pictures/irina-iriser-nYIQYg8cQVc-unsplash.jpg
+feh --bg-scale /home/notis/Pictures/fall.jpg
 #compton --backend glx --blur-method kawase --blur-background --blur-strength 5 & 
 #compton -b &
 hc spawn bash -c "DRI_PRIME=1 picom -bft-20" 
