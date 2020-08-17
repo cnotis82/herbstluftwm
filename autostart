@@ -41,11 +41,11 @@ hc keybind $Mod-Control-i emit_hook list_keys
 hc keybind $Mod-Control-v emit_hook version
 hc keybind $Mod-Mod4-d spawn /home/notis/.config/herbstluftwm/hlwm-layout-manager.sh save
 hc keybind $Mod-Mod4-a spawn /home/notis/.config/herbstluftwm/hlwm-layout-manager.sh load
-hc keybind $Mod-F1 chain , load "$(<"$layouts/"default"")" , focus -e l
-hc keybind $Mod-F2 chain , load "$(<"$layouts/"MasterLeft"")" , focus -e l
-hc keybind $Mod-F3 chain , load "$(<"$layouts/"ThreeColumn"")" , focus -e 
-hc keybind $Mod-F4 chain , load "$(<"$layouts/"Grid"")" , focus -e l
-hc keybind $Mod-F5 chain , load "$(<"$layouts/"bsp"")" , focus -e l
+hc keybind $Mod-F1 chain , emit_hook no_bsp , load "$(<"$layouts/"default"")" , focus -e l , emit_hook bsp
+hc keybind $Mod-F2 chain , emit_hook no_bsp , load "$(<"$layouts/"MasterLeft"")" , focus -e l , emit_hook bsp
+hc keybind $Mod-F3 chain , emit_hook no_bsp , load "$(<"$layouts/"ThreeColumn"")" , focus -e , emit_hook bsp 
+hc keybind $Mod-F4 chain , emit_hook no_bsp , load "$(<"$layouts/"Grid"")" , focus -e l , emit_hook bsp
+hc keybind $Mod-F5 chain , emit_hook no_bsp , load "$(<"$layouts/"bsp"")" , focus -e l , emit_hook bsp
 hc keybind $Mod-Control-c spawn /home/notis/.config/herbstluftwm/herstcmd.sh
 hc keybind $Mod-b spawn /home/notis/.config/herbstluftwm/bring.sh
 hc keybind $Mod-Control-a spawn /home/notis/.config/herbstluftwm/new_tag.sh
@@ -233,7 +233,7 @@ hc keybind $Mod-Shift-Tab   cycle_all -1
 hc keybind $Mod-c cycle
 hc keybind $Mod-i jumpto urgent
 
-# theme
+# # theme
 hc attr theme.minimal.reset 1
 hc attr theme.tiling.reset 1
 hc attr theme.floating.reset 1
@@ -258,7 +258,7 @@ hc attr theme.inner_width 1
 hc attr theme.inner_color black
 hc attr theme.border_width 1
 hc attr theme.floating.color '#fffdd0'
-hc attr theme.floating.border_width 5
+hc attr theme.floating.border_width 4
 hc attr theme.floating.outer_width 1
 #hc attr theme.floating.outer_color black
 hc attr theme.active.inner_color '#3E4A00'

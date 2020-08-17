@@ -23,7 +23,9 @@ if [[ "$1" == 'load' ]]; then
     layout=$(file_menu 'Load layout:')
     [[ -z "$layout" ]] && exit
     if [[ -f "$layouts/$layout" ]]; then
-        hc load "$(<"$layouts/$layout")"
+        hc chain , emit_hook no_bsp \
+                 , load "$(<"$layouts/$layout")" \
+                 , emit_hook bsp
     else
         menu 'OK' 'No such layout.'
     fi
