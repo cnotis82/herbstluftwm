@@ -94,6 +94,8 @@ hc keybind Mod4-m emit_hook bsp
 hc keybind Mod4-Shift-m emit_hook no_bsp
 hc keybind Mod4-t emit_hook trans
 hc keybind Mod4-Shift-t emit_hook no_trans
+hc keybind Mod4-Return emit_hook sticky
+hc keybind Mod4-Shift-Return emit_hook no_sticky
 
 # tmux sessions
 hc keybind $Mod-Control-1 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "  " st -e tmux a -t home

@@ -7,15 +7,21 @@
 # or bind it: herbstclient keybind Mod1-Escape emit_hook goto_last_tag
 mode=1
 transparent=1
+stick=0
 tag=""
+clientid=""
 hc() { "${herbstclient_command[@]:-herbstclient}" "$@" ;}
-hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|goto_last_tag|fullscreen|floating|pseudotile|split_bottom|split_right|list_keys|version|layout_dump|print|tag_flags|bsp|no_bsp|max|trans|no_trans)' \
+hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|goto_last_tag|fullscreen|floating|pseudotile|split_bottom|split_right|list_keys|version|layout_dump|print|tag_flags|bsp|no_bsp|max|trans|no_trans|sticky|no_sticky)' \
     | while read line ; do
         IFS=$'\t' read -ra args <<< "$line"
         case ${args[0]} in
             tag_changed)
                 lasttag="$tag"
                 tag=${args[1]}
+                if [ $stick -eq 1 ]; then
+                	#notify-send -u low "$clientid"
+                	hc bring $clientid
+            	fi
                 ;;
             goto_last_tag)
                 [ "$lasttag" ] && hc use "$lasttag"
@@ -40,6 +46,16 @@ hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|goto
             tag_removed)
                 notify-send -u low "Tag ${args[1]} removed"
                 ;;
+            sticky)
+				stick=1
+				clientid=$(hc attr clients.focus.winid)
+                notify-send -u low "Client marked sticky" "$clientid"
+				;;
+			no_sticky)
+				sticky=0
+				clientid=0
+                notify-send -u low "Client unmarked sticky"
+				;;
             trans)
 				transparent=1
                 notify-send -u low "Transparent enabled"
@@ -67,9 +83,11 @@ hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|goto
 				tag=${args[1]}
                 winid=${args[2]}
                 focus=$(hc attr tags.focus.name)
+
                 if [ $transparent -eq 1 ]; then
-                transset-df -i "$winid"
+                transset-df -i "$winid" 0.85
                	fi
+                
 				if [ $mode -eq 1 ]; then
 							if [ $tag == $focus ]; then
 	                               hc chain : lock \
@@ -79,14 +97,6 @@ hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|goto
                                             , cycle_frame \
                                         : unlock
 	                        fi
-            #                 if [ $tag == $focus ]; then
-            #                     hc chain : lock : and , set_layout max \
-            #                            , compare tags.focus.curframe_wcount gt 1 \
-            #                            , ! silent get_attr tags.focus.my_unmaximized_layout \
-            #                            , split explode  \
-            #                            , cycle_frame \
-									   # : unlock
-            #                 fi
                 	hc and , compare tags.focus.curframe_wcount = 0 , close_and_remove 
             	fi
                 
