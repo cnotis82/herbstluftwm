@@ -10,6 +10,7 @@ transparent=1
 stick=0
 tag=""
 clientid=""
+sticktag=""
 hc() { "${herbstclient_command[@]:-herbstclient}" "$@" ;}
 hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|goto_last_tag|fullscreen|floating|pseudotile|split_bottom|split_right|list_keys|version|layout_dump|print|tag_flags|bsp|no_bsp|max|trans|no_trans|sticky|no_sticky)' \
     | while read line ; do
@@ -49,9 +50,11 @@ hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|goto
             sticky)
 				stick=1
 				clientid=$(hc attr clients.focus.winid)
+				sticktag=$(hc attr tags.focus.name)
                 notify-send -u low "Client marked sticky" "$clientid"
 				;;
 			no_sticky)
+				hc  move "$sticktag"
 				sticky=0
 				clientid=0
                 notify-send -u low "Client unmarked sticky"
