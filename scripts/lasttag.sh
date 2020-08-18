@@ -54,7 +54,7 @@ hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|goto
                 notify-send -u low "Client marked sticky" "$clientid"
 				;;
 			no_sticky)
-				hc  move "$sticktag"
+				hc  chain , lock , move "$sticktag" , use "$sticktag" , unlock
 				sticky=0
 				clientid=0
                 notify-send -u low "Client unmarked sticky"
