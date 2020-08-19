@@ -2,10 +2,11 @@
 
 ## Created By Aditya Shakya
 
-MENU="$(rofi -sep "|" -dmenu -i -p 'System' -width 12 -hide-scrollbar -line-padding 4 -padding 20 -lines 4 <<< "Lock|Suspend|Reboot|Shutdown")"
+MENU="$(rofi -sep "|" -dmenu -i -p 'System' -width 12 -hide-scrollbar -line-padding 5 -padding 20 -lines 5 <<< "CloseAllClients|Lock|Suspend|Reboot|Shutdown")"
             case "$MENU" in
-                *Lock) i3lock-fancy ;;
+            	*CloseAllClients) herbstclient foreach C clients. sprintf WINIDATTR '%c.winid' C substitute WINID WINIDATTR close WINID ;;
+                *Lock) betterlockscreen -l dim ;;
                 *Suspend) systemctl suspend ;;
-                *Reboot) systemctl reboot ;;
-                *Shutdown) systemctl -i poweroff
+                *Reboot) herbstclient foreach C clients. sprintf WINIDATTR '%c.winid' C substitute WINID WINIDATTR close WINID && systemctl reboot ;;
+                *Shutdown) herbstclient foreach C clients. sprintf WINIDATTR '%c.winid' C substitute WINID WINIDATTR close WINID && systemctl -i poweroff
             esac
