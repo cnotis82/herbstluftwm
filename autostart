@@ -72,13 +72,14 @@ hc keybind XF86HomePage spawn jgmenu_run
 hc keybind Print spawn bash -c "scrot '%Y-%m-%d_$wx$h_scrot.png' -e 'mv $f ~/Pictures/'; herbstclient emit_hook print"
 
 #system
-hc keybind $Mod-Control-q quit
+hc keybind $Mod-Control-q chain , foreach C clients. sprintf WINIDATTR '%c.winid' C substitute WINID WINIDATTR close WINID , quit
 hc keybind $Mod-Control-r reload
 hc keybind $Mod-q close_and_remove
+hc keybind $Mod-Shift-q spawn /home/notis/.config/herbstluftwm/close_clients_on_tag.sh
 hc keybind $Mod-Escape spawn xkill
 
 # Application
-hc keybind $Mod-Return spawn st -e zsh # use your $TERMINAL with xterm as fallback
+hc keybind $Mod-Return spawn alacritty -e zsh # use your $TERMINAL with xterm as fallback
 hc keybind $Mod-a spawn /home/notis/.config/herbstluftwm/rmenu_wi_g 
 hc keybind Mod4-f spawn bash -c "firefox& disown"
 hc keybind Mod4-e spawn thunderbird
@@ -98,11 +99,11 @@ hc keybind Mod4-Return emit_hook sticky
 hc keybind Mod4-Shift-Return emit_hook no_sticky
 
 # tmux sessions
-hc keybind $Mod-Control-1 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "  " st -e tmux a -t home
-hc keybind $Mod-Control-3 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "  " st -e tmux a -t file
-hc keybind $Mod-Control-4 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "  " st -e tmux a -t chat
-hc keybind $Mod-Control-8 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "  " st -e tmux a -t system
-hc keybind $Mod-Control-0 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "  " st -e tmux a -t scratchpad
+hc keybind $Mod-Control-1 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "  " alacritty -e tmux a -t home
+hc keybind $Mod-Control-3 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "  " alacritty -e tmux a -t file
+hc keybind $Mod-Control-4 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "  " alacritty -e tmux a -t chat
+hc keybind $Mod-Control-8 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "  " alacritty -e tmux a -t system
+hc keybind $Mod-Control-0 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "  " alacritty -e tmux a -t scratchpad
 
 # focusing clients
 hc set focus_crosses_monitor_boundaries 0
@@ -293,6 +294,7 @@ hc rule index=e
 hc rule floatplacement=smart
 #hc rule hook=new_client
 hc rule class=Termite tag="  " hook="  " focus=off
+hc rule class=Alacritty tag="  " hook="  " focus=off
 hc rule instance=st tag="  " hook="  " focus=off keys_inactive="Mod4-Shift-Up"
 hc rule class=XTerm tag="   " hook="   " focus=off
 hc rule class=firefox tag="  " hook="  " focus=off 
