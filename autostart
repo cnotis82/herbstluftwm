@@ -36,7 +36,6 @@ hc keybind $Mod-Control-s spawn /home/notis/.config/herbstluftwm/toggledualhead.
 hc keybind $Mod-Control-m spawn /home/notis/.config/herbstluftwm/polybarmenu.sh
 hc keybind $Mod-Control-t spawn /home/notis/.config/herbstluftwm/show_bottom_bar.sh
 hc keybind $Mod-Shift-t spawn /home/notis/.config/herbstluftwm/hide_bottom_bar.sh
-hc keybind $Mod-t emit_hook goto_last_tag
 hc keybind $Mod-Control-i emit_hook list_keys
 hc keybind $Mod-Control-v emit_hook version
 hc keybind $Mod-Mod4-d spawn /home/notis/.config/herbstluftwm/hlwm-layout-manager.sh save
@@ -75,7 +74,7 @@ hc keybind Print spawn bash -c "scrot '%Y-%m-%d_$wx$h_scrot.png' -e 'mv $f ~/Pic
 hc keybind $Mod-Control-q chain , foreach C clients. sprintf WINIDATTR '%c.winid' C substitute WINID WINIDATTR close WINID , quit
 hc keybind $Mod-Control-r reload
 hc keybind $Mod-q close_and_remove
-hc keybind $Mod-Shift-q spawn /home/notis/.config/herbstluftwm/close_clients_on_tag.sh
+hc keybind $Mod-Shift-q chain , lock , spawn /home/notis/.config/herbstluftwm/close_clients_on_tag.sh , unlock
 hc keybind $Mod-Escape spawn xkill
 
 # Application
@@ -204,6 +203,7 @@ hc keybind $Mod-period spawn /home/notis/.config/herbstluftwm/herbst-move.py +1 
 hc keybind $Mod-comma  spawn /home/notis/.config/herbstluftwm/herbst-move.py -1 full
 
 # layouting
+hc keybind $Mod-t use_previous
 hc keybind $Mod-r remove
 hc keybind $Mod-Shift-s set_attr clients.focus.floating toggle
 hc keybind $Mod-s chain , floating toggle , emit_hook floating
