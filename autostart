@@ -45,6 +45,7 @@ hc keybind $Mod-F2 chain , emit_hook no_bsp , load "$(<"$layouts/"MasterLeft"")"
 hc keybind $Mod-F3 chain , emit_hook no_bsp , load "$(<"$layouts/"ThreeColumn"")" , focus -e , emit_hook bsp 
 hc keybind $Mod-F4 chain , emit_hook no_bsp , load "$(<"$layouts/"Grid"")" , focus -e l , emit_hook bsp
 hc keybind $Mod-F5 chain , emit_hook no_bsp , load "$(<"$layouts/"bsp"")" , focus -e l , emit_hook bsp
+
 hc keybind $Mod-Control-c spawn /home/notis/.config/herbstluftwm/herstcmd.sh
 hc keybind $Mod-b spawn /home/notis/.config/herbstluftwm/bring.sh
 hc keybind $Mod-Control-a spawn /home/notis/.config/herbstluftwm/new_tag.sh
@@ -131,7 +132,10 @@ hc keybind Mod4-Control-o split left 0.5 ''
 hc keybind $Mod-Control-space chain , split explode , or . focus right . focus down
 hc keybind $Mod-z rotate
 
-
+#Load layouts
+hc keybind Mod4-Control-F4 spawn /home/notis/.config/herbstluftwm/load_spawn_social.sh
+hc keybind Mod4-Control-F5 spawn /home/notis/.config/herbstluftwm/load_spawn_music.sh
+hc keybind Mod4-Control-F8 spawn /home/notis/.config/herbstluftwm/load_spawn_sys.sh
 
 # resizing frames
 resizestep=0.02
@@ -148,11 +152,9 @@ hc keybind $Mod-Control-Up spawn /home/notis/.config/herbstluftwm/winsizer.sh -y
 hc keybind $Mod-Control-Down spawn /home/notis/.config/herbstluftwm/winsizer.sh +y
 
 # Gaps
-#hc keybind $Mod-Control-f cycle_value frame_gap 0 10 20 30 40 50 60 70 80 90 100 110 120
 hc keybind $Mod-Mod4-Up spawn /home/notis/.config/herbstluftwm/frame_gap_sizer.sh +x
 hc keybind $Mod-Mod4-Down spawn /home/notis/.config/herbstluftwm/frame_gap_sizer.sh -x
 hc keybind $Mod-Mod4-equal set frame_gap 10
-#hc keybind $Mod-Control-w cycle_value window_gap 0 5 10 15 20 25
 hc keybind $Mod-Control-w set always_show_frame toggle 
 
 # Shifting to monitor
@@ -310,7 +312,7 @@ hc rule class=Corebird tag="  " hook="  " focus=off
 hc rule class=Pidgin tag="  " hook="  " focus=off
 hc rule class=Hexchat tag="  " hook="  " focus=off
 hc rule class=ViberPC tag="  " hook="  " focus=off 
-hc rule class=discord tag="  " hook="  " focus=off 
+#hc rule class=discord tag="  " hook="  " focus=off 
 hc rule class=Slack tag="  " hook="  " focus=off
 hc rule class=Clementine tag="  "   
 hc rule class=mpv tag="  " 
