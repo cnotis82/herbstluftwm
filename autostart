@@ -134,7 +134,7 @@ hc keybind $Mod-z rotate
 
 #Load layouts
 hc keybind $Mod-Control-5 spawn /home/notis/.config/herbstluftwm/load_spawn_social.sh
-hc keybind $Mod-Control-1 spawn /home/notis/.config/herbstluftwm/load_spawn_music.sh
+hc keybind $Mod-Control-1 spawn /home/notis/.config/herbstluftwm/load_spawn_basic.sh
 hc keybind $Mod-Control-8 spawn /home/notis/.config/herbstluftwm/load_spawn_sys.sh
 
 # resizing frames
