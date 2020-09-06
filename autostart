@@ -120,7 +120,7 @@ hc keybind $Mod-Shift-Right or , shift right , shift_edge left
 
 # splitting frames
 # create an empty frame at the specified direction
-hc keybind $Mod-u chain , split bottom 0.5 , focus -e d       
+hc keybind $Mod-u chain , lock , split bottom 0.5 , focus -e d , unlock       
 hc keybind $Mod-o chain , split right 0.5 , focus -e r     
 hc keybind $Mod-Control-u chain , split top 0.5 , focus -e t      
 hc keybind $Mod-Control-o chain , split left 0.5 , focus -e l
@@ -158,8 +158,8 @@ hc keybind $Mod-Mod4-equal set frame_gap 10
 hc keybind $Mod-Control-w set always_show_frame toggle 
 
 # Shifting to monitor
-hc keybind $Mod-Control-bracketleft  chain . shift_to_monitor 1 . focus_monitor 1
-hc keybind $Mod-Control-bracketright chain . shift_to_monitor 0 . focus_monitor 0
+hc keybind $Mod-Control-bracketleft  chain . lock . shift_to_monitor 0 . focus_monitor 0 . unlock
+hc keybind $Mod-Control-bracketright chain . lock . shift_to_monitor 1 . focus_monitor 1 . unlock
 
 #Show/Hide Lemonbar
 hc keybind $Mod-grave chain , pad 0 0 0 0 0 , pad 1 0 0 0 0 , spawn xdo hide -n lemonbar  
@@ -206,7 +206,8 @@ hc keybind Mod4-period use_index +1 --skip-visible
 hc keybind Mod4-comma  use_index -1 --skip-visible
 hc keybind $Mod-period spawn /home/notis/.config/herbstluftwm/herbst-move.py +1 full
 hc keybind $Mod-comma  spawn /home/notis/.config/herbstluftwm/herbst-move.py -1 full
-
+hc keybind Mod4-Control-l lock_tag ""
+hc keybind Mod4-Shift-l unlock_tag ""
 # layouting
 hc keybind $Mod-t use_previous
 hc keybind $Mod-r remove
@@ -367,7 +368,7 @@ dunst -conf /home/notis/.config/dunst/dunstrc &
 feh --bg-scale /home/notis/Pictures/fall.jpg
 #compton --backend glx --blur-method kawase --blur-background --blur-strength 5 & 
 #compton -b &
-hc spawn bash -c "DRI_PRIME=1 picom -bft-20" 
+hc spawn bash -c "picom -bft-20"
 #xcompmgr -c &
 # find the panel
 panelcmd=${panelcmd:-~/.config/herbstluftwm/panel_polybar.sh}
