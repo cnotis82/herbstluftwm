@@ -29,7 +29,7 @@
     split_direction="horizontal"
     split_ratio="0.6667" 
     stack_layout="vertical" 
-    stack_frame=d 
+    stack_frame=1
     # Here ends the section for users #
      
     hc() { herbstclient $@;}; chn() { cmds="$cmds , $@";}
@@ -93,8 +93,10 @@
     }
     close() { ### replace master client on close. removes stack if empty.
       hc close; set_vars
-      [ $emptyMaster = ')' ]&&
-        hc chain , focus -e $stackD , shift -e $masterD&&set_vars
+      [ $emptyMaster = ')' ]
+      	
+      	hc chain , focus -e $stackD , shift -e $masterD && set_vars
+
       [ $emptyStack = ')' ] && hc chain , focus -e $stackD , remove
     }
     $@;exit # do something and exit
