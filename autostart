@@ -20,6 +20,8 @@ Mod=Mod1    # Use alt as the main modifier
 layouts="$HOME/.config/herbstluftwm/layouts"
 
 #scripts
+pkill -u notis --full perclient_kb_layout
+hc spawn /home/notis/.config/herbstluftwm/perclient_kb_layout.sh
 hc spawn /home/notis/.config/herbstluftwm/keychain.sh
 hc spawn /home/notis/.config/herbstluftwm/keychain_trans.sh
 hc spawn /home/notis/.config/herbstluftwm/lasttag.sh
@@ -82,6 +84,7 @@ hc keybind $Mod-Escape spawn xkill
 hc keybind $Mod-Return spawn alacritty -e zsh # use your $TERMINAL with xterm as fallback
 hc keybind $Mod-a spawn /home/notis/.config/herbstluftwm/rmenu_wi_g 
 hc keybind Mod4-f spawn bash -c "firefox& disown"
+hc keybind Mod4-r spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "reddit" firefox --new-window https://www.reddit.com/
 hc keybind Mod4-e spawn thunderbird
 hc keybind Mod4-v spawn bash -c "viber& disown"
 hc keybind Mod4-l spawn bash -c "betterlockscreen -l dim"  
@@ -259,6 +262,7 @@ hc set frame_normal_opacity 40
 hc set frame_transparent_width 0
 hc set frame_gap 10
 hc set focus_follows_mouse 0
+hc set gapless_grid 1
 
 hc attr theme.active.color '#ffb86c'
 hc attr theme.normal.color dimgray
@@ -266,9 +270,11 @@ hc attr theme.urgent.color red
 hc attr theme.inner_width 1
 hc attr theme.inner_color black
 hc attr theme.border_width 1
-hc attr theme.floating.color '#fffdd0'
-hc attr theme.floating.border_width 4
+hc attr theme.floating.active.color '#ffb86c'
+hc attr theme.floating.normal.color dimgray 
+hc attr theme.floating.border_width 3
 hc attr theme.floating.outer_width 1
+hc attr theme.floating.padding_left 25
 #hc attr theme.floating.outer_color black
 hc attr theme.active.inner_color '#3E4A00'
 hc attr theme.active.outer_color '#3E4A00'
@@ -279,9 +285,10 @@ hc attr theme.minimal.normal.color dimgray
 hc attr theme.minimal.border_width 5
 hc attr theme.minimal.outer_width 1
 hc attr theme.minimal.outer_color black 
-hc attr theme.tiling.border_width 5
+hc attr theme.tiling.border_width 3
 hc attr theme.tiling.outer_width 1
 hc attr theme.tiling.outer_color black
+hc attr theme.tiling.padding_bottom 15
 
 
 hc attr theme.background_color '#141414'
