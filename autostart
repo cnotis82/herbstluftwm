@@ -21,6 +21,9 @@ layouts="$HOME/.config/herbstluftwm/layouts"
 
 #scripts
 pkill -u notis --full perclient_kb_layout
+pkill -u notis --full lasttag
+pkill -u notis --full keychain
+pkill -u notis --full keychain_trans
 hc spawn /home/notis/.config/herbstluftwm/perclient_kb_layout.sh
 hc spawn /home/notis/.config/herbstluftwm/keychain.sh
 hc spawn /home/notis/.config/herbstluftwm/keychain_trans.sh
@@ -253,7 +256,6 @@ hc set frame_border_active_color '#222222'
 hc set frame_border_normal_color '#101010'
 hc set frame_bg_normal_color '#565656'
 hc set frame_bg_active_color '#ffb86c'
-#'#345F0C'
 hc set frame_border_width 0
 hc set always_show_frame 1
 hc set frame_bg_transparent 0
@@ -274,8 +276,7 @@ hc attr theme.floating.active.color '#ffb86c'
 hc attr theme.floating.normal.color dimgray 
 hc attr theme.floating.border_width 3
 hc attr theme.floating.outer_width 1
-hc attr theme.floating.padding_left 25
-#hc attr theme.floating.outer_color black
+hc attr theme.floating.padding_left 15
 hc attr theme.active.inner_color '#3E4A00'
 hc attr theme.active.outer_color '#3E4A00'
 
@@ -305,7 +306,6 @@ hc set update_dragged_clients 1
 hc unrule -F
 hc rule index=e
 hc rule floatplacement=smart
-#hc rule hook=new_client
 hc rule class=Termite tag="  " hook="  " focus=off
 hc rule class=Alacritty tag="  " hook="  " focus=off
 hc rule instance=st tag="  " hook="  " focus=off keys_inactive="Mod4-Shift-Up"
