@@ -12,20 +12,19 @@ tag=""
 clientid=""
 sticktag=""
 hc() { "${herbstclient_command[@]:-herbstclient}" "$@" ;}
-hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|goto_last_tag|fullscreen|floating|pseudotile|split_bottom|split_right|list_keys|version|layout_dump|print|tag_flags|bsp|no_bsp|max|trans|no_trans|sticky|no_sticky)' \
+hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|fullscreen|floating|pseudotile|split_bottom|split_right|list_keys|version|layout_dump|print|tag_flags|bsp|no_bsp|max|trans|no_trans|sticky|no_sticky)' \
     | while read line ; do
         IFS=$'\t' read -ra args <<< "$line"
         case ${args[0]} in
             tag_changed)
                 lasttag="$tag"
                 tag=${args[1]}
-                if [ $stick -eq 1 ]; then
-                	#notify-send -u low "$clientid"
-                	hc bring $clientid
-            	fi
-                ;;
-            goto_last_tag)
-                [ "$lasttag" ] && hc use "$lasttag"
+
+                hc foreach C clients. \
+                    sprintf WINIDATTR '%c.winid' C substitute WINID WINIDATTR \
+                    sprintf CSTICKYATTR '%c.my_sticky' C \
+                    and . compare CSTICKYATTR = 1 \
+                        . bring WINID
                 ;;
             reload)
                 notify-send -u critical "Herbstluftwm will be reloaded"
@@ -48,16 +47,28 @@ hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|goto
                 notify-send -u low "Tag ${args[1]} removed"
                 ;;
             sticky)
-				stick=1
-				clientid=$(hc attr clients.focus.winid)
 				sticktag=$(hc attr tags.focus.name)
-                notify-send -u low "Client marked sticky" "$clientid"
+                hc try silent new_attr int clients.$(hc attr clients.focus.winid).my_sticky;
+                hc silent attr clients.$(hc attr clients.focus.winid).my_sticky "1";
+                hc try silent new_attr string clients.$(hc attr clients.focus.winid).my_sticky_tag;
+                hc silent attr clients.$(hc attr clients.focus.winid).my_sticky_tag "$sticktag";
+
+                notify-send -u low "Client marked as sticky" "$clientid"
 				;;
 			no_sticky)
-				hc  chain , lock , move "$sticktag" , use "$sticktag" , unlock
-				sticky=0
-				clientid=0
-                notify-send -u low "Client unmarked sticky"
+				FOCUSID=$(hc attr clients.focus.winid)
+                hc silent attr clients.${FOCUSID}.my_sticky "0";
+
+                hc foreach C clients. \
+                    substitute FOCUSTAG tags.focus.name \
+                    sprintf CSTICKYATTR '%c.my_sticky' C \
+                    sprintf CSTICKYTAGATTR '%c.my_sticky_tag' C substitute TAG CSTICKYTAGATTR \
+                    sprintf CTAGATTR '%c.tag' C \
+                    and . compare CTAGATTR = FOCUSTAG \
+                        . compare CSTICKYATTR = 0 \
+                        . move TAG
+
+                notify-send -u low "Client unmarked as sticky"
 				;;
             trans)
 				transparent=1
@@ -93,7 +104,7 @@ hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|goto
                 
 				if [ $mode -eq 1 ]; then
 							if [ $tag == $focus ]; then
-	                               hc chain : lock \
+	                                  hc chain : lock \
                                          : and , set_layout max , compare tags.by-name."$tag".curframe_wcount gt 1 \
                                             , ! silent get_attr tags.by-name."$tag".my_unmaximized_layout \
                                             , split explode \
