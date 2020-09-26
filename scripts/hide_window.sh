@@ -1,23 +1,21 @@
 #!/bin/sh
-
+layouts="$HOME/.config/herbstluftwm/layouts"
 tag=$(herbstclient attr tags.focus.name)
+layout=$(herbstclient dump)
 case "$@" in
-  +1)   herbstclient dump "'$tag" || herbstclient add "'$tag"
-        herbstclient move "'$tag"
+  hide) herbstclient chain . add "'$tag" . move "'$tag" 
         ;;
-  -1)   if herbstclient dump "'$tag"; then
-          #herbstclient lock
-          herbstclient chain . use "'$tag"
+  unhide) herbstclient chain . use "'$tag"
           winid=$(herbstclient attr clients.focus.winid)
           herbstclient chain . use "$tag" . bring $winid
-          #herbstclient unlock
-        fi
         ;;
-  -2)   if herbstclient dump "'$tag"; then
-          #herbstclient lock
-          herbstclient use "'$tag"
-        fi
+  use)   herbstclient use "'$tag"
         ;;
-  0|*)  herbstclient dump "'$tag" && herbstclient merge_tag "'$tag" 
+  all)  herbstclient chain . add "*$tag*" . load "*$tag*" "$layout" . load "$tag" "$(<"$layouts/"default"")"
+		;;
+  restore)  layout=$(herbstclient dump "*$tag*")
+		herbstclient chain . load "$tag" "$layout" . merge_tag "*$tag*"
+		;;
+  0|*)  herbstclient load "$tag" "$layout" && herbstclient merge_tag "'$tag" 
 ;;
 esac

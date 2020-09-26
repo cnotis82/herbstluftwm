@@ -59,9 +59,11 @@ hc keybind $Mod-j spawn /home/notis/.config/herbstluftwm/rmenu_wi
 hc keybind $Mod-w spawn /home/notis/.config/herbstluftwm/herstcmd.sh move
 
 #minimize
-hc keybind $Mod-n       spawn /home/notis/.config/herbstluftwm/hide_window.sh +1
-hc keybind $Mod-Shift-n spawn /home/notis/.config/herbstluftwm/hide_window.sh -1
-hc keybind Mod4-n       spawn /home/notis/.config/herbstluftwm/hide_window.sh -2
+hc keybind $Mod-n       spawn /home/notis/.config/herbstluftwm/hide_window.sh hide
+hc keybind $Mod-Shift-n spawn /home/notis/.config/herbstluftwm/hide_window.sh unhide
+hc keybind Mod4-n       spawn /home/notis/.config/herbstluftwm/hide_window.sh use
+hc keybind Mod4-Shift-n spawn /home/notis/.config/herbstluftwm/hide_window.sh all
+hc keybind Mod4-Control-n spawn /home/notis/.config/herbstluftwm/hide_window.sh restore
 hc keybind $Mod-Control-n spawn /home/notis/.config/herbstluftwm/hide_window.sh 0
 
 #multimedia
