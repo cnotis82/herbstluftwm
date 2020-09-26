@@ -2,20 +2,24 @@
 layouts="$HOME/.config/herbstluftwm/layouts"
 tag=$(herbstclient attr tags.focus.name)
 layout=$(herbstclient dump)
+
 case "$@" in
-  hide) herbstclient chain . add "'$tag" . move "'$tag" 
+  hide) herbstclient chain . silent new_attr string clients.focus.my_layout "$layout" \
+						   . add "'$tag" . move "'$tag" 
         ;;
   unhide) herbstclient chain . use "'$tag"
-          winid=$(herbstclient attr clients.focus.winid)
-          herbstclient chain . use "$tag" . bring $winid
-        ;;
-  use)   herbstclient use "'$tag"
-        ;;
-  all)  herbstclient chain . add "*$tag*" . load "*$tag*" "$layout" . load "$tag" "$(<"$layouts/"default"")"
-		;;
-  restore)  layout=$(herbstclient dump "*$tag*")
-		herbstclient chain . load "$tag" "$layout" . merge_tag "*$tag*"
-		;;
-  0|*)  herbstclient load "$tag" "$layout" && herbstclient merge_tag "'$tag" 
-;;
+          layout=$(herbstclient attr clients.focus.my_layout)
+          herbstclient chain . remove_attr clients.focus.my_layout \
+          					 . use "$tag" \
+          					 . load "$tag" "$layout" \
+          					 . and , compare tags.by-name."'$tag".client_count = 0 , merge_tag "'$tag"
+          ;;
+  use)    herbstclient use "'$tag"
+          ;;
+  all)    layout=$(herbstclient dump)
+		  herbstclient chain . add "*$tag*" . load "*$tag*" "$layout" . load "$tag" "$(<"$layouts/"default"")"
+		  ;;
+restore)  layout=$(herbstclient dump "*$tag*")
+		  herbstclient chain . load "$tag" "$layout" . merge_tag "*$tag*"
+		  ;;
 esac

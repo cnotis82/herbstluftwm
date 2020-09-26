@@ -58,13 +58,14 @@ hc keybind $Mod-d spawn /home/notis/.config/herbstluftwm/merge_tag.sh
 hc keybind $Mod-j spawn /home/notis/.config/herbstluftwm/rmenu_wi 
 hc keybind $Mod-w spawn /home/notis/.config/herbstluftwm/herstcmd.sh move
 
-#minimize
+#minimize window
 hc keybind $Mod-n       spawn /home/notis/.config/herbstluftwm/hide_window.sh hide
-hc keybind $Mod-Shift-n spawn /home/notis/.config/herbstluftwm/hide_window.sh unhide
-hc keybind Mod4-n       spawn /home/notis/.config/herbstluftwm/hide_window.sh use
-hc keybind Mod4-Shift-n spawn /home/notis/.config/herbstluftwm/hide_window.sh all
+hc keybind $Mod-Control-n spawn /home/notis/.config/herbstluftwm/hide_window.sh unhide
+hc keybind $Mod-Shift-n spawn /home/notis/.config/herbstluftwm/hide_window.sh use
+#minimize tag
+hc keybind Mod4-n spawn /home/notis/.config/herbstluftwm/hide_window.sh all
 hc keybind Mod4-Control-n spawn /home/notis/.config/herbstluftwm/hide_window.sh restore
-hc keybind $Mod-Control-n spawn /home/notis/.config/herbstluftwm/hide_window.sh 0
+
 
 #multimedia
 hc keybind XF86AudioLowerVolume spawn amixer -q set Master 5%-
