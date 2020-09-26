@@ -48,11 +48,9 @@ hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|full
                 ;;
             sticky)
 				sticktag=$(hc attr tags.focus.name)
-                hc try silent new_attr int clients.$(hc attr clients.focus.winid).my_sticky;
-                hc silent attr clients.$(hc attr clients.focus.winid).my_sticky "1";
-                hc try silent new_attr string clients.$(hc attr clients.focus.winid).my_sticky_tag;
-                hc silent attr clients.$(hc attr clients.focus.winid).my_sticky_tag "$sticktag";
-
+                hc try silent new_attr int clients.$(hc attr clients.focus.winid).my_sticky 1;
+                hc try silent new_attr string clients.$(hc attr clients.focus.winid).my_sticky_tag "$sticktag";
+                
                 notify-send -u low "Client marked as sticky" "$clientid"
 				;;
 			no_sticky)
@@ -66,7 +64,9 @@ hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|full
                     sprintf CTAGATTR '%c.tag' C \
                     and . compare CTAGATTR = FOCUSTAG \
                         . compare CSTICKYATTR = 0 \
-                        . move TAG
+                        . move TAG 
+                hc chain . try remove_attr clients.${FOCUSID}.my_sticky \
+                         . try remove_attr clients.${FOCUSID}.my_sticky_tag
 
                 notify-send -u low "Client unmarked as sticky"
 				;;

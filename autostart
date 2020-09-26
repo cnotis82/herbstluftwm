@@ -61,6 +61,7 @@ hc keybind $Mod-w spawn /home/notis/.config/herbstluftwm/herstcmd.sh move
 #minimize
 hc keybind $Mod-n       spawn /home/notis/.config/herbstluftwm/hide_window.sh +1
 hc keybind $Mod-Shift-n spawn /home/notis/.config/herbstluftwm/hide_window.sh -1
+hc keybind Mod4-n       spawn /home/notis/.config/herbstluftwm/hide_window.sh -2
 hc keybind $Mod-Control-n spawn /home/notis/.config/herbstluftwm/hide_window.sh 0
 
 #multimedia
@@ -128,12 +129,12 @@ hc keybind $Mod-Shift-Right or , shift right , shift_edge left
 # create an empty frame at the specified direction
 hc keybind $Mod-u chain , lock , split bottom 0.5 , focus -e d , unlock       
 hc keybind $Mod-o chain , split right 0.5 , focus -e r     
-hc keybind $Mod-Control-u chain , split top 0.5 , focus -e t      
+hc keybind $Mod-Control-u chain , split top 0.5 , focus -e u      
 hc keybind $Mod-Control-o chain , split left 0.5 , focus -e l
-hc keybind Mod4-u split bottom 0.5 ''      
-hc keybind Mod4-o split right 0.5 ''   
-hc keybind Mod4-Control-u split top 0.5 ''      
-hc keybind Mod4-Control-o split left 0.5 ''      
+hc keybind Mod4-u chain , split bottom 0.5 '' , focus -e d      
+hc keybind Mod4-o chain , split right 0.5 '' , focus -e r  
+hc keybind Mod4-Control-u chain , split top 0.5 '' , focus -e u      
+hc keybind Mod4-Control-o chain , split left 0.5 '' , focus -e l     
 # let the current frame explode into subframes
 hc keybind $Mod-Control-space chain , split explode , or . focus right . focus down
 hc keybind $Mod-z rotate
