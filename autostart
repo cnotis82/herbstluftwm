@@ -168,8 +168,8 @@ hc keybind $Mod-Mod4-equal set frame_gap 10
 hc keybind $Mod-Control-w set always_show_frame toggle 
 
 # Shifting to monitor
-hc keybind $Mod-Control-bracketleft  chain . lock . shift_to_monitor 0 . focus_monitor 0 . unlock
-hc keybind $Mod-Control-bracketright chain . lock . shift_to_monitor 1 . focus_monitor 1 . unlock
+hc keybind $Mod-Control-bracketleft  chain . lock . shift_to_monitor 0 . remove . focus_monitor 0 . unlock
+hc keybind $Mod-Control-bracketright chain . lock . shift_to_monitor 1 . remove . focus_monitor 1 . unlock
 
 #Show/Hide Lemonbar
 hc keybind $Mod-grave chain , pad 0 0 0 0 0 , pad 1 0 0 0 0 , spawn xdo hide -n lemonbar  
