@@ -20,11 +20,15 @@ hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|full
                 lasttag="$tag"
                 tag=${args[1]}
 
-                hc foreach C clients. \
-                    sprintf WINIDATTR '%c.winid' C substitute WINID WINIDATTR \
-                    sprintf CSTICKYATTR '%c.my_sticky' C \
-                    and . compare CSTICKYATTR = 1 \
-                        . bring WINID
+                if [ $stick -eq 1 ]; then
+
+                    hc foreach C clients. \
+                        sprintf WINIDATTR '%c.winid' C substitute WINID WINIDATTR \
+                        sprintf CSTICKYATTR '%c.my_sticky' C \
+                        and . compare CSTICKYATTR = 1 \
+                            . bring WINID
+
+                fi
                 ;;
             reload)
                 notify-send -u critical "Herbstluftwm will be reloaded"
@@ -47,6 +51,7 @@ hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|full
                 notify-send -u low "Tag ${args[1]} removed"
                 ;;
             sticky)
+                stick=1
 				sticktag=$(hc attr tags.focus.name)
                 hc try silent new_attr int clients.$(hc attr clients.focus.winid).my_sticky 1;
                 hc try silent new_attr string clients.$(hc attr clients.focus.winid).my_sticky_tag "$sticktag";
@@ -54,6 +59,7 @@ hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|full
                 notify-send -u low "Client marked as sticky" "$clientid"
 				;;
 			no_sticky)
+                stick=0
 				FOCUSID=$(hc attr clients.focus.winid)
                 hc silent attr clients.${FOCUSID}.my_sticky "0";
 
