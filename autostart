@@ -220,7 +220,7 @@ hc keybind Mod4-Control-l lock_tag ""
 hc keybind Mod4-Shift-l unlock_tag ""
 # layouting
 hc keybind $Mod-t use_previous
-hc keybind $Mod-r remove
+hc keybind $Mod-r chain . remove . cycle_layout +1
 hc keybind $Mod-Shift-s set_attr clients.focus.floating toggle
 hc keybind $Mod-s chain , floating toggle , emit_hook floating
 hc keybind $Mod-x chain , pseudotile toggle , emit_hook pseudotile
