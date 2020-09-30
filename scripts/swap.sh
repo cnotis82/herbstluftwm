@@ -68,12 +68,13 @@
       if [ -n "$EmptyAll" ]; then # EmptyAll is null if 1 frame with clients exists.
         chn shift -e $target # move client to target frame.
         [ "$emptyInact" != ')' ] && 
-        chn cycle -1 , shift -e $origin , focus -e $target , cycle 1
+        #chn cycle -1 , shift -e $origin , focus -e $target , cycle 1
+        chn cycle -1 , shift -e $origin , cycle 1
       else # one frame? split it. move client to new frame, set stack layout.
         hc split $split_direction $split_ratio; set_vars
         [ "$split_direction" = "horizontal" ]&&chn shift -e r || chn shift -e d
-        chn focus -e $stackD , set_layout $stack_layout 
-        [ $stack = 0 ] && chn focus -e $masterD
+        #chn focus -e $stackD , set_layout $stack_layout 
+        #[ $stack = 0 ] && chn focus -e $masterD
       fi; hc chain "$cmds"
     }
     stack_spawn() { ### spawn applications in the stack.
