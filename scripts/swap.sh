@@ -73,7 +73,7 @@
       else # one frame? split it. move client to new frame, set stack layout.
         hc split $split_direction $split_ratio; set_vars
         [ "$split_direction" = "horizontal" ]&&chn shift -e r || chn shift -e d
-        #chn focus -e $stackD , set_layout $stack_layout 
+        chn focus -e $stackD , set_layout $stack_layout 
         #[ $stack = 0 ] && chn focus -e $masterD
       fi; hc chain "$cmds"
     }
