@@ -131,16 +131,16 @@ hc keybind $Mod-Shift-Right or , shift right , shift_edge left
 # splitting frames
 # create an empty frame at the specified direction
 hc keybind $Mod-u chain , lock , split bottom 0.5 , focus -e d , unlock       
-hc keybind $Mod-o chain , split right 0.5 , focus -e r     
-hc keybind $Mod-Control-u chain , split top 0.5 , focus -e u      
-hc keybind $Mod-Control-o chain , split left 0.5 , focus -e l
-hc keybind Mod4-u chain , split bottom 0.5 '' , focus -e d      
-hc keybind Mod4-o chain , split right 0.5 '' , focus -e r  
-hc keybind Mod4-Control-u chain , split top 0.5 '' , focus -e u      
-hc keybind Mod4-Control-o chain , split left 0.5 '' , focus -e l     
+hc keybind $Mod-o chain , lock , split right 0.5 , focus -e r , unlock    
+hc keybind $Mod-Control-u chain , lock , split top 0.5 , focus -e u , unlock      
+hc keybind $Mod-Control-o chain , lock , split left 0.5 , focus -e l , unlock
+hc keybind Mod4-u chain , lock , split bottom 0.5 '' , focus -e d , unlock     
+hc keybind Mod4-o chain , lock , split right 0.5 '' , focus -e r , unlock 
+hc keybind Mod4-Control-u chain , lock , split top 0.5 '' , focus -e u , unlock     
+hc keybind Mod4-Control-o chain , lock , split left 0.5 '' , focus -e l , unlock    
 # let the current frame explode into subframes
 hc keybind $Mod-Control-space chain , split explode , or . focus right . focus down
-hc keybind $Mod-z rotate
+hc keybind $Mod-z chain , lock , rotate , unlock
 
 #Load layouts
 hc keybind $Mod-Control-5 spawn /home/notis/.config/herbstluftwm/load_spawn_social.sh
@@ -149,10 +149,10 @@ hc keybind $Mod-Control-8 spawn /home/notis/.config/herbstluftwm/load_spawn_sys.
 
 # resizing frames
 resizestep=0.02
-hc keybind $Mod-Shift-h       resize left +$resizestep
-hc keybind $Mod-Shift-j       resize down +$resizestep
-hc keybind $Mod-Shift-k       resize up +$resizestep
-hc keybind $Mod-Shift-l       resize right +$resizestep
+hc keybind $Mod-Shift-h chain , lock , resize left +$resizestep , unlock
+hc keybind $Mod-Shift-j chain , lock , resize down +$resizestep , unlock
+hc keybind $Mod-Shift-k chain , lock , resize up +$resizestep , unlock
+hc keybind $Mod-Shift-l chain , lock , resize right +$resizestep , unlock
 hc keybind $Mod-Shift-r drag "" resize
 
 # resize window in floating mode
