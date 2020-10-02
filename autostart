@@ -107,6 +107,7 @@ hc keybind Mod4-t emit_hook trans
 hc keybind Mod4-Shift-t emit_hook no_trans
 hc keybind Mod4-Return emit_hook sticky
 hc keybind Mod4-Shift-Return emit_hook no_sticky
+hc keybind Mod4-Control-Return emit_hook no_sticky_no_move
 
 # tmux sessions
 #hc keybind $Mod-Control-1 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "  " alacritty -e tmux a -t home
