@@ -21,13 +21,13 @@ hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|full
                 tag=${args[1]}
 
                 if [ $stick -eq 1 ]; then
-
+                	hc lock
                     hc foreach C clients. \
                         sprintf WINIDATTR '%c.winid' C substitute WINID WINIDATTR \
                         sprintf CSTICKYATTR '%c.my_sticky' C \
                         and . compare CSTICKYATTR = 1 \
                             . bring WINID
-
+                    hc unlock
                 fi
                 ;;
             reload)
@@ -35,7 +35,6 @@ hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|full
                 polybar-msg cmd quit
                 killall dunst
                 killall compton
-                
                 exit
                 ;;
             quit_panel)
@@ -115,18 +114,18 @@ hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|full
                 focus=$(hc attr tags.focus.name)
 
                 if [ $transparent -eq 1 ]; then
-                transset-df -i "$winid" 0.85
+                    transset-df -i "$winid" 0.85
                	fi
                 
 				if [ $mode -eq 1 ]; then
-							if [ $tag == $focus ]; then
-	                                  hc chain : lock \
-                                         : and , set_layout max , compare tags.by-name."$tag".curframe_wcount gt 1 \
-                                            , ! silent get_attr tags.by-name."$tag".my_unmaximized_layout \
-                                            , split explode \
-                                            , cycle_frame \
-                                        : unlock
-	                        fi
+                    if [ $tag == $focus ]; then
+                          hc chain : lock \
+                               : and , set_layout max , compare tags.by-name."$tag".curframe_wcount gt 1 \
+                                        , ! silent get_attr tags.by-name."$tag".my_unmaximized_layout \
+                                        , split explode \
+                                        , cycle_frame \
+                               : unlock
+                    fi
                 	hc and , compare tags.focus.curframe_wcount = 0 , close_and_remove 
             	fi
                 
