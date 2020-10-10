@@ -66,7 +66,6 @@ hc keybind $Mod-Shift-n spawn /home/notis/.config/herbstluftwm/hide_window.sh us
 hc keybind Mod4-n spawn /home/notis/.config/herbstluftwm/hide_window.sh all
 hc keybind Mod4-Control-n spawn /home/notis/.config/herbstluftwm/hide_window.sh restore
 
-
 #multimedia
 hc keybind XF86AudioLowerVolume spawn amixer -q set Master 5%-
 hc keybind XF86AudioRaiseVolume spawn amixer -q set Master 5%+
@@ -150,10 +149,10 @@ hc keybind $Mod-Control-8 spawn /home/notis/.config/herbstluftwm/load_spawn_sys.
 
 # resizing frames
 resizestep=0.02
-hc keybind $Mod-Shift-h chain , lock , resize left +$resizestep , unlock
-hc keybind $Mod-Shift-j chain , lock , resize down +$resizestep , unlock
-hc keybind $Mod-Shift-k chain , lock , resize up +$resizestep , unlock
-hc keybind $Mod-Shift-l chain , lock , resize right +$resizestep , unlock
+hc keybind $Mod-Shift-h resize left +$resizestep
+hc keybind $Mod-Shift-j resize down +$resizestep
+hc keybind $Mod-Shift-k resize up +$resizestep
+hc keybind $Mod-Shift-l resize right +$resizestep
 hc keybind $Mod-Shift-r drag "" resize
 
 # resize window in floating mode
@@ -272,7 +271,7 @@ hc set focus_follows_mouse 0
 hc set gapless_grid 1
 
 hc attr theme.active.color '#ffb86c'
-hc attr theme.normal.color dimgray
+hc attr theme.normal.color '#3c2b22'
 hc attr theme.urgent.color red
 hc attr theme.inner_width 1
 hc attr theme.inner_color black
@@ -281,23 +280,26 @@ hc attr theme.floating.active.color '#ffb86c'
 hc attr theme.floating.normal.color dimgray 
 hc attr theme.floating.border_width 3
 hc attr theme.floating.outer_width 1
-hc attr theme.floating.padding_left 15
-hc attr theme.active.inner_color '#3E4A00'
-hc attr theme.active.outer_color '#3E4A00'
+hc attr theme.floating.padding_left 22
+hc attr theme.active.inner_color '#978965'
+hc attr theme.active.outer_color '#1f1f1f'
 
 hc attr theme.minimal.color '#ffb86c'
+
 hc attr theme.minimal.active.color '#ffb86c'
 hc attr theme.minimal.normal.color dimgray 
 hc attr theme.minimal.border_width 5
 hc attr theme.minimal.outer_width 1
 hc attr theme.minimal.outer_color black 
+hc attr theme.tiling.active.color '#ffb86c'
+hc attr theme.tiling.normal.color dimgray
 hc attr theme.tiling.border_width 3
 hc attr theme.tiling.outer_width 1
 hc attr theme.tiling.outer_color black
 hc attr theme.tiling.padding_bottom 15
 
 
-hc attr theme.background_color '#141414'
+hc attr theme.background_color '#1f1f1f'
 
 hc set window_gap 0
 hc set frame_padding 0
