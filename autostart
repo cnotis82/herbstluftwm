@@ -112,6 +112,7 @@ hc keybind Mod4-Control-Return emit_hook no_sticky_no_move
 #hc keybind $Mod-Control-1 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "  " alacritty -e tmux a -t home
 hc keybind $Mod-Control-3 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "  " alacritty -e tmux a -t file
 hc keybind $Mod-Control-4 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "  " alacritty -e tmux a -t chat
+hc keybind $Mod-Control-6 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "  " alacritty -e tmux a -t dev
 #hc keybind $Mod-Control-8 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "  " alacritty -e tmux a -t system
 hc keybind $Mod-Control-0 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "  " alacritty -e tmux a -t scratchpad
 
