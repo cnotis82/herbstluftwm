@@ -5,7 +5,7 @@
 
 # to switch to the last tag, call: herbstclient emit_hook goto_last_tag
 # or bind it: herbstclient keybind Mod1-Escape emit_hook goto_last_tag
-mode=1
+mode=0
 transparent=1
 stick=0
 tag=""
@@ -94,15 +94,15 @@ hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|full
                 notify-send -u low "Transparent disabled"
 				;;
             bsp)
-				mode=1
+                hc try remove_attr tags.focus.my_bsp_mode
                 notify-send -u low "Binary split enabled"
 				;;
 			no_bsp)
-				mode=0
+                hc try silent new_attr int tags.focus.my_bsp_mode 1
                 notify-send -u low "Binary split disabled"
 				;;
             tag_flags)
-                if [ $mode -eq 1 ]; then
+                if [ $mode -eq 0 ]; then
                     hc chain : lock : and , compare tags.focus.curframe_wcount = 0 , close_and_remove : unlock
                     hc chain : lock : and , compare tags.focus.frame_count = 1 , ! silent get_attr tags.focus.my_unmaximized_layout , set_layout grid : unlock
                 fi
@@ -112,24 +112,30 @@ hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|full
 				tag=${args[1]}
                 winid=${args[2]}
                 focus=$(hc attr tags.focus.name)
+                bsp_mode=$(hc attr tags.by-name."$tag".my_bsp_mode)
 
                 if [ $transparent -eq 1 ]; then
-                    transset-df -i "$winid" 0.85
+                    transset-df -i "$winid" 0.90
                	fi
+
+                if [ $bsp_mode -eq 1 ]; then
+                    mode=1
+                fi
                 
-				if [ $mode -eq 1 ]; then
+				if [ $mode -eq 0 ]; then
                     if [ $tag == $focus ]; then
                           hc chain : lock \
-                               : and , set_layout max , compare tags.by-name."$tag".curframe_wcount gt 1 \
+                                   : and , set_layout max , compare tags.by-name."$tag".curframe_wcount gt 1 \
                                         , ! silent get_attr tags.by-name."$tag".my_unmaximized_layout \
                                         , split explode \
                                         , cycle_frame \
-                               : unlock
+                                   : unlock
                     fi
                 	hc and , compare tags.focus.curframe_wcount = 0 , close_and_remove 
             	fi
                 
                 xdotool set_window --urgency 1 $winid
+                mode=0
                 ;;
             fullscreen)
                 notify-send -u low "Fullscreen $tag"
@@ -154,7 +160,7 @@ hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|full
                 notify-send -u low -t 20000 "${keys}"
                 ;;
             version)
-            ver=$(herbstclient -v | cowsay)
+            ver=$(herbstclient version | cowsay)
                 notify-send -u low "${ver}"
                 ;;
             layout_dump)
