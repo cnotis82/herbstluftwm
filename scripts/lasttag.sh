@@ -21,7 +21,7 @@ hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|full
                 tag=${args[1]}
 
                 if [ $stick -eq 1 ]; then
-                	hc lock
+                    hc lock
                     hc foreach C clients. \
                         sprintf WINIDATTR '%c.winid' C substitute WINID WINIDATTR \
                         sprintf CSTICKYATTR '%c.my_sticky' C \
@@ -51,16 +51,15 @@ hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|full
                 ;;
             sticky)
                 stick=1
-				sticktag=$(hc attr tags.focus.name)
-				
+                sticktag=$(hc attr tags.focus.name)
+
                 hc try silent new_attr int clients.$(hc attr clients.focus.winid).my_sticky 1;
                 hc try silent new_attr string clients.$(hc attr clients.focus.winid).my_sticky_tag "$sticktag";
-                
                 notify-send -u low "Client marked as sticky" "$clientid"
-				;;
-			no_sticky)
+                ;;
+            no_sticky)
                 stick=0
-				FOCUSID=$(hc attr clients.focus.winid)
+                FOCUSID=$(hc attr clients.focus.winid)
                 hc silent attr clients.${FOCUSID}.my_sticky "0";
 
                 hc foreach C clients. \
@@ -70,37 +69,39 @@ hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|full
                     sprintf CTAGATTR '%c.tag' C \
                     and . compare CTAGATTR = FOCUSTAG \
                         . compare CSTICKYATTR = 0 \
-                        . move TAG 
+                        . move TAG
 
                 hc chain . try remove_attr clients.${FOCUSID}.my_sticky \
                          . try remove_attr clients.${FOCUSID}.my_sticky_tag \
                          . try remove_attr clients.${FOCUSID}.my_sticky_layout
 
                 notify-send -u low "Client unmarked as sticky"
-				;;
-			no_sticky_no_move)
+                ;;
+            no_sticky_no_move)
                 stick=0
-				FOCUSID=$(hc attr clients.focus.winid)
+                FOCUSID=$(hc attr clients.focus.winid)
                 hc silent attr clients.${FOCUSID}.my_sticky "0";
 
                 notify-send -u low "Client unmarked as sticky"
-				;;
+                ;;
             trans)
-				transparent=1
+                transparent=1
                 notify-send -u low "Transparent enabled"
-				;;
-			no_trans)
-				transparent=0
+                ;;
+            no_trans)
+                transparent=0
                 notify-send -u low "Transparent disabled"
-				;;
+                ;;
             bsp)
+                mode=0
                 hc try remove_attr tags.focus.my_bsp_mode
                 notify-send -u low "Binary split enabled"
-				;;
-			no_bsp)
+                ;;
+            no_bsp)
+                mode=1
                 hc try silent new_attr int tags.focus.my_bsp_mode 1
                 notify-send -u low "Binary split disabled"
-				;;
+                ;;
             tag_flags)
                 if [ $mode -eq 0 ]; then
                     hc chain : lock : and , compare tags.focus.curframe_wcount = 0 , close_and_remove : unlock
@@ -108,21 +109,21 @@ hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|full
                 fi
                 ;;
             rule|tag_flags)
-				lasttag="$tag"
-				tag=${args[1]}
+                lasttag="$tag"
+                tag=${args[1]}
                 winid=${args[2]}
                 focus=$(hc attr tags.focus.name)
                 bsp_mode=$(hc attr tags.by-name."$tag".my_bsp_mode)
 
                 if [ $transparent -eq 1 ]; then
-                    transset-df -i "$winid" 0.90
-               	fi
+                    transset-df -i "$winid" 0.75
+                fi
 
                 if [ $bsp_mode -eq 1 ]; then
                     mode=1
                 fi
-                
-				if [ $mode -eq 0 ]; then
+
+                if [ $mode -eq 0 ]; then
                     if [ $tag == $focus ]; then
                           hc chain : lock \
                                    : and , set_layout max , compare tags.by-name."$tag".curframe_wcount gt 1 \
@@ -131,9 +132,9 @@ hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|full
                                         , cycle_frame \
                                    : unlock
                     fi
-                	hc and , compare tags.focus.curframe_wcount = 0 , close_and_remove 
-            	fi
-                
+                    hc and , compare tags.focus.curframe_wcount = 0 , close_and_remove
+                fi
+
                 xdotool set_window --urgency 1 $winid
                 mode=0
                 ;;
@@ -145,7 +146,7 @@ hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|full
                 ;;
             pseudotile)
                 notify-send -u low "Pseudotile $tag"
-                ;;    
+                ;;
             split_bottom)
                 notify-send -u low "Split Bottom 0.5"
                 ;;
