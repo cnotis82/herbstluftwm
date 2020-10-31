@@ -23,23 +23,23 @@ hc(['pad', str(monitor), str(height)]) # get space for the panel
 
 # first icon: 0 percent
 # last icon: 100 percent
-conky_text = '%{F\\#d79921} %{F\\#989898}${texeci 600 /home/notis/.config/polybar/gmail/launch.py} '
-conky_text += '%{F\\#d79921}  %{F\\#989898}${texeci 3600 /home/notis/.config/polybar/packages.sh} '
-conky_text += '%{F\\#d79921}  %{F\\#989898}${cpu}% '
-conky_text += '%{F\\#d79921}  %{F\\#989898}${memperc}% '
-conky_text += '%{F\\#d79921}  %{F\\#989898}${i8k_right_fan_rpm} '
-conky_text += '%{F\\#d79921}  %{F\\#989898}${i8k_cpu_temp}°C '
-conky_text += '%{F\\#d79921}  %{F\\#989898}${exec sensors | grep temp1 | cut -c16-23 | head -n 1 }'
-conky_text += '%{F\\#d79921}  %{F\\#989898}${wireless_link_qual_perc wlp3s0}% '
-conky_text += '%{F\\#d79921}  %{F\\#989898}${upspeedf enp2s0}K '
-conky_text += '%{F\\#d79921}  %{F\\#989898}${downspeedf enp2s0}K '
-conky_text += '%{F\\#d79921}%{A1:gsimplecal:}  %{A} %{F\\#989898}${fs_used_perc /}% '
-conky_text += '%{F\\#d79921}  %{F\\#989898}${battery_percent}% '
-conky_weather = '%{F\\#d79921} %{F\\#989898}${texeci 3600 /home/notis/.config/polybar/weather.sh} '
-conky_weather += '%{F\\#d79921}  %{F\\#989898}${texeci 3600 /home/notis/.config/polybar/isrunning-openvpn.sh} '
-conky_weather += '%{F\\#d79921}  %{F\\#989898}${texeci 3600 /home/notis/.config/polybar/isrunning-firewall.sh}'
-conky_weather += '%{F\\#d79921}  %{F\\#989898}${kernel} '
-conky_weather += '%{F\\#d79921}  %{F\\#989898}${uptime_short} '
+#conky_text = '%{F\\#ffb86c} %{F\\#989898}${texeci 600 /home/notis/.config/polybar/gmail/launch.py} '
+conky_text = '%{F\\#ffb86c}  %{F\\#989898}${texeci 3600 /home/notis/.config/polybar/packages.sh} '
+conky_text += '%{F\\#ffb86c}  %{F\\#989898}${cpu}% - ${freq_g}Ghz'
+conky_text += '%{F\\#ffb86c}  %{F\\#989898}${memperc}% '
+conky_text += '%{F\\#ffb86c}  %{F\\#989898}${i8k_right_fan_rpm} '
+conky_text += '%{F\\#ffb86c}  %{F\\#989898}${i8k_cpu_temp}°C '
+conky_text += '%{F\\#ffb86c}  %{F\\#989898}${exec sensors | grep temp1 | cut -c16-23 | head -n 1 }'
+conky_text += '%{F\\#ffb86c}  %{F\\#989898}${wireless_link_qual_perc wlp3s0}% '
+conky_text += '%{F\\#ffb86c}  %{F\\#989898}${upspeedf enp2s0}K '
+conky_text += '%{F\\#ffb86c}  %{F\\#989898}${downspeedf enp2s0}K '
+conky_text += '%{F\\#ffb86c}%{A1:gsimplecal:}  %{A} %{F\\#989898}${fs_used_perc /}% '
+conky_text += '%{F\\#ffb86c}  %{F\\#989898}${battery_percent}% '
+conky_weather = '%{F\\#ffb86c} %{F\\#989898}${texeci 3600 /home/notis/.config/polybar/weather.sh} '
+conky_sys = '%{F\\#ffb86c}  %{F\\#989898}${texeci 3600 /home/notis/.config/polybar/isrunning-openvpn.sh} '
+conky_sys += '%{F\\#ffb86c}  %{F\\#989898}${texeci 3600 /home/notis/.config/polybar/isrunning-firewall.sh}'
+conky_sys += '%{F\\#ffb86c}  %{F\\#989898}${kernel} '
+conky_sys += '%{F\\#ffb86c}  %{F\\#989898}${uptime_short} '
 
 # example options for the hlwm.HLWMLayoutSwitcher widget
 xkblayouts = [
@@ -51,8 +51,10 @@ setxkbmap = 'setxkbmap -option compose:menu -option ctrl:nocaps'
 #setxkbmap += ' -option compose:ralt -option compose:rctrl'
 
 # you can define custom themes
-grey_frame = Theme(bg = '#32302f', fg = '#d79921', padding = (3,3))
-orange_frame = Theme(bg = '#d79921', fg = '#32302f', padding = (3,3))
+grey_frame = Theme(bg = '#32302f', fg = '#ffb86c', padding = (3,3))
+orange_frame = Theme(bg = '#ffb86c', fg = '#32302f', padding = (3,3))
+pink_frame = Theme(bg = '#ff79c6', fg = '#32302f', padding = (3,3))
+purple_frame = Theme(bg = '#bd93f9', fg = '#32302f', padding = (3,3))
 
 # Widget configuration:
 bar = lemonbar.Lemonbar(geometry = (x,y,width,height))
@@ -61,19 +63,21 @@ bar.widget = W.ListLayout([
     hlwm.HLWMTags(hc, monitor, tag_renderer = hlwm.underlined_tags),
     hlwm.HLWMMonitorFocusLayout(hc, monitor,
            # this widget is shown on the focused monitor:
-           orange_frame(hlwm.HLWMLayout(hc)),
+           purple_frame(hlwm.HLWMLayout(hc)),
            # this widget is shown on all unfocused monitors:
-           orange_frame(hlwm.HLWMLayout(hc))
+           purple_frame(hlwm.HLWMLayout(hc))
                                     ),
-    W.RawLabel('%{c}'),
-    hlwm.HLWMMonitorFocusLayout(hc, monitor,
-           # this widget is shown on the focused monitor:
-           grey_frame(hlwm.HLWMWindowTitle(hc)),
-           # this widget is shown on all unfocused monitors:
-           grey_frame(hlwm.HLWMWindowTitle(hc))
-                                    ),
+     W.RawLabel('%{c}'),
+     pink_frame(W.DateTime('%d. %B, %H:%M')),
+     pink_frame(conky.ConkyWidget(text= conky_weather)),
+     #hlwm.HLWMMonitorFocusLayout(hc, monitor,
+     #       # this widget is shown on the focused monitor:
+     #       pink_frame(hlwm.HLWMWindowTitle(hc)),
+     #       # this widget is shown on all unfocused monitors:
+     #       pink_frame(hlwm.HLWMWindowTitle(hc))
+     #                                ),
     W.RawLabel('%{r}'),
-    
+
     W.ShortLongLayout(
       W.RawLabel(' '),
       W.ListLayout([
@@ -89,11 +93,9 @@ bar.widget = W.ListLayout([
             W.RawLabel(' '),
         ])),
     W.ShortLongLayout(
-      W.RawLabel(' '),
+      W.RawLabel(' '),
       W.ListLayout([
-      conky.ConkyWidget(text= conky_weather), 
-      orange_frame(W.DateTime('%d. %B, %H:%M'))
-
+      conky.ConkyWidget(text= conky_sys)
       ])),
     
     trayer.TrayerWidget()
