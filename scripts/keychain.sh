@@ -31,9 +31,9 @@ done
 # by only deleting the appropriate line)
 resizestep=0.05
 hc keybind $Mod-p chain \
-    '->' spawn notify-send "Resize frame (h,j,k,l)" \
-    '->' keybind "${keys[0]}" resize left +$resizestep \
-    '->' keybind "${keys[3]}" resize right +$resizestep \
-    '->' keybind "${keys[1]}" resize down +$resizestep \
-    '->' keybind "${keys[2]}" resize up +$resizestep \
-    '->' keybind Escape       chain "${unbind[@]}"
+    '->' spawn notify-send "Mirror/Rotate frames (h,j,k,l)" \
+    '->' keybind "${keys[0]}" mirror \
+    '->' keybind "${keys[1]}" mirror vertical \
+    '->' keybind "${keys[2]}" mirror both \
+    '->' keybind "${keys[3]}" rotate \
+    '->' keybind Escape       chain "${unbind[@]}" , spawn notify-send "Mirror/Rotate frame Mode exited"
