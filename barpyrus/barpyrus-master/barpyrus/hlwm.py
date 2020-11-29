@@ -97,8 +97,9 @@ def underlined_tags(self, painter): # self is a HLWMTagInfo object
     painter.space(2)
 
 class HLWMTagInfo:
-    def __init__(self):
+    def __init__(self, hlwm):
         self.name = '?'
+        self.hc = hlwm
         self.occupied = True
         self.focused = False
         self.here = False
@@ -107,21 +108,18 @@ class HLWMTagInfo:
         self.empty = False
         self.activecolor = '#ffb86c'
         self.emphbg = '#ffb86c'
-    def parse(self,string): # parse a tag_status string
+    def parse(self,string, wcount, fcount): # parse a tag_status string
         self.name = string[1:]
-        self.parse_char(string[0])
-    def parse_char(self,ch): # parse a tag_status char
+        self.parse_char(string[0], wcount, fcount)
+        print(wcount + fcount)
+    def parse_char(self,ch, wcount, fcount): # parse a tag_status char
         self.occupied = True
         self.focused = False
         self.here = False
         self.urgent = False
         self.visible = True
         self.empty = False
-        if ch == '.':
-            self.occupied = False
-            self.visible = False
-            self.empty = True
-        elif ch == '#':
+        if ch == '#':
             self.focused = True
             self.here = True
         elif ch == '%':
@@ -133,10 +131,16 @@ class HLWMTagInfo:
             self.urgent = True
         elif ch == ':':
             self.visible = False
-
+            if (fcount == '1' and wcount == '0'):
+                self.empty = True
         elif ch == '-':
             self.here = True
             pass
+        elif ch == '.' :
+            self.occupied = False
+            self.visible = False
+            self.empty = True
+        
         else:
             print("Unknown hlwm tag modifier >%s<" % ch)
 
@@ -192,7 +196,7 @@ class HLWMTags(Widget):
         for i in range(len(self.tags),len(strlist)):
             btn = Button('')
             btn.callback = (lambda j: lambda b: self.tag_clicked(j, b))(i)
-            tag_info = HLWMTagInfo()
+            tag_info = HLWMTagInfo(self.hc)
             if self.tag_renderer:
                 btn.pre_render = (lambda t: lambda p: self.tag_renderer(t,p))(tag_info)
             else:
@@ -202,7 +206,9 @@ class HLWMTags(Widget):
             self.tag_info.append(tag_info)
         # update names and formatting
         for i in range(0, self.tag_count):
-            self.tag_info[i].parse(strlist[i])
+            wcount = self.hc(['attr' , 'tags.'+str(i)+'.curframe_wcount'])
+            fcount = self.hc(['attr' , 'tags.'+str(i)+'.frame_count'])
+            self.tag_info[i].parse(strlist[i], wcount, fcount)
         self.needs_update = False
     def tag_clicked(self,tagindex,button):
         cmd = 'chain , focus_monitor %s , use_index %s' % (str(self.monitor),str(tagindex))
