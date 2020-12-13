@@ -35,7 +35,6 @@ hc keybind $Mod-slash spawn /home/notis/.config/herbstluftwm/swap.sh close
 hc keybind $Mod-minus spawn /home/notis/.config/herbstluftwm/scratchpad.sh
 hc keybind $Mod-m spawn /home/notis/.config/herbstluftwm/maximize.sh
 hc keybind $Mod-g spawn /home/notis/.config/herbstluftwm/maximize.sh grid
-hc keybind $Mod-Shift-m spawn /home/notis/.config/herbstluftwm/float-maximize.sh
 hc keybind $Mod-Control-Delete spawn /home/notis/.config/herbstluftwm/powermenu
 hc keybind $Mod-Control-s spawn /home/notis/.config/herbstluftwm/toggledualhead.sh
 hc keybind $Mod-Control-m spawn /home/notis/.config/herbstluftwm/minimized_windows.sh
@@ -183,8 +182,8 @@ hc set_layout grid
 hc keybind $Mod-Control-t spawn /home/notis/.config/herbstluftwm/thememenu.sh
 
 # tags
-tag_names=( "  " "  " "  " "  " "  " "  " "  " "  " "  " "  " "  " "  " "  " "  ")
-tag_keys=( {1..14} 0 )
+tag_names=( "  " "  " "  " "  " "  " "  " "  " "  " "  " "  " )
+tag_keys=( {1..10} 0 )
 
 hc rename default "${tag_names[0]}" || true
 for i in ${!tag_names[@]} ; do
@@ -193,20 +192,20 @@ for i in ${!tag_names[@]} ; do
     if ! [ -z "$key" ] && [ $key -lt 11 ]; then
         hc keybind "$Mod-$key" use_index "$i"
         hc keybind "$Mod-Shift-$key" move_index "$i"
-    else
-        if [ $key -eq 11 ];then
-            hc keybind "Mod4-1" use_index 10
-            hc keybind "Mod4-Shift-1" move_index 10
-        elif [ $key -eq 12 ];then
-            hc keybind "Mod4-2" use_index 11
-            hc keybind "Mod4-Shift-2" move_index 11
-        elif [ $key -eq 13 ];then
-            hc keybind "Mod4-3" use_index 12
-            hc keybind "Mod4-Shift-3" move_index 12
-        elif [ $key -eq 14 ];then
-            hc keybind "Mod4-4" use_index 13
-            hc keybind "Mod4-Shift-4" move_index 13
-        fi
+    #else
+    #    if [ $key -eq 11 ];then
+    #        hc keybind "Mod4-1" use_index 10
+    #        hc keybind "Mod4-Shift-1" move_index 10
+    #    elif [ $key -eq 12 ];then
+    #        hc keybind "Mod4-2" use_index 11
+    #        hc keybind "Mod4-Shift-2" move_index 11
+    #    elif [ $key -eq 13 ];then
+    #        hc keybind "Mod4-3" use_index 12
+    #        hc keybind "Mod4-Shift-3" move_index 12
+    #    elif [ $key -eq 14 ];then
+    #        hc keybind "Mod4-4" use_index 13
+    #        hc keybind "Mod4-Shift-4" move_index 13
+    #    fi
     fi
 done
 hc keybind "$Mod-0" use_index 9
@@ -224,6 +223,7 @@ hc keybind $Mod-t use_previous
 hc keybind $Mod-r chain . remove . cycle_layout +1
 hc keybind $Mod-Shift-s set_attr clients.focus.floating toggle
 hc keybind $Mod-Shift-m set_attr clients.focus.minimized toggle
+hc keybind $Mod-Shift-a chain , lock , spawn /home/notis/.config/herbstluftwm/minimize_clients_on_tag.sh , unlock
 hc keybind $Mod-s chain , floating toggle , emit_hook floating
 hc keybind $Mod-x chain , pseudotile toggle , emit_hook pseudotile
 hc keybind $Mod-f chain , fullscreen toggle , emit_hook fullscreen
@@ -344,14 +344,11 @@ hc rule class=QtCreator tag="  " hook="  "
 hc rule class=Code tag="  " hook="  "
 hc rule class=Gvim tag="  " hook="  "
 hc rule class=org.remmina.Remmina tag="  " hook="  "
-hc rule class=Filezilla tag="  " hook="  "
+hc rule class=Filezilla tag="  " hook="  "
 hc rule class=DesktopEditors tag="  " hook="  "
 hc rule instance=libreoffice tag="  " hook="  "
 hc rule instance=FoxitReader tag="  " hook="  "
 hc rule class=Zathura tag="  " hook="  "
-hc rule class=Sxiv tag="  " hook="  "
-hc rule class=Gimp-2.10 tag="  " hook="  "
-hc rule class=Pencil tag="  " hook="  "
 
 hc rule class=Arandr tag="  " hook="  "
 hc rule class=Xfce4-power-manager-settings tag="  " pseudotile=off hook="  "
