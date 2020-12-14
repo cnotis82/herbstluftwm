@@ -1,7 +1,7 @@
 #!/bin/sh
 tag=$(herbstclient attr tags.focus.name)
 layout=$(herbstclient dump)
-closeallontag=(
+minimizeallontag=(
     foreach C clients.
         substitute TAG tags.focus.name
         sprintf CTAGATTR '%c.tag' C  # the client's tag attribute
@@ -9,11 +9,17 @@ closeallontag=(
             . set_attr clients.focus.minimized true
             . remove
 )
+restoreallontag=(
+    foreach C clients.
+        substitute TAG tags.focus.name
+        sprintf WINIDATTR '%c.winid' C substitute WINID WINIDATTR
+        sprintf CTAGATTR '%c.tag' C  # the client's tag attribute
+        and . compare CTAGATTR = TAG
+            . jumpto WINID
+)
 case "$@" in
-  all)  layout=$(herbstclient dump)
-        herbstclient silent new_attr string tags.focus.my_minimize_layout "$layout" 
-        herbstclient "${closeallontag[@]}"
+    all) herbstclient "${minimizeallontag[@]}"
         ;;
-  restore)  herbstclient substitute LAYOUT tags.focus.my_minimize_layout chain . remove_attr tags.focus.my_minimize_layout . load "$tag" LAYOUT
-          ;;
+  restore) herbstclient "${restoreallontag[@]}"
+      ;;
 esac
