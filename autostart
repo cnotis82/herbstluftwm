@@ -38,8 +38,6 @@ hc keybind $Mod-g spawn /home/notis/.config/herbstluftwm/maximize.sh grid
 hc keybind $Mod-Control-Delete spawn /home/notis/.config/herbstluftwm/powermenu
 hc keybind $Mod-Control-s spawn /home/notis/.config/herbstluftwm/toggledualhead.sh
 hc keybind $Mod-Control-m spawn /home/notis/.config/herbstluftwm/minimized_windows.sh
-hc keybind $Mod-Control-t spawn /home/notis/.config/herbstluftwm/show_bottom_bar.sh
-hc keybind $Mod-Shift-t spawn /home/notis/.config/herbstluftwm/hide_bottom_bar.sh
 hc keybind $Mod-Control-i emit_hook list_keys
 hc keybind $Mod-Control-v emit_hook version
 hc keybind $Mod-Mod4-d spawn /home/notis/.config/herbstluftwm/hlwm-layout-manager.sh save
@@ -174,6 +172,9 @@ hc keybind $Mod-Control-bracketright chain . lock . shift_to_monitor 1 . remove 
 #Show/Hide Lemonbar
 hc keybind $Mod-grave chain , pad 0 0 0 0 0 , pad 1 0 0 0 0 , spawn xdo hide -n lemonbar
 hc keybind $Mod-Control-grave chain , pad 0 20 0 0 0 , pad 1 20 0 0 0 , spawn xdo show -n lemonbar
+#hide trayer
+hc keybind Mod4-h spawn bash -c "pkill -u notis --full trayer"
+hc keybind Mod4-Control-h spawn bash -c "trayer --edge bottom --align right --widthtype request --height 16"
 
 hc set default_frame_layout 3
 hc set_layout grid
@@ -379,10 +380,11 @@ herbstclient emit_hook quit_panel
 pid=( )
 sleep 1
 dunst -conf /home/notis/.config/dunst/dunstrc &
-feh --bg-scale /home/notis/Pictures/fall.jpg
+feh --bg-scale /home/notis/Pictures/florest-stair2.jpg
+
 #compton --backend glx --blur-method kawase --blur-background --blur-strength 5 &
 #compton -b &
-hc spawn bash -c "picom -bft-20"
+hc spawn bash -c "DRI_PRIME=1 picom -cbft-20"
 #xcompmgr -c &
 # find the panel
 panelcmd=${panelcmd:-~/.config/herbstluftwm/panel_polybar.sh}
