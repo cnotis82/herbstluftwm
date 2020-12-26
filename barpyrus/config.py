@@ -25,7 +25,7 @@ hc(['pad', str(monitor), str(height)]) # get space for the panel
 # last icon: 100 percent
 #conky_text = '%{F\\#ffb86c} %{F\\#989898}${texeci 600 /home/notis/.config/polybar/gmail/launch.py} '
 conky_text = '%{F\\#ffb86c}  %{F\\#989898}${texeci 3600 /home/notis/.config/polybar/packages.sh} '
-conky_text += '%{F\\#ffb86c}  %{F\\#989898}${cpu}% - ${freq_g}Ghz'
+conky_text += "%{F\\#ffb86c}  %{F\\#989898}${cpu}% - ${freq_g}Ghz"
 conky_text += '%{F\\#ffb86c}  %{F\\#989898}${memperc}% '
 conky_text += '%{F\\#ffb86c}  %{F\\#989898}${i8k_right_fan_rpm} '
 conky_text += '%{F\\#ffb86c}  %{F\\#989898}${i8k_cpu_temp}°C '
@@ -40,18 +40,19 @@ conky_sys = '%{F\\#ffb86c}  %{F\\#989898}${texeci 3600 /home/notis/.config/po
 conky_sys += '%{F\\#ffb86c}  %{F\\#989898}${texeci 3600 /home/notis/.config/polybar/isrunning-firewall.sh}'
 conky_sys += '%{F\\#ffb86c}  %{F\\#989898}${kernel} '
 conky_sys += '%{F\\#ffb86c}  %{F\\#989898}${uptime_short} '
+#conky_sys += "%{A:pavucontrol:} Click Here %{A}"
 
 # example options for the hlwm.HLWMLayoutSwitcher widget
 xkblayouts = [
     'us us us'.split(' '),
     'gr gr gr'.split(' '),
 ]
-setxkbmap = 'setxkbmap -option compose:menu -option ctrl:nocaps'
-#setxkbmap += 'layout us,gr -option grp:ctrl_shift_toggle'
+#setxkbmap = 'setxkbmap -option compose:menu -option rctrl:nocaps'
+setxkbmap = 'setxkbmap -layout us,gr -option grp:ctrl_shift_toggle'
 #setxkbmap += ' -option compose:ralt -option compose:rctrl'
 
 # you can define custom themes
-grey_frame = Theme(bg = '#32302f', fg = '#ffb86c', padding = (3,3))
+grey_frame = Theme(bg = '#6272a4', fg = '#32302f', padding = (3,3))
 orange_frame = Theme(bg = '#ffb86c', fg = '#32302f', padding = (3,3))
 pink_frame = Theme(bg = '#ff79c6', fg = '#32302f', padding = (3,3))
 purple_frame = Theme(bg = '#bd93f9', fg = '#32302f', padding = (3,3))
@@ -65,18 +66,17 @@ bar.widget = W.ListLayout([
            # this widget is shown on the focused monitor:
            purple_frame(hlwm.HLWMLayout(hc)),
            # this widget is shown on all unfocused monitors:
-           purple_frame(hlwm.HLWMLayout(hc))
-                                    ),
+           purple_frame(hlwm.HLWMLayout(hc))),
+     hlwm.HLWMMonitorFocusLayout(hc, monitor,
+            # this widget is shown on the focused monitor:
+            pink_frame(hlwm.HLWMWindowTitle(hc)),
+            # this widget is shown on all unfocused monitors:
+            pink_frame(hlwm.HLWMWindowTitle(hc))
+                                     ),
      W.RawLabel('%{c}'),
-     pink_frame(W.DateTime('%d. %B, %H:%M')),
-     pink_frame(conky.ConkyWidget(text= conky_weather)),
-     #hlwm.HLWMMonitorFocusLayout(hc, monitor,
-     #       # this widget is shown on the focused monitor:
-     #       pink_frame(hlwm.HLWMWindowTitle(hc)),
-     #       # this widget is shown on all unfocused monitors:
-     #       pink_frame(hlwm.HLWMWindowTitle(hc))
-     #                                ),
-    W.RawLabel('%{r}'),
+     grey_frame(W.DateTime('%d. %B, %H:%M')),
+     grey_frame(conky.ConkyWidget(text= conky_weather)),
+         W.RawLabel('%{r}'),
 
     W.ShortLongLayout(
       W.RawLabel(' '),
@@ -98,7 +98,7 @@ bar.widget = W.ListLayout([
       conky.ConkyWidget(text= conky_sys)
       ])),
     
-    trayer.TrayerWidget()
+    #trayer.TrayerWidget()
 
 ])
 

@@ -175,7 +175,7 @@ class HLWMTags(Widget):
         self.tag_renderer = tag_renderer
         self.monitor = monitor
         self.activecolor = hlwm('attr theme.active.color'.split(' '))
-        self.emphbg = '#ff79c6'
+        self.emphbg = '#928374'
         self.update_tags()
         hlwm.enhook('tag_changed', lambda a: self.update_tags(args = a))
         hlwm.enhook('tag_flags', lambda a: self.update_tags(args = a))
@@ -237,7 +237,7 @@ class HLWMTags(Widget):
         self.hc(cmd)
 
 class HLWMWindowTitle(Label):
-    def __init__(self, hlwm, maxlen = 100):
+    def __init__(self, hlwm, maxlen = 50):
         self.windowtitle = hlwm(['attr', 'clients.focus.title'])
         self.maxlen = maxlen
         super(HLWMWindowTitle,self).__init__('')
@@ -291,53 +291,53 @@ class HLWMLayout(Label):
         if self.monitor == "false" :
 
             if index > 0:
-                self.label = "T-[" + self.fcount + "/" + self.count + "]"
+                self.label = "[T-" + self.fcount + "/" + self.count + "]"
             else:
                 if self.layout.find("grid") > 0:
                     if self.count > self.fcount:
-                        self.label = "G-[" + self.fcount + "/" + self.count + "]Min"
+                        self.label = "[G-" + self.fcount + "/" + self.count + "-Min]"
                     else:
-                        self.label = "G"
+                        self.label = "[G]"
                 elif self.layout.find("horizontal") > 0:
                     if self.count > self.fcount:
-                        self.label = "H-[" + self.fcount + "/" + self.count + "]Min"
+                        self.label = "[H-" + self.fcount + "/" + self.count + "-Min]"
                     else:
-                        self.label = "H"
+                        self.label = "[H]"
                 elif self.layout.find("vertical") > 0:
                     if self.count > self.fcount:
-                        self.label = "V-[" + self.fcount + "/" + self.count + "]Min"
+                        self.label = "[V-" + self.fcount + "/" + self.count + "-Min]"
                     else:
-                        self.label = "V"
+                        self.label = "[V]"
 
                 else:    
                     if self.count > self.fcount:
-                        self.label = "[" + self.fcount + "/" + self.count + "]-Min"
+                        self.label = "[" + self.fcount + "/" + self.count + "-Min]"
                     else:
-                        self.label = self.count
+                        self.label = "[" + self.count + "]"
         else:
             if index > 0:
-                self.label = "T-[" + self.fcount + "/" + self.count + "]-[]"
+                self.label = "[T-" + self.fcount + "/" + self.count + "-]"
             else:
                 if self.layout.find("grid") > 0:
                     if self.count > self.fcount:
-                        self.label = "G-[" + self.fcount + "/" + self.count +"]Min-[]"
+                        self.label = "[G-" + self.fcount + "/" + self.count +"-Min-]"
                     else:
-                        self.label = "G" + " - []"
+                        self.label = "[G" + " - ]"
                 elif self.layout.find("horizontal") > 0:
                     if self.count > self.fcount:
-                        self.label = "H-[" + self.fcount + "/" + self.count +"]Min-[]"
+                        self.label = "[H-" + self.fcount + "/" + self.count +"-Min-]"
                     else:
-                        self.label = "H" + " - []"
+                        self.label = "[H" + " - ]"
                 elif self.layout.find("vertical") > 0:
                     if self.count > self.fcount:
-                        self.label = "V-[" + self.fcount + "/" + self.count +"]Min-[]"
+                        self.label = "[V-" + self.fcount + "/" + self.count +"-Min-]"
                     else:
-                        self.label = "V" + " - []"
+                        self.label = "[V" + " - ]"
                 else:    
                     if self.count > self.fcount:
-                        self.label = "[" + self.fcount + "/" + self.count + "]Min-[]"
+                        self.label = "[" + self.fcount + "/" + self.count + "-Min-]"
                     else:
-                        self.label = self.count + "-[]"
+                        self.label = "[" + self.count + "- ]"
     def render_themed(self,painter):
         if self.label != '':
             super(HLWMLayout,self).render_themed(painter)
