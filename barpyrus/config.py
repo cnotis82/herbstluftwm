@@ -24,22 +24,22 @@ hc(['pad', str(monitor), str(height)]) # get space for the panel
 # first icon: 0 percent
 # last icon: 100 percent
 #conky_text = '%{F\\#ffb86c} %{F\\#989898}${texeci 600 /home/notis/.config/polybar/gmail/launch.py} '
-conky_text = '%{+u}%{U\\#ffb86c}%{F\\#ffb86c} %{F\\#989898}${texeci 3600 /home/notis/.config/polybar/packages.sh}%{U-}%{-u} '
-conky_text += "%{+u}%{U\\#ff79c6}%{F\\#ff79c6}  %{F\\#989898}${cpu}% - ${freq_g}Ghz %{U-}%{-u} "
-conky_text += '%{+u}%{U\\#bd93f9}%{F\\#bd93f9} %{F\\#989898}${memperc}% %{U-}%{-u} '
-conky_text += '%{+u}%{U\\#8be9fd}%{F\\#8be9fd} %{F\\#989898}${i8k_right_fan_rpm}%{U-}%{-u} '
-conky_text += '%{+u}%{U\\#f1fa8c}%{F\\#f1fa8c} %{F\\#989898}${i8k_cpu_temp}°C '
-conky_text += '%{F\\#6272a4}  %{F\\#989898}${exec sensors | grep temp1 | cut -c16-23 | head -n 1 } %{U-}%{-u} '
-conky_text += '%{+u}%{U\\#6272a4}%{F\\#6272a4} %{F\\#989898}${wireless_link_qual_perc wlp3s0}% '
-conky_text += '%{F\\#ff5555}  %{F\\#989898}${upspeedf enp2s0}K '
-conky_text += '%{F\\#50fa7b}  %{F\\#989898}${downspeedf enp2s0}K %{U-}%{-u} '
-conky_text += '%{+u}%{U\\#ff79c6}%{F\\#ff79c6}%{A:gsimplecal:}  %{F\\#989898}${fs_used_perc /}% %{U-}%{-u}%{A} '
-conky_text += '%{+u}%{U\\#50fa7b}%{F\\#50fa7b} %{F\\#989898}${battery_percent}% %{U-}%{-u} '
+conky_text = '%{F\\#ffb86c} ${texeci 3600 /home/notis/.config/polybar/packages.sh} '
+conky_text += "%{F\\#ff79c6}  ${cpu}% - ${freq_g}Ghz  "
+conky_text += '%{F\\#bd93f9} ${memperc}%  '
+conky_text += '%{F\\#8be9fd} ${i8k_right_fan_rpm} '
+conky_text += '%{F\\#f1fa8c} ${i8k_cpu_temp}°C '
+conky_text += '%{F\\#f1fa8c}  ${exec sensors | grep temp1 | cut -c16-23 | head -n 1 }  '
+conky_text += '%{F\\#6272a4} ${wireless_link_qual_perc wlp3s0}% '
+conky_text += '%{F\\#ff5555}  ${upspeedf enp2s0}K '
+conky_text += '%{F\\#50fa7b}  ${downspeedf enp2s0}K  '
+conky_text += '%{F\\#6272a4} ${texeci 60 /home/notis/.config/polybar/isrunning-openvpn.sh}  '
+conky_text += '%{F\\#ff5555} ${texeci 3600 /home/notis/.config/polybar/isrunning-firewall.sh}  '
+conky_text += '%{F\\#50fa7b} ${battery_percent}% %{F-} '
 conky_weather = '%{F\\#ffb86c} %{F\\#989898}${texeci 3600 /home/notis/.config/polybar/weather.sh} '
-conky_sys = '%{+u}%{U\\#6272a4}%{F\\#6272a4} %{F\\#989898}${texeci 3600 /home/notis/.config/polybar/isrunning-openvpn.sh} %{U-}%{-u} '
-conky_sys += '%{+u}%{U\\#ff5555}%{F\\#ff5555} %{F\\#989898}${texeci 3600 /home/notis/.config/polybar/isrunning-firewall.sh} %{U-}%{-u} '
-conky_sys += '%{+u}%{U\\#ffb86c}%{F\\#ffb86c} %{F\\#989898}${kernel} %{U-}%{-u} '
-conky_sys += '%{+u}%{U\\#50fa7b}%{F\\#50fa7b} %{F\\#989898}${uptime_short} %{U-}%{-u} '
+conky_sys = '%{F\\#ff79c6}%{A:gsimplecal:}  ${fs_used_perc /}% %{A} '
+conky_sys += '%{F\\#ffb86c} ${kernel}  '
+conky_sys += '%{F\\#50fa7b} ${uptime_short} %{F-} '
 #conky_sys += "%{A:pavucontrol:} Click Here %{A}"
 
 # example options for the hlwm.HLWMLayoutSwitcher widget
