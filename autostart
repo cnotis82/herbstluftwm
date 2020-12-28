@@ -274,12 +274,15 @@ hc set frame_gap 10
 hc set focus_follows_mouse 0
 hc set gapless_grid 1
 
+hc attr theme.title_height 15
 hc attr theme.active.color '#ffb86c'
 hc attr theme.normal.color '#3c2b22'
 hc attr theme.urgent.color red
 hc attr theme.inner_width 1
 hc attr theme.inner_color black
 hc attr theme.border_width 1
+
+hc attr theme.floating.title_height 0
 hc attr theme.floating.active.color '#ffb86c'
 hc attr theme.floating.normal.color dimgray
 hc attr theme.floating.border_width 3
@@ -300,9 +303,6 @@ hc attr theme.tiling.normal.color dimgray
 hc attr theme.tiling.border_width 3
 hc attr theme.tiling.outer_width 1
 hc attr theme.tiling.outer_color black
-hc attr theme.tiling.padding_bottom 15
-
-
 hc attr theme.background_color '#1f1f1f'
 
 hc set window_gap 0
