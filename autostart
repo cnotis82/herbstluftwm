@@ -235,13 +235,15 @@ hc keybind $Mod-Shift-f substitute FSRESTORE clients.focus.fullscreen chain , fu
 # The following cycles through the available layouts within a frame, but skips
 # layouts, if the layout change wouldn't affect the actual window positions.
 # I.e. if there are two windows within a frame, the grid layout is skipped.
-hc keybind $Mod-space                                                           \
+hc keybind $Mod-Shift-space                                                           \
             or , and . compare tags.focus.curframe_wcount = 2                   \
                      . cycle_layout +1 vertical horizontal max vertical grid    \
                , cycle_layout +1
 
 hc keybind $Mod-Shift-g set_layout grid
-hc keybind $Mod-Shift-space set_layout max
+hc keybind $Mod-space or : and '?' \
+                       compare tags.focus.tiling.focused_frame.algorithm '=' max \
+                       '?' try cycle : set_layout max
 
 # mouse
 hc mouseunbind --all
@@ -275,6 +277,7 @@ hc set focus_follows_mouse 0
 hc set gapless_grid 1
 
 hc attr theme.title_height 15
+hc attr theme.title_font '-*-fixed-medium-r-*-*-13-*-*-*-*-*-*-*'
 hc attr theme.active.color '#ffb86c'
 hc attr theme.normal.color '#3c2b22'
 hc attr theme.urgent.color red
@@ -384,7 +387,8 @@ feh --bg-scale /home/notis/Pictures/florest-stair2.jpg
 
 #compton --backend glx --blur-method kawase --blur-background --blur-strength 5 &
 #compton -b &
-hc spawn bash -c "DRI_PRIME=1 picom -cbft-20"
+#hc spawn bash -c "DRI_PRIME=1 picom -cbft-20"
+hc spawn bash -c "DRI_PRIME=1 picom --experimental-backends -cbft-20"
 #xcompmgr -c &
 # find the panel
 panelcmd=${panelcmd:-~/.config/herbstluftwm/panel_polybar.sh}
