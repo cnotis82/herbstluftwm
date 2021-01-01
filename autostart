@@ -388,7 +388,7 @@ feh --bg-scale /home/notis/Pictures/florest-stair2.jpg
 #compton --backend glx --blur-method kawase --blur-background --blur-strength 5 &
 #compton -b &
 #hc spawn bash -c "DRI_PRIME=1 picom -cbft-20"
-hc spawn bash -c "DRI_PRIME=1 picom --experimental-backends -cbft-20"
+hc spawn bash -c "DRI_PRIME=1 picom --experimental-backend --vsync -cbft-20"
 #xcompmgr -c &
 # find the panel
 panelcmd=${panelcmd:-~/.config/herbstluftwm/panel_polybar.sh}
