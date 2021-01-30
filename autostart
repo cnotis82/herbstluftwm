@@ -24,6 +24,7 @@ pkill -u notis --full perclient_kb_layout
 pkill -u notis --full lasttag
 pkill -u notis --full keychain
 pkill -u notis --full keychain_trans
+pkill -u notis --full picom
 hc spawn /home/notis/.config/herbstluftwm/perclient_kb_layout.sh
 hc spawn /home/notis/.config/herbstluftwm/keychain.sh
 hc spawn /home/notis/.config/herbstluftwm/keychain_trans.sh
@@ -40,8 +41,8 @@ hc keybind $Mod-Control-s spawn /home/notis/.config/herbstluftwm/toggledualhead.
 hc keybind $Mod-Control-m spawn /home/notis/.config/herbstluftwm/minimized_windows.sh
 hc keybind $Mod-Control-i emit_hook list_keys
 hc keybind $Mod-Control-v emit_hook version
-hc keybind $Mod-Mod4-d spawn /home/notis/.config/herbstluftwm/hlwm-layout-manager.sh save
-hc keybind $Mod-Mod4-a spawn /home/notis/.config/herbstluftwm/hlwm-layout-manager.sh load
+#hc keybind $Mod-Mod4-d spawn /home/notis/.config/herbstluftwm/hlwm-layout-manager.sh save
+#hc keybind $Mod-Mod4-a spawn /home/notis/.config/herbstluftwm/hlwm-layout-manager.sh load
 hc keybind $Mod-F1 chain , emit_hook no_bsp , load "$(<"$layouts/"default"")" , focus -e l , emit_hook bsp
 hc keybind $Mod-F2 chain , emit_hook no_bsp , load "$(<"$layouts/"MasterLeft"")" , focus -e l , emit_hook bsp
 hc keybind $Mod-F3 chain , emit_hook no_bsp , load "$(<"$layouts/"ThreeColumn"")" , focus -e , emit_hook bsp
@@ -50,7 +51,7 @@ hc keybind $Mod-F5 chain , emit_hook no_bsp , load "$(<"$layouts/"bsp"")" , focu
 
 hc keybind $Mod-Control-c spawn /home/notis/.config/herbstluftwm/herstcmd.sh
 hc keybind $Mod-b spawn /home/notis/.config/herbstluftwm/bring.sh
-hc keybind $Mod-Control-a spawn /home/notis/.config/herbstluftwm/new_tag.sh
+hc keybind $Mod-Mod4-a spawn /home/notis/.config/herbstluftwm/new_tag.sh
 hc keybind $Mod-d spawn /home/notis/.config/herbstluftwm/merge_tag.sh
 hc keybind $Mod-j spawn /home/notis/.config/herbstluftwm/rmenu_wi
 hc keybind $Mod-w spawn /home/notis/.config/herbstluftwm/herstcmd.sh move
@@ -262,10 +263,10 @@ hc keybind $Mod-i jumpto urgent
 hc attr theme.minimal.reset 1
 hc attr theme.tiling.reset 1
 hc attr theme.floating.reset 1
-hc set frame_border_active_color '#222222'
-hc set frame_border_normal_color '#101010'
-hc set frame_bg_normal_color '#565656'
-hc set frame_bg_active_color '#ffb86c'
+hc set frame_border_active_color '#473428'
+hc set frame_border_normal_color '#3c2b22'
+hc set frame_bg_normal_color '#443a36'
+hc set frame_bg_active_color '#79695a'
 hc set frame_border_width 0
 hc set always_show_frame 1
 hc set frame_bg_transparent 0
@@ -277,36 +278,33 @@ hc set focus_follows_mouse 0
 hc set gapless_grid 1
 
 hc attr theme.title_height 15
-hc attr theme.title_font '-*-fixed-medium-r-*-*-13-*-*-*-*-*-*-*'
-hc attr theme.active.color '#ffb86c'
-hc attr theme.normal.color '#3c2b22'
+hc attr theme.title_font 'Iosevka Term:pixelsize=12'
+hc attr theme.active.color '#201e1a'
+hc attr theme.normal.color '#201e1a'
 hc attr theme.urgent.color red
 hc attr theme.inner_width 1
 hc attr theme.inner_color black
 hc attr theme.border_width 1
 
 hc attr theme.floating.title_height 0
-hc attr theme.floating.active.color '#ffb86c'
+hc attr theme.floating.active.color '#473428'
 hc attr theme.floating.normal.color dimgray
 hc attr theme.floating.border_width 3
 hc attr theme.floating.outer_width 1
 hc attr theme.floating.padding_left 22
-hc attr theme.active.inner_color '#978965'
-hc attr theme.active.outer_color '#1f1f1f'
-
-hc attr theme.minimal.color '#ffb86c'
-
-hc attr theme.minimal.active.color '#ffb86c'
+hc attr theme.floating.active.inner_color '#473428'
+hc attr theme.floating.normal.inner_color '#3c2b22'
+hc attr theme.minimal.active.color '#473428'
 hc attr theme.minimal.normal.color dimgray
 hc attr theme.minimal.border_width 5
 hc attr theme.minimal.outer_width 1
 hc attr theme.minimal.outer_color black
-hc attr theme.tiling.active.color '#ffb86c'
+hc attr theme.tiling.active.color '#473428'
 hc attr theme.tiling.normal.color dimgray
 hc attr theme.tiling.border_width 3
 hc attr theme.tiling.outer_width 1
 hc attr theme.tiling.outer_color black
-hc attr theme.background_color '#1f1f1f'
+hc attr theme.background_color '#201e1a'
 
 hc set window_gap 0
 hc set frame_padding 0
