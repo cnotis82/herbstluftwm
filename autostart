@@ -25,6 +25,7 @@ pkill -u notis --full lasttag
 pkill -u notis --full keychain
 pkill -u notis --full keychain_trans
 pkill -u notis --full picom
+pkill -u notis --full dunst
 hc spawn /home/notis/.config/herbstluftwm/perclient_kb_layout.sh
 hc spawn /home/notis/.config/herbstluftwm/keychain.sh
 hc spawn /home/notis/.config/herbstluftwm/keychain_trans.sh
@@ -265,13 +266,13 @@ hc attr theme.tiling.reset 1
 hc attr theme.floating.reset 1
 hc set frame_border_active_color '#473428'
 hc set frame_border_normal_color '#3c2b22'
-hc set frame_bg_normal_color '#443a36'
-hc set frame_bg_active_color '#79695a'
+hc set frame_bg_normal_color '#79695a'
+hc set frame_bg_active_color '#473428'
 hc set frame_border_width 0
 hc set always_show_frame 1
 hc set frame_bg_transparent 0
-hc set frame_active_opacity 20
-hc set frame_normal_opacity 40
+hc set frame_active_opacity 40
+hc set frame_normal_opacity 20
 hc set frame_transparent_width 0
 hc set frame_gap 10
 hc set focus_follows_mouse 0
@@ -279,8 +280,6 @@ hc set gapless_grid 1
 
 hc attr theme.title_height 15
 hc attr theme.title_font 'Iosevka Term:pixelsize=12'
-hc attr theme.active.color '#201e1a'
-hc attr theme.normal.color '#201e1a'
 hc attr theme.urgent.color red
 hc attr theme.inner_width 1
 hc attr theme.inner_color black
@@ -292,8 +291,8 @@ hc attr theme.floating.normal.color dimgray
 hc attr theme.floating.border_width 3
 hc attr theme.floating.outer_width 1
 hc attr theme.floating.padding_left 22
-hc attr theme.floating.active.inner_color '#473428'
-hc attr theme.floating.normal.inner_color '#3c2b22'
+
+hc attr theme.minimal.color '#473428'
 hc attr theme.minimal.active.color '#473428'
 hc attr theme.minimal.normal.color dimgray
 hc attr theme.minimal.border_width 5
