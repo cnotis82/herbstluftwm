@@ -14,10 +14,9 @@ print_menu=(
         sprintf WINIDATTR '%c.winid' C substitute WINID WINIDATTR
         sprintf TITLEATTR '%c.title' C substitute TITLE TITLEATTR
         sprintf MINATTR '%c.minimized' C substitute MIN MINATTR
-        sprintf CTAGATTR '%c.tag' C substitute TAG CTAGATTR # the client's tag attribute
-        or , and . compare MINATTR = false
-           , and . compare MINATTR = true
-                 . echo TAG TITLE WINID
+        sprintf CTAGATTR '%c.tag' C substitute TAG CTAGATTR
+        or : and , compare MINATTR = false
+           : sprintf AGEATTR '%c.my_minimized_age' C substitute AGEATT AGEATTR and . compare MINATTR = true . echo TAG TITLE AGEATTR WINID
 
 )
 
@@ -35,4 +34,4 @@ result=$("${print_menu[@]}" | rofi -i -lines 10 -padding 20 -width 50 -show drun
 IFS=' ' # space is set as delimiter
 read -ra RES <<< "$result"
 
-herbstclient jumpto ${RES[-1]}
+herbstclient and : jumpto ${RES[-1]} : remove_attr ${RES[-2]}

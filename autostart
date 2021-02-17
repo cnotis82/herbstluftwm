@@ -30,6 +30,7 @@ hc spawn /home/notis/.config/herbstluftwm/perclient_kb_layout.sh
 hc spawn /home/notis/.config/herbstluftwm/keychain.sh
 hc spawn /home/notis/.config/herbstluftwm/keychain_trans.sh
 hc spawn /home/notis/.config/herbstluftwm/lasttag.sh
+hc spawn /home/notis/.config/herbstluftwm/unminimize.sh
 hc keybind $Mod-semicolon spawn /home/notis/.config/herbstluftwm/swap.sh auto
 hc keybind $Mod-Control-semicolon spawn /home/notis/.config/herbstluftwm/swap.sh stack_spawn
 hc keybind $Mod-Shift-semicolon spawn /home/notis/.config/herbstluftwm/swap.sh master_spawn
@@ -225,7 +226,7 @@ hc keybind Mod4-Shift-l unlock_tag ""
 hc keybind $Mod-t use_previous
 hc keybind $Mod-r chain . remove . cycle_layout +1
 hc keybind $Mod-Shift-s set_attr clients.focus.floating toggle
-hc keybind $Mod-Shift-m set_attr clients.focus.minimized toggle
+#hc keybind $Mod-Shift-m set_attr clients.focus.minimized toggle
 hc keybind $Mod-Shift-a chain , lock , spawn /home/notis/.config/herbstluftwm/minimize_clients_on_tag.sh all , unlock
 hc keybind $Mod-Control-a chain , lock , spawn /home/notis/.config/herbstluftwm/minimize_clients_on_tag.sh restore , unlock
 hc keybind $Mod-s chain , floating toggle , emit_hook floating
