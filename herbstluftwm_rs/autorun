@@ -1,0 +1,10 @@
+#!/bin/bash
+hc() { "${herbstclient_command[@]:-herbstclient}" "$@" ;}
+if pgrep -x "$1">/dev/null; then
+	polybar-msg cmd quit
+	rm /tmp/bottom-bar.pid
+	sleep 3
+	polybar bottom-bar &
+	echo "$!" > /tmp/bottom-bar.pid
+	
+fi

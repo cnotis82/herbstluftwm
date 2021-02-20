@@ -1,0 +1,402 @@
+#!/usr/bin/env bash
+
+# this is a simple config for herbstluftwm
+
+hc() {
+    herbstclient "$@"
+}
+
+hc emit_hook reload
+
+xsetroot -solid '#5A8E3A'
+
+# remove all existing keybindings
+hc keyunbind --all
+
+# keybindings
+# if you have a super key you will be much happier with Mod set to Mod4
+Mod=Mod1    # Use alt as the main modifier
+#Mod=Mod4   # Use the super key as the main modifier
+layouts="$HOME/.config/herbstluftwm/layouts"
+
+#scripts
+pkill -u notis --full perclient_kb_layout
+pkill -u notis --full lasttag
+pkill -u notis --full keychain
+pkill -u notis --full keychain_trans
+hc spawn /home/notis/.config/herbstluftwm/perclient_kb_layout.sh
+hc spawn /home/notis/.config/herbstluftwm/keychain.sh
+hc spawn /home/notis/.config/herbstluftwm/keychain_trans.sh
+hc spawn /home/notis/.config/herbstluftwm/lasttag.sh
+hc keybind $Mod-semicolon spawn /home/notis/.config/herbstluftwm/swap.sh auto
+hc keybind $Mod-Control-semicolon spawn /home/notis/.config/herbstluftwm/swap.sh stack_spawn
+hc keybind $Mod-Shift-semicolon spawn /home/notis/.config/herbstluftwm/swap.sh master_spawn
+hc keybind $Mod-slash spawn /home/notis/.config/herbstluftwm/swap.sh close
+hc keybind $Mod-minus spawn /home/notis/.config/herbstluftwm/scratchpad.sh
+hc keybind $Mod-m spawn /home/notis/.config/herbstluftwm/maximize.sh
+hc keybind $Mod-g spawn /home/notis/.config/herbstluftwm/maximize.sh grid
+hc keybind $Mod-Control-Delete spawn /home/notis/.config/herbstluftwm/powermenu
+hc keybind $Mod-Control-s spawn /home/notis/.config/herbstluftwm/toggledualhead.sh
+hc keybind $Mod-Control-m spawn /home/notis/.config/herbstluftwm/minimized_windows.sh
+hc keybind $Mod-Control-t spawn /home/notis/.config/herbstluftwm/show_bottom_bar.sh
+hc keybind $Mod-Shift-t spawn /home/notis/.config/herbstluftwm/hide_bottom_bar.sh
+hc keybind $Mod-Control-i emit_hook list_keys
+hc keybind $Mod-Control-v emit_hook version
+hc keybind $Mod-Mod4-d spawn /home/notis/.config/herbstluftwm/hlwm-layout-manager.sh save
+hc keybind $Mod-Mod4-a spawn /home/notis/.config/herbstluftwm/hlwm-layout-manager.sh load
+hc keybind $Mod-F1 chain , emit_hook no_bsp , load "$(<"$layouts/"default"")" , focus -e l , emit_hook bsp
+hc keybind $Mod-F2 chain , emit_hook no_bsp , load "$(<"$layouts/"MasterLeft"")" , focus -e l , emit_hook bsp
+hc keybind $Mod-F3 chain , emit_hook no_bsp , load "$(<"$layouts/"ThreeColumn"")" , focus -e , emit_hook bsp
+hc keybind $Mod-F4 chain , emit_hook no_bsp , load "$(<"$layouts/"Grid"")" , focus -e l , emit_hook bsp
+hc keybind $Mod-F5 chain , emit_hook no_bsp , load "$(<"$layouts/"bsp"")" , focus -e l , emit_hook bsp
+
+hc keybind $Mod-Control-c spawn /home/notis/.config/herbstluftwm/herstcmd.sh
+hc keybind $Mod-b spawn /home/notis/.config/herbstluftwm/bring.sh
+hc keybind $Mod-Control-a spawn /home/notis/.config/herbstluftwm/new_tag.sh
+hc keybind $Mod-d spawn /home/notis/.config/herbstluftwm/merge_tag.sh
+hc keybind $Mod-j spawn /home/notis/.config/herbstluftwm/rmenu_wi
+hc keybind $Mod-w spawn /home/notis/.config/herbstluftwm/herstcmd.sh move
+
+#minimize window
+hc keybind $Mod-n       spawn /home/notis/.config/herbstluftwm/hide_window.sh hide
+hc keybind $Mod-Control-n spawn /home/notis/.config/herbstluftwm/hide_window.sh unhide
+hc keybind $Mod-Shift-n spawn /home/notis/.config/herbstluftwm/hide_window.sh use
+#minimize tag
+hc keybind Mod4-n spawn /home/notis/.config/herbstluftwm/hide_window.sh all
+hc keybind Mod4-Control-n spawn /home/notis/.config/herbstluftwm/hide_window.sh restore
+
+#multimedia
+hc keybind XF86AudioLowerVolume spawn amixer -q set Master 5%-
+hc keybind XF86AudioRaiseVolume spawn amixer -q set Master 5%+
+hc keybind XF86AudioMute spawn amixer -q set Master toggle
+hc keybind XF86AudioNext spawn mpc next
+hc keybind XF86AudioPrev spawn mpc prev
+hc keybind XF86AudioPlay spawn mpc toggle
+hc keybind XF86Mail spawn thunderbird
+hc keybind XF86Music spawn st -e ncmpcpp
+hc keybind XF86Calculator spawn galculator
+hc keybind XF86HomePage spawn jgmenu_run
+hc keybind Print spawn bash -c "scrot '%Y-%m-%d_$wx$h_scrot.png' -e 'mv $f ~/Pictures/'; herbstclient emit_hook print"
+
+#system
+hc keybind $Mod-Control-q chain , foreach C clients. sprintf WINIDATTR '%c.winid' C substitute WINID WINIDATTR close WINID , quit
+hc keybind $Mod-Control-r reload
+hc keybind $Mod-q close_and_remove
+hc keybind $Mod-Shift-q chain , lock , spawn /home/notis/.config/herbstluftwm/close_clients_on_tag.sh , unlock
+hc keybind $Mod-Escape spawn xkill
+
+# Application
+hc keybind $Mod-Return spawn alacritty -e zsh # use your $TERMINAL with xterm as fallback
+hc keybind $Mod-a spawn /home/notis/.config/herbstluftwm/rmenu_wi_g
+hc keybind Mod4-f spawn bash -c "firefox& disown"
+hc keybind Mod4-r spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "reddit" firefox --new-window https://www.reddit.com/
+hc keybind Mod4-e spawn thunderbird
+hc keybind Mod4-v spawn bash -c "viber& disown"
+hc keybind Mod4-l spawn bash -c "betterlockscreen -l dim"
+hc keybind Mod4-s spawn bash -c "slack& disown"
+hc keybind Mod4-p spawn bash -c "popcorntime& disown"
+hc keybind Mod4-g spawn bash -c "gitkraken& disown"
+hc keybind Mod4-c spawn bash -c "code& disown"
+hc keybind Mod4-d spawn bash -c "discord& disown"
+hc keybind Mod4-w spawn bash -c "libreoffice& disown"
+hc keybind Mod4-m emit_hook bsp
+hc keybind Mod4-Shift-m emit_hook no_bsp
+hc keybind Mod4-t emit_hook trans
+hc keybind Mod4-Shift-t emit_hook no_trans
+hc keybind Mod4-Return emit_hook sticky
+hc keybind Mod4-Shift-Return emit_hook no_sticky
+hc keybind Mod4-Control-Return emit_hook no_sticky_no_move
+
+# tmux sessions
+#hc keybind $Mod-Control-1 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "  " alacritty -e tmux a -t home
+hc keybind $Mod-Control-3 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "  " alacritty -e tmux a -t file
+hc keybind $Mod-Control-4 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "  " alacritty -e tmux a -t chat
+hc keybind $Mod-Control-6 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "  " alacritty -e tmux a -t dev
+#hc keybind $Mod-Control-8 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "  " alacritty -e tmux a -t system
+hc keybind $Mod-Control-0 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "  " alacritty -e tmux a -t scratchpad
+
+# focusing clients
+hc set focus_crosses_monitor_boundaries 0
+hc keybind $Mod-Left  or , focus left , focus_edge right
+hc keybind $Mod-Down  or , focus down , focus_edge up
+hc keybind $Mod-Up    or , focus up , focus_edge down
+hc keybind $Mod-Right or , focus right , focus_edge left
+
+# moving clients
+hc keybind $Mod-Shift-Left  or , shift left , shift_edge right
+hc keybind $Mod-Shift-Down  or , shift down , shift_edge up
+hc keybind $Mod-Shift-Up    or , shift up , shift_edge down
+hc keybind $Mod-Shift-Right or , shift right , shift_edge left
+
+# splitting frames
+# create an empty frame at the specified direction
+hc keybind $Mod-u chain , lock , split bottom 0.5 , focus -e d , unlock
+hc keybind $Mod-o chain , lock , split right 0.5 , focus -e r , unlock
+hc keybind $Mod-Control-u chain , lock , split top 0.5 , focus -e u , unlock
+hc keybind $Mod-Control-o chain , lock , split left 0.5 , focus -e l , unlock
+hc keybind Mod4-u chain , lock , split bottom 0.5 '' , focus -e d , unlock
+hc keybind Mod4-o chain , lock , split right 0.5 '' , focus -e r , unlock
+hc keybind Mod4-Control-u chain , lock , split top 0.5 '' , focus -e u , unlock
+hc keybind Mod4-Control-o chain , lock , split left 0.5 '' , focus -e l , unlock
+# let the current frame explode into subframes
+hc keybind $Mod-Control-space chain , split explode , or . focus right . focus down
+hc keybind $Mod-z chain , lock , rotate , unlock
+
+#Load layouts
+hc keybind $Mod-Control-5 spawn /home/notis/.config/herbstluftwm/load_spawn_social.sh
+hc keybind $Mod-Control-1 spawn /home/notis/.config/herbstluftwm/load_spawn_basic.sh
+hc keybind $Mod-Control-8 spawn /home/notis/.config/herbstluftwm/load_spawn_sys.sh
+
+# resizing frames
+resizestep=0.02
+hc keybind $Mod-Shift-h resize left +$resizestep
+hc keybind $Mod-Shift-j resize down +$resizestep
+hc keybind $Mod-Shift-k resize up +$resizestep
+hc keybind $Mod-Shift-l resize right +$resizestep
+hc keybind $Mod-Shift-r drag "" resize
+
+# resize window in floating mode
+hc keybind $Mod-Control-Left spawn /home/notis/.config/herbstluftwm/winsizer.sh -x
+hc keybind $Mod-Control-Right spawn /home/notis/.config/herbstluftwm/winsizer.sh +x
+hc keybind $Mod-Control-Up spawn /home/notis/.config/herbstluftwm/winsizer.sh -y
+hc keybind $Mod-Control-Down spawn /home/notis/.config/herbstluftwm/winsizer.sh +y
+
+# Gaps
+hc keybind $Mod-Mod4-Up spawn /home/notis/.config/herbstluftwm/frame_gap_sizer.sh +x
+hc keybind $Mod-Mod4-Down spawn /home/notis/.config/herbstluftwm/frame_gap_sizer.sh -x
+hc keybind $Mod-Mod4-equal set frame_gap 10
+hc keybind $Mod-Control-w set always_show_frame toggle
+
+# Shifting to monitor
+hc keybind $Mod-Control-bracketleft  chain . lock . shift_to_monitor 0 . remove . focus_monitor 0 . unlock
+hc keybind $Mod-Control-bracketright chain . lock . shift_to_monitor 1 . remove . focus_monitor 1 . unlock
+
+#Show/Hide Lemonbar
+hc keybind $Mod-grave chain , pad 0 0 0 0 0 , pad 1 0 0 0 0 , spawn xdo hide -n lemonbar
+hc keybind $Mod-Control-grave chain , pad 0 20 0 0 0 , pad 1 20 0 0 0 , spawn xdo show -n lemonbar
+
+hc set default_frame_layout 3
+hc set_layout grid
+
+#themes
+hc keybind $Mod-Control-t spawn /home/notis/.config/herbstluftwm/thememenu.sh
+
+# tags
+tag_names=( "  " "  " "  " "  " "  " "  " "  " "  " "  " "  " "  " "  " "  " "  ")
+tag_keys=( {1..14} 0 )
+
+hc rename default "${tag_names[0]}" || true
+for i in ${!tag_names[@]} ; do
+    hc add "${tag_names[$i]}"
+    key="${tag_keys[$i]}"
+    if ! [ -z "$key" ] && [ $key -lt 11 ]; then
+        hc keybind "$Mod-$key" use_index "$i"
+        hc keybind "$Mod-Shift-$key" move_index "$i"
+    else
+        if [ $key -eq 11 ];then
+            hc keybind "Mod4-1" use_index 10
+            hc keybind "Mod4-Shift-1" move_index 10
+        elif [ $key -eq 12 ];then
+            hc keybind "Mod4-2" use_index 11
+            hc keybind "Mod4-Shift-2" move_index 11
+        elif [ $key -eq 13 ];then
+            hc keybind "Mod4-3" use_index 12
+            hc keybind "Mod4-Shift-3" move_index 12
+        elif [ $key -eq 14 ];then
+            hc keybind "Mod4-4" use_index 13
+            hc keybind "Mod4-Shift-4" move_index 13
+        fi
+    fi
+done
+hc keybind "$Mod-0" use_index 9
+hc keybind "$Mod-Shift-0" move_index 9
+
+# cycle through tags
+hc keybind Mod4-period use_index +1 --skip-visible
+hc keybind Mod4-comma  use_index -1 --skip-visible
+hc keybind $Mod-period spawn /home/notis/.config/herbstluftwm/herbst-move.py +1 full
+hc keybind $Mod-comma  spawn /home/notis/.config/herbstluftwm/herbst-move.py -1 full
+hc keybind Mod4-Control-l lock_tag ""
+hc keybind Mod4-Shift-l unlock_tag ""
+# layouting
+hc keybind $Mod-t use_previous
+hc keybind $Mod-r chain . remove . cycle_layout +1
+hc keybind $Mod-Shift-s set_attr clients.focus.floating toggle
+hc keybind $Mod-Shift-m set_attr clients.focus.minimized toggle
+hc keybind $Mod-s chain , floating toggle , emit_hook floating
+hc keybind $Mod-x chain , pseudotile toggle , emit_hook pseudotile
+hc keybind $Mod-f chain , fullscreen toggle , emit_hook fullscreen
+hc keybind $Mod-Shift-f substitute FSRESTORE clients.focus.fullscreen chain , fullscreen on , attr clients.focus.ewmhnotify toggle , spawn herbstclient fullscreen FSRESTORE
+
+#hc keybind $Mod-p pseudotile toggle
+# The following cycles through the available layouts within a frame, but skips
+# layouts, if the layout change wouldn't affect the actual window positions.
+# I.e. if there are two windows within a frame, the grid layout is skipped.
+hc keybind $Mod-space                                                           \
+            or , and . compare tags.focus.curframe_wcount = 2                   \
+                     . cycle_layout +1 vertical horizontal max vertical grid    \
+               , cycle_layout +1
+
+hc keybind $Mod-Shift-g set_layout grid
+hc keybind $Mod-Shift-space set_layout max
+
+# mouse
+hc mouseunbind --all
+hc mousebind $Mod-Button1 move
+hc mousebind $Mod-Button2 zoom
+hc mousebind $Mod-Button3 resize
+
+# focus
+hc keybind $Mod-BackSpace   cycle_monitor
+hc keybind $Mod-Tab         cycle_all +1
+hc keybind $Mod-Shift-Tab   cycle_all -1
+hc keybind $Mod-c cycle
+hc keybind $Mod-i jumpto urgent
+
+# # theme
+hc attr theme.minimal.reset 1
+hc attr theme.tiling.reset 1
+hc attr theme.floating.reset 1
+hc set frame_border_active_color '#222222'
+hc set frame_border_normal_color '#101010'
+hc set frame_bg_normal_color '#565656'
+hc set frame_bg_active_color '#ffb86c'
+hc set frame_border_width 0
+hc set always_show_frame 1
+hc set frame_bg_transparent 0
+hc set frame_active_opacity 20
+hc set frame_normal_opacity 40
+hc set frame_transparent_width 0
+hc set frame_gap 10
+hc set focus_follows_mouse 0
+hc set gapless_grid 1
+
+hc attr theme.active.color '#ffb86c'
+hc attr theme.normal.color '#3c2b22'
+hc attr theme.urgent.color red
+hc attr theme.inner_width 1
+hc attr theme.inner_color black
+hc attr theme.border_width 1
+hc attr theme.floating.active.color '#ffb86c'
+hc attr theme.floating.normal.color dimgray
+hc attr theme.floating.border_width 3
+hc attr theme.floating.outer_width 1
+hc attr theme.floating.padding_left 22
+hc attr theme.active.inner_color '#978965'
+hc attr theme.active.outer_color '#1f1f1f'
+
+hc attr theme.minimal.color '#ffb86c'
+
+hc attr theme.minimal.active.color '#ffb86c'
+hc attr theme.minimal.normal.color dimgray
+hc attr theme.minimal.border_width 5
+hc attr theme.minimal.outer_width 1
+hc attr theme.minimal.outer_color black
+hc attr theme.tiling.active.color '#ffb86c'
+hc attr theme.tiling.normal.color dimgray
+hc attr theme.tiling.border_width 3
+hc attr theme.tiling.outer_width 1
+hc attr theme.tiling.outer_color black
+hc attr theme.tiling.padding_bottom 15
+
+
+hc attr theme.background_color '#1f1f1f'
+
+hc set window_gap 0
+hc set frame_padding 0
+hc set smart_window_surroundings 1
+hc set smart_frame_surroundings 1
+hc set mouse_recenter_gap 0
+hc set hide_covered_windows 1
+hc set update_dragged_clients 1
+
+# rules
+hc unrule -F
+hc rule index=e
+hc rule floatplacement=smart
+hc rule class=Termite tag="  " hook="  " focus=off
+hc rule class=Alacritty tag="  " hook="  " focus=off
+hc rule instance=st tag="  " hook="  " focus=off
+hc rule class=XTerm tag="   " hook="   " focus=off
+hc rule class=firefox tag="  " hook="  " focus=off
+hc rule class=Brave-browser tag="  " hook="  " focus=off ewmhrequests=off
+hc rule class=Thunderbird tag="  " hook="  " focus=off
+hc rule class=Google-chrome tag="  "
+hc rule class=Pcmanfm tag="  " hook="  " focus=off
+hc rule class=Polo-gtk tag="  "
+hc rule class=Corebird tag="  " hook="  " focus=off
+hc rule class=Pidgin tag="  " hook="  " focus=off
+hc rule class=Hexchat tag="  " hook="  " focus=off
+hc rule class=ViberPC tag="  " hook="  " focus=off
+hc rule class=discord tag="  " hook="  " focus=off keys_inactive="Mod-Up"
+hc rule class=Slack tag="  " hook="  " focus=off
+hc rule class=Clementine tag="  "
+hc rule class=mpv tag="  "
+hc rule class=vlc tag="  " hook="  " focus=off
+hc rule class=Popcorn-Time tag="  "  hook="  " focus=off
+hc rule class=Spotify tag="  "
+hc rule class=Chromium-browser tag="  " hook="  " focus=off
+hc rule class=GitKraken tag="  " hook="  " focus=off pseudotile=on
+hc rule class=Atom tag="  " hook="  "
+hc rule class=Subl3 tag="  " hook="  " ewmhrequests=off
+hc rule class=QtCreator tag="  " hook="  "
+hc rule class=Code tag="  " hook="  "
+hc rule class=Gvim tag="  " hook="  "
+hc rule class=org.remmina.Remmina tag="  " hook="  "
+hc rule class=Filezilla tag="  " hook="  "
+hc rule class=DesktopEditors tag="  " hook="  "
+hc rule instance=libreoffice tag="  " hook="  "
+hc rule instance=FoxitReader tag="  " hook="  "
+hc rule class=Zathura tag="  " hook="  "
+hc rule class=Sxiv tag="  " hook="  "
+hc rule class=Gimp-2.10 tag="  " hook="  "
+hc rule class=Pencil tag="  " hook="  "
+
+hc rule class=Arandr tag="  " hook="  "
+hc rule class=Xfce4-power-manager-settings tag="  " pseudotile=off hook="  "
+hc rule class=gufw.py tag="  " hook="  "
+ # move all xterms to tag 3
+hc rule focus=on # normally focus new clients
+#hc rule focus=off # normally do not focus new clients
+# give focus to most common terminals
+#hc rule class~'(.*[Rr]xvt.*|.*[Tt]erm|Konsole)' focus=on
+hc rule windowtype~'_NET_WM_WINDOW_TYPE_(DIALOG|UTILITY|SPLASH)' floating=on floatplacement=center
+hc rule windowtype='_NET_WM_WINDOW_TYPE_DIALOG' focus=on floatplacement=center
+hc rule windowtype~'_NET_WM_WINDOW_TYPE_(NOTIFICATION|DOCK|DESKTOP)' manage=off
+hc rule class=Gsimplecal manage=off
+
+# unlock, just to be sure
+hc unlock
+
+herbstclient set tree_style '╾│ ├└╼─┐'
+
+# do multi monitor setup here, e.g.:
+# hc set_monitors 1280x1024+0+0 1280x1024+1280+0
+# or simply:
+hc detect_monitors
+#hc set_monitors 2560x1080+0+0
+#autostart]
+herbstclient emit_hook quit_panel
+pid=( )
+sleep 1
+dunst -conf /home/notis/.config/dunst/dunstrc &
+feh --bg-scale /home/notis/Pictures/fall.jpg
+#compton --backend glx --blur-method kawase --blur-background --blur-strength 5 &
+#compton -b &
+hc spawn bash -c "picom -CGbft-20"
+#xcompmgr -c &
+# find the panel
+panelcmd=${panelcmd:-~/.config/herbstluftwm/panel_polybar.sh}
+
+
+for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do
+    # start it on each monitor
+    "$panelcmd" $monitor &
+done
+
+#herbstclient spawn /home/notis/.config/barpyrus/barpyrus-master/barpyrus.py &
+herbstclient spawn /home/notis/.config/barpyrus/barpyrus-master/barpyrus1.py &
+
+herbstclient -w '(quit_panel|reload)'
+
+kill ${pids[@]}
