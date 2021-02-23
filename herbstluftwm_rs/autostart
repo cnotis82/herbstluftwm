@@ -369,7 +369,7 @@ hc rule class=Gsimplecal manage=off
 # unlock, just to be sure
 hc unlock
 
-herbstclient set tree_style '╾│ ├└╼─┐'
+hc set tree_style '╾│ ├└╼─┐'
 
 # do multi monitor setup here, e.g.:
 # hc set_monitors 1280x1024+0+0 1280x1024+1280+0
@@ -377,7 +377,7 @@ herbstclient set tree_style '╾│ ├└╼─┐'
 hc detect_monitors
 #hc set_monitors 2560x1080+0+0
 #autostart]
-herbstclient emit_hook quit_panel
+hc emit_hook quit_panel
 pid=( )
 sleep 1
 dunst -conf /home/notis/.config/dunst/dunstrc &
@@ -392,14 +392,14 @@ hc spawn bash -c "DRI_PRIME=1 picom --experimental-backend --vsync -cbft-20"
 panelcmd=${panelcmd:-~/.config/herbstluftwm/panel_polybar.sh}
 
 
-for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do
+for monitor in $(hc list_monitors | cut -d: -f1) ; do
     # start it on each monitor
     "$panelcmd" $monitor &
 done
 
 #herbstclient spawn /home/notis/.config/barpyrus/barpyrus-master/barpyrus.py &
-herbstclient spawn /home/notis/.config/barpyrus/barpyrus-master/barpyrus1.py &
+hc spawn /home/notis/.config/barpyrus/barpyrus-master/barpyrus1.py &
 
-herbstclient -w '(quit_panel|reload)'
+#hc -w '(quit_panel|reload)'
 
 kill ${pids[@]}

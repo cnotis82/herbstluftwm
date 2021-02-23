@@ -12,7 +12,7 @@ tag=""
 clientid=""
 sticktag=""
 hc() { "${herbstclient_command[@]:-hc_rs}" "$@" ;}
-herbstclient --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|fullscreen|floating|minimized|pseudotile|split_bottom|split_right|list_keys|version|layout_dump|print|tag_flags|bsp|no_bsp|max|trans|no_trans|sticky|no_sticky)' \
+hc_rs --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|fullscreen|floating|minimized|pseudotile|split_bottom|split_right|list_keys|version|layout_dump|print|tag_flags|bsp|no_bsp|max|trans|no_trans|sticky|no_sticky)' \
     | while read line ; do
         IFS=$'\t' read -ra args <<< "$line"
         case ${args[0]} in

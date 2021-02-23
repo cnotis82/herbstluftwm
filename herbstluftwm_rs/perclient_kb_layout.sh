@@ -34,7 +34,7 @@ hc() {
 
 FOCUS_WINID=$(hc attr clients.focus.winid)
 
-herbstclient --idle focus_changed | while read hook winid name
+hc_rs --idle focus_changed | while read hook winid name
 do
     # Save current keyboard layout for window loosing focus
     hc try silent new_attr int clients.${FOCUS_WINID}.my_kb_layout;

@@ -33,12 +33,12 @@ hc add "$tag"
 monitor=scratchpad
 
 exists=false
-if ! herbstclient add_monitor $(printf "%dx%d%+d%+d" "${rect[@]}") \
-                    "$tag" $monitor 2> /dev/null ; then
+if ! hc add_monitor $(printf "%dx%d%+d%+d" "${rect[@]}") \
+                    "$tag" "$monitor" 2> /dev/null ; then
     exists=true
 else
     # remember which monitor was focused previously
-    hc chain \
+    hc and \
         , new_attr string monitors.by-name."$monitor".my_prev_focus \
         , substitute M monitors.focus.index \
             set_attr monitors.by-name."$monitor".my_prev_focus M

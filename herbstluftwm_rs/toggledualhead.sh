@@ -4,7 +4,7 @@
 # Running this on a splitted monitor joins the two monitor halfs again.
 
 hc() {
-    herbstclient "$@"
+    hc_rs "$@"
 }
 
 array2rect() {
@@ -55,7 +55,7 @@ else
 fi
 
 # restart the panels
-herbstclient emit_hook quit_panel
+hc emit_hook quit_panel
 pid=( )
 
 
@@ -71,8 +71,8 @@ for monitor in $(herbstclient list_monitors | cut -d: -f1) ; do
 
 done
 
-herbstclient spawn /home/notis/.config/barpyrus/barpyrus-master/barpyrus.py &
+hc spawn /home/notis/.config/barpyrus/barpyrus-master/barpyrus.py &
 
-herbstclient -w '(quit_panel|reload)'
+#hc_rs -w '(quit_panel|reload)'
 
 kill ${pids[@]}

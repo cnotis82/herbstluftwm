@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-hc() { "${herbstclient_command[@]:-herbstclient}" "$@" ;}
+hc() { "${herbstclient_command[@]:-hc_rs}" "$@" ;}
 
 # loads layouts for each tag coming from stdin
 # the format is the one created by savestate.sh

@@ -27,7 +27,7 @@ dm() {
     fi
 }
 
-hc() { "${herbstclient_command[@]:-herbstclient}" "$@" ;}
+hc() { "${herbstclient_command[@]:-hc_rs}" "$@" ;}
 prompt=${prompt:-herbstluft: }
 display_reply=${display_reply:-true}
 
