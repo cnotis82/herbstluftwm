@@ -87,7 +87,9 @@ hc keybind $Mod-Shift-q chain , lock , spawn /home/notis/.config/herbstluftwm/cl
 hc keybind $Mod-Escape spawn xkill
 
 # Application
-hc keybind $Mod-Return spawn alacritty -e zsh # use your $TERMINAL with xterm as fallback
+hc keybind $Mod-Return chain , and : compare tags.by-name."  ".curframe_wcount != 0 \
+                                   : split auto \
+                             , spawn alacritty -e zsh # use your $TERMINAL with xterm as fallback
 hc keybind $Mod-a spawn /home/notis/.config/herbstluftwm/rmenu_wi_g
 hc keybind Mod4-f spawn bash -c "firefox& disown"
 hc keybind Mod4-r spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "reddit" firefox --new-window https://www.reddit.com/
@@ -100,8 +102,8 @@ hc keybind Mod4-g spawn bash -c "gitkraken& disown"
 hc keybind Mod4-c spawn bash -c "code& disown"
 hc keybind Mod4-d spawn bash -c "discord& disown"
 hc keybind Mod4-w spawn bash -c "libreoffice& disown"
-hc keybind Mod4-m emit_hook bsp
-hc keybind Mod4-Shift-m emit_hook no_bsp
+#hc keybind Mod4-m emit_hook bsp
+#hc keybind Mod4-Shift-m emit_hook no_bsp
 hc keybind Mod4-t emit_hook trans
 hc keybind Mod4-Shift-t emit_hook no_trans
 hc keybind Mod4-Return emit_hook sticky
@@ -284,12 +286,12 @@ hc attr theme.title_font 'Iosevka Term:pixelsize=12'
 hc attr theme.urgent.color red
 hc attr theme.inner_width 1
 hc attr theme.inner_color black
-hc attr theme.border_width 1
+hc attr theme.border_width 3
 
 hc attr theme.floating.title_height 0
 hc attr theme.floating.active.color '#473428'
 hc attr theme.floating.normal.color dimgray
-hc attr theme.floating.border_width 3
+hc attr theme.floating.border_width 5
 hc attr theme.floating.outer_width 1
 hc attr theme.floating.padding_left 22
 
@@ -301,7 +303,7 @@ hc attr theme.minimal.outer_width 1
 hc attr theme.minimal.outer_color black
 hc attr theme.tiling.active.color '#473428'
 hc attr theme.tiling.normal.color dimgray
-hc attr theme.tiling.border_width 3
+hc attr theme.tiling.border_width 5
 hc attr theme.tiling.outer_width 1
 hc attr theme.tiling.outer_color black
 hc attr theme.background_color '#201e1a'
@@ -382,7 +384,7 @@ pid=( )
 sleep 1
 dunst -conf /home/notis/.config/dunst/dunstrc &
 feh --bg-scale /home/notis/Pictures/florest-stair2.jpg
-
+setxkbmap -layout us,gr -option grp:ctrl_shift_toggle
 #compton --backend glx --blur-method kawase --blur-background --blur-strength 5 &
 #compton -b &
 #hc spawn bash -c "DRI_PRIME=1 picom -cbft-20"
