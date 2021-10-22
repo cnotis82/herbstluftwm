@@ -105,23 +105,19 @@ class HLWMTagInfo:
         self.urgent = False
         self.visible = True
         self.empty = False
-        self.activecolor = '#d79921'
-        self.emphbg = '#d79921'
-    def parse(self,string): # parse a tag_status string
+        self.activecolor = '#ffb86c'
+        self.emphbg = '#ffb86c'
+    def parse(self,string, wcount, fcount): # parse a tag_status string
         self.name = string[1:]
-        self.parse_char(string[0])
-    def parse_char(self,ch): # parse a tag_status char
+        self.parse_char(string[0], wcount, fcount)
+    def parse_char(self,ch, wcount, fcount): # parse a tag_status char
         self.occupied = True
         self.focused = False
         self.here = False
         self.urgent = False
         self.visible = True
         self.empty = False
-        if ch == '.':
-            self.occupied = False
-            self.visible = False
-            self.empty = True
-        elif ch == '#':
+        if ch == '#':
             self.focused = True
             self.here = True
         elif ch == '%':
@@ -133,10 +129,16 @@ class HLWMTagInfo:
             self.urgent = True
         elif ch == ':':
             self.visible = False
-
+            if (fcount == '1' and wcount == '0'):
+                self.empty = True
         elif ch == '-':
             self.here = True
             pass
+        elif ch == '.' :
+            self.occupied = False
+            self.visible = False
+            self.empty = True
+        
         else:
             print("Unknown hlwm tag modifier >%s<" % ch)
 
@@ -173,7 +175,7 @@ class HLWMTags(Widget):
         self.tag_renderer = tag_renderer
         self.monitor = monitor
         self.activecolor = hlwm('attr theme.active.color'.split(' '))
-        self.emphbg = '#d79921'
+        self.emphbg = '#928374'
         self.update_tags()
         hlwm.enhook('tag_changed', lambda a: self.update_tags(args = a))
         hlwm.enhook('tag_flags', lambda a: self.update_tags(args = a))
@@ -202,7 +204,11 @@ class HLWMTags(Widget):
             self.tag_info.append(tag_info)
         # update names and formatting
         for i in range(0, self.tag_count):
-            self.tag_info[i].parse(strlist[i])
+            fcount = self.hc(['attr' , 'tags.'+str(i)+'.frame_count'])
+            wcount = 1
+            if(fcount == "1"):
+                wcount = self.hc(['attr' , 'tags.'+str(i)+'.curframe_wcount'])
+            self.tag_info[i].parse(strlist[i], wcount, fcount)
         self.needs_update = False
     def tag_clicked(self,tagindex,button):
         cmd = 'chain , focus_monitor %s , use_index %s' % (str(self.monitor),str(tagindex))
@@ -231,7 +237,7 @@ class HLWMTags(Widget):
         self.hc(cmd)
 
 class HLWMWindowTitle(Label):
-    def __init__(self, hlwm, maxlen = -1):
+    def __init__(self, hlwm, maxlen = 50):
         self.windowtitle = hlwm(['attr', 'clients.focus.title'])
         self.maxlen = maxlen
         super(HLWMWindowTitle,self).__init__('')
@@ -285,28 +291,53 @@ class HLWMLayout(Label):
         if self.monitor == "false" :
 
             if index > 0:
-                self.label = "T-" + self.fcount
+                self.label = "[T-" + self.fcount + "/" + self.count + "]"
             else:
                 if self.layout.find("grid") > 0:
-                    self.label = "G"
+                    if self.count > self.fcount:
+                        self.label = "[G-" + self.fcount + "/" + self.count + "-Min]"
+                    else:
+                        self.label = "[G]"
                 elif self.layout.find("horizontal") > 0:
-                    self.label = "H"
+                    if self.count > self.fcount:
+                        self.label = "[H-" + self.fcount + "/" + self.count + "-Min]"
+                    else:
+                        self.label = "[H]"
                 elif self.layout.find("vertical") > 0:
-                    self.label = "V"
+                    if self.count > self.fcount:
+                        self.label = "[V-" + self.fcount + "/" + self.count + "-Min]"
+                    else:
+                        self.label = "[V]"
+
                 else:    
-                    self.label = self.count
+                    if self.count > self.fcount:
+                        self.label = "[" + self.fcount + "/" + self.count + "-Min]"
+                    else:
+                        self.label = "[" + self.count + "]"
         else:
             if index > 0:
-                self.label = "T-" + self.fcount + " - []"
+                self.label = "[T-" + self.fcount + "/" + self.count + "-]"
             else:
                 if self.layout.find("grid") > 0:
-                    self.label = "G" + " - []"
+                    if self.count > self.fcount:
+                        self.label = "[G-" + self.fcount + "/" + self.count +"-Min-]"
+                    else:
+                        self.label = "[G" + " - ]"
                 elif self.layout.find("horizontal") > 0:
-                    self.label = "H" + " - []"
+                    if self.count > self.fcount:
+                        self.label = "[H-" + self.fcount + "/" + self.count +"-Min-]"
+                    else:
+                        self.label = "[H" + " - ]"
                 elif self.layout.find("vertical") > 0:
-                    self.label = "V" + " - []"
+                    if self.count > self.fcount:
+                        self.label = "[V-" + self.fcount + "/" + self.count +"-Min-]"
+                    else:
+                        self.label = "[V" + " - ]"
                 else:    
-                    self.label = self.count + " - []"
+                    if self.count > self.fcount:
+                        self.label = "[" + self.fcount + "/" + self.count + "-Min-]"
+                    else:
+                        self.label = "[" + self.count + "- ]"
     def render_themed(self,painter):
         if self.label != '':
             super(HLWMLayout,self).render_themed(painter)

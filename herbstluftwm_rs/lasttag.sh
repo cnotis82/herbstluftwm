@@ -11,8 +11,8 @@ stick=0
 tag=""
 clientid=""
 sticktag=""
-hc() { "${herbstclient_command[@]:-herbstclient}" "$@" ;}
-hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|fullscreen|floating|minimized|pseudotile|split_bottom|split_right|list_keys|version|layout_dump|print|tag_flags|bsp|no_bsp|max|trans|no_trans|sticky|no_sticky)' \
+hc() { "${herbstclient_command[@]:-hc_rs}" "$@" ;}
+hc_rs --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|fullscreen|floating|minimized|pseudotile|split_bottom|split_right|list_keys|version|layout_dump|print|tag_flags|bsp|no_bsp|max|trans|no_trans|sticky|no_sticky)' \
     | while read line ; do
         IFS=$'\t' read -ra args <<< "$line"
         case ${args[0]} in
@@ -119,23 +119,23 @@ hc --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|full
                     transset-df -i "$winid" 0.85
                 fi
 
-                if [ $bsp_mode -eq 1 ]; then
-                    mode=1
-                fi
+                #if [ $bsp_mode -eq 1 ]; then
+                #    mode=1
+                #fi
 
-                if [ $mode -eq 0 ]; then
-                    if [ $tag == $focus ]; then
-                          hc chain : lock \
-                                   : and , set_layout max , compare tags.by-name."$tag".curframe_wcount gt 1 \
-                                        , ! silent get_attr tags.by-name."$tag".my_unmaximized_layout \
-                                        , split explode \
-                                   : unlock
-                    fi
-                    hc and , compare tags.focus.curframe_wcount = 0 , close_and_remove
-                fi
+                #if [ $mode -eq 0 ]; then
+                #    if [ $tag == $focus ]; then
+                #          hc chain : lock \
+                #                   : and , set_layout max , compare tags.by-name."$tag".curframe_wcount gt 1 \
+                #                        , ! silent get_attr tags.by-name."$tag".my_unmaximized_layout \
+                #                        , split explode \
+                #                   : unlock
+                #    fi
+                #    hc and , compare tags.focus.curframe_wcount = 0 , close_and_remove
+                #fi
 
                 xdotool set_window --urgency 1 $winid
-                mode=0
+                #mode=0
                 ;;
             fullscreen)
                 #notify-send -u low "Fullscreen $tag"

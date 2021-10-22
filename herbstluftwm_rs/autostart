@@ -20,7 +20,6 @@ Mod=Mod1    # Use alt as the main modifier
 layouts="$HOME/.config/herbstluftwm/layouts"
 
 #scripts
-pkill -u notis --full lemonbar
 pkill -u notis --full perclient_kb_layout
 pkill -u notis --full lasttag
 pkill -u notis --full keychain
@@ -42,11 +41,10 @@ hc keybind $Mod-g spawn /home/notis/.config/herbstluftwm/maximize.sh grid
 hc keybind $Mod-Control-Delete spawn /home/notis/.config/herbstluftwm/powermenu
 hc keybind $Mod-Control-s spawn /home/notis/.config/herbstluftwm/toggledualhead.sh
 hc keybind $Mod-Control-m spawn /home/notis/.config/herbstluftwm/minimized_windows.sh
-hc keybind $Mod-Control-l spawn /home/notis/.config/herbstluftwm/client_lists.sh
 hc keybind $Mod-Control-i emit_hook list_keys
 hc keybind $Mod-Control-v emit_hook version
-hc keybind $Mod-Mod4-s spawn /home/notis/.config/herbstluftwm/save_layout.sh
-hc keybind $Mod-Mod4-s spawn /home/notis/.config/herbstluftwm/save_layout.sh
+#hc keybind $Mod-Mod4-d spawn /home/notis/.config/herbstluftwm/hlwm-layout-manager.sh save
+#hc keybind $Mod-Mod4-a spawn /home/notis/.config/herbstluftwm/hlwm-layout-manager.sh load
 hc keybind $Mod-F1 chain , emit_hook no_bsp , load "$(<"$layouts/"default"")" , focus -e l , emit_hook bsp
 hc keybind $Mod-F2 chain , emit_hook no_bsp , load "$(<"$layouts/"MasterLeft"")" , focus -e l , emit_hook bsp
 hc keybind $Mod-F3 chain , emit_hook no_bsp , load "$(<"$layouts/"ThreeColumn"")" , focus -e , emit_hook bsp
@@ -93,7 +91,7 @@ hc keybind $Mod-Return chain , and : compare tags.by-name."  ".curframe_wcoun
                                    : split auto \
                              , spawn alacritty -e zsh # use your $TERMINAL with xterm as fallback
 hc keybind $Mod-a spawn /home/notis/.config/herbstluftwm/rmenu_wi_g
-hc keybind Mod4-f spawn bash -c "DRI_PRIME=1 firefox& disown"
+hc keybind Mod4-f spawn bash -c "firefox& disown"
 hc keybind Mod4-r spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "reddit" firefox --new-window https://www.reddit.com/
 hc keybind Mod4-e spawn thunderbird
 hc keybind Mod4-v spawn bash -c "viber& disown"
@@ -259,7 +257,7 @@ hc mousebind $Mod-Button2 zoom
 hc mousebind $Mod-Button3 resize
 
 # focus
-hc keybind $Mod-BackSpace   cycle_monitor +1
+hc keybind $Mod-BackSpace   cycle_monitor
 hc keybind $Mod-Tab         cycle_all +1
 hc keybind $Mod-Shift-Tab   cycle_all -1
 hc keybind $Mod-c cycle
@@ -269,16 +267,16 @@ hc keybind $Mod-i jumpto urgent
 hc attr theme.minimal.reset 1
 hc attr theme.tiling.reset 1
 hc attr theme.floating.reset 1
-hc set frame_border_active_color '#345F0Cef' 
+hc set frame_border_active_color '#473428'
 hc set frame_border_normal_color '#3c2b22'
 hc set frame_bg_normal_color '#79695a'
-hc set frame_bg_active_color '#345F0C' 
+hc set frame_bg_active_color '#473428'
 hc set frame_border_width 0
 hc set always_show_frame 1
-hc set frame_bg_transparent 1
-hc set frame_active_opacity 60
+hc set frame_bg_transparent 0
+hc set frame_active_opacity 40
 hc set frame_normal_opacity 20
-hc set frame_transparent_width 5
+hc set frame_transparent_width 0
 hc set frame_gap 10
 hc set focus_follows_mouse 0
 hc set gapless_grid 1
@@ -286,31 +284,31 @@ hc set gapless_grid 1
 hc attr theme.title_height 15
 hc attr theme.title_font 'Iosevka Term:pixelsize=12'
 hc attr theme.urgent.color red
-hc attr theme.inner_width 0
-hc attr theme.inner_color white
-hc attr theme.border_width 0
+hc attr theme.inner_width 1
+hc attr theme.inner_color black
+hc attr theme.border_width 3
 
 hc attr theme.floating.title_height 0
-hc attr theme.floating.active.color '#345F0Cef' 
+hc attr theme.floating.active.color '#473428'
 hc attr theme.floating.normal.color dimgray
 hc attr theme.floating.border_width 5
 hc attr theme.floating.outer_width 1
 hc attr theme.floating.padding_left 22
 
-hc attr theme.minimal.color brown 
-hc attr theme.minimal.active.color '#345F0Cef' 
+hc attr theme.minimal.color '#473428'
+hc attr theme.minimal.active.color '#473428'
 hc attr theme.minimal.normal.color dimgray
 hc attr theme.minimal.border_width 5
 hc attr theme.minimal.outer_width 1
 hc attr theme.minimal.outer_color black
-hc attr theme.tiling.active.color '#345F0Cef' 
+hc attr theme.tiling.active.color '#473428'
 hc attr theme.tiling.normal.color dimgray
 hc attr theme.tiling.border_width 5
 hc attr theme.tiling.outer_width 1
 hc attr theme.tiling.outer_color black
-hc attr theme.background_color white 
+hc attr theme.background_color '#201e1a'
 
-hc set window_gap 5 
+hc set window_gap 0
 hc set frame_padding 0
 hc set smart_window_surroundings 1
 hc set smart_frame_surroundings 1
@@ -330,7 +328,7 @@ hc rule class=firefox tag="  " hook="  " focus=off
 hc rule class=Brave-browser tag="  " hook="  " focus=off ewmhrequests=off
 hc rule class=Thunderbird tag="  " hook="  " focus=off
 hc rule class=Google-chrome tag="  "
-hc rule class=Thunar tag="  " hook="  " focus=off
+hc rule class=Pcmanfm tag="  " hook="  " focus=off
 hc rule class=Polo-gtk tag="  "
 hc rule class=Corebird tag="  " hook="  " focus=off
 hc rule class=Pidgin tag="  " hook="  " focus=off
@@ -385,12 +383,12 @@ hc emit_hook quit_panel
 pid=( )
 sleep 1
 dunst -conf /home/notis/.config/dunst/dunstrc &
-feh --bg-scale /home/notis/Pictures/clay-banks-u27Rrbs9Dwc-unsplash.jpg
-setxkbmap -layout us,gr -option grp:rctrl_rshift_toggle > /dev/null&
+feh --bg-scale /home/notis/Pictures/florest-stair2.jpg
+setxkbmap -layout us,gr -option grp:ctrl_shift_toggle
 #compton --backend glx --blur-method kawase --blur-background --blur-strength 5 &
 #compton -b &
 #hc spawn bash -c "DRI_PRIME=1 picom -cbft-20"
-hc spawn bash -c "DRI_PRIME=1 picom --experimental-backend --vsync -cbf"
+hc spawn bash -c "DRI_PRIME=1 picom --experimental-backend --vsync -cbft-20"
 #xcompmgr -c &
 # find the panel
 panelcmd=${panelcmd:-~/.config/herbstluftwm/panel_polybar.sh}

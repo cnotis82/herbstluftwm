@@ -21,6 +21,8 @@ class Conky(EventInput):
             'background': 'false',
             'default_bar_width': '5',
             'use_spacer': 'none',
+            'mpd_host': 'localhost',
+            
         }
         for key,val in config.items():
             default_config[key] = val

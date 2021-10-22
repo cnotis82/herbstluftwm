@@ -1,0 +1,12 @@
+#!/bin/bash
+
+## Created By Aditya Shakya
+
+MENU="$(rofi -sep "|" -dmenu -i -p 'System' -width 12 -hide-scrollbar -line-padding 5 -padding 20 -lines 5 <<< "CloseAllClients|Lock|Suspend|Reboot|Shutdown")"
+            case "$MENU" in
+            	*CloseAllClients) hc_rs foreach C clients. sprintf WINIDATTR '%c.winid' C substitute WINID WINIDATTR close WINID ;;
+                *Lock) betterlockscreen -l dim ;;
+                *Suspend) systemctl suspend ;;
+                *Reboot) hc_rs foreach C clients. sprintf WINIDATTR '%c.winid' C substitute WINID WINIDATTR close WINID && systemctl reboot ;;
+                *Shutdown) hc_rs foreach C clients. sprintf WINIDATTR '%c.winid' C substitute WINID WINIDATTR close WINID && systemctl -i poweroff
+            esac

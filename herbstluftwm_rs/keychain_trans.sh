@@ -13,7 +13,7 @@
 # not unbind it, use_index 0 always would be executed when pressing the single
 # 1-button).
 
-hc() { "${herbstclient_command[@]:-herbstclient}" "$@" ;}
+hc() { "${herbstclient_command[@]:-hc_rs}" "$@" ;}
 Mod=Mod1
 
 # Create the array of keysyms, the n'th entry will be used for the n'th
@@ -29,11 +29,11 @@ done
 # Add the actual bind, after that, no new processes are spawned when using that
 # key chain. (Except the spawn notify-send of course, which can be deactivated
 # by only deleting the appropriate line)
-resizestep=0.05
-hc keybind $Mod-p chain \
-    '->' spawn notify-send "Mirror/Rotate frames (h,j,k,l)" \
-    '->' keybind "${keys[0]}" mirror \
-    '->' keybind "${keys[1]}" mirror vertical \
-    '->' keybind "${keys[2]}" mirror both \
-    '->' keybind "${keys[3]}" rotate \
-    '->' keybind Escape       chain "${unbind[@]}" , spawn notify-send "Mirror/Rotate frame Mode exited"
+
+hc keybind $Mod-Shift-p substitute FOCUS clients.focus.winid chain \
+    '->' spawn notify-send "Change Transparent Mode(h=0.5,j=0.75,k=0.85,l=1)" \
+    '->' keybind "${keys[0]}" spawn transset-df -i FOCUS 0.5 \
+    '->' keybind "${keys[1]}" spawn transset-df -i FOCUS 0.75 \
+    '->' keybind "${keys[2]}" spawn transset-df -i FOCUS 0.85 \
+    '->' keybind "${keys[3]}" spawn transset-df -i FOCUS 1 \
+    '->' keybind Escape       chain "${unbind[@]}" , spawn notify-send "Change Transparent Mode exited"
