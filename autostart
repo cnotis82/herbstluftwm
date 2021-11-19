@@ -230,7 +230,8 @@ hc keybind Mod4-Shift-l unlock_tag ""
 hc keybind $Mod-t use_previous
 hc keybind $Mod-r chain . remove . cycle_layout +1
 hc keybind $Mod-Shift-s set_attr clients.focus.floating toggle
-#hc keybind $Mod-Shift-m set_attr clients.focus.minimized toggle
+hc keybind $Mod-Shift-d set_attr clients.focus.decorated toggle
+hc keybind $Mod-Shift-m set_attr clients.focus.minimized toggle
 hc keybind $Mod-Shift-a chain , lock , spawn /home/notis/.config/herbstluftwm/minimize_clients_on_tag.sh all , unlock
 hc keybind $Mod-Control-a chain , lock , spawn /home/notis/.config/herbstluftwm/minimize_clients_on_tag.sh restore , unlock
 hc keybind $Mod-s chain , floating toggle , emit_hook floating
@@ -332,7 +333,8 @@ hc rule class=Thunderbird tag="  " hook="  " focus=off
 hc rule class=Google-chrome tag="  "
 hc rule class=Thunar tag="  " hook="  " focus=off
 hc rule class=Polo-gtk tag="  "
-hc rule class=Corebird tag="  " hook="  " focus=off
+hc rule class=Cawbird tag="  " hook="  " focus=off
+hc rule class=Newsflash tag="  " hook="  " focus=off
 hc rule class=Pidgin tag="  " hook="  " focus=off
 hc rule class=Hexchat tag="  " hook="  " focus=off
 hc rule class=ViberPC tag="  " hook="  " focus=off
@@ -342,7 +344,7 @@ hc rule class=Clementine tag="  "
 hc rule class=mpv tag="  "
 hc rule class=vlc tag="  " hook="  " focus=off
 hc rule class=Popcorn-Time tag="  "  hook="  " focus=off
-hc rule class=Spotify tag="  "
+hc rule class=Spotify tag="music"
 hc rule class=Chromium-browser tag="  " hook="  " focus=off
 hc rule class=GitKraken tag="  " hook="  " focus=off pseudotile=on
 hc rule class=Atom tag="  " hook="  "
@@ -385,7 +387,7 @@ hc emit_hook quit_panel
 pid=( )
 sleep 1
 dunst -conf /home/notis/.config/dunst/dunstrc &
-feh --bg-scale /home/notis/Pictures/clay-banks-u27Rrbs9Dwc-unsplash.jpg
+feh --bg-scale /home/notis/Pictures/fall.jpg
 setxkbmap -layout us,gr -option grp:rctrl_rshift_toggle > /dev/null&
 #compton --backend glx --blur-method kawase --blur-background --blur-strength 5 &
 #compton -b &
