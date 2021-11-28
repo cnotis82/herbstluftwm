@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-hc() { "${herbstclient_command[@]:-herbstclient}" "$@" ;}
+hc() { "${herbstclient_command[@]:-hc_rs}" "$@" ;}
 
 tag="$1"
 expire="120" # expiry time in seconds
@@ -14,7 +14,7 @@ if [ -z "$1" ] ;then
 
 fi
 
-tag=${tag:-$(hc attr tags.focus.name)}
+#tag=${tag:-$(hc attr tags.focus.name)}
 
 # ensure tag exists
 hc add "$tag"
@@ -22,6 +22,6 @@ hc add "$tag"
 # move next window from this process to this tag
 # prepend the rule so that it may be overwritten by existing custom rules e.g.
 # in the autostart
-hc rule maxage="$expire" pid="$$" tag="$tag"
+hc rule pid="$$" tag="$tag" once maxage=20
 
 exec "$@"

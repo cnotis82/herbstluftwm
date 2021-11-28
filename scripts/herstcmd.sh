@@ -23,11 +23,11 @@ dm() {
         "${dmenu_command[@]}" "$@"
     else
         #dmenu -i "$@"
-        rofi -show-icons -lines 10 -padding 20 -width 50 -show drun -sidebar-mode -columns 3 -dmenu
+        rofi -show-icons -lines 10 -padding 20 -width 50 -show drun -sidebar-mode -columns 3 -dmenu "$@"
     fi
 }
 
-hc() { "${herbstclient_command[@]:-herbstclient}" "$@" ;}
+hc() { "${herbstclient_command[@]:-hc_rs}" "$@" ;}
 prompt=${prompt:-herbstluft: }
 display_reply=${display_reply:-true}
 

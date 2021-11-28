@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 
-tag="${1:-floating}"
+tag="${1:-~~}"
 monitor=floating_monitor
-hc() { "${herbstclient_command[@]:-herbstclient}" "$@" ;}
+hc() { "${herbstclient_command[@]:-hc_rs}" "$@" ;}
 
 float_on() {
   mrect=( $(hc monitor_rect) )

@@ -27,4 +27,4 @@ result=$("${print_menu[@]}" | rofi -i -lines 10 -padding 20 -width 50 -show drun
 IFS=' ' # space is set as delimiter
 read -ra RES <<< "$result"
 
-hc_rs jumpto ${RES[0]}
+hc_rs chain : jumpto ${RES[0]} : and , compare tags.focus.curframe_wcount gt 0 , set_attr settings.smart_window_surroundings 1 : and , compare tags.focus.curframe_wcount gt 1 , set_attr settings.smart_window_surroundings 0

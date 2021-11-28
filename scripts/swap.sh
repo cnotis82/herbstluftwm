@@ -1,9 +1,9 @@
     #!/bin/bash
-     
+
     ## SWAP! ##
     # functions to give herbstluftwm some dynamic tiling behaviors.
     # by Aaron "ninjaaron" Christianson <ninjaaron@gmail.com>
-     
+
     # Usage #
     ### auto
     #    Swaps client in and out of "master" or "stack." If there is only one frame,
@@ -20,25 +20,25 @@
     #    If client in master frame is closed, it is replaced by a client from the
     #    stack. If stack is empty, it's removed. used like hlwm "close" command:
     #        hc keybind $Mod-slash spawn /PATH/TO/swap close
-     
+
     # CONFIG #
     # split_direction = frame split's orientation. "horizontal" or "vertical"
     # split_ratio determines split's location. value between 0.1 and 0.9
     # stack_layout = stack's hlwm layout. "horizontal" "vertical" "max" "grid"
     # stack_frame = frame for stack. 0=top/left 1=bottom/right d=smaller frame
     split_direction="horizontal"
-    split_ratio="0.6667" 
-    stack_layout="vertical" 
+    split_ratio="0.6667"
+    stack_layout="vertical"
     stack_frame=1
     # Here ends the section for users #
-     
-    hc() { herbstclient $@;}; chn() { cmds="$cmds , $@";}
+
+    hc() { hc_rs $@;}; chn() { cmds="$cmds , $@";}
     set_vars() { ### some vars need to be set more than once.
       dump=( $(hc dump) ) # put the content of hc dump into an array
       # values based directly on the dump
       Ratio=${dump[1]#*.} # make the division of primary frame an int
       Orientation=${dump[1]%%:*} # frames split horizontal or vertical
-      Frame=${dump[1]##*:} # frame with active client 
+      Frame=${dump[1]##*:} # frame with active client
       Empty0=${dump[3]: -1} # empty frames =')'; same for following 2 vars
       Empty1=${dump[${#dump[@]}-1]##*:};Empty1=${Empty1:1:1}
       EmptyAll=${dump[1]#*:};EmptyAll=${EmptyAll:1:1}
@@ -62,12 +62,12 @@
       else origin=$masterD; target=$stackD # $target = inactive frame
       fi
     }; set_vars # do all that stuff I just said
-     
+
     ### functions called by the luser
     auto() { ### swap out of the current frame into the other.
       if [ -n "$EmptyAll" ]; then # EmptyAll is null if 1 frame with clients exists.
         chn shift -e $target # move client to target frame.
-        [ "$emptyInact" != ')' ] && 
+        [ "$emptyInact" != ')' ] &&
         #chn cycle -1 , shift -e $origin , focus -e $target , cycle 1
         chn cycle -1 , shift -e $origin , cycle 1
       else # one frame? split it. move client to new frame, set stack layout.

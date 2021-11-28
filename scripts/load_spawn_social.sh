@@ -8,13 +8,16 @@ spawn_with_rules() {(
     ) &
 }
 
-hc_rs chain , emit_hook no_bsp , add "'  " , load "'  " "(split horizontal:0.7767:0 (clients max:0) (clients horizontal:0))" , emit_hook bsp
+hc_rs chain , emit_hook no_bsp , load "  " "(split horizontal:0.7767:0 (clients max:0) (clients horizontal:0))" , emit_hook bsp
 
-RULES=( class=discord tag="'  " hook="'  " index=0 )
+RULES=( class=discord tag="  " hook="  " index=0 )
 spawn_with_rules discord
 
-RULES=( tag="'  " hook="'  " index=1 )
+RULES=( tag="  " hook="  " index=1 )
 spawn_with_rules viber
 
-RULES=( tag="'  " hook="'  " index=1 )
+RULES=( tag="  " hook="  " index=1 )
 spawn_with_rules telegram-desktop
+
+RULES=( tag="  " hook="  " index=1 )
+spawn_with_rules cawbird

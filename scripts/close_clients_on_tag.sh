@@ -8,4 +8,4 @@ closeallontag=(
         and . compare CTAGATTR = TAG
             . close WINID
 )
-herbstclient "${closeallontag[@]}"
+hc_rs "${closeallontag[@]}"

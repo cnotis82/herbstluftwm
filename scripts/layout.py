@@ -11,7 +11,7 @@ wstr = ""
 output = str(os.popen(cmd).read())
 index = output.find("%")
 if output[4] == "g":
-    os.popen("herbstclient set window_gap 5")
+    os.popen("herbstclient set window_gap 0")
     print("[G] ")
 elif output[4] == "v":    
     if output[index] == "%":

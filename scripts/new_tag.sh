@@ -10,7 +10,7 @@
 #source ~/.config/herbstluftwm/vars.sh
 
 hc() {
-    herbstclient "$@"
+    hc_rs "$@"
 }
 
 

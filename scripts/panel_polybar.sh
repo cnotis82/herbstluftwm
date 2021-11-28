@@ -8,4 +8,6 @@ if [ -z "$geometry" ] ;then
     exit 1
 fi
 #
+
 herbstclient pad $monitor " 20 " "0 " "0 " "0"
+ 

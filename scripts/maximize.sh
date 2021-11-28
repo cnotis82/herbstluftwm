@@ -19,7 +19,7 @@ mode=${1:-max} # just some valid layout algorithm name
 
 # FIXME: for some unknown reason, remove_attr always fails
 #        fix that in the hlwm core and remove the "try" afterwards
-layout=$(herbstclient dump)
+layout=$(hc_rs dump)
 cmd=(
 # remmember which client is focused
 substitute FOCUS clients.focus.winid chain
@@ -40,4 +40,4 @@ substitute FOCUS clients.focus.winid chain
 . jumpto FOCUS
 . unlock
 )
-herbstclient "${cmd[@]}"
+hc_rs "${cmd[@]}"

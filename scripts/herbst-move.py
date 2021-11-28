@@ -9,7 +9,7 @@ import binascii
 tag_offset, mode = sys.argv[1:]
 tag_offset = int(tag_offset)
 if mode == 'full':
-    ch = {'.'}
+    ch = {'.', '-'}
 elif mode == 'empty':
     ch = {':', '!'}
 else:

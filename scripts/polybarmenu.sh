@@ -13,7 +13,7 @@ action_list() {
     local a="$1"
     i=0
     "$a" "Quit" polybar-msg cmd quit
-    "$a" "Restart" polybar-msg cmd restart
+    "$a" "Restart" polybar-msg -p $pid cmd restart
     "$a" "Show" polybar-msg cmd show
     "$a" "Hide" polybar-msg cmd hide
     "$a" "Toggle" polybar-msg cmd toggle

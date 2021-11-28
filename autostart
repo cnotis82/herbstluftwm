@@ -231,7 +231,8 @@ hc keybind $Mod-t use_previous
 hc keybind $Mod-r chain . remove . cycle_layout +1
 hc keybind $Mod-Shift-s set_attr clients.focus.floating toggle
 hc keybind $Mod-Shift-d set_attr clients.focus.decorated toggle
-hc keybind $Mod-Shift-m set_attr clients.focus.minimized toggle
+hc keybind $Mod-Shift-t set_attr settings.smart_window_surroundings toggle
+hc keybind $Mod-Shift-m chain : set_attr clients.focus.minimized toggle : and , compare tags.focus.curframe_wcount gt 0 , set_attr settings.smart_window_surroundings 1 : and , compare tags.focus.curframe_wcount gt 1 , set_attr settings.smart_window_surroundings 0
 hc keybind $Mod-Shift-a chain , lock , spawn /home/notis/.config/herbstluftwm/minimize_clients_on_tag.sh all , unlock
 hc keybind $Mod-Control-a chain , lock , spawn /home/notis/.config/herbstluftwm/minimize_clients_on_tag.sh restore , unlock
 hc keybind $Mod-s chain , floating toggle , emit_hook floating
@@ -286,6 +287,7 @@ hc set gapless_grid 1
 
 hc attr theme.title_height 15
 hc attr theme.title_font 'Iosevka Term:pixelsize=12'
+hc attr theme.padding_top 3
 hc attr theme.urgent.color red
 hc attr theme.inner_width 0
 hc attr theme.inner_color white
@@ -351,6 +353,7 @@ hc rule class=Atom tag="  " hook="  "
 hc rule class=Subl3 tag="  " hook="  " ewmhrequests=off
 hc rule class=QtCreator tag="  " hook="  "
 hc rule class=Code tag="  " hook="  "
+hc rule class=jetbrains-rider tag="  " hook="  "
 hc rule class=Gvim tag="  " hook="  "
 hc rule class=org.remmina.Remmina tag="  " hook="  "
 hc rule class=Filezilla tag="  " hook="  "

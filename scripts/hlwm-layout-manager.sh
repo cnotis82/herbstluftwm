@@ -15,7 +15,7 @@ menu () {
 }
 
 hc () {
-    herbstclient "$@"
+    hc_rs "$@"
 }
 
 mkdir -p "$layouts"

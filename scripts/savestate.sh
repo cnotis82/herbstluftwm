@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-hc() { "${herbstclient_command[@]:-herbstclient}" "$@" ;}
+hc() { "${herbstclient_command[@]:-hc_rs}" "$@" ;}
 
 # prints a machine readable format of all tags and its layouts
 # one tag with its layout per line

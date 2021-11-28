@@ -1,18 +1,19 @@
-
-#!/bin/bash
+ 
+#!/usr/bin/env bash
 
 # A script allowing to minimize and un-minimize clients in a LIFO way
 # (last minimized client will be un-minimized first).
 # 
-# `chmod +x unminimize.sh` then call `./unminimize.sh`.
+# `chmod +x unminimize.sh` then call it or add it to `autostart`.
 
 
 Mod=${Mod:-Mod1}
 Minimizekey=Shift-m
 Unminimizekey=Ctrl-comma
-SCRIPT_PATH="$HOME/.config/herbstluftwm/unminimize.sh"
+# get the absolute path of this script, to call it when minimizing
+SCRIPT_PATH=$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )/$(basename "${BASH_SOURCE[0]}")
 
-hc() { "${herbstclient_command[@]:-herbstclient}" "$@" ;}
+hc() { "${herbstclient_command[@]:-hc_rs}" "$@" ;}
 
 
 # 
@@ -24,9 +25,11 @@ init() {
    hc silent new_attr uint my_minimized_counter 1
 
    # minimize current window
-   hc keybind $Mod-$Minimizekey spawn $SCRIPT_PATH minimize
+   hc keybind $Mod-$Minimizekey spawn "$SCRIPT_PATH" minimize
 
    # unminimize last window of a tag
+   # if the `my_minimized_age` attribute does not exist (i.e. the window has not been
+   #  minimized with this script), use arbitrary order to unminimize
    hc keybind $Mod-$Unminimizekey mktemp string LASTCLIENTATT mktemp uint LASTAGEATT chain \
      . set_attr LASTAGEATT 0 \
      . foreach CLIENT clients. and \
@@ -34,11 +37,15 @@ init() {
            compare MINATT "=" "true" \
        , sprintf TAGATT "%c.tag" CLIENT substitute FOCUS "tags.focus.name" \
            compare TAGATT "=" FOCUS \
-       , sprintf AGEATT "%c.my_minimized_age" CLIENT and \
-         : substitute LASTAGE LASTAGEATT \
-             compare AGEATT 'gt' LASTAGE \
-         : substitute AGE AGEATT \
-             set_attr LASTAGEATT AGE \
+       , sprintf AGEATT "%c.my_minimized_age" CLIENT or \
+         case: and \
+            : ! get_attr AGEATT \
+            : compare LASTAGEATT "=" 0 \
+         case: and \
+            : substitute LASTAGE LASTAGEATT \
+                compare AGEATT 'gt' LASTAGE \
+            : substitute AGE AGEATT \
+                set_attr LASTAGEATT AGE \
        , set_attr LASTCLIENTATT CLIENT \
      . and \
        , compare LASTCLIENTATT "!=" "" \
@@ -46,7 +53,8 @@ init() {
          : sprintf MINATT "%c.minimized" CLIENT \
              set_attr MINATT false \
          : sprintf AGEATT "%c.my_minimized_age" CLIENT \
-             remove_attr AGEATT \
+             try remove_attr AGEATT \
+      , and , compare tags.focus.curframe_wcount gt 0 , set_attr settings.smart_window_surroundings 1 : and , compare tags.focus.curframe_wcount gt 1 , set_attr settings.smart_window_surroundings 0
 
 }
 
@@ -57,12 +65,11 @@ init() {
 minimize() {
 
    hc and \
-     . substitute C my_minimized_counter new_attr uint clients.focus.my_minimized_age C \
-     . set_attr my_minimized_counter $(($(herbstclient substitute C my_minimized_counter echo C)+1)) \
+     . or , substitute C my_minimized_counter new_attr uint clients.focus.my_minimized_age C \
+          , set_attr my_minimized_counter $(($(hc get_attr my_minimized_counter)+1)) \
      . set_attr clients.focus.minimized true \
 
 }
 
 
 if [ "$1" = "minimize" ] ; then minimize ; else init ; fi
-  

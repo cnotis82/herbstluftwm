@@ -13,7 +13,7 @@
 # not unbind it, use_index 0 always would be executed when pressing the single
 # 1-button).
 
-hc() { "${herbstclient_command[@]:-herbstclient}" "$@" ;}
+hc() { "${herbstclient_command[@]:-hc_rs}" "$@" ;}
 Mod=Mod1
 
 # Create the array of keysyms, the n'th entry will be used for the n'th

@@ -9,7 +9,7 @@ set -e
 # moving to a different tag or toggling its fullscreen state
 
 print_menu=(
-    herbstclient foreach C clients.
+    hc_rs foreach C clients.
         #substitute TAG tags.focus.name
         sprintf WINIDATTR '%c.winid' C substitute WINID WINIDATTR
         sprintf TITLEATTR '%c.title' C substitute TITLE TITLEATTR
@@ -34,4 +34,4 @@ result=$("${print_menu[@]}" | rofi -i -lines 10 -padding 20 -width 50 -show drun
 IFS=' ' # space is set as delimiter
 read -ra RES <<< "$result"
 
-herbstclient and : jumpto ${RES[-1]} : remove_attr ${RES[-2]}
+hc and : jumpto ${RES[-1]} : remove_attr ${RES[-2]}

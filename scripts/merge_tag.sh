@@ -10,7 +10,7 @@
 #source ~/.config/herbstluftwm/vars.sh
 
 hc() {
-    herbstclient "$@"
+    hc_rs "$@"
 }
 
 tagname=$(rofi -dmenu -p "merge_tag" -lines 0 | xargs)
