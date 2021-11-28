@@ -122,16 +122,20 @@ hc keybind $Mod-Control-0 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh 
 
 # focusing clients
 hc set focus_crosses_monitor_boundaries 0
-hc keybind $Mod-Left  or , focus left , focus_edge right
+hc keybind $Mod-Left  or , focus left , focus_edge right 
 hc keybind $Mod-Down  or , focus down , focus_edge up
 hc keybind $Mod-Up    or , focus up , focus_edge down
 hc keybind $Mod-Right or , focus right , focus_edge left
 
 # moving clients
-hc keybind $Mod-Shift-Left  or , shift left , shift_edge right
-hc keybind $Mod-Shift-Down  or , shift down , shift_edge up
-hc keybind $Mod-Shift-Up    or , shift up , shift_edge down
-hc keybind $Mod-Shift-Right or , shift right , shift_edge left
+hc keybind $Mod-Shift-Left  chain : or , shift left , shift_edge right : and , compare tags.focus.curframe_wcount gt 0 , set_attr settings.smart_window_surroundings 1 : and , compare tags.focus.curframe_wcount gt 1 , set_attr settings.smart_window_surroundings 0
+
+hc keybind $Mod-Shift-Down   chain : or , shift down , shift_edge up : and , compare tags.focus.curframe_wcount gt 0 , set_attr settings.smart_window_surroundings 1 : and , compare tags.focus.curframe_wcount gt 1 , set_attr settings.smart_window_surroundings 0
+
+hc keybind $Mod-Shift-Up    chain : or , shift up , shift_edge down : and , compare tags.focus.curframe_wcount gt 0 , set_attr settings.smart_window_surroundings 1 : and , compare tags.focus.curframe_wcount gt 1 , set_attr settings.smart_window_surroundings 0
+
+hc keybind $Mod-Shift-Right chain : or , shift right , shift_edge left : and , compare tags.focus.curframe_wcount gt 0 , set_attr settings.smart_window_surroundings 1 : and , compare tags.focus.curframe_wcount gt 1 , set_attr settings.smart_window_surroundings 0
+
 
 # splitting frames
 # create an empty frame at the specified direction
@@ -288,6 +292,8 @@ hc set gapless_grid 1
 hc attr theme.title_height 15
 hc attr theme.title_font 'Iosevka Term:pixelsize=12'
 hc attr theme.padding_top 3
+hc attr theme.padding_bottom 3
+hc attr theme.padding_right 3
 hc attr theme.urgent.color red
 hc attr theme.inner_width 0
 hc attr theme.inner_color white
