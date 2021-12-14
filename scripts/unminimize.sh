@@ -54,7 +54,7 @@ init() {
              set_attr MINATT false \
          : sprintf AGEATT "%c.my_minimized_age" CLIENT \
              try remove_attr AGEATT \
-      , and , compare tags.focus.curframe_wcount gt 0 , set_attr settings.smart_window_surroundings 1 : and , compare tags.focus.curframe_wcount gt 1 , set_attr settings.smart_window_surroundings 0
+      #, and , compare tags.focus.curframe_wcount gt 0 , set_attr settings.smart_window_surroundings 1 : and , compare tags.focus.curframe_wcount gt 1 , set_attr settings.smart_window_surroundings 0
 
 }
 

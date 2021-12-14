@@ -4,4 +4,3 @@ set -e
 
 rofi -modi run,drun,window -show-icons -lines 10 -padding 20 -width 50 -show window -sidebar-mode -columns 3 -font "Fantasque Sans Mono 10"
 
-hc_rs chain : and , compare tags.focus.curframe_wcount gt 0 , set_attr settings.smart_window_surroundings 1 : and , compare tags.focus.curframe_wcount gt 1 , set_attr settings.smart_window_surroundings 0

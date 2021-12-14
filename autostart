@@ -128,14 +128,10 @@ hc keybind $Mod-Up    or , focus up , focus_edge down
 hc keybind $Mod-Right or , focus right , focus_edge left
 
 # moving clients
-hc keybind $Mod-Shift-Left  chain : or , shift left , shift_edge right : and , compare tags.focus.curframe_wcount gt 0 , set_attr settings.smart_window_surroundings 1 : and , compare tags.focus.curframe_wcount gt 1 , set_attr settings.smart_window_surroundings 0
-
-hc keybind $Mod-Shift-Down   chain : or , shift down , shift_edge up : and , compare tags.focus.curframe_wcount gt 0 , set_attr settings.smart_window_surroundings 1 : and , compare tags.focus.curframe_wcount gt 1 , set_attr settings.smart_window_surroundings 0
-
-hc keybind $Mod-Shift-Up    chain : or , shift up , shift_edge down : and , compare tags.focus.curframe_wcount gt 0 , set_attr settings.smart_window_surroundings 1 : and , compare tags.focus.curframe_wcount gt 1 , set_attr settings.smart_window_surroundings 0
-
-hc keybind $Mod-Shift-Right chain : or , shift right , shift_edge left : and , compare tags.focus.curframe_wcount gt 0 , set_attr settings.smart_window_surroundings 1 : and , compare tags.focus.curframe_wcount gt 1 , set_attr settings.smart_window_surroundings 0
-
+hc keybind $Mod-Shift-Left  chain : or , shift left , shift_edge right 
+hc keybind $Mod-Shift-Down   chain : or , shift down , shift_edge up 
+hc keybind $Mod-Shift-Up    chain : or , shift up , shift_edge down 
+hc keybind $Mod-Shift-Right chain : or , shift right , shift_edge left 
 
 # splitting frames
 # create an empty frame at the specified direction
@@ -187,8 +183,8 @@ hc keybind $Mod-Control-grave chain , pad 0 20 0 0 0 , pad 1 20 0 0 0 , spawn xd
 hc keybind Mod4-h spawn bash -c "pkill -u notis --full trayer"
 hc keybind Mod4-Control-h spawn bash -c "trayer --edge bottom --align right --widthtype request --height 16"
 
-hc set default_frame_layout 3
-hc set_layout grid
+hc set default_frame_layout 2
+hc set_layout max
 
 #themes
 hc keybind $Mod-Control-t spawn /home/notis/.config/herbstluftwm/thememenu.sh
@@ -232,11 +228,11 @@ hc keybind Mod4-Control-l lock_tag ""
 hc keybind Mod4-Shift-l unlock_tag ""
 # layouting
 hc keybind $Mod-t use_previous
-hc keybind $Mod-r chain . remove . cycle_layout +1
+hc keybind $Mod-r chain . remove 
 hc keybind $Mod-Shift-s set_attr clients.focus.floating toggle
 hc keybind $Mod-Shift-d set_attr clients.focus.decorated toggle
-hc keybind $Mod-Shift-t set_attr settings.smart_window_surroundings toggle
-hc keybind $Mod-Shift-m chain : set_attr clients.focus.minimized toggle : and , compare tags.focus.curframe_wcount gt 0 , set_attr settings.smart_window_surroundings 1 : and , compare tags.focus.curframe_wcount gt 1 , set_attr settings.smart_window_surroundings 0
+hc keybind $Mod-Shift-t set_attr settings.tabbed_max toggle 
+hc keybind $Mod-Shift-m chain : set_attr clients.focus.minimized toggle 
 hc keybind $Mod-Shift-a chain , lock , spawn /home/notis/.config/herbstluftwm/minimize_clients_on_tag.sh all , unlock
 hc keybind $Mod-Control-a chain , lock , spawn /home/notis/.config/herbstluftwm/minimize_clients_on_tag.sh restore , unlock
 hc keybind $Mod-s chain , floating toggle , emit_hook floating
@@ -290,10 +286,11 @@ hc set focus_follows_mouse 0
 hc set gapless_grid 1
 
 hc attr theme.title_height 15
+hc attr theme.title_when multiple_tabs
+hc attr theme.title_depth 3   
+
 hc attr theme.title_font 'Iosevka Term:pixelsize=12'
-hc attr theme.padding_top 3
-hc attr theme.padding_bottom 3
-hc attr theme.padding_right 3
+hc attr theme.padding_top 0
 hc attr theme.urgent.color red
 hc attr theme.inner_width 0
 hc attr theme.inner_color white
@@ -321,7 +318,7 @@ hc attr theme.background_color white
 
 hc set window_gap 5 
 hc set frame_padding 0
-hc set smart_window_surroundings 1
+hc set smart_window_surroundings 0
 hc set smart_frame_surroundings 1
 hc set mouse_recenter_gap 0
 hc set hide_covered_windows 1
@@ -401,7 +398,7 @@ setxkbmap -layout us,gr -option grp:rctrl_rshift_toggle > /dev/null&
 #compton --backend glx --blur-method kawase --blur-background --blur-strength 5 &
 #compton -b &
 #hc spawn bash -c "DRI_PRIME=1 picom -cbft-20"
-hc spawn bash -c "DRI_PRIME=1 picom --experimental-backend --vsync -cbf"
+hc spawn bash -c "DRI_PRIME=1 picom --vsync -cb"
 #xcompmgr -c &
 # find the panel
 panelcmd=${panelcmd:-~/.config/herbstluftwm/panel_polybar.sh}

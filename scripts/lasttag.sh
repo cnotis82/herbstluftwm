@@ -102,9 +102,8 @@ hc_rs --idle '(tag_changed|reload|quit_panel|urgent|tag_added|tag_removed|rule|f
             tag_flags)
                 if [ $mode -eq 0 ]; then
                     hc chain : lock : and , compare tags.focus.curframe_wcount = 0 , close_and_remove : unlock
-                    hc chain : lock : and , compare tags.focus.frame_count = 1 , ! silent get_attr tags.focus.my_unmaximized_layout , set_layout grid : unlock
+                    hc chain : lock : and , compare tags.focus.frame_count = 1 , ! silent get_attr tags.focus.my_unmaximized_layout , set_layout max : unlock
                 fi
-                hc chain : and , compare tags.focus.curframe_wcount gt 0 , set_attr settings.smart_window_surroundings 1 : and , compare tags.focus.curframe_wcount gt 1 , set_attr settings.smart_window_surroundings 0
                 ;;
             rule|tag_flags)
                 lasttag="$tag"
