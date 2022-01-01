@@ -288,7 +288,10 @@ hc set gapless_grid 1
 hc attr theme.title_height 15
 hc attr theme.title_when multiple_tabs
 hc attr theme.title_depth 3   
-
+hc attr theme.tab_color '#1F1F1Fdd'
+hc attr theme.active.tab_color '#2B4F0Add'
+#hc attr theme.active.tab_outer_color '#6C8257dd'
+hc attr theme.active.tab_title_color '#ababab'
 hc attr theme.title_font 'Iosevka Term:pixelsize=12'
 hc attr theme.padding_top 0
 hc attr theme.urgent.color red
