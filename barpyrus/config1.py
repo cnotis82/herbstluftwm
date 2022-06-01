@@ -12,10 +12,10 @@ import sys
 hc = hlwm.connect()
 
 # get the geometry of the monitor
-monitor = sys.argv[1] if len(sys.argv) >= 2 else 0
+monitor = 0 #if len(sys.argv) >= 2 else 0
 (x, y, monitor_w, monitor_h) = hc.monitor_rect(monitor)
 height = 20 # height of the panel
-width = 2560 # width of the panel
+width = 1920 # width of the panel
 hc(['pad', str(monitor), str(height)]) # get space for the panel
 
 # An example conky-section:
@@ -30,8 +30,8 @@ conky_text += '%{F\\#8ec07c} ${memperc}%  '
 conky_text += '%{F\\#83a598} ${exec sensors | grep fan1 | cut -c14-23 | head -n 1} '
 conky_text += '%{F\\#fabd2f} ${exec sensors | grep temp1 | cut -c16-23 | head -n 1} '
 #conky_text += '%{F\\#ebdbb2} ${wireless_link_qual_perc wlp3s0}% '
-conky_text += '%{F\\#fb4934}  ${upspeedf enp2s0}K '
-conky_text += '%{F\\#b8bb26}  ${downspeedf enp2s0}K  '
+conky_text += '%{F\\#fb4934}  ${upspeedf wlp3s0}K '
+conky_text += '%{F\\#b8bb26}  ${downspeedf wlp3s0}K  '
 conky_text += '%{F\\#cc241d} ${texeci 60 /home/notis/.config/polybar/isrunning-openvpn.sh}  '
 conky_text += '%{F\\#fb4934} ${texeci 3600 /home/notis/.config/polybar/isrunning-firewall.sh}  '
 conky_text += '%{F\\#458588} ${battery_percent}% %{F-} '
