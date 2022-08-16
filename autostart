@@ -98,7 +98,8 @@ hc keybind Mod4-r spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh "reddit"
 hc keybind Mod4-e spawn thunderbird
 hc keybind Mod4-v spawn bash -c "viber& disown"
 hc keybind Mod4-l spawn bash -c "betterlockscreen -l dim"
-hc keybind Mod4-s spawn bash -c "slack& disown"
+hc keybind Mod4-s spawn bash -c "xrandr --output eDP1 --auto --output HDMI1 --off"
+hc keybind Mod4-Shift-s spawn bash -c "xrandr --output eDP1 --off --output HDMI1 --auto"
 hc keybind Mod4-p spawn bash -c "popcorntime& disown"
 hc keybind Mod4-g spawn bash -c "gitkraken& disown"
 hc keybind Mod4-c spawn bash -c "code& disown"
@@ -122,16 +123,16 @@ hc keybind $Mod-Control-0 spawn /home/notis/.config/herbstluftwm/exec_on_tag.sh 
 
 # focusing clients
 hc set focus_crosses_monitor_boundaries 0
-hc keybind $Mod-Left  or , focus left , focus_edge right 
-hc keybind $Mod-Down  or , focus down , focus_edge up
-hc keybind $Mod-Up    or , focus up , focus_edge down
-hc keybind $Mod-Right or , focus right , focus_edge left
+hc keybind $Mod-Left  or , focus --level=all left , focus_edge --level=all right 
+hc keybind $Mod-Down  or , focus --level=all down , focus_edge --level=all up
+hc keybind $Mod-Up    or , focus --level=all up , focus_edge --level=all down
+hc keybind $Mod-Right or , focus --level=all right , focus_edge --level=all left
 
 # moving clients
-hc keybind $Mod-Shift-Left  chain : or , shift left , shift_edge right 
-hc keybind $Mod-Shift-Down   chain : or , shift down , shift_edge up 
-hc keybind $Mod-Shift-Up    chain : or , shift up , shift_edge down 
-hc keybind $Mod-Shift-Right chain : or , shift right , shift_edge left 
+hc keybind $Mod-Shift-Left  chain : or , shift --level=all left , shift_edge --level=all right 
+hc keybind $Mod-Shift-Down   chain : or , shift --level=all down , shift_edge --level=all up 
+hc keybind $Mod-Shift-Up    chain : or , shift --level=all up , shift_edge --level=all down 
+hc keybind $Mod-Shift-Right chain : or , shift --level=all right , shift_edge --level=all left 
 
 # splitting frames
 # create an empty frame at the specified direction
@@ -170,8 +171,8 @@ hc keybind $Mod-Control-Down spawn /home/notis/.config/herbstluftwm/winsizer.sh 
 hc keybind $Mod-Mod4-Up spawn /home/notis/.config/herbstluftwm/frame_gap_sizer.sh +x
 hc keybind $Mod-Mod4-Down spawn /home/notis/.config/herbstluftwm/frame_gap_sizer.sh -x
 hc keybind $Mod-Mod4-equal set frame_gap 10
-hc keybind $Mod-Control-w set always_show_frame toggle
-
+hc keybind $Mod-Control-w cycle_value settings.smart_frame_surroundings off hide_gaps hide_all
+ 
 # Shifting to monitor
 hc keybind $Mod-Control-bracketleft  chain . lock . shift_to_monitor 0 . remove . focus_monitor 0 . unlock
 hc keybind $Mod-Control-bracketright chain . lock . shift_to_monitor 1 . remove . focus_monitor 1 . unlock
@@ -184,6 +185,7 @@ hc keybind Mod4-h spawn bash -c "pkill -u notis --full trayer"
 hc keybind Mod4-Control-h spawn bash -c "trayer --edge bottom --align right --widthtype request --height 16"
 
 hc set default_frame_layout 2
+hc set show_frame_decorations focused_if_multiple
 hc set_layout max
 
 #themes
@@ -322,7 +324,7 @@ hc attr theme.background_color white
 hc set window_gap 5 
 hc set frame_padding 0
 hc set smart_window_surroundings 0
-hc set smart_frame_surroundings 1
+hc set smart_frame_surroundings off
 hc set mouse_recenter_gap 0
 hc set hide_covered_windows 1
 hc set update_dragged_clients 1
@@ -360,6 +362,10 @@ hc rule class=Subl3 tag="  " hook="  " ewmhrequests=off
 hc rule class=QtCreator tag="  " hook="  "
 hc rule class=Code tag="  " hook="  "
 hc rule class=jetbrains-rider tag="  " hook="  "
+hc rule class=jetbrains-datagrip tag="  " hook="  "
+hc rule class=jetbrains-goland tag="  " hook="  "
+hc rule class=jetbrains-webstorm tag="  " hook="  "
+hc rule class=jetbrains-idea tag="  " hook="  "
 hc rule class=Gvim tag="  " hook="  "
 hc rule class=org.remmina.Remmina tag="  " hook="  "
 hc rule class=Filezilla tag="  " hook="  "
@@ -380,6 +386,7 @@ hc rule windowtype~'_NET_WM_WINDOW_TYPE_(DIALOG|UTILITY|SPLASH)' floating=on flo
 hc rule windowtype='_NET_WM_WINDOW_TYPE_DIALOG' focus=on floatplacement=center
 hc rule windowtype~'_NET_WM_WINDOW_TYPE_(NOTIFICATION|DOCK|DESKTOP)' manage=off
 hc rule class=Gsimplecal manage=off
+hc rule fixedsize floating=on
 
 # unlock, just to be sure
 hc unlock
@@ -409,10 +416,10 @@ panelcmd=${panelcmd:-~/.config/herbstluftwm/panel_polybar.sh}
 
 for monitor in $(hc list_monitors | cut -d: -f1) ; do
     # start it on each monitor
-    "$panelcmd" $monitor &
+   "$panelcmd" $monitor &
 done
 
-#herbstclient spawn /home/notis/.config/barpyrus/barpyrus-master/barpyrus.py &
+herbstclient spawn /home/notis/.config/barpyrus/barpyrus-master/barpyrus.py &
 hc spawn /home/notis/.config/barpyrus/barpyrus-master/barpyrus1.py &
 
 #hc -w '(quit_panel|reload)'
