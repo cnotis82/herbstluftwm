@@ -46,7 +46,7 @@ hc keybind $Mod-Control-l spawn /home/notis/.config/herbstluftwm/client_lists.sh
 hc keybind $Mod-Control-i emit_hook list_keys
 hc keybind $Mod-Control-v emit_hook version
 hc keybind $Mod-Mod4-s spawn /home/notis/.config/herbstluftwm/save_layout.sh
-hc keybind $Mod-Mod4-s spawn /home/notis/.config/herbstluftwm/save_layout.sh
+hc keybind $Mod-Mod4-l spawn /home/notis/.config/herbstluftwm/load_layout.sh
 hc keybind $Mod-F1 chain , emit_hook no_bsp , load "$(<"$layouts/"default"")" , focus -e l , emit_hook bsp
 hc keybind $Mod-F2 chain , emit_hook no_bsp , load "$(<"$layouts/"MasterLeft"")" , focus -e l , emit_hook bsp
 hc keybind $Mod-F3 chain , emit_hook no_bsp , load "$(<"$layouts/"ThreeColumn"")" , focus -e , emit_hook bsp
@@ -147,6 +147,7 @@ hc keybind Mod4-Control-o chain , lock , split left 0.5 '' , focus -e l , unlock
 # let the current frame explode into subframes
 hc keybind $Mod-Control-space chain , split explode , or . focus right . focus down
 hc keybind $Mod-z chain , lock , rotate , unlock
+hc keybind Release-Mod4-Control-r chain , lock , rotate , unlock
 
 #Load layouts
 hc keybind $Mod-Control-5 spawn /home/notis/.config/herbstluftwm/load_spawn_social.sh
@@ -403,12 +404,12 @@ hc emit_hook quit_panel
 pid=( )
 sleep 1
 dunst -conf /home/notis/.config/dunst/dunstrc &
-feh --bg-scale /home/notis/Pictures/fall.jpg
+feh --bg-scale /home/notis/Pictures/waterfall2.jpg
 setxkbmap -layout us,gr -option grp:rctrl_rshift_toggle > /dev/null&
 #compton --backend glx --blur-method kawase --blur-background --blur-strength 5 &
 #compton -b &
 #hc spawn bash -c "DRI_PRIME=1 picom -cbft-20"
-hc spawn bash -c "DRI_PRIME=1 picom -cb"
+hc spawn bash -c "picom -cb"
 #xcompmgr -c &
 # find the panel
 panelcmd=${panelcmd:-~/.config/herbstluftwm/panel_polybar.sh}
