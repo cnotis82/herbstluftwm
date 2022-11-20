@@ -408,7 +408,7 @@ setxkbmap -layout us,gr -option grp:rctrl_rshift_toggle > /dev/null&
 #compton --backend glx --blur-method kawase --blur-background --blur-strength 5 &
 #compton -b &
 #hc spawn bash -c "DRI_PRIME=1 picom -cbft-20"
-hc spawn bash -c "DRI_PRIME=1 picom --vsync -cb"
+hc spawn bash -c "DRI_PRIME=1 picom -cb"
 #xcompmgr -c &
 # find the panel
 panelcmd=${panelcmd:-~/.config/herbstluftwm/panel_polybar.sh}
